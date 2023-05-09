@@ -32,12 +32,9 @@ Route::middleware([
 ])->group(function () {
 
     // Dashboard route lead us to the search page
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-
+    Route::get('/dashboard', [SearchController::class, 'index'])->name('dashboard');
     // Route to manage searched path
-    Route::post('/search', [SearchController::class, 'search']);
+    Route::post('/search', [SearchController::class, 'search'])->name('search');
 
 
 

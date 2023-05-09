@@ -4,6 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ asset('img/YadakShop.png') }}">
+    <meta name="description" content="This is a simple CMS for tracing goods based on thier serail or part number.">
+    <meta name="author" content="Mahdi Rezaei">
 
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
 

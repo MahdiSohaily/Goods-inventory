@@ -13,7 +13,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
             <div class="max-w-7xl overflow-x-auto mx-auto">
                 <table class="min-w-full text-left text-sm font-light">
                     <thead class="font-medium dark:border-neutral-500">
-                        <tr class="bg-green-600">
+                        <tr class="bg-green-700">
                             <th scope="col" class="px-6 py-3 bg-black text-white w-72 text-center">شماره فنی</th>
                             <th scope="col" class="px-6 py-3 text-white w-32">دلار پایه</th>
                             <th scope="col" class="px-6 py-3 text-white border-black border-r-2">+10%</th>

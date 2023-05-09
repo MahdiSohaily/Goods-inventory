@@ -29,14 +29,19 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::resource('search', SearchController::class);
 
-
-
-
+    // Dashboard route lead us to the search page
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    // Route to manage searched path
+    Route::post('/search', [SearchController::class, 'search']);
+
+
+
+
+
 
     Route::get('/goods', function () {
         return Inertia::render('Dashboard');

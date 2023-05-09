@@ -8,8 +8,12 @@ defineProps({
 });
 
 const toggleNav = () => {
-    alert(this.$refs.nav)
-    // .style.bottom = "0px";
+    const nav = document.getElementById("nav");
+    if(nav.classList.contains('open')) {
+        nav.classList.remove('open')
+    } else {
+        nav.classList.add('open')
+    }
 };
 
 const logout = () => {
@@ -25,9 +29,16 @@ const logout = () => {
 
         <div class="min-h-screen bg-gray-100">
             <nav
+                id="nav"
                 ref="nav"
                 class="main-nav bg-white shadow-lg flex flex-col justify-between"
             >
+                <i
+                    @click="toggleNav()"
+                    id="close"
+                    class="material-icons absolute m-3 right-0 hover:cursor-pointer"
+                    >close</i
+                >
                 <ul class="flex flex-col">
                     <li class="hover:bg-gray-100 flex">
                         <i class="pl-6 py-3 material-icons">search</i>

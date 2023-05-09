@@ -13,7 +13,7 @@
     left: -300px;
     bottom: 0;
     width: 250px;
-    transition: all 1s ease-in-out;
+    transition: all 500ms ease-in-out;
 }
 .open {
     left: 0;

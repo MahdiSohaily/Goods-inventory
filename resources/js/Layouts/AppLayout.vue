@@ -1,27 +1,15 @@
 <script setup>
-import { ref } from "vue";
-import { Head, Link, router } from "@inertiajs/vue3";
+import { Head, router } from "@inertiajs/vue3";
 import Banner from "@/Components/Banner.vue";
-import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
-import NavLink from "@/Components/NavLink.vue";
 
 defineProps({
     title: String,
 });
 
-const showingNavigationDropdown = ref(false);
 
-const switchToTeam = (team) => {
-    router.put(
-        route("current-team.update"),
-        {
-            team_id: team.id,
-        },
-        {
-            preserveState: false,
-        }
-    );
+const toggleNav = () => {
+    alert("clicked");
 };
 
 const logout = () => {
@@ -94,7 +82,7 @@ const logout = () => {
                 <div class="flex justify-between">
                     <i
                         class="p-2 material-icons hover:cursor-pointer"
-                        onclick="alert('')"
+                        @click="toggleNav"
                         >menu</i
                     >
                 </div>

@@ -13,6 +13,7 @@ class SearchController extends Controller
     {
         $rates = DB::table('rates')
             ->select('amount', 'status')
+            ->orderBy('amount', 'asc')
             ->get();
         return Inertia::render('Dashboard', ['rates' => $rates]);
     }

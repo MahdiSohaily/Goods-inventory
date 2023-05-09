@@ -56,7 +56,6 @@ const search = (val) => {
             <input type="checkbox" name="super" id="mode" class="rounded-md" />
             <label for="mode" class="ml-1">Super Mode</label>
         </div>
-
         <div class="bg-gray-100 bg-opacity-25">
             <div class="max-w-7xl overflow-x-auto mx-auto">
                 <table class="min-w-full text-left text-sm font-light">
@@ -77,15 +76,14 @@ const search = (val) => {
                             >
                                 +10%
                             </th>
-                            <th scope="col" class="px-6 py-3 text-white">50</th>
-                            <th scope="col" class="px-6 py-3 text-white">51</th>
-                            <th scope="col" class="px-6 py-3 text-white">52</th>
-                            <th scope="col" class="px-6 py-3 text-white">53</th>
-                            <th scope="col" class="px-6 py-3 text-white">54</th>
-                            <th scope="col" class="px-6 py-3 text-white">55</th>
-                            <th scope="col" class="px-6 py-3 text-white">56</th>
-                            <th scope="col" class="px-6 py-3 text-white">57</th>
-                            <th scope="col" class="px-6 py-3 text-white">60</th>
+                            <th
+                                v-for="item in rates"
+                                :class="item.status"
+                                scope="col"
+                                class="px-6 py-3 text-white"
+                            >
+                                {{ item.amount }}
+                            </th>
                             <th scope="col" class="px-6 py-3 text-white">
                                 عملیات
                             </th>

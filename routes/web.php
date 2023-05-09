@@ -29,10 +29,15 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    Route::resource('search', SearchController::class);
+
+
+
+
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-    
+
     Route::get('/goods', function () {
         return Inertia::render('Dashboard');
     })->name('goods');

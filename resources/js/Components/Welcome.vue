@@ -1,5 +1,10 @@
 <script setup>
 import axios from "axios";
+
+defineProps({
+    rates: Object,
+});
+
 const search = (val) => {
     let pattern = val;
     let superMode = 0;

@@ -11,7 +11,10 @@ class SearchController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Dashboard');
+        $rates = DB::table('rates')
+            ->select('amount', 'status')
+            ->get();
+        return Inertia::render('Dashboard', ['rates' => $rates]);
     }
 
     public function search(Request $request)

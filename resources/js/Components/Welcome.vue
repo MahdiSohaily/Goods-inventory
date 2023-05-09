@@ -1,17 +1,41 @@
 <script setup>
 import axios from "axios";
-const search = () => {
-    axios
-        .post("/formSubmit", {
-            name: this.name,
-            description: this.description,
-        })
-        .then(function (response) {
-            currentObj.output = response.data;
-        })
-        .catch(function (error) {
-            currentObj.output = error;
-        });
+const search = (val) => {
+    let pattern = val;
+    let superMode = 0;
+    const resultBox = document.getElementById("s-result");
+
+    if (document.getElementById("mode").checked) {
+        superMode = 1;
+    }
+
+    if (
+        (pattern.length > 4 && superMode == 1) ||
+        (pattern.length > 6 && superMode == 0)
+    ) {
+        resultBox.innerHTML =
+            "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
+        if (pattern.charAt(0) == 0) {
+            pattern = "X" + pattern.substr(1);
+        }
+
+        pattern = pattern.replace(/\s/g, "");
+        pattern = pattern.replace(/-/g, "");
+        pattern = pattern.replace(/_/g, "");
+        axios
+            .post("/search", {
+                pattern,
+                superMode,
+            })
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                currentObj.output = error;
+            });
+    } else {
+        resultBox.innerHTML = "";
+    }
 };
 </script>
 
@@ -25,9 +49,13 @@ const search = () => {
                 class="rounded-md py-3 text-center w-96 border-2 bg-gray-100"
                 min="0"
                 max="30"
-                @keyup="search(this.value)"
+                @keyup="search($event.target.value)"
                 placeholder="... کد فنی قطعه را وارد کنید"
             />
+        </div>
+        <div class="flex justify-center items-center pb-6">
+            <input type="checkbox" name="super" id="mode" class="rounded-md" />
+            <label for="mode" class="ml-1">Super Mode</label>
         </div>
 
         <div class="bg-gray-100 bg-opacity-25">

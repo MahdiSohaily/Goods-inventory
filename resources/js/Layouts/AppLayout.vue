@@ -9,10 +9,10 @@ defineProps({
 
 const toggleNav = () => {
     const nav = document.getElementById("nav");
-    if(nav.classList.contains('open')) {
-        nav.classList.remove('open')
+    if (nav.classList.contains("open")) {
+        nav.classList.remove("open");
     } else {
-        nav.classList.add('open')
+        nav.classList.add("open");
     }
 };
 
@@ -34,12 +34,12 @@ const logout = () => {
                 class="main-nav bg-white shadow-lg flex flex-col justify-between"
             >
                 <i
-                    @click="toggleNav()"
                     id="close"
+                    @click="toggleNav()"
                     class="material-icons absolute m-3 right-0 hover:cursor-pointer"
                     >close</i
                 >
-                <ul class="flex flex-col">
+                <ul class="flex flex-col pt-5">
                     <li class="hover:bg-gray-100 flex">
                         <i class="pl-6 py-3 material-icons">search</i>
                         <a
@@ -84,16 +84,17 @@ const logout = () => {
                 </ul>
                 <!-- Authentication -->
                 <form @submit.prevent="logout">
-                    <DropdownLink class="py-3 block" as="button">
+                    <button type="submit" class="pl-6 py-3 hover:bg-gray-300 w-full flex justify-start">
+                        <i class="material-icons mr-1">settings_power</i>
                         Log Out
-                    </DropdownLink>
+                    </button>
                 </form>
             </nav>
             <!-- Page Content -->
             <main>
                 <div class="flex justify-between">
                     <i
-                        class="p-2 material-icons hover:cursor-pointer"
+                        class="p-2 material-icons hover:cursor-pointer fixed"
                         @click="toggleNav"
                         >menu</i
                     >

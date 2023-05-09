@@ -1,7 +1,6 @@
 <script setup>
 import { Head, router } from "@inertiajs/vue3";
 import Banner from "@/Components/Banner.vue";
-import DropdownLink from "@/Components/DropdownLink.vue";
 
 defineProps({
     title: String,

@@ -33,77 +33,53 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
                     <tbody>
                         <tr
                             class=" transition duration-300 ease-in-out hover:bg-neutral-200">
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                1
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-3 font-medium">1</td>
                             <td class="whitespace-nowrap px-6 py-3">Mark</td>
                             <td class="whitespace-nowrap px-6 py-3">Otto</td>
                             <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                1
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-3 font-medium">1</td>
                             <td class="whitespace-nowrap px-6 py-3">Mark</td>
                             <td class="whitespace-nowrap px-6 py-3">Otto</td>
                             <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                1
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-3 font-medium">1</td>
                             <td class="whitespace-nowrap px-6 py-3">Mark</td>
                             <td class="whitespace-nowrap px-6 py-3">Otto</td>
                             <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                1
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-3 font-medium">1</td>
                             <td class="whitespace-nowrap px-6 py-3">Mark</td>
                         </tr>
                         <tr
                             class=" transition duration-300 ease-in-out hover:bg-neutral-200">
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                1
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-3 font-medium">1</td>
                             <td class="whitespace-nowrap px-6 py-3">Mark</td>
                             <td class="whitespace-nowrap px-6 py-3">Otto</td>
                             <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                1
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-3 font-medium">1</td>
                             <td class="whitespace-nowrap px-6 py-3">Mark</td>
                             <td class="whitespace-nowrap px-6 py-3">Otto</td>
                             <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                1
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-3 font-medium">1</td>
                             <td class="whitespace-nowrap px-6 py-3">Mark</td>
                             <td class="whitespace-nowrap px-6 py-3">Otto</td>
                             <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                1
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-3 font-medium">1</td>
                             <td class="whitespace-nowrap px-6 py-3">Mark</td>
                         </tr>
                         <tr
                             class=" transition duration-300 ease-in-out hover:bg-neutral-200">
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                1
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-3 font-medium">1</td>
                             <td class="whitespace-nowrap px-6 py-3">Mark</td>
                             <td class="whitespace-nowrap px-6 py-3">Otto</td>
                             <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                1
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-3 font-medium">1</td>
                             <td class="whitespace-nowrap px-6 py-3">Mark</td>
                             <td class="whitespace-nowrap px-6 py-3">Otto</td>
                             <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                1
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-3 font-medium">1</td>
                             <td class="whitespace-nowrap px-6 py-3">Mark</td>
                             <td class="whitespace-nowrap px-6 py-3">Otto</td>
                             <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
-                                1
-                            </td>
+                            <td class="whitespace-nowrap px-6 py-3 font-medium">1</td>
                             <td class="whitespace-nowrap px-6 py-3">Mark</td>
                         </tr>
                         <tr

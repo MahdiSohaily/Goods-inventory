@@ -12,7 +12,7 @@
     justify-content: center;
 }
 
-.Requset {
+.Request {
     background-color: seagreen;
 }
 
@@ -35,15 +35,6 @@
     padding: 0.5rem;
     border-radius: 0.5rem;
     color: white;
-}
-
-.input-controll {
-    display: flex;
-    justify-content: center;
-}
-
-.input-controll label {
-    padding-inline: 0.5rem;
 }
 
 .mobis {

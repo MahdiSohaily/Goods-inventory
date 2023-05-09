@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+
+/* main navbar styles */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    bottom: 0;
+    width: 250px;
+    transition: all 1s ease-in-out;
+}

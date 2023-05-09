@@ -13,12 +13,6 @@ const search = (val) => {
         (pattern.length > 4 && superMode == 1) ||
         (pattern.length > 6 && superMode == 0)
     ) {
-        resultBox.innerHTML =
-            "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
-        if (pattern.charAt(0) == 0) {
-            pattern = "X" + pattern.substr(1);
-        }
-
         pattern = pattern.replace(/\s/g, "");
         pattern = pattern.replace(/-/g, "");
         pattern = pattern.replace(/_/g, "");
@@ -31,10 +25,10 @@ const search = (val) => {
                 console.log(response.data);
             })
             .catch(function (error) {
-                currentObj.output = error;
+                console.log(error);
             });
     } else {
-        resultBox.innerHTML = "";
+        // resultBox.innerHTML = "";
     }
 };
 </script>

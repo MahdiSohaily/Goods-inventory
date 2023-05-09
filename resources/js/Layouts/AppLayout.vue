@@ -7,9 +7,9 @@ defineProps({
     title: String,
 });
 
-
 const toggleNav = () => {
-    alert("clicked");
+    alert(this.$refs.nav)
+    // .style.bottom = "0px";
 };
 
 const logout = () => {
@@ -25,6 +25,7 @@ const logout = () => {
 
         <div class="min-h-screen bg-gray-100">
             <nav
+                ref="nav"
                 class="main-nav bg-white shadow-lg flex flex-col justify-between"
             >
                 <ul class="flex flex-col">

@@ -41,7 +41,7 @@ const search = (val, rates) => {
                 console.log(error);
             });
     } else {
-        // resultBox.innerHTML = "";
+        resultBox.innerHTML = "";
     }
 };
 
@@ -94,7 +94,7 @@ const print = (data, rates) => {
                 <td class='whitespace-nowrap text-center px-3 py-3'>` +
                 Math.round(avgPrice * 1.1) +
                 `</td>
-                <td class='orange whitespace-nowrap text-center px-3 py-3' >` +
+                <td class='orange whitespace-nowrap text-center px-3 py-3 border-black border-r-2' >` +
                 Math.round(avgPrice * 1.2) +
                 `</td>`;
 
@@ -140,7 +140,7 @@ const print = (data, rates) => {
                         <td class='font-bold whitespace-nowrap text-center px-3 py-3'>` +
                     Math.round(avgPrice) +
                     `</td>
-                        <td class='whitespace-nowrap px-3 py-3 text-center'>` +
+                        <td class='whitespace-nowrap px-3 py-3 text-center border-black border-r-2'>` +
                     Math.round(avgPrice * 1.1) +
                     `</td>`;
                 template += mobisRate(avgPrice, rates);

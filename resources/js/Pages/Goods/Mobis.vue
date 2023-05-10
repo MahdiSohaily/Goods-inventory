@@ -4,7 +4,7 @@ defineProps({ rates: Object, result: Array });
 </script>
 
 <template>
-    <AppLayout title="Search">
+    <AppLayout title="Mobis">
         <div class="py-20">
             <div class="max-w-full mx-auto sm:px-6 lg:px-8">
                 <div>
@@ -40,20 +40,20 @@ defineProps({ rates: Object, result: Array });
                                 </thead>
                                 <tbody>
                                     <tr v-if="result.length > 0" class="transition duration-300 ease-in-out bg-neutral-300">
-                                        <td class="whitespace-nowrap px-3 py-3">
+                                        <td class="whitespace-nowrap px-3 py-3 text-center">
                                             {{ result["partNumber"] }}
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-3">
+                                        <td class="whitespace-nowrap px-3 py-3 text-center">
                                             {{
                                                 Math.round(
                                                     result["avgPrice"] / 1.1
                                                 )
                                             }}
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-3">
+                                        <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
                                             {{ Math.round(result["avgPrice"]) }}
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-3">
+                                        <td class="whitespace-nowrap px-3 py-3 text-center">
                                             {{
                                                 Math.round(
                                                     result["avgPrice"] * 1.1

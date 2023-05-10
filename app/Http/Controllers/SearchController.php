@@ -27,12 +27,21 @@ class SearchController extends Controller
 
     public function mobis(string $mobis = null)
     {
+        $rates = DB::table('rates')
+            ->select('amount', 'status')
+            ->orderBy('amount', 'asc')
+            ->get();
+
         $good = DB::table('nisha')->where('partnumber', '=', "$mobis")->first();
+        
         $result = $this->checkMobis($mobis, $good);
 
-        print_r($result);
+        return Inertia::render('Dashboard', ['rates' => $rates, 'result' => $result]);
     }
 
+    /** ================================== Helper functions section =============================================== */
+
+    // A function to get the destination page response from it's response header (get_http_response_code)
     public function get_http_response_code($url)
     {
         ini_set('user_agent', 'Mozilla/5.0');
@@ -40,6 +49,8 @@ class SearchController extends Controller
         return substr($headers[0], 9, 3);
     }
 
+
+    // A function to check for mobis label in the destination page
     public function checkMobis($mobis, $good)
     {
         $context = stream_context_create(array("http" => array("header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36")));
@@ -54,7 +65,7 @@ class SearchController extends Controller
             );
             return false;
         } else {
-            require_once 'simple_html_dom.php';
+            require_once 'simple_html_dom.php'; // A php file which converts the response text to HTML DOM
 
             $html = file_get_contents("https://partsmotors.com/products/$mobis", false, $context);
 

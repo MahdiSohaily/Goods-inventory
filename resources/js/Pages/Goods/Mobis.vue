@@ -9,15 +9,6 @@ defineProps({ rates: Object });
         <div class="py-12">
             <div class="max-w-full mx-auto sm:px-6 lg:px-8">
                 <div>
-                    <div class="p-6 lg:p-8 flex justify-center">
-                        <input type="text" name="serial" id="serial"
-                            class="rounded-md py-3 text-center w-96 border-2 bg-gray-100" min="0" max="30"
-                            @keyup="search($event.target.value, rates)" placeholder="... کد فنی قطعه را وارد کنید" />
-                    </div>
-                    <div class="flex justify-center items-center pb-6">
-                        <input type="checkbox" name="super" id="mode" class="rounded-md" />
-                        <label for="mode" class="ml-1">Super Mode</label>
-                    </div>
                     <div class="bg-gray-100 bg-opacity-25">
                         <div class="max-w-7xl overflow-x-auto mx-auto">
                             <table class="min-w-full text-left text-sm font-light">

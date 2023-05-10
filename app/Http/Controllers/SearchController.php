@@ -30,7 +30,7 @@ class SearchController extends Controller
         $good = DB::table('nisha')->where('partnumber', '=', "$mobis")->first();
         $result = $this->checkMobis($mobis, $good);
 
-        return $result;
+        print_r($result);
     }
 
     public function get_http_response_code($url)
@@ -43,6 +43,8 @@ class SearchController extends Controller
     public function checkMobis($mobis, $good)
     {
         $context = stream_context_create(array("http" => array("header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36")));
+
+        $item = [];
 
         if ($this->get_http_response_code("https://partsmotors.com/products/$mobis") != "200") {
 
@@ -62,14 +64,20 @@ class SearchController extends Controller
                 $price = $element->content;
             }
 
-            $good->price = str_replace(",", "", $price);
-            $good->$avgPrice = round($price * 100 / 243.5 * 1.1);
-
+            $price = str_replace(",", "", $price);
+            // Updating the current item mobis
             DB::update(
-                "update nisha set mobis = '?' where partnumber = '?'",
+                "update nisha set mobis = ? where partnumber = ?",
                 [$price, $mobis]
             );
+
+            $item = [
+                'id' => $good->id,
+                'partNumber' => $good->partnumber,
+                'price' => $price,
+                'avgPrice' => round($price * 100 / 243.5 * 1.1),
+            ];
         }
-        return $good;
+        return $item;
     }
 }

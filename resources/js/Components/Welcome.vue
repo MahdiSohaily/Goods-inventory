@@ -48,7 +48,7 @@ const print = (data, rates) => {
             const id = item.id;
             const partNumber = item.partnumber;
             let price = item.price;
-            const avgPrice = Math.round((price * 110) / 243.5);
+            let avgPrice = Math.round((price * 110) / 243.5);
             const weight = Math.round(item.weight, 2);
             const mobis = item.mobis;
             let status;
@@ -128,8 +128,9 @@ const print = (data, rates) => {
             if (status == "YES-Mobis") {
                 price = mobis;
                 price = price.replace(",", "");
+                avgPrice = Math.round(price*110/243.5);
                 template +=
-                    `<tr class='mobis'>
+                    `<tr class='bg-gray-300 transition duration-400 ease-in-out hover:bg-neutral-500'>
                 <td class='part text-white left'> ` +
                     partNumber +
                     `-M</td>

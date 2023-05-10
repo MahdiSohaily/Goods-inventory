@@ -139,7 +139,7 @@ const print = (data, rates) => {
                 <td>` +
                     Math.round(avgPrice * 1.1) +
                     `</td>`;
-                template += getPriceMobis(avgPrice, rates);
+                template += mobisRate(avgPrice, rates);
                 template += `
                 <td></td>
                 <td></td>

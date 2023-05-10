@@ -1,7 +1,7 @@
+@import "search.css"; /* Using a string */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "search.css"; /* Using a string */
 
 [x-cloak] {
     display: none;

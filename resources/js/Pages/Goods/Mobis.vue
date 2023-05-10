@@ -74,14 +74,14 @@ defineProps({ rates: Object, result: Array });
                                             <div class="flex justify-center gap-1 items-center px-2">
                                                 <a target="_blank"
                                                     href="https://www.google.com/search?tbm=isch&q={{ result['partNumber']}}">
-                                                    <img class="w-5 h-auto" src="/img/google.png" alt="google" />
+                                                    1 <img class="w-5 h-auto" src="/img/google.png" alt="google" />
                                                 </a>
                                                 <a msg="partNumber">
-                                                    <img class="w-5 h-auto" src="/img/tel.png" alt="part" />
+                                                    2 <img class="w-5 h-auto" src="/img/tel.png" alt="part" />
                                                 </a>
                                                 <a target="_blank"
                                                     href="https://partsouq.com/en/search/all?q={{ result['partNumber'] }}">
-                                                    <img class="w-5 h-auto" src="/img/part.png" alt="part" />
+                                                    3 <img class="w-5 h-auto" src="/img/part.png" alt="part" />
                                                 </a>
                                             </div>
                                         </td>

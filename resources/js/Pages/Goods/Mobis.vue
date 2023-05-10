@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-defineProps({ rates: Object });
+defineProps({ rates: Object, result: Array });
 </script>
 
 <template>
@@ -17,10 +17,13 @@ defineProps({ rates: Object });
                                             شماره فنی
                                         </th>
                                         <th scope="col" class="px-3 py-3 text-white w-32">
-                                            دلار پایه
+                                            دلار پایین
                                         </th>
                                         <th scope="col" class="px-3 py-3 text-white border-black border-r-2">
-                                            +10%
+                                            دلار میانگین
+                                        </th>
+                                        <th scope="col" class="px-3 py-3 text-white border-black border-r-2">
+                                            دلار بالا 
                                         </th>
 
                                         <!-- START TO Loop over the existing rates at database -->

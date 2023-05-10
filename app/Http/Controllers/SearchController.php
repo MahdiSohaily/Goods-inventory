@@ -33,10 +33,10 @@ class SearchController extends Controller
             ->get();
 
         $good = DB::table('nisha')->where('partnumber', '=', "$mobis")->first();
-        
+
         $result = $this->checkMobis($mobis, $good);
 
-        return Inertia::render('Dashboard', ['rates' => $rates, 'result' => $result]);
+        return Inertia::render('Goods/Mobis', ['rates' => $rates, 'result' => $result]);
     }
 
     /** ================================== Helper functions section =============================================== */
@@ -63,7 +63,7 @@ class SearchController extends Controller
                 "update nisha set mobis = '-' where partnumber = ?",
                 [$mobis]
             );
-            return false;
+            return $item;
         } else {
             require_once 'simple_html_dom.php'; // A php file which converts the response text to HTML DOM
 

@@ -24,4 +24,8 @@ class SearchController extends Controller
         $user = DB::table('nisha')->where('partnumber', 'like', "$pattern%")->get();
         return response()->json([$user]);
     }
+
+    public function mobis(string $mobis = null) {
+
+    }
 }

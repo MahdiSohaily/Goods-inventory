@@ -5,10 +5,12 @@ defineProps({
     rates: Object,
 });
 
+let result = null;
+
 const search = (val) => {
     let pattern = val;
     let superMode = 0;
-    const resultBox = document.getElementById("s-result");
+    const resultBox = document.getElementById("results");
 
     if (document.getElementById("mode").checked) {
         superMode = 1;
@@ -27,13 +29,35 @@ const search = (val) => {
                 superMode,
             })
             .then(function (response) {
-                console.log(response.data);
+                print(response.data);
+                resultBox.innerHTML = response.data;
             })
             .catch(function (error) {
                 console.log(error);
             });
     } else {
         // resultBox.innerHTML = "";
+    }
+};
+const print = (data) => {
+    if (data) {
+        for (let item of data) {
+            const id = data.id;
+            const partNumber = data.partnumber;
+            const price = data.price;
+            const avgPrice = Math.round((price * 110) / 243.5);
+            const weight = Math.round(data.weight, 2);
+            const mobis = data.mobis;
+            let status;
+
+            if (mobis == "0.00") {
+                status = "NO-Price";
+            } else if (mobis == "-") {
+                status = "NO-Mobis";
+            } else if (mobis == NULL) {
+                status = "Request";
+            } else {$status = "YES-Mobis";}
+        }
     }
 };
 </script>
@@ -76,6 +100,8 @@ const search = (val) => {
                             >
                                 +10%
                             </th>
+
+                            <!-- START TO Loop over the existing rates at database -->
                             <th
                                 v-for="item in rates"
                                 :class="item.status"
@@ -84,13 +110,16 @@ const search = (val) => {
                             >
                                 {{ item.amount }}
                             </th>
+                            <!-- END the loop -->
+
                             <th scope="col" class="px-6 py-3 text-white">
                                 عملیات
                             </th>
                             <th scope="col" class="px-6 py-3 text-white">kg</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="results">
+                        <div v-if="result">{{ result }}</div>
                         <tr
                             class="transition duration-300 ease-in-out hover:bg-neutral-200"
                         >

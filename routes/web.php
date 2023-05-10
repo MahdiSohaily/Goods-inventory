@@ -35,6 +35,7 @@ Route::middleware([
     Route::get('/dashboard', [SearchController::class, 'index'])->name('dashboard');
     // Route to manage searched path
     Route::post('/search', [SearchController::class, 'search'])->name('search');
+    Route::get('/mobis/{id}', [SearchController::class, 'mobis'])->name('mobis');
 
 
 

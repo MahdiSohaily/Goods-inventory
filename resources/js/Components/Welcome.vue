@@ -23,6 +23,8 @@ const search = (val, rates) => {
         pattern = pattern.replace(/\s/g, "");
         pattern = pattern.replace(/-/g, "");
         pattern = pattern.replace(/_/g, "");
+
+        resultBox.innerHTML = `<img class='w-5 h-auto' src='/img/google.png' alt='google'>`;
         axios
             .post("/search", {
                 pattern,

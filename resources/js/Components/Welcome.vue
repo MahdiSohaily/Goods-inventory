@@ -47,7 +47,7 @@ const search = (val, rates) => {
 
 const print = (data, rates) => {
     let template = "";
-    if (data.length > 0) {
+    if (data[0].length > 0) {
         for (let item of data[0]) {
             const partNumber = item.partnumber;
             let price = item.price;
@@ -151,7 +151,7 @@ const print = (data, rates) => {
     } else {
         return `<tr v-else class="transition duration-300 ease-in-out bg-neutral-200">
                                         <td colspan="14" class="whitespace-nowrap px-3 py-3 text-center">
-                                           !این قطعه فاقد موبیز می باشد
+                                           !قطعه ای برای  کد فنی وارد در سیستم پیدا نشد
                                         </td>
                                     </tr>`;
     }

@@ -47,7 +47,7 @@ const search = (val, rates) => {
 
 const print = (data, rates) => {
     let template = "";
-    if (data) {
+    if (data.length > 0) {
         for (let item of data[0]) {
             const partNumber = item.partnumber;
             let price = item.price;
@@ -148,6 +148,12 @@ const print = (data, rates) => {
             }
         }
         return template;
+    } else {
+        return `<tr v-else class="transition duration-300 ease-in-out bg-neutral-200">
+                                        <td colspan="14" class="whitespace-nowrap px-3 py-3 text-center">
+                                           !این قطعه فاقد موبیز می باشد
+                                        </td>
+                                    </tr>`;
     }
 };
 
@@ -187,8 +193,16 @@ const mobisRate = (avg, rates) => {
 <template>
     <div>
         <div class="p-6 lg:p-8 flex justify-center">
-            <input type="text" name="serial" id="serial" class="rounded-md py-3 text-center w-96 border-2 bg-gray-100"
-                min="0" max="30" @keyup="search($event.target.value, rates)" placeholder="... کد فنی قطعه را وارد کنید" />
+            <input
+                type="text"
+                name="serial"
+                id="serial"
+                class="rounded-md py-3 text-center w-96 border-2 bg-gray-100"
+                min="0"
+                max="30"
+                @keyup="search($event.target.value, rates)"
+                placeholder="... کد فنی قطعه را وارد کنید"
+            />
         </div>
         <div class="flex justify-center items-center pb-6">
             <input type="checkbox" name="super" id="mode" class="rounded-md" />
@@ -199,24 +213,37 @@ const mobisRate = (avg, rates) => {
                 <table class="min-w-full text-left text-sm font-light">
                     <thead class="font-medium dark:border-neutral-500">
                         <tr class="bg-green-700">
-                            <th scope="col" class="px-3 py-3 bg-black text-white w-72 text-center">
+                            <th
+                                scope="col"
+                                class="px-3 py-3 bg-black text-white w-72 text-center"
+                            >
                                 شماره فنی
                             </th>
                             <th scope="col" class="px-3 py-3 text-white w-32">
                                 دلار پایه
                             </th>
-                            <th scope="col" class="px-3 py-3 text-white border-black border-r-2">
+                            <th
+                                scope="col"
+                                class="px-3 py-3 text-white border-black border-r-2"
+                            >
                                 +10%
                             </th>
 
                             <!-- START TO Loop over the existing rates at database -->
-                            <th v-for="item in rates" :class="item.status" scope="col"
-                                class="px-3 py-3 text-white text-center">
+                            <th
+                                v-for="item in rates"
+                                :class="item.status"
+                                scope="col"
+                                class="px-3 py-3 text-white text-center"
+                            >
                                 {{ item.amount }}
                             </th>
                             <!-- END the loop -->
 
-                            <th scope="col" class="px-3 py-3 text-white w-52 text-center">
+                            <th
+                                scope="col"
+                                class="px-3 py-3 text-white w-52 text-center"
+                            >
                                 عملیات
                             </th>
                             <th scope="col" class="px-3 py-3 text-white">

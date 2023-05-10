@@ -39,7 +39,7 @@ defineProps({ rates: Object, result: Array });
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-if="result" class="transition duration-300 ease-in-out bg-neutral-300">
+                                    <tr v-if="result.length > 0" class="transition duration-300 ease-in-out bg-neutral-300">
                                         <td class="whitespace-nowrap px-3 py-3">
                                             {{ result["partNumber"] }}
                                         </td>
@@ -81,8 +81,7 @@ defineProps({ rates: Object, result: Array });
                                                 <a msg="partNumber">
                                                     <img class="w-5 h-auto" src="/img/tel.png" alt="part" />
                                                 </a>
-                                                <a target="_blank"
-                                                :href="
+                                                <a target="_blank" :href="
                                                     'https://www.google.com/search?tbm=isch&q=' +
                                                     result['partNumber']
                                                 ">
@@ -91,9 +90,9 @@ defineProps({ rates: Object, result: Array });
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr v-else class="transition duration-300 ease-in-out hover:bg-neutral-200">
+                                    <tr v-else class="transition duration-300 ease-in-out bg-neutral-200">
                                         <td colspan="14" class="whitespace-nowrap px-3 py-3 text-center">
-                                            این قطعه فاقد موبیز می باشد!
+                                           !این قطعه فاقد موبیز می باشد
                                         </td>
                                     </tr>
                                 </tbody>

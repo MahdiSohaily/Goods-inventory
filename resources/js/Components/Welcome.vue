@@ -65,24 +65,24 @@ const print = (data, rates) => {
 
             template += `<tr class="transition duration-300 ease-in-out hover:bg-neutral-200">
                 <td class='whitespace-nowrap bg-blue-900'>
-                <div class='flex gap-1 text-white font-bold px-4'>`;
+                <div class='flex gap-1 text-white font-bold'>`;
             if (status == "Request") {
                 template +=
-                    ` <a class='link-s Request' target='_blank' href='` +
+                    ` <a class='link-s ml-4 Request' target='_blank' href='` +
                     partNumber +
                     `'>?</a>`;
             } else if (status == "NO-Price") {
                 template +=
-                    ` <a class='link-s NO-Price' target='_blank' href='` +
+                    ` <a class='link-s ml-4 NO-Price' target='_blank' href='` +
                     partNumber +
                     `'>!</a>`;
             } else if (status == `NO-Mobis`) {
                 template +=
-                    ` <a class='link-s NO-Mobis' target='_blank' href='` +
+                    ` <a class='link-s ml-4 NO-Mobis' target='_blank' href='` +
                     partNumber +
                     `'>x</a>`;
             } else {
-                template += `<span class='spacer'></span>`;
+                template += `<span class='ml-11'></span>`;
             }
 
             template +=
@@ -91,7 +91,7 @@ const print = (data, rates) => {
                 <td class='whitespace-nowrap text-center px-3 py-3'>` +
                 Math.round(avgPrice * 1.1) +
                 `</td>
-                <td class='orange whitespace-nowrap px-3 py-3' >` +
+                <td class='orange whitespace-nowrap text-center px-3 py-3' >` +
                 Math.round(avgPrice * 1.2) +
                 `</td>`;
 
@@ -128,23 +128,20 @@ const print = (data, rates) => {
             if (status == "YES-Mobis") {
                 price = mobis;
                 price = price.replace(",", "");
-                avgPrice = Math.round(price*110/243.5);
+                avgPrice = Math.round((price * 110) / 243.5);
                 template +=
                     `<tr class='bg-gray-300 transition duration-400 ease-in-out hover:bg-neutral-500'>
-                <td class='part text-white left'> ` +
+                        <td class='text-white font-bold pl-12'> ` +
                     partNumber +
                     `-M</td>
-                <td class='bold'>` +
+                        <td class='font-bold whitespace-nowrap text-center px-3 py-3'>` +
                     Math.round(avgPrice) +
                     `</td>
-                <td>` +
+                        <td class='whitespace-nowrap px-3 py-3 text-center'>` +
                     Math.round(avgPrice * 1.1) +
                     `</td>`;
                 template += mobisRate(avgPrice, rates);
-                template += `
-                <td></td>
-                <td></td>
-                </tr>`;
+                template += `<td></td><td></td></tr>`;
             }
         }
         return template;
@@ -157,7 +154,7 @@ const normalRate = (avg, rates) => {
     for (let rate of rates) {
         result +=
             `
-            <td class='whitespace-nowrap px-3 py-3 ` +
+            <td class='whitespace-nowrap px-3 py-3 text-center ` +
             rate.status +
             `' > ` +
             Math.round(avg * rate.amount * 1.2 * 1.2 * 1.3) +
@@ -173,7 +170,7 @@ const mobisRate = (avg, rates) => {
     for (let rate of rates) {
         result +=
             `
-        <td class='whitespace-nowrap px-3 py-3` +
+        <td class='whitespace-nowrap px-3 py-3 text-center b-` +
             rate.status +
             `' > ` +
             Math.round(avg * rate.amount * 1.25 * 1.3) +

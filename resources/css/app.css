@@ -157,20 +157,9 @@ td.G {
     font-weight: bold !important;
 }
 
-.part {
-    width: 250px !important;
-}
 
 .dollar {
     width: 80px !important;
-}
-
-.social {
-    width: 20px;
-}
-
-.action {
-    width: 150px;
 }
 
 .kg {
@@ -182,6 +171,3 @@ td.G {
     font-weight: bold;
 }
 
-.bold {
-    font-weight: bold;
-}

@@ -29,8 +29,7 @@ const search = (val) => {
                 superMode,
             })
             .then(function (response) {
-                print(response.data);
-                resultBox.innerHTML = response.data;
+                resultBox.innerHTML = print(JSON.parse(response.data));
             })
             .catch(function (error) {
                 console.log(error);
@@ -40,24 +39,12 @@ const search = (val) => {
     }
 };
 const print = (data) => {
+    let template;
     if (data) {
         for (let item of data) {
-            const id = data.id;
-            const partNumber = data.partnumber;
-            const price = data.price;
-            const avgPrice = Math.round((price * 110) / 243.5);
-            const weight = Math.round(data.weight, 2);
-            const mobis = data.mobis;
-            let status;
-
-            if (mobis == "0.00") {
-                status = "NO-Price";
-            } else if (mobis == "-") {
-                status = "NO-Mobis";
-            } else if (mobis == NULL) {
-                status = "Request";
-            } else {$status = "YES-Mobis";}
+            console.log(item);
         }
+        return template;
     }
 };
 </script>

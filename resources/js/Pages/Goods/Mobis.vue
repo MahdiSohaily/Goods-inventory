@@ -5,7 +5,7 @@ defineProps({ rates: Object, result: Array });
 
 <template>
     <AppLayout title="Search">
-        <div class="py-12">
+        <div class="py-20">
             <div class="max-w-full mx-auto sm:px-6 lg:px-8">
                 <div>
                     <div class="bg-gray-100 bg-opacity-25">
@@ -39,7 +39,7 @@ defineProps({ rates: Object, result: Array });
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-if="result" class="transition duration-300 ease-in-out hover:bg-neutral-200">
+                                    <tr v-if="result" class="transition duration-300 ease-in-out bg-neutral-300">
                                         <td class="whitespace-nowrap px-3 py-3">
                                             {{ result["partNumber"] }}
                                         </td>
@@ -72,16 +72,21 @@ defineProps({ rates: Object, result: Array });
                                         </td>
                                         <td class="whitespace-nowrap w-24">
                                             <div class="flex justify-center gap-1 items-center px-2">
-                                                <a target="_blank"
-                                                    href="https://www.google.com/search?tbm=isch&q={{ result['partNumber']}}">
-                                                    1 <img class="w-5 h-auto" src="/img/google.png" alt="google" />
+                                                <a target="_blank" :href="
+                                                    'https://www.google.com/search?tbm=isch&q=' +
+                                                    result['partNumber']
+                                                ">
+                                                    <img class="w-5 h-auto" src="/img/google.png" alt="google" />
                                                 </a>
                                                 <a msg="partNumber">
-                                                    2 <img class="w-5 h-auto" src="/img/tel.png" alt="part" />
+                                                    <img class="w-5 h-auto" src="/img/tel.png" alt="part" />
                                                 </a>
                                                 <a target="_blank"
-                                                    href="https://partsouq.com/en/search/all?q={{ result['partNumber'] }}">
-                                                    3 <img class="w-5 h-auto" src="/img/part.png" alt="part" />
+                                                :href="
+                                                    'https://www.google.com/search?tbm=isch&q=' +
+                                                    result['partNumber']
+                                                ">
+                                                    <img class="w-5 h-auto" src="/img/part.png" alt="part" />
                                                 </a>
                                             </div>
                                         </td>

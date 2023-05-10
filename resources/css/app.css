@@ -1,7 +1,12 @@
 @import "search.css"; /* Using a string */
+@import url('https://v1.fontapi.ir/css/Vazir');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*:not(i) {
+    font-family: Vazir, sans-serif !important;
+}
 
 [x-cloak] {
     display: none;
@@ -78,7 +83,7 @@ th,
 
 th,
 td {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 td.A,

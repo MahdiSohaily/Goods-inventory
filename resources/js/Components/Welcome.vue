@@ -217,11 +217,11 @@ const mobisRate = (avg, rates) => {
                         <tr class="bg-green-700">
                             <th
                                 scope="col"
-                                class="px-3 py-3 bg-black text-white w-72 text-center"
+                                class="px-3 py-3 bg-black text-white w-52 text-center"
                             >
                                 شماره فنی
                             </th>
-                            <th scope="col" class="px-3 py-3 text-white w-32">
+                            <th scope="col" class="px-3 py-3 text-white w-20">
                                 دلار پایه
                             </th>
                             <th

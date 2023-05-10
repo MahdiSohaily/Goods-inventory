@@ -24,7 +24,11 @@ const search = (val, rates) => {
         pattern = pattern.replace(/-/g, "");
         pattern = pattern.replace(/_/g, "");
 
-        resultBox.innerHTML = `<img class='w-5 h-auto' src='/img/google.png' alt='google'>`;
+        resultBox.innerHTML = `<tr class=''>
+                <td colspan='14' class='py-10 text-center'> 
+                    <img class=' block w-10 mx-auto h-auto' src='/img/loading.png' alt='google'>
+                    </td>
+            </tr>`;
         axios
             .post("/search", {
                 pattern,
@@ -243,7 +247,9 @@ const mobisRate = (avg, rates) => {
                         </tr>
                     </thead>
                     <tbody id="results">
-                        <div v-if="result">{{ result }}</div>
+                        {{
+                            result ? result : ""
+                        }}
                         <tr
                             class="transition duration-300 ease-in-out hover:bg-neutral-200"
                         >

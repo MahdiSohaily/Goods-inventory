@@ -47,7 +47,7 @@ const print = (data, rates) => {
         for (let item of data[0]) {
             const id = item.id;
             const partNumber = item.partnumber;
-            const price = item.price;
+            let price = item.price;
             const avgPrice = Math.round((price * 110) / 243.5);
             const weight = Math.round(item.weight, 2);
             const mobis = item.mobis;
@@ -127,7 +127,7 @@ const print = (data, rates) => {
 
             if (status == "YES-Mobis") {
                 price = mobis;
-                price = str_replace(",", "", price);
+                price = price.replace(",", "");
                 template +=
                     `<tr class='mobis'>
                 <td class='part text-white left'> ` +

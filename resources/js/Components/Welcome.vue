@@ -124,6 +124,27 @@ const print = (data, rates) => {
                 ` KG</div>
                 </td>
             </tr> `;
+
+            if (status == "YES-Mobis") {
+                price = mobis;
+                price = str_replace(",", "", price);
+                template +=
+                    `<tr class='mobis'>
+                <td class='part text-white left'> ` +
+                    partNumber +
+                    `-M</td>
+                <td class='bold'>` +
+                    Math.round(avgPrice) +
+                    `</td>
+                <td>` +
+                    Math.round(avgPrice * 1.1) +
+                    `</td>`;
+                template += getPriceMobis(avgPrice, rates);
+                template += `
+                <td></td>
+                <td></td>
+                </tr>`;
+            }
         }
         return template;
     }
@@ -212,10 +233,15 @@ const mobisRate = (avg, rates) => {
                             </th>
                             <!-- END the loop -->
 
-                            <th scope="col" class="px-3 py-3 text-white w-52 text-center">
+                            <th
+                                scope="col"
+                                class="px-3 py-3 text-white w-52 text-center"
+                            >
                                 عملیات
                             </th>
-                            <th scope="col" class="px-3 py-3 text-white">وزن</th>
+                            <th scope="col" class="px-3 py-3 text-white">
+                                وزن
+                            </th>
                         </tr>
                     </thead>
                     <tbody id="results">

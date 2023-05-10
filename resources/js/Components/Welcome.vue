@@ -72,17 +72,17 @@ const print = (data, rates) => {
                 <div class='flex gap-1 text-white font-bold'>`;
             if (status == "Request") {
                 template +=
-                    ` <a class='link-s ml-4 Request' target='_blank' href='mobis` +
+                    ` <a class='link-s ml-4 Request' target='_blank' href='mobis/` +
                     partNumber +
                     `'>?</a>`;
             } else if (status == "NO-Price") {
                 template +=
-                    ` <a class='link-s ml-4 NO-Price' target='_blank' href='mobis` +
+                    ` <a class='link-s ml-4 NO-Price' target='_blank' href='mobis/` +
                     partNumber +
                     `'>!</a>`;
             } else if (status == `NO-Mobis`) {
                 template +=
-                    ` <a class='link-s ml-4 NO-Mobis' target='_blank' href='mobis` +
+                    ` <a class='link-s ml-4 NO-Mobis' target='_blank' href='mobis/` +
                     partNumber +
                     `'>x</a>`;
             } else {

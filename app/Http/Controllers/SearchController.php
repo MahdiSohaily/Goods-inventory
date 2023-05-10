@@ -21,11 +21,14 @@ class SearchController extends Controller
     public function search(Request $request)
     {
         $pattern = $request->input('pattern');
-        $user = DB::table('nisha')->where('partnumber', 'like', "$pattern%")->get();
-        return response()->json([$user]);
+        $result = DB::table('nisha')->where('partnumber', 'like', "$pattern%")->get();
+        return response()->json([$result]);
     }
 
-    public function mobis(string $mobis = null) {
-
+    public function mobis(string $mobis = null)
+    {
+        $user = DB::table('nisha')->where('partnumber', '=', "$mobis%")->get();
+        require_once 'simple_html_dom.php';
+        echo $user;
     }
 }

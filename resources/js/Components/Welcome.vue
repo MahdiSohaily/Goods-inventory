@@ -86,10 +86,10 @@ const print = (data, rates) => {
             template +=
                 partNumber +
                 `</div></td>
-                <td class='whitespace-nowrap px-6 py-3'>` +
+                <td class='whitespace-nowrap text-center px-3 py-3'>` +
                 Math.round(avgPrice * 1.1) +
                 `</td>
-                <td class='orange whitespace-nowrap px-6 py-3' >` +
+                <td class='orange whitespace-nowrap px-3 py-3' >` +
                 Math.round(avgPrice * 1.2) +
                 `</td>`;
 
@@ -97,24 +97,26 @@ const print = (data, rates) => {
 
             template +=
                 `
-                <td class='whitespace-nowrap px-6 py-3 flex gap-1 items-center w-24'>
+                <td class='whitespace-nowrap w-24'>
+                    <div class='flex justify-center gap-1 items-center px-2'>
                     <a target='_blank' href='https://www.google.com/search?tbm=isch&q=` +
                 partNumber +
                 `'>
-                        <img class='w-8 h-auto' src='/img/google.png' alt='google'>
+                        <img class='w-5 h-auto' src='/img/google.png' alt='google'>
                     </a>
                     <a msg='` +
                 partNumber +
                 `'>
-                        <img class='w-8 h-auto' src='/img/tel.png' alt='part'>
+                        <img class='w-5 h-auto' src='/img/tel.png' alt='part'>
                     </a>
                     <a target='_blank' href='https://partsouq.com/en/search/all?q=` +
                 partNumber +
                 `'>
-                        <img class='w-8 h-auto' src='/img/part.png' alt='part'>
+                        <img class='w-5 h-auto' src='/img/part.png' alt='part'>
                     </a>
+                </div>
                 </td>
-                <td class='whitespace-nowrap px-6 py-3 kg'>
+                <td class='whitespace-nowrap px-3 py-3 kg'>
                     <div class='weight'>` +
                 weight +
                 ` KG</div>
@@ -131,7 +133,7 @@ const normalRate = (avg, rates) => {
     for (let rate of rates) {
         result +=
             `
-            <td class='whitespace-nowrap px-6 py-3 ` +
+            <td class='whitespace-nowrap px-3 py-3 ` +
             rate.status +
             `' > ` +
             Math.round(avg * rate.amount * 1.2 * 1.2 * 1.3) +
@@ -147,7 +149,7 @@ const mobisRate = (avg, rates) => {
     for (let rate of rates) {
         result +=
             `
-        <td class='whitespace-nowrap px-6 py-3` +
+        <td class='whitespace-nowrap px-3 py-3` +
             rate.status +
             `' > ` +
             Math.round(avg * rate.amount * 1.25 * 1.3) +
@@ -183,16 +185,16 @@ const mobisRate = (avg, rates) => {
                         <tr class="bg-green-700">
                             <th
                                 scope="col"
-                                class="px-6 py-3 bg-black text-white w-72 text-center"
+                                class="px-3 py-3 bg-black text-white w-72 text-center"
                             >
                                 شماره فنی
                             </th>
-                            <th scope="col" class="px-6 py-3 text-white w-32">
+                            <th scope="col" class="px-3 py-3 text-white w-32">
                                 دلار پایه
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 text-white border-black border-r-2"
+                                class="px-3 py-3 text-white border-black border-r-2"
                             >
                                 +10%
                             </th>
@@ -202,16 +204,16 @@ const mobisRate = (avg, rates) => {
                                 v-for="item in rates"
                                 :class="item.status"
                                 scope="col"
-                                class="px-6 py-3 text-white text-center"
+                                class="px-3 py-3 text-white text-center"
                             >
                                 {{ item.amount }}
                             </th>
                             <!-- END the loop -->
 
-                            <th scope="col" class="px-6 py-3 text-white w-52">
+                            <th scope="col" class="px-3 py-3 text-white w-52 text-center">
                                 عملیات
                             </th>
-                            <th scope="col" class="px-6 py-3 text-white">kg</th>
+                            <th scope="col" class="px-3 py-3 text-white">وزن</th>
                         </tr>
                     </thead>
                     <tbody id="results">
@@ -219,70 +221,70 @@ const mobisRate = (avg, rates) => {
                         <tr
                             class="transition duration-300 ease-in-out hover:bg-neutral-200"
                         >
-                            <td class="whitespace-nowrap px-6 py-3 font-bold">
+                            <td class="whitespace-nowrap px-3 py-3 font-bold">
                                 1
                             </td>
-                            <td class="whitespace-nowrap px-6 py-3">Mark</td>
-                            <td class="whitespace-nowrap px-6 py-3">Otto</td>
-                            <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
+                            <td class="whitespace-nowrap px-3 py-3">Mark</td>
+                            <td class="whitespace-nowrap px-3 py-3">Otto</td>
+                            <td class="whitespace-nowrap px-3 py-3">@mdo</td>
+                            <td class="whitespace-nowrap px-3 py-3 font-medium">
                                 1
                             </td>
-                            <td class="whitespace-nowrap px-6 py-3">Mark</td>
-                            <td class="whitespace-nowrap px-6 py-3">Otto</td>
-                            <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
+                            <td class="whitespace-nowrap px-3 py-3">Mark</td>
+                            <td class="whitespace-nowrap px-3 py-3">Otto</td>
+                            <td class="whitespace-nowrap px-3 py-3">@mdo</td>
+                            <td class="whitespace-nowrap px-3 py-3 font-medium">
                                 1
                             </td>
-                            <td class="whitespace-nowrap px-6 py-3">Mark</td>
-                            <td class="whitespace-nowrap px-6 py-3">Otto</td>
-                            <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
+                            <td class="whitespace-nowrap px-3 py-3">Mark</td>
+                            <td class="whitespace-nowrap px-3 py-3">Otto</td>
+                            <td class="whitespace-nowrap px-3 py-3">@mdo</td>
+                            <td class="whitespace-nowrap px-3 py-3 font-medium">
                                 1
                             </td>
-                            <td class="whitespace-nowrap px-6 py-3">Mark</td>
+                            <td class="whitespace-nowrap px-3 py-3">Mark</td>
                         </tr>
                         <tr
                             class="transition duration-300 ease-in-out hover:bg-neutral-200"
                         >
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
+                            <td class="whitespace-nowrap px-3 py-3 font-medium">
                                 1
                             </td>
-                            <td class="whitespace-nowrap px-6 py-3">Mark</td>
-                            <td class="whitespace-nowrap px-6 py-3">Otto</td>
-                            <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
+                            <td class="whitespace-nowrap px-3 py-3">Mark</td>
+                            <td class="whitespace-nowrap px-3 py-3">Otto</td>
+                            <td class="whitespace-nowrap px-3 py-3">@mdo</td>
+                            <td class="whitespace-nowrap px-3 py-3 font-medium">
                                 1
                             </td>
-                            <td class="whitespace-nowrap px-6 py-3">Mark</td>
-                            <td class="whitespace-nowrap px-6 py-3">Otto</td>
-                            <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
+                            <td class="whitespace-nowrap px-3 py-3">Mark</td>
+                            <td class="whitespace-nowrap px-3 py-3">Otto</td>
+                            <td class="whitespace-nowrap px-3 py-3">@mdo</td>
+                            <td class="whitespace-nowrap px-3 py-3 font-medium">
                                 1
                             </td>
-                            <td class="whitespace-nowrap px-6 py-3">Mark</td>
-                            <td class="whitespace-nowrap px-6 py-3">Otto</td>
-                            <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
+                            <td class="whitespace-nowrap px-3 py-3">Mark</td>
+                            <td class="whitespace-nowrap px-3 py-3">Otto</td>
+                            <td class="whitespace-nowrap px-3 py-3">@mdo</td>
+                            <td class="whitespace-nowrap px-3 py-3 font-medium">
                                 1
                             </td>
-                            <td class="whitespace-nowrap px-6 py-3">Mark</td>
+                            <td class="whitespace-nowrap px-3 py-3">Mark</td>
                         </tr>
                         <tr
                             class="transition duration-300 ease-in-out hover:bg-neutral-200"
                         >
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
+                            <td class="whitespace-nowrap px-3 py-3 font-medium">
                                 1
                             </td>
-                            <td class="whitespace-nowrap px-6 py-3">Mark</td>
-                            <td class="whitespace-nowrap px-6 py-3">Otto</td>
-                            <td class="whitespace-nowrap px-6 py-3">@mdo</td>
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
+                            <td class="whitespace-nowrap px-3 py-3">Mark</td>
+                            <td class="whitespace-nowrap px-3 py-3">Otto</td>
+                            <td class="whitespace-nowrap px-3 py-3">@mdo</td>
+                            <td class="whitespace-nowrap px-3 py-3 font-medium">
                                 1
                             </td>
-                            <td class="whitespace-nowrap px-6 py-3">Mark</td>
-                            <td class="whitespace-nowrap px-6 py-3">Otto</td>
-                            <td class="whitespace-nowrap px-6 py-3">@mdo</td>
+                            <td class="whitespace-nowrap px-3 py-3">Mark</td>
+                            <td class="whitespace-nowrap px-3 py-3">Otto</td>
+                            <td class="whitespace-nowrap px-3 py-3">@mdo</td>
                             <td class="whitespace-nowrap px-6 py-3 font-medium">
                                 1
                             </td>

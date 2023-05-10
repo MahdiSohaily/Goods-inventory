@@ -22,7 +22,6 @@ class SearchController extends Controller
     {
         $pattern = $request->input('pattern');
         $user = DB::table('nisha')->where('partnumber', 'like', "$pattern%")->get();
-        echo $user;
         return response()->json([$user]);
     }
 }

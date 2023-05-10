@@ -31,16 +31,12 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
-    // Dashboard route lead us to the search page
-    Route::get('/dashboard', [SearchController::class, 'index'])->name('dashboard');
-    // Route to manage searched path
-    Route::post('/search', [SearchController::class, 'search'])->name('search');
-    Route::get('/mobis/{mobis}', [SearchController::class, 'mobis'])->name('mobis');
-
-
-
-
-
+    // Search Page related routs
+    Route::controller(SearchController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('dashboard'); // Dashboard route lead us to the search page
+        Route::post('/search', 'search')->name('search'); // Route to manage searched path
+        Route::get('/mobis/{mobis}', 'mobis')->name('mobis'); // Route to check if a good has mobis
+    });
 
     Route::get('/goods', function () {
         return Inertia::render('Dashboard');

@@ -7,7 +7,7 @@ defineProps({
 
 let result = null;
 
-const search = (val) => {
+const search = (val, rates) => {
     let pattern = val;
     let superMode = 0;
     const resultBox = document.getElementById("results");
@@ -29,7 +29,7 @@ const search = (val) => {
                 superMode,
             })
             .then(function (response) {
-                resultBox.innerHTML = print(JSON.parse(response.data));
+                resultBox.innerHTML = print(response.data, rates);
             })
             .catch(function (error) {
                 console.log(error);
@@ -38,14 +38,123 @@ const search = (val) => {
         // resultBox.innerHTML = "";
     }
 };
-const print = (data) => {
-    let template;
+
+const print = (data, rates) => {
+    let template = "";
     if (data) {
-        for (let item of data) {
-            console.log(item);
+        for (let item of data[0]) {
+            const id = item.id;
+            const partNumber = item.partnumber;
+            const price = item.price;
+            const avgPrice = Math.round((price * 110) / 243.5);
+            const weight = Math.round(item.weight, 2);
+            const mobis = item.mobis;
+            let status;
+
+            if (mobis == "0.00") {
+                status = "NO-Price";
+            } else if (mobis == "-") {
+                status = "NO-Mobis";
+            } else if (mobis == null) {
+                status = "Request";
+            } else {
+                status = "YES-Mobis";
+            }
+
+            template += `<tr class="transition duration-300 ease-in-out hover:bg-neutral-200">
+                <td class='whitespace-nowrap bg-blue-900'>
+                <div class='flex gap-1 text-white font-bold px-4'>`;
+            if (status == "Request") {
+                template +=
+                    ` <a class='link-s Request' target='_blank' href='` +
+                    partNumber +
+                    `'>?</a>`;
+            } else if (status == "NO-Price") {
+                template +=
+                    ` <a class='link-s NO-Price' target='_blank' href='` +
+                    partNumber +
+                    `'>!</a>`;
+            } else if (status == `NO-Mobis`) {
+                template +=
+                    ` <a class='link-s NO-Mobis' target='_blank' href='` +
+                    partNumber +
+                    `'>x</a>`;
+            } else {
+                template += `<span class='spacer'></span>`;
+            }
+
+            template +=
+                partNumber +
+                `</div></td>
+                <td class='whitespace-nowrap px-6 py-3'>` +
+                Math.round(avgPrice * 1.1) +
+                `</td>
+                <td class='orange whitespace-nowrap px-6 py-3' >` +
+                Math.round(avgPrice * 1.2) +
+                `</td>`;
+
+            template += normalRate(avgPrice, rates);
+
+            template +=
+                `
+                <td class='whitespace-nowrap px-6 py-3 flex gap-1 items-center w-24'>
+                    <a target='_blank' href='https://www.google.com/search?tbm=isch&q=` +
+                partNumber +
+                `'>
+                        <img class='w-8 h-auto' src='/img/google.png' alt='google'>
+                    </a>
+                    <a msg='` +
+                partNumber +
+                `'>
+                        <img class='w-8 h-auto' src='/img/tel.png' alt='part'>
+                    </a>
+                    <a target='_blank' href='https://partsouq.com/en/search/all?q=` +
+                partNumber +
+                `'>
+                        <img class='w-8 h-auto' src='/img/part.png' alt='part'>
+                    </a>
+                </td>
+                <td class='whitespace-nowrap px-6 py-3 kg'>
+                    <div class='weight'>` +
+                weight +
+                ` KG</div>
+                </td>
+            </tr> `;
         }
         return template;
     }
+};
+
+const normalRate = (avg, rates) => {
+    let result = "";
+
+    for (let rate of rates) {
+        result +=
+            `
+            <td class='whitespace-nowrap px-6 py-3 ` +
+            rate.status +
+            `' > ` +
+            Math.round(avg * rate.amount * 1.2 * 1.2 * 1.3) +
+            `</td>`;
+    }
+
+    return result;
+};
+
+const mobisRate = (avg, rates) => {
+    let result = "";
+
+    for (let rate of rates) {
+        result +=
+            `
+        <td class='whitespace-nowrap px-6 py-3` +
+            rate.status +
+            `' > ` +
+            Math.round(avg * rate.amount * 1.25 * 1.3) +
+            `</td>`;
+    }
+
+    return result;
 };
 </script>
 
@@ -59,7 +168,7 @@ const print = (data) => {
                 class="rounded-md py-3 text-center w-96 border-2 bg-gray-100"
                 min="0"
                 max="30"
-                @keyup="search($event.target.value)"
+                @keyup="search($event.target.value, rates)"
                 placeholder="... کد فنی قطعه را وارد کنید"
             />
         </div>
@@ -93,13 +202,13 @@ const print = (data) => {
                                 v-for="item in rates"
                                 :class="item.status"
                                 scope="col"
-                                class="px-6 py-3 text-white"
+                                class="px-6 py-3 text-white text-center"
                             >
                                 {{ item.amount }}
                             </th>
                             <!-- END the loop -->
 
-                            <th scope="col" class="px-6 py-3 text-white">
+                            <th scope="col" class="px-6 py-3 text-white w-52">
                                 عملیات
                             </th>
                             <th scope="col" class="px-6 py-3 text-white">kg</th>
@@ -110,7 +219,7 @@ const print = (data) => {
                         <tr
                             class="transition duration-300 ease-in-out hover:bg-neutral-200"
                         >
-                            <td class="whitespace-nowrap px-6 py-3 font-medium">
+                            <td class="whitespace-nowrap px-6 py-3 font-bold">
                                 1
                             </td>
                             <td class="whitespace-nowrap px-6 py-3">Mark</td>

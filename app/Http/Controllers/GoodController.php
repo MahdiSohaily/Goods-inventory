@@ -12,6 +12,7 @@ class GoodController extends Controller
     public function index()
     {
         $goods = DB::table('nisha')
+            ->limit(10)
             ->orderBy('id', 'asc')
             ->get();
         return Inertia::render('Goods/Show', ['goods' => $goods]);

@@ -53,7 +53,7 @@ defineProps({
                     </thead>
                     <tbody id="results">
                         {{
-                            result ? result : ""
+                            goods ? goods : ""
                         }}
                     </tbody>
                 </table>

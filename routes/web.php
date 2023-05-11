@@ -50,10 +50,6 @@ Route::middleware([
         Route::delete('/goods/{goods}', 'delete')->name('goods.delete'); // Route to delete a specific good
     });
 
-    Route::get('/goods', function () {
-        return Inertia::render('Dashboard');
-    })->name('goods');
-
     Route::get('/rates', function () {
         return Inertia::render('Dashboard');
     })->name('rates');

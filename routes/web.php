@@ -47,7 +47,7 @@ Route::middleware([
         Route::post('/goods/page', 'page')->name('goods.page'); // goods route lead us to the goods page
         Route::get('/goods/create', 'create')->name('goods.create'); // Route to show the form for creating a new good in the system
         Route::post('/goods', 'store')->name('goods.store'); // Route to create new good in the system
-        Route::put('/goods/{goods}/edit', 'edit')->name('goods.edit'); // Route to show the selected good for update
+        Route::get('/goods/{goods}/edit', 'edit')->name('goods.edit'); // Route to show the selected good for update
         Route::put('/goods/{goods}', 'update')->name('goods.update'); // Route to update an existing good
         Route::delete('/goods/{goods}', 'delete')->name('goods.delete'); // Route to delete a specific good
     });

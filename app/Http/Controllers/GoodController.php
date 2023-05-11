@@ -88,4 +88,9 @@ class GoodController extends Controller
 
         return response()->json(['goods' => $goods, 'count' => $goods_count]);
     }
+
+    public function edit($good)
+    {
+        echo $good;
+    }
 }

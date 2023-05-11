@@ -44,7 +44,6 @@ const logout = () => {
                         <a
                             class="pl-1 py-3 block"
                             :href="route('dashboard')"
-                            :active="route().current('dashboard')"
                         >
                             Search
                         </a>
@@ -54,7 +53,6 @@ const logout = () => {
                         <a
                             class="pl-1 py-3 block"
                             :href="route('goods')"
-                            :active="route().current('goods')"
                         >
                             Goods
                         </a>
@@ -65,7 +63,6 @@ const logout = () => {
                         <a
                             class="pl-1 py-3 block"
                             :href="route('rates')"
-                            :active="route().current('rates')"
                         >
                             Rates
                         </a>
@@ -75,7 +72,6 @@ const logout = () => {
                         <a
                             class="pl-1 py-3 block"
                             :href="route('profile.show')"
-                            :active="route().current('profile.show')"
                         >
                             Profile
                         </a>

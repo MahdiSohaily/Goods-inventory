@@ -15,6 +15,9 @@ class GoodController extends Controller
             ->limit(10)
             ->orderBy('id', 'asc')
             ->get();
-        return Inertia::render('Goods/Show', ['goods' => $goods]);
+
+        $goods_count = DB::table('nisha')
+            ->count();
+        return Inertia::render('Goods/Show', ['goods' => $goods, 'count' => $goods_count]);
     }
 }

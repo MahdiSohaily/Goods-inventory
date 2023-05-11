@@ -146,17 +146,17 @@ const print = (data) => {
     <AppLayout title="Goods">
         <div>
             <div class="max-w-7xl overflow-x-auto mx-auto py-6 flex justify-between">
-                <a :href="route('goods.create')" class="bg-indigo-500 hover:bg-indigo-400 rounded-md text-white px-4">ثبت قطعه</a>
                 <input
                     type="text"
                     name="serial"
                     id="serial"
-                    class="rounded-md py-3 text-right w-96 border-2 bg-gray-100"
+                    class="rounded-md py-3 w-96 border-2 bg-gray-100"
                     min="0"
                     max="30"
                     @keyup="search($event.target.value, rates)"
-                    placeholder="... جستجوی به اساس کد فنی قطعه"
+                    placeholder="Search base on Part Number..."
                 />
+                <a :href="route('goods.create')" class="bg-indigo-500 hover:bg-indigo-400 rounded-md text-white px-4 flex justify-center items-center">Create New</a>
             </div>
             <div class="bg-gray-100 bg-opacity-25">
                 <div class="max-w-7xl overflow-x-auto mx-auto">

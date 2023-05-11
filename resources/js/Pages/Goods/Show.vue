@@ -41,7 +41,7 @@ const getData = (page, pattern) => {
     axios
         .post("/goods/page/", {
             page,
-            pattern,
+            pattern :'553113f',
         })
         .then(function (response) {
             resultBox.setAttribute(

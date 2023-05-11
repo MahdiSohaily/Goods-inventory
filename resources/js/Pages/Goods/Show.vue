@@ -5,7 +5,7 @@ import axios from "axios";
 defineProps({
     goods: Object,
 });
-let current_page = 1;
+let current_page = 0;
 const total_pages = goods.length;
 
 const page = async (action) => {
@@ -21,8 +21,8 @@ const page = async (action) => {
             break;
         case "next":
             ++current_page;
-            if (current_page <= 0) {
-                current_page = total_pages;
+            if (current_page > total_pages) {
+                current_page = 0;
             }
             data = await getData(current_page);
             break;

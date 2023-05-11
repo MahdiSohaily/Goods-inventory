@@ -9,6 +9,10 @@ defineProps({
 let current_page = 0;
 let pattern = null;
 
+const search = (value) => {
+    pattern = value;
+};
+
 const page = async (action) => {
     const results = document.getElementById("results");
     const total_pages = results.getAttribute("data-length");
@@ -41,7 +45,7 @@ const getData = (page, pattern) => {
     axios
         .post("/goods/page/", {
             page,
-            pattern :'553113f',
+            pattern: "553113f",
         })
         .then(function (response) {
             resultBox.setAttribute(

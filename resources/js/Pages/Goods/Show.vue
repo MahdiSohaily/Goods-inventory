@@ -97,7 +97,7 @@ const print = (data) => {
             const mobis = item.mobis;
 
             template +=
-                `<tr class="transition duration-300 ease-in-out hover:bg-neutral-200">
+                `<tr class="transition duration-300 ease-in-out bg-neutral-200 hover:bg-neutral-100">
                 <td class='whitespace-nowrap font-bold text-center'>` +
                 partNumber +
                 `</td>

@@ -23,6 +23,29 @@ class GoodController extends Controller
 
     public function page(Request $request)
     {
+        $page = $request->input('page');
+        $pattern = $request->input('pattern');
+        $limit = 10;
+        $goods = null;
+
+        if($pattern) {
+            $goods = DB::table('nisha')
+            ->where('partnumber', 'like', '%' . $pattern . '%')
+            ->offset($limit * $page)
+            ->limit(10)
+            ->orderBy('id', 'asc')
+            ->get();
+        } else {
+            $goods = DB::table('nisha')
+            ->offset($limit * $page)
+            ->limit(10)
+            ->orderBy('id', 'asc')
+            ->get();
+        }
+
+        $goods_count = DB::table('nisha')
+            ->count();
+        return Inertia::render('Goods/Show', ['goods' => $goods, 'count' => $goods_count]);
         echo $request->input('page');
     }
 }

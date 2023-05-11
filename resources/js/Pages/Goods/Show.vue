@@ -187,10 +187,7 @@ const print = (data) => {
                                 </td>
                                 <td class="whitespace-nowrap w-24">
                                     <div class="flex justify-center gap-1 items-center px-2">
-                                        <a target="_blank" :href="
-                                            'https://www.google.com/search?tbm=isch&q=' +
-                                            item.partnumber
-                                        ">
+                                        <a target="_blank" :href="route('goods.edit', item.id)">
                                             <i class="material-icons text-blue-500">create</i>
                                         </a>
                                         <a target="_blank" :href="

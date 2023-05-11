@@ -8,17 +8,28 @@ defineProps({
 let current_page = 1;
 const total_pages = goods.length;
 
-const page = (action) => {
+const page = async (action) => {
     const results = document.getElementById("results");
+    let data = null;
     switch (action) {
         case "prev":
+            --current_page;
+            if (current_page <= 0) {
+                current_page = total_pages;
+            }
+            data = await getData(current_page);
             break;
         case "next":
+            ++current_page;
+            if (current_page <= 0) {
+                current_page = total_pages;
+            }
+            data = await getData(current_page);
             break;
     }
 };
 
-const getData = () => {
+const getData = (page) => {
     axios
         .post("/search", {
             pattern,

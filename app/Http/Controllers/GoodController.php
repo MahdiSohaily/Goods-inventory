@@ -27,6 +27,8 @@ class GoodController extends Controller
         $pattern = $request->input('pattern');
         $limit = 10;
         $goods = null;
+        $goods_count = DB::table('nisha')
+            ->count();
 
         if ($pattern) {
             $goods = DB::table('nisha')
@@ -35,6 +37,9 @@ class GoodController extends Controller
                 ->limit(10)
                 ->orderBy('id', 'asc')
                 ->get();
+            $goods_count = DB::table('nisha')
+                ->where('partnumber', 'like', '%' . $pattern . '%')
+                ->count();
         } else {
             $goods = DB::table('nisha')
                 ->offset($limit * $page)
@@ -42,9 +47,6 @@ class GoodController extends Controller
                 ->orderBy('id', 'asc')
                 ->get();
         }
-
-        $goods_count = DB::table('nisha')
-            ->count();
 
         return response()->json(['goods' => $goods, 'count' => $goods_count]);
     }

@@ -28,24 +28,24 @@ class GoodController extends Controller
         $limit = 10;
         $goods = null;
 
-        if($pattern) {
+        if ($pattern) {
             $goods = DB::table('nisha')
-            ->where('partnumber', 'like', '%' . $pattern . '%')
-            ->offset($limit * $page)
-            ->limit(10)
-            ->orderBy('id', 'asc')
-            ->get();
+                ->where('partnumber', 'like', '%' . $pattern . '%')
+                ->offset($limit * $page)
+                ->limit(10)
+                ->orderBy('id', 'asc')
+                ->get();
         } else {
             $goods = DB::table('nisha')
-            ->offset($limit * $page)
-            ->limit(10)
-            ->orderBy('id', 'asc')
-            ->get();
+                ->offset($limit * $page)
+                ->limit(10)
+                ->orderBy('id', 'asc')
+                ->get();
         }
 
         $goods_count = DB::table('nisha')
             ->count();
-        return Inertia::render('Goods/Show', ['goods' => $goods, 'count' => $goods_count]);
-        echo $request->input('page');
+
+        return response()->json(['goods' => $goods, 'count' => $goods_count]);
     }
 }

@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\DB;
 class GoodController extends Controller
 {
     public function index () {
-        $goods = DB::table('rates')
-            ->select('amount', 'status')
-            ->orderBy('amount', 'asc')
+        $goods = DB::table('nisha')
+            ->orderBy('id', 'asc')
             ->get();
         return Inertia::render('Dashboard', ['goods' => $goods]);
     }

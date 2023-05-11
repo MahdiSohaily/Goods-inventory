@@ -20,4 +20,9 @@ class GoodController extends Controller
             ->count();
         return Inertia::render('Goods/Show', ['goods' => $goods, 'count' => $goods_count]);
     }
+
+    public function page(Request $request)
+    {
+        echo $request->input('page');
+    }
 }

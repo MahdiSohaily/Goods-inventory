@@ -34,12 +34,13 @@ const page = async (action) => {
 const getData = (page, pattern) => {
     const resultBox = document.getElementById("results");
     axios
-        .post("/search", {
-            pattern,
+        .post("/goods/page/", {
             page,
+            pattern,
         })
         .then(function (response) {
-            resultBox.innerHTML = print(response.data);
+            console.log(response.data);
+            // resultBox.innerHTML = print(response.data);
         })
         .catch(function (error) {
             console.log(error);

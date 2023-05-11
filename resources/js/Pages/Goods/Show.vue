@@ -81,13 +81,15 @@ defineProps({
                             </tr>
                         </tbody>
                     </table>
-                    <div class="flex justify-center py-3">
+                    <div v-if="goods.length > 0" class="flex justify-center py-3">
                         <ul class="flex">
-                        <li id="prev" class="bg-blue-400 hover:bg-blue-300 mx-2 flex justify-center items-center px-3 py-2 rounded-md cursor-pointer" data-page="prev">
+                        <li class="bg-blue-400 hover:bg-blue-300 mx-2 flex justify-center items-center px-3 py-2 rounded-md cursor-pointer"
+                        @click="page('prev')">
                             <i class="material-icons">fast_rewind</i>
                         </li>
-                        <li id="next" class="bg-blue-400 hover:bg-blue-300 mx-2 flex justify-center items-center  px-3 p-2 rounded-md cursor-pointer">
-                            <i class="material-icons" data-page="next">fast_forward</i>
+                        <li class="bg-blue-400 hover:bg-blue-300 mx-2 flex justify-center items-center  px-3 p-2 rounded-md cursor-pointer"
+                        @click="page('next')">
+                            <i class="material-icons">fast_forward</i>
                         </li>
                     </ul>
                     </div>

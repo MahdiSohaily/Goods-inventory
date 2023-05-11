@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class GoodController extends Controller
 {
-    public function index () {
+    public function index()
+    {
         $goods = DB::table('nisha')
             ->orderBy('id', 'asc')
             ->get();
-        return Inertia::render('Dashboard', ['goods' => $goods]);
+        return Inertia::render('Goods/Show', ['goods' => $goods]);
     }
 }

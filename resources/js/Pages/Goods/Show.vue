@@ -7,19 +7,25 @@ defineProps({
     count: Number,
 });
 let current_page = 0;
+let pattern = null;
 
 const page = async (action) => {
     const results = document.getElementById("results");
+    const total_pages = results.getAttribute("data-length");
     let data = null;
     switch (action) {
         case "prev":
             --current_page;
-            alert(current_page);
-            data = await getData(current_page);
+            if (current_page <= 0) {
+                current_page = total_pages;
+            }
+            data = await getData(current_page, pattern);
             break;
         case "next":
             ++current_page;
-            alert(current_page);
+            if (current_page > total_pages) {
+                current_page = 0;
+            }
             data = await getData(current_page);
             break;
     }
@@ -92,9 +98,11 @@ const getData = (page) => {
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="results">
+                        <tbody
+                            id="results"
+                            :data-length="Math.round(count / 10)"
+                        >
                             <tr
-                                :data-length="goods.length"
                                 v-if="goods.length > 0"
                                 v-for="item in goods"
                                 class="transition duration-300 ease-in-out bg-neutral-200 hover:bg-neutral-100"

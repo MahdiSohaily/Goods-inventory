@@ -31,15 +31,23 @@ class GoodController extends Controller
             ->count();
 
         if ($pattern) {
-            $goods = DB::table('nisha')
-                ->where('partnumber', 'like', '%' . $pattern . '%')
-                ->offset($limit * $page)
-                ->limit(10)
-                ->orderBy('id', 'asc')
-                ->get();
             $goods_count = DB::table('nisha')
                 ->where('partnumber', 'like', '%' . $pattern . '%')
                 ->count();
+            if ($goods_count > 10) {
+                $goods = DB::table('nisha')
+                    ->where('partnumber', 'like', '%' . $pattern . '%')
+                    ->offset($limit * $page)
+                    ->limit(10)
+                    ->orderBy('id', 'asc')
+                    ->get();
+            } else {
+                $goods = DB::table('nisha')
+                    ->where('partnumber', 'like', '%' . $pattern . '%')
+                    ->limit(10)
+                    ->orderBy('id', 'asc')
+                    ->get();
+            }
         } else {
             $goods = DB::table('nisha')
                 ->offset($limit * $page)

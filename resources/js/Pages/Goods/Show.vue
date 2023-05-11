@@ -33,14 +33,23 @@ const page = async (action) => {
 
 const getData = (page, pattern) => {
     const resultBox = document.getElementById("results");
+    resultBox.innerHTML = `<tr class=''>
+                <td colspan='5' class='py-10 text-center'> 
+                    <img class=' block w-10 mx-auto h-auto' src='/img/loading.png' alt='google'>
+                    </td>
+            </tr>`;
     axios
         .post("/goods/page/", {
             page,
             pattern,
         })
         .then(function (response) {
+            resultBox.setAttribute(
+                "data-length",
+                Math.ceil(response.data.count / 10)
+            );
             console.log(response.data);
-            // resultBox.innerHTML = print(response.data);
+            resultBox.innerHTML = print(response.data.goods);
         })
         .catch(function (error) {
             console.log(error);
@@ -49,18 +58,27 @@ const getData = (page, pattern) => {
 
 const print = (data) => {
     let template = "";
-    if (data[0].length > 0) {
-        for (let item of data[0]) {
+    if (data.length > 0) {
+        for (let item of data) {
             const partNumber = item.partnumber;
             const price = item.price;
             const weight = Number(item.weight).toFixed(1);
             const mobis = item.mobis;
 
-            template +=`<tr class="transition duration-300 ease-in-out hover:bg-neutral-200">
-                <td class='whitespace-nowrap bg-blue-900'>`+ partNumber +`</td>
-                <td class='whitespace-nowrap text-center px-3 py-3'>` + price +`</td>
-                <td class='orange whitespace-nowrap text-center px-3 py-3 border-black border-r-2' >` + weight + `</td>
-                <td class='orange whitespace-nowrap text-center px-3 py-3 border-black border-r-2' >` + mobis + `</td>`;
+            template +=
+                `<tr class="transition duration-300 ease-in-out hover:bg-neutral-200">
+                <td class='whitespace-nowrap font-bold text-center'>` +
+                partNumber +
+                `</td>
+                <td class='whitespace-nowrap font-bold text-center px-3 py-3'>` +
+                price +
+                `</td>
+                <td class= 'whitespace-nowrap font-bold text-center px-3 py-3' >` +
+                weight +
+                `</td>
+                <td class='whitespace-nowrap font-bold text-center px-3 py-3' >` +
+                mobis +
+                `</td>`;
 
             template +=
                 `

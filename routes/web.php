@@ -43,6 +43,7 @@ Route::middleware([
     // Good Page related routs
     Route::controller(GoodController::class)->group(function () {
         Route::get('/goods', 'index')->name('goods'); // goods route lead us to the goods page
+        Route::post('/goods/search', 'search')->name('goods.search'); // goods route lead us to the goods page
         Route::post('/goods/page', 'page')->name('goods.page'); // goods route lead us to the goods page
         Route::get('/goods/create', 'create')->name('goods.create'); // Route to show the form for creating a new good in the system
         Route::post('/goods', 'store')->name('goods.store'); // Route to create new good in the system

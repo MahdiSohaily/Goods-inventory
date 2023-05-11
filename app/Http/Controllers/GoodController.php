@@ -44,13 +44,43 @@ class GoodController extends Controller
             } else {
                 $goods = DB::table('nisha')
                     ->where('partnumber', 'like', '%' . $pattern . '%')
-                    ->limit(10)
                     ->orderBy('id', 'asc')
                     ->get();
             }
         } else {
             $goods = DB::table('nisha')
                 ->offset($limit * $page)
+                ->limit(10)
+                ->orderBy('id', 'asc')
+                ->get();
+        }
+
+        return response()->json(['goods' => $goods, 'count' => $goods_count]);
+    }
+
+    public function search(Request $request)
+    {
+        $pattern = $request->input('pattern');
+        $goods = null;
+
+        if ($pattern) {
+            $goods_count = DB::table('nisha')
+                ->where('partnumber', 'like', '%' . $pattern . '%')
+                ->count();
+            if ($goods_count > 10) {
+                $goods = DB::table('nisha')
+                    ->where('partnumber', 'like', '%' . $pattern . '%')
+                    ->limit(10)
+                    ->orderBy('id', 'asc')
+                    ->get();
+            } else {
+                $goods = DB::table('nisha')
+                    ->where('partnumber', 'like', '%' . $pattern . '%')
+                    ->orderBy('id', 'asc')
+                    ->get();
+            }
+        } else {
+            $goods = DB::table('nisha')
                 ->limit(10)
                 ->orderBy('id', 'asc')
                 ->get();

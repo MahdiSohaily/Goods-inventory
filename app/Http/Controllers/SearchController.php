@@ -36,7 +36,7 @@ class SearchController extends Controller
 
         $result = $this->checkMobis($mobis, $good);
 
-        return Inertia::render('Goods/Mobis', ['rates' => $rates, 'result' => $result]);
+        return Inertia::render('Mobis/Mobis', ['rates' => $rates, 'result' => $result]);
     }
 
     /** ================================== Helper functions section =============================================== */

@@ -91,8 +91,11 @@ defineProps({ rates: Object, result: Array });
                                         </td>
                                     </tr>
                                     <tr v-else class="transition duration-300 ease-in-out bg-neutral-200">
-                                        <td colspan="14" class="whitespace-nowrap px-3 py-3 text-center">
-                                           !این قطعه فاقد موبیز می باشد
+                                        <td colspan="14"
+                                            class="whitespace-nowrap px-3 py-3 text-center text-red-500 font-bold">
+                                            <i class="material-icons text-red-500">mood_bad</i>
+                                            <br />
+                                            !این قطعه فاقد موبیز می باشد
                                         </td>
                                     </tr>
                                 </tbody>

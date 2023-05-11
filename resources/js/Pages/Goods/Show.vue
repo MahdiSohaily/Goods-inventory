@@ -6,24 +6,15 @@ defineProps({
     goods: Object,
 });
 let current_page = 0;
-const total_pages = goods.length;
 
 const page = async (action) => {
     const results = document.getElementById("results");
     let data = null;
     switch (action) {
         case "prev":
-            --current_page;
-            if (current_page <= 0) {
-                current_page = total_pages;
-            }
             data = await getData(current_page);
             break;
         case "next":
-            ++current_page;
-            if (current_page > total_pages) {
-                current_page = 0;
-            }
             data = await getData(current_page);
             break;
     }

@@ -41,6 +41,11 @@ class RateController extends Controller
 
     public function update(Request $request, $rate)
     {
-        echo Rate::find($rate);
+        $amount = $request->input('amount');
+        $status = $request->input('status');
+        $rate = Rate::find($rate);
+        $rate->amount = $amount;
+        $rate->status = $status;
+        $rate->save();
     }
 }

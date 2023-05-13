@@ -8,15 +8,10 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 
-const props = defineProps({
-    rates: Object,
-});
-
 const form = useForm({
     _method: "POST",
-    amount: props.rates.amount,
-    status: props.rates.status,
-    photo: null,
+    amount: null,
+    status: null,
 });
 </script>
 
@@ -58,13 +53,13 @@ const form = useForm({
                             v-model="form.status"
                             id="status"
                         >
-                            <option
-                                v-for="rate in rates"
-                                :value="rate.amount"
-                                :class="rate.status"
-                            >
-                                {{ rate.amount }}
-                            </option>
+                            <option  value="A" class="A">A</option>
+                            <option  value="B" class="B">B</option>
+                            <option  value="C" class="C">C</option>
+                            <option  value="D" class="D">D</option>
+                            <option  value="E" class="E">E</option>
+                            <option  value="F" class="F">F</option>
+                            <option  value="G" class="G">G</option>
                         </select>
                         <InputError
                             :message="form.errors.status"

@@ -12,8 +12,8 @@ import TextInput from '@/Components/TextInput.vue';
 
 const form = useForm({
     _method: 'PUT',
-    name: props.user.name,
-    email: props.user.email,
+    name: null,
+    email: null,
     photo: null,
 });
 
@@ -33,43 +33,6 @@ const updateProfileInformation = () => {
     });
 };
 
-const sendEmailVerification = () => {
-    verificationLinkSent.value = true;
-};
-
-const selectNewPhoto = () => {
-    photoInput.value.click();
-};
-
-const updatePhotoPreview = () => {
-    const photo = photoInput.value.files[0];
-
-    if (! photo) return;
-
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-        photoPreview.value = e.target.result;
-    };
-
-    reader.readAsDataURL(photo);
-};
-
-const deletePhoto = () => {
-    router.delete(route('current-user-photo.destroy'), {
-        preserveScroll: true,
-        onSuccess: () => {
-            photoPreview.value = null;
-            clearPhotoFileInput();
-        },
-    });
-};
-
-const clearPhotoFileInput = () => {
-    if (photoInput.value?.value) {
-        photoInput.value.value = null;
-    }
-};
 </script>
 
 <template>

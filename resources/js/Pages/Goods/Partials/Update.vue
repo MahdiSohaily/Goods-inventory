@@ -33,11 +33,11 @@ const updateGood = () => {
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <FormSection @submitted="updateGood">
-                    <template #title> Create New Good </template>
+                    <template #title> Update Good </template>
 
                     <template #description>
                         Fill the following form fields carefully in order to
-                        register new good in the system.
+                        update good in the system.
                     </template>
 
                     <template #form>

@@ -19,24 +19,19 @@ const form = useForm({
     status: props.rate.status,
 });
 
-const createRate = () => {
+const updateRate = () => {
     form.post(route("rates.store"), {
-        errorBag: "createRate",
+        errorBag: "updateRate",
         preserveScroll: true,
-        onSuccess: () => clearInput(),
     });
 };
 
-const clearInput = () => {
-    amount.value.value = null;
-    status.value.value = null;
-};
 </script>
 
 <template>
     <AppLayout title="Rates">
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            <FormSection @submitted="createRate">
+            <FormSection @submitted="updateRate">
                 <template #title> Price Rate </template>
 
                 <template #description>

@@ -7,13 +7,16 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
+const props = defineProps({
+    good: Object,
+});
 
 const form = useForm({
-    _method: "POST",
-    serial: null,
-    price: null,
-    weight: null,
-    mobis: null,
+    _method: "PUT",
+    serial: props.good.serial,
+    price: props.good.price,
+    weight: props.good.weight,
+    mobis: props.good.mobis,
 });
 
 const createGood = () => {

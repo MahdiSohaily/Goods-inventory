@@ -120,4 +120,20 @@ class GoodController extends Controller
         $good = Good::find($good);
         return Inertia::render('Goods/Partials/Update', ['good' => $good]);
     }
+
+    public function Update(Request $request, $good)
+    {
+        $serial = $request->input('serial');
+        $price = $request->input('price');
+        $weight = $request->input('weight');
+        $mobis = $request->input('mobis');
+
+        $good = Good::find($good);
+        $good->partnumber = $serial;
+        $good->price = $price;
+        $good->weight = $weight;
+        $good->mobis = $mobis;
+        $good->save();
+        return Inertia::render('Goods/Partials/Update', ['good' => $good]);
+    }
 }

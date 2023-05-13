@@ -20,10 +20,15 @@ const createGood = () => {
     form.post(route("goods.store"), {
         errorBag: "createGood",
         preserveScroll: true,
-        onSuccess: (response) => console.log(response.data),
+        onSuccess: () => clearInput(),
     });
 };
-const clearInput = () => {};
+const clearInput = () => {
+    serial.value.value = null;
+    price.value.value = null;
+    weight.value.value = null;
+    mobis.value.value = null;
+};
 </script>
 
 <template>

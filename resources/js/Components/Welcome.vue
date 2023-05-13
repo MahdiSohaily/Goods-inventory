@@ -244,7 +244,7 @@ const mobisRate = (avg, rates) => {
 
                             <th
                                 scope="col"
-                                class="px-3 py-3 text-white w-52 text-center"
+                                class="px-3 py-3 text-white w-32 text-center"
                             >
                                 عملیات
                             </th>

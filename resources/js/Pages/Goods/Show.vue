@@ -25,7 +25,7 @@ const search = (value) => {
             </tr>`;
 
     axios
-        .post("/goods/search/", {
+        .post("/goods/search", {
             pattern,
         })
         .then(function (response) {

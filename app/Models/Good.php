@@ -9,4 +9,5 @@ class Good extends Model
 {
     use HasFactory;
     protected $table = 'nisha';
+    public $timestamps = false;
 }

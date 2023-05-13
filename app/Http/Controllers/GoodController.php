@@ -118,6 +118,6 @@ class GoodController extends Controller
     public function edit($good)
     {
         $good = Good::find($good);
-        echo $good;
+        return Inertia::render('Goods/Partials/Update', ['good' => $good]);
     }
 }

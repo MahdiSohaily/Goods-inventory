@@ -39,11 +39,10 @@ const updateProfileInformation = () => {
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <FormSection @submitted="updateProfileInformation">
-                    <template #title> Profile Information </template>
+                    <template #title> Create New Good </template>
 
                     <template #description>
-                        Update your account's profile information and email
-                        address.
+                        Fill the following form fields carefully in order to register new good in the system.
                     </template>
 
                     <template #form>

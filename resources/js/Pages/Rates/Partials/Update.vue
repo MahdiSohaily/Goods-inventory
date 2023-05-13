@@ -20,7 +20,7 @@ const form = useForm({
 });
 
 const updateRate = () => {
-    form.post(route("rates.store"), {
+    form.post(route("rates.update",props.rate.id), {
         errorBag: "updateRate",
         preserveScroll: true,
     });

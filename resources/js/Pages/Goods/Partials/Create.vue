@@ -12,25 +12,27 @@ import TextInput from "@/Components/TextInput.vue";
 
 const form = useForm({
     _method: "PUT",
-    name: null,
-    email: null,
-    photo: null,
+    serial: null,
+    price: null,
+    weight: null,
+    mobis: null,
 });
 
-const verificationLinkSent = ref(null);
-const photoPreview = ref(null);
-const photoInput = ref(null);
-
-const updateProfileInformation = () => {
+const createGood = () => {
     if (photoInput.value) {
         form.photo = photoInput.value.files[0];
     }
 
     form.post(route("user-profile-information.update"), {
-        errorBag: "updateProfileInformation",
+        errorBag: "createGood",
         preserveScroll: true,
-        onSuccess: () => clearPhotoFileInput(),
+        onSuccess: () => clearInput(),
     });
+};
+const clearInput = () => {
+    if (photoInput.value?.value) {
+        photoInput.value.value = null;
+    }
 };
 </script>
 
@@ -38,51 +40,94 @@ const updateProfileInformation = () => {
     <AppLayout title="Goods">
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <FormSection @submitted="updateProfileInformation">
+                <FormSection @submitted="createGood">
                     <template #title> Create New Good </template>
 
                     <template #description>
-                        Fill the following form fields carefully in order to register new good in the system.
+                        Fill the following form fields carefully in order to
+                        register new good in the system.
                     </template>
 
                     <template #form>
                         <!-- Serial Number -->
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="serial" value="Part Number" />
-                            <TextInput required id="serial" v-model="form.serial" type="text" class="mt-1 block w-full"
-                                autocomplete="serial" />
-                            <InputError :message="form.errors.serial" class="mt-2" />
+                            <TextInput
+                                required
+                                id="serial"
+                                v-model="form.serial"
+                                type="text"
+                                class="mt-1 block w-full"
+                                autocomplete="serial"
+                            />
+                            <InputError
+                                :message="form.errors.serial"
+                                class="mt-2"
+                            />
                         </div>
 
                         <!-- Price -->
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="price" value="Price" />
-                            <TextInput required id="price" v-model="form.price" type="text" class="mt-1 block w-full"
-                                autocomplete="username" />
-                            <InputError :message="form.errors.price" class="mt-2" />
+                            <TextInput
+                                required
+                                id="price"
+                                v-model="form.price"
+                                type="text"
+                                class="mt-1 block w-full"
+                                autocomplete="username"
+                            />
+                            <InputError
+                                :message="form.errors.price"
+                                class="mt-2"
+                            />
                         </div>
                         <!-- Weight -->
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="weight" value="Weight" />
-                            <TextInput required id="weight" v-model="form.weight" type="text" class="mt-1 block w-full"
-                                autocomplete="username" />
-                            <InputError :message="form.errors.weight" class="mt-2" />
+                            <TextInput
+                                required
+                                id="weight"
+                                v-model="form.weight"
+                                type="text"
+                                class="mt-1 block w-full"
+                                autocomplete="username"
+                            />
+                            <InputError
+                                :message="form.errors.weight"
+                                class="mt-2"
+                            />
                         </div>
                         <!-- Mobis -->
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="mobis" value="Mobis" />
-                            <TextInput required id="mobis" v-model="form.mobis" type="text" class="mt-1 block w-full"
-                                autocomplete="username" />
-                            <InputError :message="form.errors.mobis" class="mt-2" />
+                            <TextInput
+                                required
+                                id="mobis"
+                                v-model="form.mobis"
+                                type="text"
+                                class="mt-1 block w-full"
+                                autocomplete="username"
+                            />
+                            <InputError
+                                :message="form.errors.mobis"
+                                class="mt-2"
+                            />
                         </div>
                     </template>
 
                     <template #actions>
-                        <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                        <ActionMessage
+                            :on="form.recentlySuccessful"
+                            class="mr-3"
+                        >
                             Saved.
                         </ActionMessage>
 
-                        <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        <PrimaryButton
+                            :class="{ 'opacity-25': form.processing }"
+                            :disabled="form.processing"
+                        >
                             Save
                         </PrimaryButton>
                     </template>

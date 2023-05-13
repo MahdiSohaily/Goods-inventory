@@ -60,7 +60,7 @@ defineProps({
                             <div
                                 class="flex justify-center gap-1 items-center px-2"
                             >
-                                <a :href="route('goods.edit', item.id)">
+                                <a :href="route('rates.edit', item.id)">
                                     <i class="material-icons text-blue-500"
                                         >create</i
                                     >

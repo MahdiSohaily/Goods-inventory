@@ -1,5 +1,4 @@
 <script setup>
-import AppLayout from "@/Layouts/AppLayout.vue";
 import { useForm } from "@inertiajs/vue3";
 import ActionMessage from "@/Components/ActionMessage.vue";
 import FormSection from "@/Components/FormSection.vue";
@@ -33,59 +32,35 @@ const updateGood = () => {
         </template>
 
         <template #form>
-            <!-- Name -->
+            <!-- Amount -->
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="amount" value="Amount" />
                 <TextInput
-                    id="name"
-                    v-model="form.name"
+                    id="amount"
+                    v-model="form.amount"
                     type="text"
                     class="mt-1 block w-full"
-                    autocomplete="name"
+                    autocomplete="amount"
                 />
-                <InputError :message="form.errors.name" class="mt-2" />
+                <InputError :message="form.errors.amount" class="mt-2" />
             </div>
 
-            <!-- Email -->
+            <!-- status -->
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="email" value="Email" />
-                <TextInput
-                    id="email"
-                    v-model="form.email"
-                    type="email"
-                    class="mt-1 block w-full"
+                <InputLabel for="status" value="Status" />
+                <select
+                    type="status"
+                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                     autocomplete="username"
-                />
-                <InputError :message="form.errors.email" class="mt-2" />
-
-                <div
-                    v-if="
-                        $page.props.jetstream.hasEmailVerification &&
-                        user.email_verified_at === null
-                    "
+                    v-model="form.status"
+                    id="status"
                 >
-                    <p class="text-sm mt-2">
-                        Your email address is unverified.
-
-                        <Link
-                            :href="route('verification.send')"
-                            method="post"
-                            as="button"
-                            class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            @click.prevent="sendEmailVerification"
-                        >
-                            Click here to re-send the verification email.
-                        </Link>
-                    </p>
-
-                    <div
-                        v-show="verificationLinkSent"
-                        class="mt-2 font-medium text-sm text-green-600"
-                    >
-                        A new verification link has been sent to your email
-                        address.
-                    </div>
-                </div>
+                <option value="1">1</option>
+                <option value="1">1</option>
+                <option value="1">1</option>
+                <option value="1">1</option>
+            </select>
+                <InputError :message="form.errors.status" class="mt-2" />
             </div>
         </template>
 

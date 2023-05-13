@@ -12,6 +12,25 @@ class RateController extends Controller
     public function index()
     {
         $rate = DB::table('rates')->get();
-        Inertia::render('Rates/Show', ['rates' => $rate]);
+        return Inertia::render('Rates/Show', ['rates' => $rate]);
+    }
+
+    public function create()
+    {
+        $rate = DB::table('rates')->get();
+        return Inertia::render('Rates/Show', ['rates' => $rate]);
+    }
+
+    public function store(Request $request)
+    {
+        # code...
+    }
+
+    public function edit($rate)
+    {
+    }
+
+    public function update(Request $request, $rate)
+    {
     }
 }

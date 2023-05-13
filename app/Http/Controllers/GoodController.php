@@ -102,13 +102,17 @@ class GoodController extends Controller
         $weight = $request->input('weight');
         $mobis = $request->input('mobis');
 
-        $good = new Good();
-        $good->partnumber = $serial;
-        $good->price = $price;
-        $good->weight = $weight;
-        $good->mobis = $mobis;
+        try {
+            $good = new Good();
+            $good->partnumber = $serial;
+            $good->price = $price;
+            $good->weight = $weight;
+            $good->mobis = $mobis;
 
-        $good->save();
+            $good->save();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     public function edit($good)

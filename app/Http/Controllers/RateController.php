@@ -34,9 +34,13 @@ class RateController extends Controller
 
     public function edit($rate)
     {
+        $rates = DB::table('rates')->get();
+        $rate = Rate::find($rate);
+        return Inertia::render('Rates/Partials/Update', ['rates' => $rates, 'rate' => $rate]);
     }
 
     public function update(Request $request, $rate)
     {
+        echo Rate::find($rate);
     }
 }

@@ -55,8 +55,6 @@ Route::middleware([
 // Good Page related routs
 Route::controller(RateController::class)->group(function () {
     Route::get('/rates', 'index')->name('rates'); // rates route lead us to the goods page
-    Route::post('/rates/search', 'search')->name('rates.search'); // rates route lead us to the rates page
-    Route::post('/rates/page', 'page')->name('rates.page'); // rates route lead us to the rates page
     Route::get('/rates/create', 'create')->name('rates.create'); // Route to show the form for creating a new good in the system
     Route::post('/rates', 'store')->name('rates.store'); // Route to create new good in the system
     Route::get('/rates/{rates}/edit', 'edit')->name('rates.edit'); // Route to show the selected good for update

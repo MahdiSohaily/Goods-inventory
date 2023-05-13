@@ -18,7 +18,7 @@ class RateController extends Controller
     public function create()
     {
         $rate = DB::table('rates')->get();
-        return Inertia::render('Rates/Show', ['rates' => $rate]);
+        return Inertia::render('Rates/Partials/Create', ['rates' => $rate]);
     }
 
     public function store(Request $request)

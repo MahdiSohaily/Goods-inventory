@@ -52,7 +52,8 @@ Route::middleware([
         Route::put('/goods/{goods}', 'update')->name('goods.update'); // Route to update an existing good
         Route::delete('/goods/{goods}', 'delete')->name('goods.delete'); // Route to delete a specific good
     });
-// Good Page related routs
+
+// Rate Page related routs
 Route::controller(RateController::class)->group(function () {
     Route::get('/rates', 'index')->name('rates'); // rates route lead us to the goods page
     Route::get('/rates/create', 'create')->name('rates.create'); // Route to show the form for creating a new good in the system

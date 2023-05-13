@@ -17,21 +17,13 @@ const form = useForm({
 });
 
 const createGood = () => {
-    if (photoInput.value) {
-        form.photo = photoInput.value.files[0];
-    }
-
     form.post(route("goods.store"), {
         errorBag: "createGood",
         preserveScroll: true,
-        onSuccess: () => clearInput(),
+        onSuccess: (response) => console.log(response.data),
     });
 };
-const clearInput = () => {
-    if (photoInput.value?.value) {
-        photoInput.value.value = null;
-    }
-};
+const clearInput = () => {};
 </script>
 
 <template>

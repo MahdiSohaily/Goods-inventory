@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
+use App\Models\Good;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -96,7 +97,12 @@ class GoodController extends Controller
 
     public function store(Request $request)
     {
-        echo $request->input('serial');
+        $serial = $request->input('serial');
+        $price = $request->input('price');
+        $weight = $request->input('weight');
+        $mobis = $request->input('mobis');
+
+        $good = new Good();
     }
 
     public function edit($good)

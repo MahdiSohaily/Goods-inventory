@@ -22,7 +22,10 @@ class RateController extends Controller
 
     public function store(Request $request)
     {
-        # code...
+       $amount = $request->input('amount');
+       $status = $request->input('status');
+
+       $rate = new Rat
     }
 
     public function edit($rate)

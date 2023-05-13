@@ -11,7 +11,7 @@ import TextInput from "@/Components/TextInput.vue";
 const form = useForm({
     _method: "POST",
     amount: null,
-    status: null,
+    status: 'N',
 });
 
 const createRate = () => {

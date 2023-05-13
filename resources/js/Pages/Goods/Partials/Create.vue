@@ -49,7 +49,7 @@ const updateProfileInformation = () => {
                         <!-- Serial Number -->
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="serial" value="Part Number" />
-                            <TextInput id="serial" v-model="form.serial" type="text" class="mt-1 block w-full"
+                            <TextInput required id="serial" v-model="form.serial" type="text" class="mt-1 block w-full"
                                 autocomplete="serial" />
                             <InputError :message="form.errors.serial" class="mt-2" />
                         </div>
@@ -57,21 +57,21 @@ const updateProfileInformation = () => {
                         <!-- Price -->
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="price" value="Price" />
-                            <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
+                            <TextInput required id="price" v-model="form.price" type="text" class="mt-1 block w-full"
                                 autocomplete="username" />
                             <InputError :message="form.errors.price" class="mt-2" />
                         </div>
                         <!-- Weight -->
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="weight" value="Weight" />
-                            <TextInput id="weight" v-model="form.weight" type="text" class="mt-1 block w-full"
+                            <TextInput required id="weight" v-model="form.weight" type="text" class="mt-1 block w-full"
                                 autocomplete="username" />
                             <InputError :message="form.errors.weight" class="mt-2" />
                         </div>
                         <!-- Mobis -->
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="mobis" value="Mobis" />
-                            <TextInput id="mobis" v-model="form.mobis" type="text" class="mt-1 block w-full"
+                            <TextInput required id="mobis" v-model="form.mobis" type="text" class="mt-1 block w-full"
                                 autocomplete="username" />
                             <InputError :message="form.errors.mobis" class="mt-2" />
                         </div>

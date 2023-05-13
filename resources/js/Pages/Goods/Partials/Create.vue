@@ -1,17 +1,15 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { ref } from "vue";
-import { Link, router, useForm } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 import ActionMessage from "@/Components/ActionMessage.vue";
 import FormSection from "@/Components/FormSection.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 
 const form = useForm({
-    _method: "PUT",
+    _method: "POST",
     serial: null,
     price: null,
     weight: null,
@@ -23,7 +21,7 @@ const createGood = () => {
         form.photo = photoInput.value.files[0];
     }
 
-    form.post(route("user-profile-information.update"), {
+    form.post(route("goods.store"), {
         errorBag: "createGood",
         preserveScroll: true,
         onSuccess: () => clearInput(),

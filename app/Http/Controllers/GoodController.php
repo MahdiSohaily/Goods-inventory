@@ -89,10 +89,14 @@ class GoodController extends Controller
         return response()->json(['goods' => $goods, 'count' => $goods_count]);
     }
 
-
     public function create()
     {
         return Inertia::render('Goods/Partials/Create');
+    }
+
+    public function store(Request $request)
+    {
+        echo $request->input('serial');
     }
 
     public function edit($good)

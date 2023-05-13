@@ -12,7 +12,9 @@ class RateController extends Controller
 {
     public function index()
     {
-        $rate = DB::table('rates')->get();
+        $rate = DB::table('rates')
+        ->orderBy('amount', 'asc')
+        ->get();
         return Inertia::render('Rates/Show', ['rates' => $rate]);
     }
 
@@ -34,7 +36,9 @@ class RateController extends Controller
 
     public function edit($rate)
     {
-        $rates = DB::table('rates')->get();
+        $rates = DB::table('rates')
+        ->orderBy('amount', 'asc')
+        ->get();
         $rate = Rate::find($rate);
         return Inertia::render('Rates/Partials/Update', ['rates' => $rates, 'rate' => $rate]);
     }

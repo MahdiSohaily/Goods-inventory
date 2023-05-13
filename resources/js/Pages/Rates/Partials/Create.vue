@@ -13,12 +13,20 @@ const form = useForm({
     amount: null,
     status: null,
 });
+
+const createRate = () => {
+    form.post(route("goods.update", props.good.id), {
+        errorBag: "createRate",
+        preserveScroll: true,
+        // onSuccess: () => clearInput(),
+    });
+};
 </script>
 
 <template>
-    <AppLayout title="Profile">
+    <AppLayout title="Rates">
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            <FormSection @submitted="updateProfileInformation">
+            <FormSection @submitted="createRate">
                 <template #title> Price Rate </template>
 
                 <template #description>
@@ -53,13 +61,13 @@ const form = useForm({
                             v-model="form.status"
                             id="status"
                         >
-                            <option  value="A" class="A">A</option>
-                            <option  value="B" class="B">B</option>
-                            <option  value="C" class="C">C</option>
-                            <option  value="D" class="D">D</option>
-                            <option  value="E" class="E">E</option>
-                            <option  value="F" class="F">F</option>
-                            <option  value="G" class="G">G</option>
+                            <option value="A" class="A">A</option>
+                            <option value="B" class="B">B</option>
+                            <option value="C" class="C">C</option>
+                            <option value="D" class="D">D</option>
+                            <option value="E" class="E">E</option>
+                            <option value="F" class="F">F</option>
+                            <option value="G" class="G">G</option>
                         </select>
                         <InputError
                             :message="form.errors.status"

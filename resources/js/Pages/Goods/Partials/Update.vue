@@ -19,18 +19,12 @@ const form = useForm({
     mobis: props.good.mobis,
 });
 
-const createGood = () => {
+const updateGood = () => {
     form.post(route("goods.store"), {
-        errorBag: "createGood",
+        errorBag: "updateGood",
         preserveScroll: true,
-        onSuccess: () => clearInput(),
+        // onSuccess: () => clearInput(),
     });
-};
-const clearInput = () => {
-    serial.value.value = null;
-    price.value.value = null;
-    weight.value.value = null;
-    mobis.value.value = null;
 };
 </script>
 
@@ -38,7 +32,7 @@ const clearInput = () => {
     <AppLayout title="Goods">
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <FormSection @submitted="createGood">
+                <FormSection @submitted="updateGood">
                     <template #title> Create New Good </template>
 
                     <template #description>

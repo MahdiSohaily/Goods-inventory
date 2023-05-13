@@ -73,6 +73,7 @@ const updateRate = () => {
                             <option value="E" class="E">E</option>
                             <option value="F" class="F">F</option>
                             <option value="G" class="G">G</option>
+                            <option value="N" class="N">N</option>
                         </select>
                         <InputError
                             :message="form.errors.status"

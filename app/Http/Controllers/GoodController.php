@@ -117,6 +117,7 @@ class GoodController extends Controller
 
     public function edit($good)
     {
+        $good = Good::find($good);
         echo $good;
     }
 }

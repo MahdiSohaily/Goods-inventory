@@ -14,7 +14,7 @@ const props = defineProps({
 });
 
 const form = useForm({
-    _method: "POST",
+    _method: "PUT",
     amount: props.rate.amount,
     status: props.rate.status,
 });

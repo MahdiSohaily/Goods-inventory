@@ -15,7 +15,7 @@ const form = useForm({
 });
 
 const createRate = () => {
-    form.post(route("goods.update", props.good.id), {
+    form.post(route("rates.store"), {
         errorBag: "createRate",
         preserveScroll: true,
         // onSuccess: () => clearInput(),

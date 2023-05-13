@@ -18,8 +18,13 @@ const createRate = () => {
     form.post(route("rates.store"), {
         errorBag: "createRate",
         preserveScroll: true,
-        // onSuccess: () => clearInput(),
+        onSuccess: () => clearInput(),
     });
+};
+
+const clearInput = () => {
+        amount.value.value = null;
+        status.value.value = null;
 };
 </script>
 

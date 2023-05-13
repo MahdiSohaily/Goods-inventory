@@ -13,7 +13,7 @@ const props = defineProps({
 
 const form = useForm({
     _method: "PUT",
-    serial: props.good.serial,
+    serial: props.good.partnumber,
     price: props.good.price,
     weight: props.good.weight,
     mobis: props.good.mobis,

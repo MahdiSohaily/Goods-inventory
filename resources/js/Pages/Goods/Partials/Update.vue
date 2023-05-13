@@ -20,7 +20,7 @@ const form = useForm({
 });
 
 const updateGood = () => {
-    form.post(route("goods.store"), {
+    form.post(route("goods.update",props.good.id), {
         errorBag: "updateGood",
         preserveScroll: true,
         // onSuccess: () => clearInput(),

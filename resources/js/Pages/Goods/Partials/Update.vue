@@ -113,14 +113,14 @@ const updateGood = () => {
                             :on="form.recentlySuccessful"
                             class="mr-3"
                         >
-                            Saved.
+                            Record Updated Successfully.
                         </ActionMessage>
 
                         <PrimaryButton
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Save
+                            Update
                         </PrimaryButton>
                     </template>
                 </FormSection>

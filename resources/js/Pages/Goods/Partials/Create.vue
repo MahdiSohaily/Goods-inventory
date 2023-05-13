@@ -46,42 +46,34 @@ const updateProfileInformation = () => {
                     </template>
 
                     <template #form>
-                        <!-- Name -->
+                        <!-- Serial Number -->
                         <div class="col-span-6 sm:col-span-4">
-                            <InputLabel for="name" value="Name" />
-                            <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full"
-                                autocomplete="name" />
-                            <InputError :message="form.errors.name" class="mt-2" />
+                            <InputLabel for="serial" value="Part Number" />
+                            <TextInput id="serial" v-model="form.serial" type="text" class="mt-1 block w-full"
+                                autocomplete="serial" />
+                            <InputError :message="form.errors.serial" class="mt-2" />
                         </div>
 
-                        <!-- Email -->
+                        <!-- Price -->
                         <div class="col-span-6 sm:col-span-4">
-                            <InputLabel for="email" value="Email" />
-                            <TextInput id="email" v-model="form.email" type="email" class="mt-1 block w-full"
+                            <InputLabel for="price" value="Price" />
+                            <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
                                 autocomplete="username" />
-                            <InputError :message="form.errors.email" class="mt-2" />
-
-                            <div v-if="
-                                $page.props.jetstream
-                                    .hasEmailVerification &&
-                                user.email_verified_at === null
-                            ">
-                                <p class="text-sm mt-2">
-                                    Your email address is unverified.
-
-                                    <Link :href="route('verification.send')" method="post" as="button"
-                                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                        @click.prevent="sendEmailVerification">
-                                    Click here to re-send the verification
-                                    email.
-                                    </Link>
-                                </p>
-
-                                <div v-show="verificationLinkSent" class="mt-2 font-medium text-sm text-green-600">
-                                    A new verification link has been sent to
-                                    your email address.
-                                </div>
-                            </div>
+                            <InputError :message="form.errors.price" class="mt-2" />
+                        </div>
+                        <!-- Weight -->
+                        <div class="col-span-6 sm:col-span-4">
+                            <InputLabel for="weight" value="Weight" />
+                            <TextInput id="weight" v-model="form.weight" type="text" class="mt-1 block w-full"
+                                autocomplete="username" />
+                            <InputError :message="form.errors.weight" class="mt-2" />
+                        </div>
+                        <!-- Mobis -->
+                        <div class="col-span-6 sm:col-span-4">
+                            <InputLabel for="mobis" value="Mobis" />
+                            <TextInput id="mobis" v-model="form.mobis" type="text" class="mt-1 block w-full"
+                                autocomplete="username" />
+                            <InputError :message="form.errors.mobis" class="mt-2" />
                         </div>
                     </template>
 

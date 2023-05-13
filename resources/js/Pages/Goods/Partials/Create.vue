@@ -46,40 +46,6 @@ const updateProfileInformation = () => {
                     </template>
 
                     <template #form>
-                        <!-- Profile Photo -->
-                        <div v-if="$page.props.jetstream.managesProfilePhotos" class="col-span-6 sm:col-span-4">
-                            <!-- Profile Photo File Input -->
-                            <input ref="photoInput" type="file" class="hidden" @change="updatePhotoPreview" />
-
-                            <InputLabel for="photo" value="Photo" />
-
-                            <!-- Current Profile Photo -->
-                            <div v-show="!photoPreview" class="mt-2">
-                                <img :src="user.profile_photo_url" :alt="user.name"
-                                    class="rounded-full h-20 w-20 object-cover" />
-                            </div>
-
-                            <!-- New Profile Photo Preview -->
-                            <div v-show="photoPreview" class="mt-2">
-                                <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center" :style="
-                                    'background-image: url(\'' +
-                                    photoPreview +
-                                    '\');'
-                                " />
-                            </div>
-
-                            <SecondaryButton class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
-                                Select A New Photo
-                            </SecondaryButton>
-
-                            <SecondaryButton v-if="user.profile_photo_path" type="button" class="mt-2"
-                                @click.prevent="deletePhoto">
-                                Remove Photo
-                            </SecondaryButton>
-
-                            <InputError :message="form.errors.photo" class="mt-2" />
-                        </div>
-
                         <!-- Name -->
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="name" value="Name" />

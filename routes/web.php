@@ -53,6 +53,6 @@ Route::middleware([
     });
 
     Route::get('/rates', function () {
-        return Inertia::render('Dashboard');
+        return Inertia::render('Rates/Show');
     })->name('rates');
 });

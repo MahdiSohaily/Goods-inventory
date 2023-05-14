@@ -1,4 +1,6 @@
+p
 <script setup>
+import { onMounted } from 'vue';
 import { Link, router, useForm } from '@inertiajs/vue3';
 import AppLayout from "@/Layouts/AppLayout.vue";
 import SectionBorder from '@/Components/SectionBorder.vue';
@@ -13,7 +15,7 @@ const form = useForm({
     name: null,
     status_id: null,
     car_id: null,
-    values: null,
+    values: ['dd'],
 });
 
 let result = null;
@@ -33,7 +35,7 @@ const search = (val) => {
         pattern = pattern.replace(/_/g, "");
 
         resultBox.innerHTML = `<tr class=''>
-                <div class='w-full h-96 flex justify-center items-center'> 
+                <div class='w-full h-96 flex justify-center items-center'>
                     <img class=' block w-10 mx-auto h-auto' src='/img/loading.png' alt='google'>
                     </div>
             </tr>`;
@@ -59,70 +61,49 @@ const search = (val) => {
  */
 const prepareData = (data) => {
     let template = "";
-    for (let item of data) {
-        if (item.pattern) {
-            template +=
-                `<div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` + item.id + `'>
+    if (data.length > 0) {
+        for (let item of data) {
+            if (item.pattern) {
+                template +=
+                    `<div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` + item.id + `'>
                     <p class='text-sm font-semibold text-gray-600'>` + item.partNumber + `</p>
-                    <i onclick='load(event,`+ item.pattern + `)'  
-                        data-id='` + item.id + `' 
+                    <i onclick='load(event,`+ item.pattern + `)'
+                        data-id='` + item.id + `'
                         data-partNumber='` + item.partNumber + `'
                         class='material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200'>add_circle_outline
                     </i>
                 </div>`;
-        } else {
-            template +=
-                `<div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` + item.id + `'>
+            } else {
+                template +=
+                    `<div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` + item.id + `'>
                     <p class='text-sm font-semibold text-gray-600'>` + item.partNumber + `</p>
-                    <i onclick='add(event)'  
-                        data-id='` + item.id + `' 
+                    <i onclick='add()'
+                        data-id='` + item.id + `'
                         data-partNumber='` + item.partNumber + `'
                         class='material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200'>add_circle_outline
                     </i>
                 </div>`;
+            }
         }
+    } else {
+        template +=
+            `<div class='w-full text-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300''>
+                <i class='material-icons text-red-500'>error</i>
+                <br/>
+                <p class='text-sm font-semibold text-gray-600 text-red-500'> Nothing to show (<span class="text-sm">Check the part number</span>)</p>
+            </div>`;
     }
 
     return template;
 };
 
+onMounted(() => {
+    el.value // <div>
+})
+
 // A function to add a good to the relation box
-function add(event) {
-    const id = event.target.getAttribute("data-id");
-    const remove = document.getElementById(id);
-
-    const partnumber = event.target.getAttribute("data-partnumber");
-    const price = event.target.getAttribute("data-price");
-    const mobis = event.target.getAttribute("data-mobis");
-
-    const result = document.getElementById("s-result");
-    const selected = document.getElementById("selected");
-
-    result.removeChild(remove);
-
-    const item =
-        `<div class='matched-item' id='m-` +
-        id +
-        `'>
-            <p>` +
-        partnumber +
-        `</p>
-            <i class='material-icons remove' onclick='remove(` +
-        id +
-        `)'>do_not_disturb_on</i>
-            </div>`;
-
-    selected.innerHTML += item;
-
-    const relation_form = document.getElementById("relation-form");
-
-    const input =
-        ` <input id='c-` +
-        id +
-        `' type='checkbox' name='value[]' value='` +
-        id +
-        `' hidden checked>`;
-    relation_form.innerHTML += input;
+const add = (event) => {
+    alert(event.target.id)
 }
 
 // A function to load data a good to the relation box
@@ -169,7 +150,6 @@ function remove(id) {
     remove_checkbox.remove();
     item.remove();
 }
-
 </script>
 
 <template>
@@ -209,9 +189,9 @@ function remove(id) {
                 </p>
                 <SectionBorder />
 
-                <div class="p-3">
+                <div id="selected_box" class="p-3">
                     <!-- selected items are going to be added here -->
-                    here
+                    {{ form.values }}
                 </div>
             </div>
 

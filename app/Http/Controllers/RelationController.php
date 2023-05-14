@@ -21,7 +21,7 @@ class RelationController extends Controller
     public function search(Request $request)
     {
         $pattern = $request->input('pattern');
-        $nisha = DB::table('nisha')->select('id')
+        $nisha = DB::table('nisha')
             ->where('partnumber', 'like', "$pattern%")->get();
 
         $pattern = DB::table('patterns')->select('id')
@@ -42,6 +42,21 @@ class RelationController extends Controller
             array_push($similar_ids, ['pattern_id' => $value->pattern_id, 'nisha_id' => $value->nisha_id]);
         }
 
-        return $similar;
+        $final_result = [];
+
+        foreach ($nisha as $key => $value) {
+            $id = $value->id;
+
+            $get_nisha = null;
+
+            foreach ($similar_ids as $item) {
+                if ($item['nisha_id'] == $id) {
+                    $get_nisha = $item['pattern_id'];
+                }
+            }
+            array_push($final_result, ['id' => $id, 'partNumber' => $value->partnumber, 'pattern' => $get_nisha]);
+        }
+
+        return $final_result;
     }
 }

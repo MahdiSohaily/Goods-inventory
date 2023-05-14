@@ -65,5 +65,6 @@ Route::middleware([
     // Rate Page related routs
     Route::controller(RelationController::class)->group(function () {
         Route::get('/relations', 'index')->name('relations'); // relations route lead us to the relations page
+        Route::post('/relations', 'search')->name('relations.search'); // Route to create new good in the system
     });
 });

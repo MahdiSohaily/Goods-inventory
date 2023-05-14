@@ -27,12 +27,11 @@ const search = (val) => {
                     </div>
             </tr>`;
         axios
-            .post("/search", {
+            .post(route('relations.search'), {
                 pattern,
-                superMode,
             })
             .then(function (response) {
-                // resultBox.innerHTML = prepareData(response.data);
+                console.log(response.data);
             })
             .catch(function (error) {
                 console.log(error);

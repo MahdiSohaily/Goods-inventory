@@ -68,8 +68,6 @@ const page = async (action) => {
 };
 
 const getData = (page, pattern) => {
-    alert(pattern);
-
     const resultBox = document.getElementById("results");
     resultBox.innerHTML = `<tr class=''>
                 <td colspan='5' class='py-10 text-center'> 
@@ -80,22 +78,22 @@ const getData = (page, pattern) => {
         pattern = pattern.replace(/\s/g, "");
         pattern = pattern.replace(/-/g, "");
         pattern = pattern.replace(/_/g, "");
-        axios
-            .post("/goods/page", {
-                page,
-                pattern,
-            })
-            .then(function (response) {
-                resultBox.setAttribute(
-                    "data-length",
-                    Math.ceil(response.data.count / 10)
-                );
-                resultBox.innerHTML = print(response.data.goods);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
     }
+    axios
+        .post("/goods/page", {
+            page,
+            pattern,
+        })
+        .then(function (response) {
+            resultBox.setAttribute(
+                "data-length",
+                Math.ceil(response.data.count / 10)
+            );
+            resultBox.innerHTML = print(response.data.goods);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 };
 
 const print = (data) => {

@@ -42,33 +42,23 @@ const prepareData = (data) => {
     for (let item of data) {
         if (item.pattern) {
             template +=
-                `<div class='w-full flex justify-between' id='$id'>
-                    <p>` +
-                item.partNumber +
-                `</p>
-                <i onclick='add(event)'  
-                    data-id='` +
-                item.id +
-                `' 
-                    data-partnumber='` +
-                item.partNumber +
-                `'
-                    class='material-icons add'>add_circle_outline</i>
+                `<div class='w-full flex justify-between' id='search-` + item.id + `'>
+                    <p>` + item.partNumber + `</p>
+                    <i onclick='add(event)'  
+                        data-id='` + item.id + `' 
+                        data-partnumber='` + item.partNumber + `'
+                        class='material-icons add'>add_circle_outline
+                    </i>
                 </div>`;
         } else {
             template +=
-                `<div class='w-full flex justify-between' id='$id'>
-                    <p>` +
-                item.partNumber +
-                `</p>
-                <i onclick='add(event)'  
-                    data-id='` +
-                item.id +
-                `' 
-                    data-partnumber='` +
-                item.partNumber +
-                `'
-                    class='material-icons add'>add_circle_outline</i>
+                `<div class='w-full flex justify-between' id='search-` + item.id + `'>
+                    <p>` + item.partNumber + `</p>
+                    <i onclick='add(event)'  
+                        data-id='` + item.id + `' 
+                        data-partnumber='` + item.partNumber + `'
+                        class='material-icons add'>add_circle_outline
+                    </i>
                 </div>`;
         }
     }
@@ -79,30 +69,19 @@ const prepareData = (data) => {
 
 <template>
     <AppLayout title="Profile">
-        <div
-            class="h-70S grid grid-cols-1 my-8 md:grid-cols-3 gap-6 lg:gap-8 p-6 lg:p-8"
-        >
+        <div class="h-70S grid grid-cols-1 my-8 md:grid-cols-3 gap-6 lg:gap-8 p-6 lg:p-8">
             <div class="bg-white rounded-md shadow-md p-3">
                 <div class="flex items-center justify-between">
-                    <h2
-                        class="text-xl font-semibold text-gray-800 flex items-center gap-2"
-                    >
+                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                         <i class="material-icons text-orange-400">search</i>
                         Search Goods
                     </h2>
                 </div>
 
                 <div class="flex justify-center py-3">
-                    <input
-                        type="text"
-                        name="serial"
-                        id="serial"
+                    <input type="text" name="serial" id="serial"
                         class="rounded-md py-3 w-full border-1 text-sm border-gray-500 focus:outline-none text-gray-500"
-                        min="0"
-                        max="30"
-                        @keyup="search($event.target.value, rates)"
-                        placeholder="Part Number ..."
-                    />
+                        min="0" max="30" @keyup="search($event.target.value, rates)" placeholder="Part Number ..." />
                 </div>
                 <div id="search_result">
                     <!-- Search Results are going to be appended here -->
@@ -111,15 +90,11 @@ const prepareData = (data) => {
 
             <div class="bg-white rounded-md shadow-md p-3">
                 <div class="flex items-center justify-between">
-                    <h2
-                        class="text-xl font-semibold text-gray-800 flex items-center gap-2"
-                    >
+                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                         <i class="material-icons text-green-600">beenhere</i>
                         Selected Items
                     </h2>
-                    <button
-                        class="border-none bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 text-sm"
-                    >
+                    <button class="border-none bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 text-sm">
                         Clear All
                     </button>
                 </div>
@@ -132,22 +107,13 @@ const prepareData = (data) => {
                 </p>
 
                 <p class="mt-4 text-sm">
-                    <a
-                        href="https://laracasts.com"
-                        class="inline-flex items-center font-semibold text-indigo-700"
-                    >
+                    <a href="https://laracasts.com" class="inline-flex items-center font-semibold text-indigo-700">
                         Start watching Laracasts
 
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            class="ml-1 w-5 h-5 fill-indigo-500"
-                        >
-                            <path
-                                fill-rule="evenodd"
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="ml-1 w-5 h-5 fill-indigo-500">
+                            <path fill-rule="evenodd"
                                 d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z"
-                                clip-rule="evenodd"
-                            />
+                                clip-rule="evenodd" />
                         </svg>
                     </a>
                 </p>
@@ -155,9 +121,7 @@ const prepareData = (data) => {
 
             <div class="bg-white rounded-md shadow-md p-3">
                 <div class="">
-                    <h2
-                        class="text-xl font-semibold text-gray-800 flex items-center gap-2"
-                    >
+                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                         <i class="material-icons text-blue-500">save</i>
                         Register Relation
                     </h2>
@@ -171,22 +135,13 @@ const prepareData = (data) => {
                 </p>
 
                 <p class="mt-4 text-sm">
-                    <a
-                        href="https://laravel.com/docs"
-                        class="inline-flex items-center font-semibold text-indigo-700"
-                    >
+                    <a href="https://laravel.com/docs" class="inline-flex items-center font-semibold text-indigo-700">
                         Explore the documentation
 
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            class="ml-1 w-5 h-5 fill-indigo-500"
-                        >
-                            <path
-                                fill-rule="evenodd"
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="ml-1 w-5 h-5 fill-indigo-500">
+                            <path fill-rule="evenodd"
                                 d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z"
-                                clip-rule="evenodd"
-                            />
+                                clip-rule="evenodd" />
                         </svg>
                     </a>
                 </p>

@@ -5,6 +5,46 @@ defineProps({
     status: Object,
     cars: Object,
 });
+
+let result = null;
+
+const search = (val, rates) => {
+    let pattern = val;
+    let superMode = 0;
+    const resultBox = document.getElementById("results");
+
+    if (document.getElementById("mode").checked) {
+        superMode = 1;
+    }
+
+    if (
+        (pattern.length > 4 && superMode == 1) ||
+        (pattern.length > 6 && superMode == 0)
+    ) {
+        pattern = pattern.replace(/\s/g, "");
+        pattern = pattern.replace(/-/g, "");
+        pattern = pattern.replace(/_/g, "");
+
+        resultBox.innerHTML = `<tr class=''>
+                <td colspan='14' class='py-10 text-center'> 
+                    <img class=' block w-10 mx-auto h-auto' src='/img/loading.png' alt='google'>
+                    </td>
+            </tr>`;
+        axios
+            .post("/search", {
+                pattern,
+                superMode,
+            })
+            .then(function (response) {
+                resultBox.innerHTML = print(response.data, rates);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    } else {
+        resultBox.innerHTML = "";
+    }
+};
 </script>
 
 <template>

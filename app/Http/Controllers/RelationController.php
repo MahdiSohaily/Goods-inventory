@@ -11,8 +11,10 @@ class RelationController extends Controller
 {
     public function index()
     {
-        $status = DB::table('status')->get();
-        $cars = DB::table('cars')->get();
+        $status = DB::table('status')->get(); //get all the existing status from database
+        $cars = DB::table('cars')->get(); //get all the registered cars in the database
+
+        // return the component to be displayed with it's required data
         return Inertia::render('Relation/Show', ['status' => $status, 'cars' => $cars]);
     }
 }

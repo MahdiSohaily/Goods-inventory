@@ -204,3 +204,9 @@ td.G {
 .bold {
     font-weight: bold;
 }
+
+@media only screen and (min-width: 600px) {
+    .h-70S {
+        height: 700px;
+    }
+}

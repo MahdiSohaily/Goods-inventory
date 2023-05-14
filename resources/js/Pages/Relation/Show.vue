@@ -44,9 +44,9 @@ const prepareData = (data) => {
             template +=
                 `<div class='w-full flex justify-between' id='search-` + item.id + `'>
                     <p>` + item.partNumber + `</p>
-                    <i onclick='add(event)'  
+                    <i onclick='lead(event,`+ item.pattern +`)'  
                         data-id='` + item.id + `' 
-                        data-partnumber='` + item.partNumber + `'
+                        data-partNumber='` + item.partNumber + `'
                         class='material-icons add'>add_circle_outline
                     </i>
                 </div>`;
@@ -56,7 +56,7 @@ const prepareData = (data) => {
                     <p>` + item.partNumber + `</p>
                     <i onclick='add(event)'  
                         data-id='` + item.id + `' 
-                        data-partnumber='` + item.partNumber + `'
+                        data-partNumber='` + item.partNumber + `'
                         class='material-icons add'>add_circle_outline
                     </i>
                 </div>`;

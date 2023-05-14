@@ -2,7 +2,8 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 
 defineProps({
-    rates: Object,
+    status: Object,
+    cars: Object,
 });
 </script>
 
@@ -36,7 +37,7 @@ defineProps({
                             {{ item.status }}
                         </td>
                         <td class="whitespace-nowrap px-3 py-3 text-center font-bold" :class="item.status">
-                            {{ }}
+                            {{}}
                         </td>
                         <td class="whitespace-nowrap w-24">
                             <div class="flex justify-center gap-1 items-center px-2">

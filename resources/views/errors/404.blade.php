@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap" rel="stylesheet">
 
-    <title>404</title>
+    <title>Page not found - 404</title>
 
     <style>
         * {
@@ -86,7 +86,7 @@
 
                             <p>the page you are looking for not avaible!</p>
 
-                            <a href="" class="link_404">Go to Home</a>
+                            <a href="{{ route('dashboard') }}" class="link_404">Go to Home</a>
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,7 @@ import { router } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import axios from "axios";
 
-defineProps({
+const props = defineProps({
     goods: Object,
     count: Number,
 });
@@ -16,12 +16,7 @@ const remove = (id) => {
 };
 
 const search = (value) => {
-    let pattern = value;
-
-    pattern = pattern.replace(/\s/g, "");
-    pattern = pattern.replace(/-/g, "");
-    pattern = pattern.replace(/_/g, "");
-
+    pattern = value;
     const resultBox = document.getElementById("results");
     resultBox.innerHTML = `<tr class=''>
                 <td colspan='5' class='py-10 text-center'> 
@@ -30,6 +25,9 @@ const search = (value) => {
             </tr>`;
 
     if (pattern.length > 0) {
+        pattern = pattern.replace(/\s/g, "");
+        pattern = pattern.replace(/-/g, "");
+        pattern = pattern.replace(/_/g, "");
         axios
             .post("/goods/search", {
                 pattern,
@@ -70,11 +68,7 @@ const page = async (action) => {
 };
 
 const getData = (page, pattern) => {
-    let pattern = value;
-
-    pattern = pattern.replace(/\s/g, "");
-    pattern = pattern.replace(/-/g, "");
-    pattern = pattern.replace(/_/g, "");
+    alert(pattern);
 
     const resultBox = document.getElementById("results");
     resultBox.innerHTML = `<tr class=''>
@@ -83,6 +77,9 @@ const getData = (page, pattern) => {
                     </td>
             </tr>`;
     if (pattern.length > 0) {
+        pattern = pattern.replace(/\s/g, "");
+        pattern = pattern.replace(/-/g, "");
+        pattern = pattern.replace(/_/g, "");
         axios
             .post("/goods/page", {
                 page,

@@ -1,6 +1,7 @@
 <script setup>
 import { Head, router } from "@inertiajs/vue3";
 import Banner from "@/Components/Banner.vue";
+import NavLink from "@/Components/NavLink.vue";
 
 defineProps({
     title: String,
@@ -22,60 +23,32 @@ const logout = () => {
 
 <template>
     <div>
+
         <Head :title="title" />
 
         <Banner />
 
         <div class="min-h-screen bg-gray-100">
-            <nav
-                id="nav"
-                ref="nav"
-                class="main-nav bg-white shadow-lg flex flex-col justify-between"
-            >
-                <i
-                    id="close"
-                    @click="toggleNav()"
-                    class="material-icons absolute m-3 right-0 hover:cursor-pointer"
-                    >close</i
-                >
+            <nav id="nav" ref="nav" class="main-nav bg-white shadow-lg flex flex-col justify-between">
+                <i id="close" @click="toggleNav()"
+                    class="material-icons absolute m-3 right-0 hover:cursor-pointer">close</i>
                 <ul class="flex flex-col pt-5">
-                    <li class="hover:bg-gray-100 flex">
+                    <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                         <i class="pl-6 py-3 material-icons">search</i>
-                        <a
-                            class="pl-1 py-3 block"
-                            :href="route('dashboard')"
-                        >
-                            Search
-                        </a>
-                    </li>
-                    <li class="hover:bg-gray-100 flex">
+                        Search
+                    </NavLink>
+                    <NavLink :href="route('goods')" :active="route().current('goods')">
                         <i class="pl-6 py-3 material-icons">local_mall</i>
-                        <a
-                            class="pl-1 py-3 block"
-                            :href="route('goods')"
-                        >
-                            Goods
-                        </a>
-                    </li>
-                    <li class="hover:bg-gray-100 flex">
+                        Goods
+                    </NavLink>
+                    <NavLink :href="route('rates')" :active="route().current('rates')">
                         <i class="pl-6 py-3 material-icons">insert_chart</i>
-
-                        <a
-                            class="pl-1 py-3 block"
-                            :href="route('rates')"
-                        >
-                            Rates
-                        </a>
-                    </li>
-                    <li class="hover:bg-gray-100 flex">
+                        Rates
+                    </NavLink>
+                    <NavLink :href="route('profile.show')" :active="route().current('profile.show')">
                         <i class="pl-6 py-3 material-icons">person</i>
-                        <a
-                            class="pl-1 py-3 block"
-                            :href="route('profile.show')"
-                        >
-                            Profile
-                        </a>
-                    </li>
+                        Profile
+                    </NavLink>
                 </ul>
                 <!-- Authentication -->
                 <form @submit.prevent="logout">
@@ -88,11 +61,7 @@ const logout = () => {
             <!-- Page Content -->
             <main>
                 <div class="flex justify-between">
-                    <i
-                        class="p-2 material-icons hover:cursor-pointer fixed"
-                        @click="toggleNav"
-                        >menu</i
-                    >
+                    <i class="p-2 material-icons hover:cursor-pointer fixed" @click="toggleNav">menu</i>
                 </div>
                 <slot />
             </main>

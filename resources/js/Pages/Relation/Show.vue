@@ -14,7 +14,9 @@ defineProps({
         >
             <div class="bg-white rounded-md shadow-md p-3">
                 <div class="">
-                    <h2 class="ml-3 text-xl font-semibold text-gray-800 flex items-center gap-2">
+                    <h2
+                        class="ml-3 text-xl font-semibold text-gray-800 flex items-center gap-2"
+                    >
                         <i class="material-icons text-blue-500">save</i>
                         Register Relation
                     </h2>
@@ -51,7 +53,9 @@ defineProps({
 
             <div class="bg-white rounded-md shadow-md p-3">
                 <div class="flex items-center justify-between">
-                    <h2 class="ml-3 text-xl font-semibold text-gray-800 flex items-center gap-2">
+                    <h2
+                        class="ml-3 text-xl font-semibold text-gray-800 flex items-center gap-2"
+                    >
                         <i class="material-icons text-green-600">beenhere</i>
                         Selected Items
                     </h2>
@@ -90,42 +94,32 @@ defineProps({
                     </a>
                 </p>
             </div>
-            
+
             <div class="bg-white rounded-md shadow-md p-3">
                 <div class="flex items-center justify-between">
-                    <h2 class="ml-3 text-xl font-semibold text-gray-800 flex items-center gap-2">
+                    <h2
+                        class="ml-3 text-xl font-semibold text-gray-800 flex items-center gap-2"
+                    >
                         <i class="material-icons text-orange-400">search</i>
                         Search Goods
                     </h2>
                 </div>
 
-                <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-                    Laracasts offers thousands of video tutorials on Laravel,
-                    PHP, and JavaScript development. Check them out, see for
-                    yourself, and massively level up your development skills in
-                    the process.
-                </p>
-
-                <p class="mt-4 text-sm">
-                    <a
-                        href="https://laracasts.com"
-                        class="inline-flex items-center font-semibold text-indigo-700"
-                    >
-                        Start watching Laracasts
-
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            class="ml-1 w-5 h-5 fill-indigo-500"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z"
-                                clip-rule="evenodd"
-                            />
-                        </svg>
-                    </a>
-                </p>
+                <div class="flex justify-center py-3">
+                    <input
+                        type="text"
+                        name="serial"
+                        id="serial"
+                        class="rounded-md py-2 w-full border-1 text-sm"
+                        min="0"
+                        max="30"
+                        @keyup="search($event.target.value, rates)"
+                        placeholder="Part Number ..."
+                    />
+                </div>
+                <div id="search_result">
+                    <!-- Search Results are going to be appended here -->
+                </div>
             </div>
         </div>
     </AppLayout>

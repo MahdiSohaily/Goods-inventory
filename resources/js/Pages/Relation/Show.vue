@@ -42,22 +42,22 @@ const prepareData = (data) => {
     for (let item of data) {
         if (item.pattern) {
             template +=
-                `<div class='w-full flex justify-between' id='search-` + item.id + `'>
-                    <p>` + item.partNumber + `</p>
+                `<div class='w-full flex justify-between items-center shadow-md rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` + item.id + `'>
+                    <p class='text-sm'>` + item.partNumber + `</p>
                     <i onclick='lead(event,`+ item.pattern +`)'  
                         data-id='` + item.id + `' 
                         data-partNumber='` + item.partNumber + `'
-                        class='material-icons add'>add_circle_outline
+                        class='material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200'>add_circle_outline
                     </i>
                 </div>`;
         } else {
             template +=
-                `<div class='w-full flex justify-between' id='search-` + item.id + `'>
-                    <p>` + item.partNumber + `</p>
+                `<div class='w-full flex justify-between items-center shadow-md rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` + item.id + `'>
+                    <p class='text-sm'>` + item.partNumber + `</p>
                     <i onclick='add(event)'  
                         data-id='` + item.id + `' 
                         data-partNumber='` + item.partNumber + `'
-                        class='material-icons add'>add_circle_outline
+                        class='material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200'>add_circle_outline
                     </i>
                 </div>`;
         }

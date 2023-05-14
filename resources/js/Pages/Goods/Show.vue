@@ -16,7 +16,12 @@ const remove = (id) => {
 };
 
 const search = (value) => {
-    pattern = value;
+    let pattern = value;
+
+    pattern = pattern.replace(/\s/g, "");
+    pattern = pattern.replace(/-/g, "");
+    pattern = pattern.replace(/_/g, "");
+
     const resultBox = document.getElementById("results");
     resultBox.innerHTML = `<tr class=''>
                 <td colspan='5' class='py-10 text-center'> 
@@ -24,20 +29,22 @@ const search = (value) => {
                     </td>
             </tr>`;
 
-    axios
-        .post("/goods/search", {
-            pattern,
-        })
-        .then(function (response) {
-            resultBox.setAttribute(
-                "data-length",
-                Math.ceil(response.data.count / 10)
-            );
-            resultBox.innerHTML = print(response.data.goods);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    if (pattern.length > 0) {
+        axios
+            .post("/goods/search", {
+                pattern,
+            })
+            .then(function (response) {
+                resultBox.setAttribute(
+                    "data-length",
+                    Math.ceil(response.data.count / 10)
+                );
+                resultBox.innerHTML = print(response.data.goods);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 };
 
 const page = async (action) => {
@@ -70,7 +77,7 @@ const getData = (page, pattern) => {
                     </td>
             </tr>`;
     axios
-        .post("/goods/page/", {
+        .post("/goods/page", {
             page,
             pattern: "553113f",
         })
@@ -116,7 +123,9 @@ const print = (data) => {
                 <td class='whitespace-nowrap w-24'>
                     <div class='flex justify-center gap-1 items-center px-2'>
                         <div class="flex justify-center gap-1 items-center px-2">
-                            <a target="_self" href="/goods/` +id +`/edit">
+                            <a target="_self" href="/goods/` +
+                id +
+                `/edit">
                                 <i class="material-icons text-blue-500">create</i>
                             </a>
                             <form @submit.prevent="remove(item.id)">
@@ -145,7 +154,9 @@ const print = (data) => {
 <template>
     <AppLayout title="Goods">
         <div>
-            <div class="max-w-7xl overflow-x-auto mx-auto py-6 flex justify-between">
+            <div
+                class="max-w-7xl overflow-x-auto mx-auto py-6 flex justify-between"
+            >
                 <input
                     type="text"
                     name="serial"
@@ -156,7 +167,11 @@ const print = (data) => {
                     @keyup="search($event.target.value, rates)"
                     placeholder="Search base on Part Number..."
                 />
-                <a :href="route('goods.create')" class="bg-indigo-500 hover:bg-indigo-400 rounded-md text-white px-4 flex justify-center items-center">Create New</a>
+                <a
+                    :href="route('goods.create')"
+                    class="bg-indigo-500 hover:bg-indigo-400 rounded-md text-white px-4 flex justify-center items-center"
+                    >Create New</a
+                >
             </div>
             <div class="bg-gray-100 bg-opacity-25">
                 <div class="max-w-7xl overflow-x-auto mx-auto">
@@ -228,9 +243,7 @@ const print = (data) => {
                                     <div
                                         class="flex justify-center gap-1 items-center px-2"
                                     >
-                                        <a
-                                            :href="route('goods.edit', item.id)"
-                                        >
+                                        <a :href="route('goods.edit', item.id)">
                                             <i
                                                 class="material-icons text-blue-500"
                                                 >create</i

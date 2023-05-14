@@ -133,7 +133,7 @@ const print = (data, rates) => {
                 price = price.replace(",", "");
                 avgPrice = Math.round((price * 110) / 243.5);
                 template +=
-                    `<tr class='bg-gray-300 transition duration-400 ease-in-out hover:bg-neutral-500'>
+                    `<tr class='mobis transition duration-400 ease-in-out hover:bg-neutral-500'>
                         <td class='text-white font-bold pl-12'> ` +
                     partNumber +
                     `-M</td>

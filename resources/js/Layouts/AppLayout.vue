@@ -51,8 +51,8 @@ const logout = () => {
                 </ul>
                 <!-- Authentication -->
                 <form @submit.prevent="logout">
-                    <button type="submit" class="pl-6 py-3 hover:bg-gray-300 w-full flex justify-start">
-                        <i class="material-icons mr-1">settings_power</i>
+                    <button type="submit"
+                        class="inline-flex items-end py-3 pl-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 w-full hover:text-white focus:outline-none transition duration-150 ease-in-out">
                         Log Out
                     </button>
                 </form>

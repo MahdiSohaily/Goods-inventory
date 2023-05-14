@@ -40,7 +40,6 @@ Route::middleware([
         Route::get('/mobis/{mobis}', 'mobis')->name('mobis'); // Route to check if a good has mobis
     });
 
-
     // Good Page related routs
     Route::controller(GoodController::class)->group(function () {
         Route::get('/goods', 'index')->name('goods'); // goods route lead us to the goods page

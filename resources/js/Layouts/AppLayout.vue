@@ -34,19 +34,15 @@ const logout = () => {
                     class="material-icons absolute m-3 right-0 hover:cursor-pointer">close</i>
                 <ul class="flex flex-col pt-5">
                     <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                        <i class="pl-6 py-3 material-icons">search</i>
                         Search
                     </NavLink>
                     <NavLink :href="route('goods')" :active="route().current('goods')">
-                        <i class="pl-6 py-3 material-icons">local_mall</i>
                         Goods
                     </NavLink>
                     <NavLink :href="route('rates')" :active="route().current('rates')">
-                        <i class="pl-6 py-3 material-icons">insert_chart</i>
                         Rates
                     </NavLink>
-                    <NavLink :href="route('profile.show')" :active="route().current('profile.show')">
-                        <i class="pl-6 py-3 material-icons">person</i>
+                    <NavLink :href="route('profile.show')" :active="route().current('profile')">
                         Profile
                     </NavLink>
                 </ul>

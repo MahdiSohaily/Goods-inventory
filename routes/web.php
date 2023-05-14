@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\GoodController;
 use App\Http\Controllers\RateController;
+use App\Http\Controllers\RelationController;
 use Inertia\Inertia;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,13 +52,18 @@ Route::middleware([
         Route::delete('/goods/{goods}', 'delete')->name('goods.delete'); // Route to delete a specific good
     });
 
-// Rate Page related routs
-Route::controller(RateController::class)->group(function () {
-    Route::get('/rates', 'index')->name('rates'); // rates route lead us to the goods page
-    Route::get('/rates/create', 'create')->name('rates.create'); // Route to show the form for creating a new good in the system
-    Route::post('/rates', 'store')->name('rates.store'); // Route to create new good in the system
-    Route::get('/rates/{rates}/edit', 'edit')->name('rates.edit'); // Route to show the selected good for update
-    Route::put('/rates/{rates}', 'update')->name('rates.update'); // Route to update an existing good
-    Route::delete('/rates/{rates}', 'delete')->name('rates.delete'); // Route to delete a specific good
-});
+    // Rate Page related routs
+    Route::controller(RateController::class)->group(function () {
+        Route::get('/rates', 'index')->name('rates'); // rates route lead us to the rates page
+        Route::get('/rates/create', 'create')->name('rates.create'); // Route to show the form for creating a new rate in the system
+        Route::post('/rates', 'store')->name('rates.store'); // Route to create new good in the system
+        Route::get('/rates/{rates}/edit', 'edit')->name('rates.edit'); // Route to show the selected good for update
+        Route::put('/rates/{rates}', 'update')->name('rates.update'); // Route to update an existing good
+        Route::delete('/rates/{rates}', 'delete')->name('rates.delete'); // Route to delete a specific good
+    });
+    
+    // Rate Page related routs
+    Route::controller(RelationController::class)->group(function () {
+        Route::get('/relations', 'index')->name('relations'); // relations route lead us to the relations page
+    });
 });

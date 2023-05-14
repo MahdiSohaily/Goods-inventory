@@ -21,6 +21,27 @@ class RelationController extends Controller
     public function search(Request $request)
     {
         $pattern = $request->input('pattern');
-        return $pattern;
+        $nisha = DB::table('nisha')->select('id')
+            ->where('partnumber', 'like', "$pattern%")->get();
+
+        $pattern = DB::table('patterns')->select('id')
+            ->where('serial', 'like', "$pattern%")->get();
+
+        $pattern_ids = [];
+
+        foreach ($nisha as $key => $value) {
+            array_push($pattern_ids, $value->id);
+        }
+
+        $similar = DB::table('similars')->select('nisha_id', 'pattern_id')
+            ->whereIn('pattern_id', $pattern_ids)->get();
+
+        $similar_ids = [];
+
+        foreach ($similar as $key => $value) {
+            array_push($similar_ids, ['pattern_id' => $value->pattern_id, 'nisha_id' => $value->nisha_id]);
+        }
+
+        return $similar;
     }
 }

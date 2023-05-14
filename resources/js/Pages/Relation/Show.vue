@@ -27,6 +27,7 @@ const search = (val) => {
                 pattern,
             })
             .then(function (response) {
+                // resultBox.innerHTML = response.data;
                 console.log(response.data);
             })
             .catch(function (error) {

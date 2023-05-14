@@ -20,7 +20,7 @@ class RateController extends Controller
 
     public function create()
     {
-        return Inertia::render('Rates/Partials/Create');
+        return Inertia::render('Rates/Partials/Create');    
     }
 
     public function store(Request $request)

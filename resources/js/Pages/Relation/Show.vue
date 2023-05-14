@@ -27,8 +27,7 @@ const search = (val) => {
                 pattern,
             })
             .then(function (response) {
-                // resultBox.innerHTML = response.data;
-                console.log(response.data);
+                resultBox.innerHTML = prepareData(response.data);
             })
             .catch(function (error) {
                 console.log(error);
@@ -38,7 +37,44 @@ const search = (val) => {
     }
 };
 
-const prepareData = (data) => {};
+const prepareData = (data) => {
+    let template = "";
+    for (let item of data) {
+        if (item.pattern) {
+            template +=
+                `<div class='w-full flex justify-between' id='$id'>
+                    <p>` +
+                item.partNumber +
+                `</p>
+                <i onclick='add(event)'  
+                    data-id='` +
+                item.id +
+                `' 
+                    data-partnumber='` +
+                item.partNumber +
+                `'
+                    class='material-icons add'>add_circle_outline</i>
+                </div>`;
+        } else {
+            template +=
+                `<div class='w-full flex justify-between' id='$id'>
+                    <p>` +
+                item.partNumber +
+                `</p>
+                <i onclick='add(event)'  
+                    data-id='` +
+                item.id +
+                `' 
+                    data-partnumber='` +
+                item.partNumber +
+                `'
+                    class='material-icons add'>add_circle_outline</i>
+                </div>`;
+        }
+    }
+
+    return template;
+};
 </script>
 
 <template>

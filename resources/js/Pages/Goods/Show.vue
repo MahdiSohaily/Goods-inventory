@@ -62,7 +62,7 @@ const page = async (action) => {
             if (current_page > total_pages) {
                 current_page = 0;
             }
-            data = await getData(current_page);
+            data = await getData(current_page, pattern);
             break;
     }
 };

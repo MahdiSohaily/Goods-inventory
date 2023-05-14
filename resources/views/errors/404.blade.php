@@ -25,6 +25,10 @@
             height: 100vh;
             box-sizing: border-box
         }
+        
+        a {
+            text-decoration: none;
+        }
 
         .page_404 {
             background: #fff;

@@ -10,13 +10,9 @@ let result = null;
 
 const search = (val) => {
     let pattern = val;
-    let superMode = 0;
     const resultBox = document.getElementById("search_result");
 
-    if (
-        (pattern.length > 4 && superMode == 1) ||
-        (pattern.length > 6 && superMode == 0)
-    ) {
+    if (pattern.length > 6) {
         pattern = pattern.replace(/\s/g, "");
         pattern = pattern.replace(/-/g, "");
         pattern = pattern.replace(/_/g, "");
@@ -27,7 +23,7 @@ const search = (val) => {
                     </div>
             </tr>`;
         axios
-            .post(route('relations.search'), {
+            .post(route("relations.search"), {
                 pattern,
             })
             .then(function (response) {

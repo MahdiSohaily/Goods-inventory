@@ -17,4 +17,10 @@ class RelationController extends Controller
         // return the component to be displayed with it's required data
         return Inertia::render('Relation/Show', ['status' => $status, 'cars' => $cars]);
     }
+
+    public function search(Request $request)
+    {
+        $pattern = $request->input('pattern');
+        return $pattern;
+    }
 }

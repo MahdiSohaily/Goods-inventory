@@ -161,6 +161,15 @@ function load(event, pattern_id) {
 }
 
 
+// A function to remove added goods from relation box
+function remove(id) {
+    const item = document.getElementById("m-" + id);
+    const remove_checkbox = document.getElementById("c-" + id);
+
+    remove_checkbox.remove();
+    item.remove();
+}
+
 </script>
 
 <template>

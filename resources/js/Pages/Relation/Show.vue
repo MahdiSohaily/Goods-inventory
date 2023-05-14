@@ -11,11 +11,7 @@ let result = null;
 const search = (val, rates) => {
     let pattern = val;
     let superMode = 0;
-    const resultBox = document.getElementById("results");
-
-    if (document.getElementById("mode").checked) {
-        superMode = 1;
-    }
+    const resultBox = document.getElementById("search_result");
 
     if (
         (pattern.length > 4 && superMode == 1) ||
@@ -26,9 +22,9 @@ const search = (val, rates) => {
         pattern = pattern.replace(/_/g, "");
 
         resultBox.innerHTML = `<tr class=''>
-                <td colspan='14' class='py-10 text-center'> 
+                <div class='w-full h-96 flex justify-center items-center'> 
                     <img class=' block w-10 mx-auto h-auto' src='/img/loading.png' alt='google'>
-                    </td>
+                    </div>
             </tr>`;
         axios
             .post("/search", {
@@ -36,7 +32,7 @@ const search = (val, rates) => {
                 superMode,
             })
             .then(function (response) {
-                resultBox.innerHTML = print(response.data);
+                // resultBox.innerHTML = print(response.data);
             })
             .catch(function (error) {
                 console.log(error);
@@ -150,7 +146,7 @@ const search = (val, rates) => {
                         type="text"
                         name="serial"
                         id="serial"
-                        class="rounded-md py-2 w-full border-1 text-sm"
+                        class="rounded-md py-2 w-full border-1 text-sm border-gray-500 focus:outline-none text-gray-500"
                         min="0"
                         max="30"
                         @keyup="search($event.target.value, rates)"

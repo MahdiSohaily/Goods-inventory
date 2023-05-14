@@ -36,7 +36,7 @@ const search = (val, rates) => {
                 superMode,
             })
             .then(function (response) {
-                resultBox.innerHTML = print(response.data, rates);
+                resultBox.innerHTML = print(response.data);
             })
             .catch(function (error) {
                 console.log(error);

@@ -1,5 +1,6 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
+import SectionBorder from '@/Components/SectionBorder.vue';
 
 defineProps({
     status: Object,
@@ -42,9 +43,9 @@ const prepareData = (data) => {
     for (let item of data) {
         if (item.pattern) {
             template +=
-                `<div class='w-full flex justify-between items-center shadow-md rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` + item.id + `'>
+                `<div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` + item.id + `'>
                     <p class='text-sm'>` + item.partNumber + `</p>
-                    <i onclick='lead(event,`+ item.pattern +`)'  
+                    <i onclick='lead(event,`+ item.pattern + `)'  
                         data-id='` + item.id + `' 
                         data-partNumber='` + item.partNumber + `'
                         class='material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200'>add_circle_outline
@@ -52,7 +53,7 @@ const prepareData = (data) => {
                 </div>`;
         } else {
             template +=
-                `<div class='w-full flex justify-between items-center shadow-md rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` + item.id + `'>
+                `<div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` + item.id + `'>
                     <p class='text-sm'>` + item.partNumber + `</p>
                     <i onclick='add(event)'  
                         data-id='` + item.id + `' 
@@ -83,6 +84,7 @@ const prepareData = (data) => {
                         class="rounded-md py-3 w-full border-1 text-sm border-gray-500 focus:outline-none text-gray-500"
                         min="0" max="30" @keyup="search($event.target.value, rates)" placeholder="Part Number ..." />
                 </div>
+                <SectionBorder />
                 <div id="search_result">
                     <!-- Search Results are going to be appended here -->
                 </div>

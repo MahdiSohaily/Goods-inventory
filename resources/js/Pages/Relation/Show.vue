@@ -7,8 +7,21 @@ defineProps({
     cars: Object,
 });
 
+const form = useForm({
+    _method: "POST",
+    name: null,
+    status_id: null,
+    car_id: null,
+    values: null,
+});
+
 let result = null;
 
+/***  This function fires on every keyup event on a specific input field and at a specific length
+ * sends an ajax request using the axios library.
+ * @val (String)
+ * @return null
+*/
 const search = (val) => {
     let pattern = val;
     const resultBox = document.getElementById("search_result");
@@ -38,6 +51,11 @@ const search = (val) => {
     }
 };
 
+/**
+ * This function prepares data to be attached and returns it.
+ * @data -> (Object)
+ * @return (HTML Structure)
+ */
 const prepareData = (data) => {
     let template = "";
     for (let item of data) {
@@ -45,7 +63,7 @@ const prepareData = (data) => {
             template +=
                 `<div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` + item.id + `'>
                     <p class='text-sm'>` + item.partNumber + `</p>
-                    <i onclick='lead(event,`+ item.pattern + `)'  
+                    <i onclick='load(event,`+ item.pattern + `)'  
                         data-id='` + item.id + `' 
                         data-partNumber='` + item.partNumber + `'
                         class='material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200'>add_circle_outline
@@ -66,6 +84,82 @@ const prepareData = (data) => {
 
     return template;
 };
+
+// A function to add a good to the relation box
+function add(event) {
+    const id = event.target.getAttribute("data-id");
+    const remove = document.getElementById(id);
+
+    const partnumber = event.target.getAttribute("data-partnumber");
+    const price = event.target.getAttribute("data-price");
+    const mobis = event.target.getAttribute("data-mobis");
+
+    const result = document.getElementById("s-result");
+    const selected = document.getElementById("selected");
+
+    result.removeChild(remove);
+
+    const item =
+        `<div class='matched-item' id='m-` +
+        id +
+        `'>
+            <p>` +
+        partnumber +
+        `</p>
+            <i class='material-icons remove' onclick='remove(` +
+        id +
+        `)'>do_not_disturb_on</i>
+            </div>`;
+
+    selected.innerHTML += item;
+
+    const relation_form = document.getElementById("relation-form");
+
+    const input =
+        ` <input id='c-` +
+        id +
+        `' type='checkbox' name='value[]' value='` +
+        id +
+        `' hidden checked>`;
+    relation_form.innerHTML += input;
+}
+
+// A function to load data a good to the relation box
+function load(event, pattern_id) {
+    const id = event.target.getAttribute("data-id");
+    const remove = document.getElementById(id);
+
+    const result = document.getElementById("s-result");
+    const selected = document.getElementById("selected");
+
+    const mode = document.getElementById("mode");
+    mode.value = "update-" + pattern_id;
+
+    result.removeChild(remove);
+
+    if (id) {
+        selected.innerHTML =
+            "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
+        axios
+            .get("loadData/" + id)
+            .then((response) => {
+                setData(response.data);
+                axios
+                    .get("loadDescription/" + id)
+                    .then((response) => {
+                        setValue(response.data);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+}
+
+
 </script>
 
 <template>

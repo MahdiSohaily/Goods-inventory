@@ -173,7 +173,7 @@ function remove(id) {
 </script>
 
 <template>
-    <AppLayout title="Profile">
+    <AppLayout title="Relations">
         <div class="h-70S grid grid-cols-1 my-8 md:grid-cols-3 gap-6 lg:gap-8 p-6 lg:p-8">
             <div class="bg-white rounded-lg shadow-md">
                 <div class="flex items-center justify-between p-3">

@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-    <AppLayout title="Profile">
+    <AppLayout title="Rates">
         <div class="max-w-5xl mx-auto py-20 sm:px-6 lg:px-8">
             <table class="min-w-full text-left text-sm font-light">
                 <thead class="font-medium dark:border-neutral-500">

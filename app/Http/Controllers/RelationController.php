@@ -60,7 +60,7 @@ class RelationController extends Controller
         return $final_result;
     }
     
-    public function create(Request $request)
+    public function store(Request $request)
     {
         echo $request->input('values');
     }

@@ -127,26 +127,25 @@ class RelationController extends Controller
         }
 
         $toAdd = $this->toBeAdded($current, $selected_index);
-        if (count($toAdd) > 0) {
-            try {
 
-                // create the pattern record
-                $pattern = Pattern::find($pattern_id);
-                $pattern->name = $request->input('name');
-                $pattern->serial = $request->input('serial');
-                $pattern->car_id = $request->input('car_id');
-                $pattern->status_id = $request->input('status_id');
-                $pattern->save();
-
+        try {
+            // create the pattern record
+            $pattern = Pattern::find($pattern_id);
+            $pattern->name = $request->input('name');
+            $pattern->serial = $request->input('serial');
+            $pattern->car_id = $request->input('car_id');
+            $pattern->status_id = $request->input('status_id');
+            $pattern->save();
+            if (count($toAdd) > 0) {
                 foreach ($toAdd as $value) {
                     $similar = new Similar();
                     $similar->pattern_id = $pattern_id;
                     $similar->nisha_id  = $value;
                     $similar->save();
                 }
-            } catch (\Throwable $th) {
-                throw $th;
             }
+        } catch (\Throwable $th) {
+            throw $th;
         }
     }
 

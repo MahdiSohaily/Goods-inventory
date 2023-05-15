@@ -74,22 +74,9 @@ class RelationController extends Controller
         ])->validate();
         // END validation
 
-
-
-        $selected_index = [];
-        $values = $request->input('values');
-
-
-        // Extract individual variables from the request body
-        $selected_index = array_unique($selected_index);
+        $selected_index = $this->extract_id($request->input('values'));
 
         try {
-            foreach ($values as $value) {
-                array_push($selected_index, $value['id']);
-            }
-
-
-
             // create the pattern record
             $pattern = new Pattern();
             $pattern->name = $request->input('name');
@@ -111,8 +98,84 @@ class RelationController extends Controller
         }
     }
 
+    public function update(Request $request)
+    {
+        // START Validation the request
+        Validator::make($request->all(), [
+            'values' => 'required',
+            'serial' => 'required',
+        ], [
+            'required' => "The selected items section can't be empty.",
+        ])->validate();
+        // END validation
+
+
+        $serial = $request->input('serial');
+        $name = $request->input('name');
+        $car_id = $request->input('car_id');
+        $status_id = $request->input('status_id');
+        $pattern_id = $request->input('pattern_id');
+        $values = $request->input('values');
+
+        $similar = DB::table('similars')->select('nisha_id')->where('pattern_id', $pattern_id)->get();
+
+        $selected_index = $this->extract_id($request->input('values'));
+
+        $current = [];
+        foreach ($similar as $item) {
+            array_push($current, $item->nisha_id);
+        }
+
+        $toAdd = $this->toBeAdded($current, $selected_index);
+        if (count($toAdd) > 0) {
+            try {
+
+                // create the pattern record
+                $pattern = Pattern::find($pattern_id);
+                $pattern->name = $request->input('name');
+                $pattern->serial = $request->input('serial');
+                $pattern->car_id = $request->input('car_id');
+                $pattern->status_id = $request->input('status_id');
+                $pattern->save();
+
+                foreach ($toAdd as $value) {
+                    $similar = new Similar();
+                    $similar->pattern_id = $pattern_id;
+                    $similar->nisha_id  = $value;
+                    $similar->save();
+                }
+            } catch (\Throwable $th) {
+                throw $th;
+            }
+        }
+
+        return $toAdd;
+    }
+
     public function pattern(Request $request)
     {
         return DB::table('patterns')->where('id', $request->input('id'))->first();
+    }
+
+
+    public function extract_id($array)
+    {
+        $selected_index = [];
+        foreach ($array as $value) {
+            array_push($selected_index, $value['id']);
+        }
+        $selected_index = array_unique($selected_index);
+        return $selected_index;
+    }
+
+    public function toBeAdded($existing, $newComer)
+    {
+        $result = [];
+        foreach ($newComer as $item) {
+            if (!in_array($item, $existing)) {
+                array_push($result, $item);
+            }
+        }
+        return $result;
     }
 }

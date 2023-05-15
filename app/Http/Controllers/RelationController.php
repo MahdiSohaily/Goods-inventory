@@ -67,12 +67,23 @@ class RelationController extends Controller
         Validator::make($request->all(), [
             'values' => 'required',
             'body' => 'required',
-        ],[
+        ], [
             'required' => "The selected items section can't be empty.",
         ])->validate();
-
         // END validation
+
+        $values = $request->input('values');
+        $pattern = $request->input('pattern');
+        $name = $request->input('name');
+        $car_id = $request->input('values');
+        $status_id = $request->input('status_id');
+
+        $selected_index = [];
+
         try {
+            foreach ($values as $key => $value) {
+                array_push($selected_index, $value->id);
+            }
             
         } catch (\Throwable $th) {
             //throw $th;

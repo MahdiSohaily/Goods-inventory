@@ -226,20 +226,19 @@ function remove(id) {
             </div>
 
             <div class="bg-white rounded-lg shadow-md">
-                <div class="">
+                <div class="p-3">
                     <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                         <i class="material-icons font-semibold text-blue-500">save</i>
                         Register Relation
                     </h2>
                 </div>
 
-                <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-                    Laravel has wonderful documentation covering every aspect of
-                    the framework. Whether you're new to the framework or have
-                    previous experience, we recommend reading all of the
-                    documentation from beginning to end.
+                <p class="px-3 py-1 mb-4 text-gray-500 text-sm leading-relaxed">
+                    Fill out the following form in order to register a relation.
                 </p>
 
+                <SectionBorder />
+                
                 <p class="mt-4 text-sm">
                     <a href="https://laravel.com/docs" class="inline-flex items-center font-semibold text-indigo-700">
                         Explore the documentation

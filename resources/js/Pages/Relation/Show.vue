@@ -154,7 +154,7 @@ function load(e) {
         if (item.pattern == pattern) {
             form._method = 'PUT';
             url = 'relations.update';
-            form.values.push({ id: item.id, partNumber: item.partNumber });
+            form.values.push({ id: item.id, partNumber: item.partNumber,pattern: item.pattern });
             remove(item.id);
         }
     }

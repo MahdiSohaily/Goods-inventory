@@ -123,7 +123,6 @@ const add = (e) => {
 };
 
 const remove_selected = (e) => {
-    alert(e.target.getAttribute('data-id'));
 };
 
 // A function to load data a good to the relation box

@@ -10,6 +10,7 @@ defineProps({
 });
 $(document).ready(() => {
     $(document).on("click", ".element", add);
+    $(document).on("click", ".remove_selected", remove_selected);
 });
 const form = useForm({
     _method: "POST",
@@ -115,31 +116,14 @@ const prepareData = (data) => {
 
 // A function to add a good to the relation box
 const add = (e) => {
-    const selected_box = document.getElementById('selected_box');
     const id = e.target.getAttribute("data-id");
     const partNumber = e.target.getAttribute("data-partnumber");
-    form.values.push(id);
-
-    selected_box.innerHTML+=
-                    `<div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='selected-` +
-                   id +
-                    `'>
-                    <p class='text-sm font-semibold text-gray-600'>` +
-                   partNumber +
-                    `</p>
-                    <i 
-                        data-id='` +
-                   id +
-                    `'
-                        data-partNumber='` +
-                   partNumber +
-                    `'
-                        class='remove material-icons add text-red-600 cursor-pointer rounded-circle hover:bg-gray-200'>do_not_disturb_on
-                    </i>
-                </div>`;
-
+    form.values.push({ id: id, partNumber: partNumber });
+    console.log(form.values);
     remove(id);
 };
+
+const remove_selected = (e) => {};
 
 // A function to load data a good to the relation box
 function load(event, pattern_id) {
@@ -239,6 +223,7 @@ function remove(id) {
 
                 <div id="selected_box" class="p-3">
                     <!-- selected items are going to be added here -->
+                    {{ form.values }}
                 </div>
             </div>
 

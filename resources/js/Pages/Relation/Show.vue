@@ -91,7 +91,7 @@ const prepareData = (data) => {
                 </div>`;
             } else {
                 template +=
-                    `<div class='w-full  flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` +
+                    `<div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` +
                     item.id +
                     `'>
                     <p class='text-sm font-semibold text-gray-600'>` +
@@ -104,7 +104,7 @@ const prepareData = (data) => {
                         data-partNumber='` +
                     item.partNumber +
                     `'
-                        class='element material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200'>add_circle_outline
+                        class='load material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200'>add_circle_outline
                     </i>
                 </div>`;
             }

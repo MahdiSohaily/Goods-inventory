@@ -121,7 +121,7 @@ const add = (e) => {
     form.values.push(id);
 
     selected_box.innerHTML+=
-                    `<div class='w-full element flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='selected-` +
+                    `<div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='selected-` +
                    id +
                     `'>
                     <p class='text-sm font-semibold text-gray-600'>` +
@@ -134,7 +134,7 @@ const add = (e) => {
                         data-partNumber='` +
                    partNumber +
                     `'
-                        class='element material-icons add text-red-600 cursor-pointer rounded-circle hover:bg-gray-200'>do_not_disturb_on
+                        class='remove material-icons add text-red-600 cursor-pointer rounded-circle hover:bg-gray-200'>do_not_disturb_on
                     </i>
                 </div>`;
 

@@ -119,7 +119,6 @@ const add = (e) => {
     const id = e.target.getAttribute("data-id");
     const partNumber = e.target.getAttribute("data-partnumber");
     form.values.push({ id: id, partNumber: partNumber });
-    console.log(form.values);
     remove(id);
 };
 
@@ -223,7 +222,18 @@ function remove(id) {
 
                 <div id="selected_box" class="p-3">
                     <!-- selected items are going to be added here -->
-                    {{ form.values }}
+                    <div v-if="form.values.length > 0" v-for="item in form.values"
+                        class="w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300">
+                        <p class="text-sm font-semibold text-gray-600">
+                            {{ item.partNumber }} 
+                        </p>
+                        <i
+                            :data-id="item.id"
+                            :data-partNumber="item.partNumber"
+                            class="material-icons add text-red-600 cursor-pointer rounded-circle hover:bg-gray-200"
+                            >do_not_disturb_on
+                        </i>
+                    </div>
                 </div>
             </div>
 

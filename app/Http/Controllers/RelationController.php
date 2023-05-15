@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class RelationController extends Controller
@@ -59,9 +60,16 @@ class RelationController extends Controller
 
         return $final_result;
     }
-    
+
     public function store(Request $request)
     {
-        echo $request->input('values');
+        Validator::make($request->all(), [
+            'values' => 'required',
+            'body' => 'required',
+        ],[
+            'required' => "The selected items section can't be empty.",
+        ])->validate();
+
+        return redirect('/posts');
     }
 }

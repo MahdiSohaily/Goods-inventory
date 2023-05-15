@@ -181,7 +181,6 @@ function remove(id) {
 
 const createRelation = () => {
     form.post(route("relations.store"), {
-        errorBag: "createRelation",
         preserveScroll: true,
         onSuccess: () => {
             console.log("success");
@@ -283,6 +282,7 @@ const createRelation = () => {
                             </select>
                             <InputError :message="form.errors.status" class="mt-2" />
                         </div>
+                        <InputError :message="form.errors.values" class="mt-2" />
                     </template>
 
                     <template #actions>

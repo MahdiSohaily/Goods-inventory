@@ -161,10 +161,25 @@ function load(e) {
                 remove(item.id);
             }
         }
-    }else {
+
+    } else {
         alert("You can't load two relation at once (clear all to load new relation)");
     }
 
+}
+
+const load_pattern_ifo = (id) => {
+    axios
+        .post(route("relations.pattern"), {
+            id,
+        })
+        .then(function (response) {
+            resultBox.innerHTML = prepareData(response.data);
+            result = response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 
 // A function to remove added goods from relation box

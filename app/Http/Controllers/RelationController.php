@@ -32,7 +32,7 @@ class RelationController extends Controller
 
         $pattern_ids = [];
 
-        foreach ($nisha as $key => $value) {
+        foreach ($pattern as $key => $value) {
             array_push($pattern_ids, $value->id);
         }
 
@@ -84,30 +84,28 @@ class RelationController extends Controller
         $selected_index = array_unique($selected_index);
 
         try {
-            foreach ($values as $key => $value) {
-                array_push($selected_index, $value->id);
+            foreach ($values as $value) {
+                array_push($selected_index, $value['id']);
             }
 
 
-            DB::transaction(function ($request, $selected_index) {
 
-                // create the pattern record
-                $pattern = new Pattern();
-                $pattern->name = $request->input('name');
-                $pattern->serial = $request->input('serial');
-                $pattern->car_id = $request->input('car_id');
-                $pattern->status_id = $request->input('status_id');
-                $pattern->save();
+            // create the pattern record
+            $pattern = new Pattern();
+            $pattern->name = $request->input('name');
+            $pattern->serial = $request->input('serial');
+            $pattern->car_id = $request->input('car_id');
+            $pattern->status_id = $request->input('status_id');
+            $pattern->save();
 
-                $id = $pattern->id;
+            $id = $pattern->id;
 
-                foreach ($selected_index as $value) {
-                    $similar = new Similar();
-                    $similar->pattern_id = $id;
-                    $similar->nisha_id  = $value;
-                    $similar->save();
-                }
-            });
+            foreach ($selected_index as $value) {
+                $similar = new Similar();
+                $similar->pattern_id = $id;
+                $similar->nisha_id  = $value;
+                $similar->save();
+            }
         } catch (\Throwable $th) {
             throw $th;
         }

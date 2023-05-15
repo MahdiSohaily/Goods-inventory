@@ -145,6 +145,7 @@ const remove_selected = (e) => {
 
 const clearAll = () => {
     form._method = 'POST';
+    form.pattern_id = null;
     form.values = [];
 };
 

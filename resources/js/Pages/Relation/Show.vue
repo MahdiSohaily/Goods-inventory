@@ -16,7 +16,7 @@ defineProps({
 });
 
 $(document).ready(() => {
-    $(document).on("click", ".element", add);
+    $(document).on("click", ".add_element", add);
 });
 
 const form = useForm({
@@ -73,38 +73,23 @@ const prepareData = (data) => {
         for (let item of data) {
             if (item.pattern) {
                 template +=
-                    `<div class='w-full element flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` +
-                    item.id +
-                    `'>
-                    <p class='text-sm font-semibold text-gray-600'>` +
-                    item.partNumber +
-                    `</p>
+                    `<div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` + item.id +`'>
+                    <p class='text-sm font-semibold text-gray-600'>` + item.partNumber +`</p>
                     <i 
-                        data-id='` +
-                    item.id +
-                    `'
-                        data-partNumber='` +
-                    item.partNumber +
-                    `'
-                        class='element material-icons add text-blue-600 cursor-pointer rounded-circle hover:bg-gray-200'>cloud_download
+                        data-id='` + item.id +`'
+                        data-pattern='` + item.pattern +`'
+                        data-partNumber='` + item.partNumber +`'
+                        class='load_element material-icons add text-blue-600 cursor-pointer rounded-circle hover:bg-gray-200'>cloud_download
                     </i>
                 </div>`;
             } else {
                 template +=
-                    `<div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` +
-                    item.id +
-                    `'>
-                    <p class='text-sm font-semibold text-gray-600'>` +
-                    item.partNumber +
-                    `</p>
+                    `<div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id='search-` +item.id +`'>
+                    <p class='text-sm font-semibold text-gray-600'>` + item.partNumber +`</p>
                     <i
-                        data-id='` +
-                    item.id +
-                    `'
-                        data-partNumber='` +
-                    item.partNumber +
-                    `'
-                        class='load material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200'>add_circle_outline
+                        data-id='` + item.id +`'
+                        data-partNumber='` + item.partNumber +`'
+                        class='add_element material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200'>add_circle_outline
                     </i>
                 </div>`;
             }
@@ -186,7 +171,7 @@ const createRelation = () => {
     form.post(route("relations.store"), {
         preserveScroll: true,
         onSuccess: (response) => {
-            console.log(response);
+            clearAll();
         },
     });
 };

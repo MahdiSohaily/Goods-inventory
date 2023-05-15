@@ -110,4 +110,9 @@ class RelationController extends Controller
             throw $th;
         }
     }
+
+    public function pattern(Request $request)
+    {
+        return DB::table('patterns')->where('id', $request->input('id'))->get();
+    }
 }

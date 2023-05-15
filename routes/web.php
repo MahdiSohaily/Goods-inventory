@@ -67,6 +67,7 @@ Route::middleware([
         Route::get('/relations', 'index')->name('relations'); // relations route lead us to the relations page
         Route::post('/relations/search', 'search')->name('relations.search'); // Route to create new good in the system
         Route::post('/relations', 'store')->name('relations.store'); // Route to create new good in the system
+        Route::post('/relations/pattern', 'pattern')->name('relations.pattern'); // Route to create new good in the system
         Route::put('/relations', 'update')->name('relations.update'); // Route to create new good in the system
     });
 });

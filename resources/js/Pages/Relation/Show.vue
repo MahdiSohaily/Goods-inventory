@@ -178,6 +178,16 @@ function remove(id) {
     const item = document.getElementById("search-" + id);
     item.remove();
 }
+
+const createRelation = () => {
+
+    form.post(route('user-profile-information.update'), {
+        errorBag: 'createRelation',
+        preserveScroll: true,
+        onSuccess: () => {},
+    });
+};
+
 </script>
 
 <template>
@@ -246,7 +256,7 @@ function remove(id) {
 
                 <SectionBorder />
 
-                <form class="p-3" action="#" @submitted="updateProfileInformation">
+                <form class="p-3" action="#" @submitted="createRelation">
                     <!-- Name -->
                     <div class="my-3">
                         <InputLabel for="name" value="Name" />

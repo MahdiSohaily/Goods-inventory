@@ -256,14 +256,32 @@ const createRelation = () => {
 
                 <SectionBorder />
 
-                <FormRelation @submitted="updateProfileInformation">
+                <FormRelation @submitted="createRelation">
                     <template #form>
                         <!-- Name -->
-                        <div class="col-span-6 sm:col-span-4">
+                        <div class="pb-2">
                             <InputLabel for="name" value="Name" />
                             <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full"
                                 autocomplete="name" />
                             <InputError :message="form.errors.name" class="mt-2" />
+                        </div>
+                        <div class="pb-2">
+                            <InputLabel for="cars" value="Car" />
+                            <select type="cars"
+                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                autocomplete="username" v-model="form.cars" id="cars">
+                                <option v-for="item in cars" :value="item.id" class="text-sm">{{ item.name }}</option>
+                            </select>
+                            <InputError :message="form.errors.cars" class="mt-2" />
+                        </div>
+                        <div class="pb-2">
+                            <InputLabel for="status" value="Status" />
+                            <select type="status"
+                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                autocomplete="username" v-model="form.status" id="status">
+                                <option v-for="item in status" :value="item.id" class="text-sm">{{ item.name }}</option>
+                            </select>
+                            <InputError :message="form.errors.status" class="mt-2" />
                         </div>
                     </template>
 

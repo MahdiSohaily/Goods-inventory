@@ -113,6 +113,6 @@ class RelationController extends Controller
 
     public function pattern(Request $request)
     {
-        return DB::table('patterns')->where('id', $request->input('id'))->get();
+        return DB::table('patterns')->where('id', $request->input('id'))->first();
     }
 }

@@ -174,8 +174,9 @@ const load_pattern_ifo = (id) => {
             id,
         })
         .then(function (response) {
-            resultBox.innerHTML = prepareData(response.data);
-            result = response.data;
+            form.name = response.data.name;
+            form.car_id = response.data.car_id;
+            form.status_id = response.data.status_id;
         })
         .catch(function (error) {
             console.log(error);

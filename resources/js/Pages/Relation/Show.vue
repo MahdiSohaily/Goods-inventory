@@ -86,7 +86,7 @@ const prepareData = (data) => {
                         data-partNumber='` +
                     item.partNumber +
                     `'
-                        class='element material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200'>add_circle_outline
+                        class='element material-icons add text-blue-600 cursor-pointer rounded-circle hover:bg-gray-200'>cloud_download
                     </i>
                 </div>`;
             } else {

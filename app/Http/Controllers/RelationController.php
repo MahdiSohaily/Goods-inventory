@@ -82,19 +82,6 @@ class RelationController extends Controller
 
         // Extract individual variables from the request body
         $selected_index = array_unique($selected_index);
-        $serial = $request->input('serial');
-        $name = $request->input('name');
-        $car_id = $request->input('values');
-        $status_id = $request->input('status_id');
-
-        // create the pattern record
-        $pattern = new Pattern();
-        $pattern->name = $name;
-        $pattern->serial = $serial;
-        $pattern->car_id = $car_id;
-        $pattern->status_id = $status_id;
-        $pattern->save();
-        $id = $pattern->id;
 
         try {
             foreach ($values as $key => $value) {
@@ -104,15 +91,22 @@ class RelationController extends Controller
 
             DB::transaction(function ($request, $selected_index) {
 
+                // create the pattern record
+                $pattern = new Pattern();
+                $pattern->name = $request->input('name');
+                $pattern->serial = $request->input('serial');
+                $pattern->car_id = $request->input('car_id');
+                $pattern->status_id = $request->input('status_id');
+                $pattern->save();
 
+                $id = $pattern->id;
 
-
-                // foreach ($selected_index as $value) {
-                //     $similar = new Similar();
-                //     $similar->pattern_id = $id;
-                //     $similar->nisha_id  = $value;
-                //     $similar->save();
-                // }
+                foreach ($selected_index as $value) {
+                    $similar = new Similar();
+                    $similar->pattern_id = $id;
+                    $similar->nisha_id  = $value;
+                    $similar->save();
+                }
             });
         } catch (\Throwable $th) {
             throw $th;

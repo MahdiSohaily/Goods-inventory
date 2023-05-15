@@ -70,6 +70,8 @@ class RelationController extends Controller
             'required' => "The selected items section can't be empty.",
         ])->validate();
 
+        
+
         return redirect('/posts');
     }
 }

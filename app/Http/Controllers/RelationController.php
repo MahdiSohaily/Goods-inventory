@@ -127,6 +127,7 @@ class RelationController extends Controller
         }
 
         $toAdd = $this->toBeAdded($current, $selected_index);
+        $toDelete = $this->toBeAdded($current, $selected_index);
 
         try {
             // create the pattern record
@@ -137,6 +138,14 @@ class RelationController extends Controller
             $pattern->status_id = $request->input('status_id');
             $pattern->save();
             if (count($toAdd) > 0) {
+                foreach ($toAdd as $value) {
+                    $similar = new Similar();
+                    $similar->pattern_id = $pattern_id;
+                    $similar->nisha_id  = $value;
+                    $similar->save();
+                }
+            }
+            if(count($toDelete)){
                 foreach ($toAdd as $value) {
                     $similar = new Similar();
                     $similar->pattern_id = $pattern_id;
@@ -167,12 +176,20 @@ class RelationController extends Controller
 
     public function toBeAdded($existing, $newComer)
     {
-        $result = ['add' => [], 'del' => []];
+        $result = [];
         foreach ($newComer as $item) {
             if (!in_array($item, $existing)) {
-                array_push($result['add'], $item);
-            } else {
-                array_push($result['add'], $item);
+                array_push($result, $item);
+            }
+        }
+        return $result;
+    }
+    public function toBeDeleted($existing, $newComer)
+    {
+        $result = [];
+        foreach ($existing as $item) {
+            if (!in_array($item, $newComer)) {
+                array_push($result, $item);
             }
         }
         return $result;

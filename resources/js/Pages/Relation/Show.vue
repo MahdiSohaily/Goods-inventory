@@ -127,6 +127,10 @@ const remove_selected = (e) => {
     console.log(form.values);
 };
 
+const clearAll = () => {
+    form.values = [];
+};
+
 // A function to load data a good to the relation box
 function load(event, pattern_id) {
     const id = event.target.getAttribute("data-id");
@@ -214,6 +218,7 @@ function remove(id) {
                     </h2>
                     <button
                         class="border-none bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 text-sm"
+                        @click="clearAll"
                     >
                         Clear All
                     </button>

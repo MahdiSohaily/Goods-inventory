@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Pattern extends Model
 {
     use HasFactory;
+    protected $table = 'patterns';
+    public $timestamps = false;
 }

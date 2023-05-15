@@ -21,7 +21,7 @@ $(document).ready(() => {
 
 const form = useForm({
     _method: "POST",
-    pattern: null,
+    serial: null,
     name: null,
     status_id: null,
     car_id: null,
@@ -42,7 +42,7 @@ const search = (val) => {
         pattern = pattern.replace(/-/g, "");
         pattern = pattern.replace(/_/g, "");
 
-        form.pattern = pattern;
+        form.serial = pattern;
 
         resultBox.innerHTML = `<tr class=''>
                 <div class='w-full h-96 flex justify-center items-center'>
@@ -285,6 +285,7 @@ const createRelation = () => {
                             <InputError :message="form.errors.status" class="mt-2" />
                         </div>
                         <InputError :message="form.errors.values" class="mt-2" />
+                        <InputError :message="form.errors" class="mt-2" />
                     </template>
 
                     <template #actions>

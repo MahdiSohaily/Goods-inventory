@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Similar extends Model
 {
     use HasFactory;
+    protected $table = 'similars';
+    public $timestamps = false;
 }

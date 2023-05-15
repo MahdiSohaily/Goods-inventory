@@ -134,7 +134,7 @@ const add = (e) => {
                         data-partNumber='` +
                    partNumber +
                     `'
-                        class='element material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200'>add_circle_outline
+                        class='element material-icons add text-red-600 cursor-pointer rounded-circle hover:bg-gray-200'>do_not_disturb_on
                     </i>
                 </div>`;
 

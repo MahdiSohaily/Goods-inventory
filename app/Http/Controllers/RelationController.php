@@ -148,8 +148,6 @@ class RelationController extends Controller
                 throw $th;
             }
         }
-
-        return $toAdd;
     }
 
     public function pattern(Request $request)

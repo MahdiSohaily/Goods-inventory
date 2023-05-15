@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pattern;
+use App\Models\Similar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -103,11 +104,14 @@ class RelationController extends Controller
                 $id = $pattern->id;
 
                 foreach ($selected_index as $value) {
-                    
+                    $similar = new Similar();
+                    $similar->pattern_id = $id;
+                    $similar->nisha_id  = $value;
+                    $similar->save();
                 }
             });
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
         }
 
 

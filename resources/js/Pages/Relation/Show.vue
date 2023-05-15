@@ -22,6 +22,7 @@ $(document).ready(() => {
 
 const form = useForm({
     _method: "POST",
+    pattern: null,
     name: null,
     status_id: null,
     car_id: null,
@@ -41,6 +42,8 @@ const search = (val) => {
         pattern = pattern.replace(/\s/g, "");
         pattern = pattern.replace(/-/g, "");
         pattern = pattern.replace(/_/g, "");
+
+        form.pattern = pattern;
 
         resultBox.innerHTML = `<tr class=''>
                 <div class='w-full h-96 flex justify-center items-center'>

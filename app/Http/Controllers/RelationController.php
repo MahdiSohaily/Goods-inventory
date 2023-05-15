@@ -63,6 +63,7 @@ class RelationController extends Controller
 
     public function store(Request $request)
     {
+        // START Validation the request
         Validator::make($request->all(), [
             'values' => 'required',
             'body' => 'required',
@@ -70,7 +71,13 @@ class RelationController extends Controller
             'required' => "The selected items section can't be empty.",
         ])->validate();
 
-        
+        // END validation
+        try {
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
 
         return redirect('/posts');
     }

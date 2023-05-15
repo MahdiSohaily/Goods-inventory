@@ -167,10 +167,12 @@ class RelationController extends Controller
 
     public function toBeAdded($existing, $newComer)
     {
-        $result = [];
+        $result = ['add' => [], 'del' => []];
         foreach ($newComer as $item) {
             if (!in_array($item, $existing)) {
-                array_push($result, $item);
+                array_push($result['add'], $item);
+            } else {
+                array_push($result['add'], $item);
             }
         }
         return $result;

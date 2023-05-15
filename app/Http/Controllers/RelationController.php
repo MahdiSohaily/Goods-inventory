@@ -99,6 +99,12 @@ class RelationController extends Controller
                 $pattern->car_id = $car_id;
                 $pattern->status_id = $status_id;
                 $pattern->save();
+
+                $id = $pattern->id;
+
+                foreach ($selected_index as $value) {
+                    
+                }
             });
         } catch (\Throwable $th) {
             //throw $th;

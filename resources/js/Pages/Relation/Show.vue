@@ -122,7 +122,9 @@ const add = (e) => {
     remove(id);
 };
 
-const remove_selected = (e) => {};
+const remove_selected = (e) => {
+    alert(e.target.getAttribute('data-id'));
+};
 
 // A function to load data a good to the relation box
 function load(event, pattern_id) {
@@ -230,6 +232,7 @@ function remove(id) {
                         <i
                             :data-id="item.id"
                             :data-partNumber="item.partNumber"
+                            @click="remove_selected"
                             class="material-icons add text-red-600 cursor-pointer rounded-circle hover:bg-gray-200"
                             >do_not_disturb_on
                         </i>

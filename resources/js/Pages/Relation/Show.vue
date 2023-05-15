@@ -161,7 +161,7 @@ function load(e) {
                 remove(item.id);
             }
         }
-
+        load_pattern_ifo(form.pattern_id);
     } else {
         alert("You can't load two relation at once (clear all to load new relation)");
     }

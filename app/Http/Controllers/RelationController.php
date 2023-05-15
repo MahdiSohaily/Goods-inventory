@@ -127,7 +127,7 @@ class RelationController extends Controller
         }
 
         $toAdd = $this->toBeAdded($current, $selected_index);
-        $toDelete = $this->toBeAdded($current, $selected_index);
+        $toDelete = $this->toBeDeleted($current, $selected_index);
 
         try {
             // create the pattern record
@@ -145,12 +145,9 @@ class RelationController extends Controller
                     $similar->save();
                 }
             }
-            if(count($toDelete)){
-                foreach ($toAdd as $value) {
-                    $similar = new Similar();
-                    $similar->pattern_id = $pattern_id;
-                    $similar->nisha_id  = $value;
-                    $similar->save();
+            if (count($toDelete)) {
+                foreach ($toDelete as $value) {
+                    DB::table('similars')->where('nisha_id', $value)->delete();
                 }
             }
         } catch (\Throwable $th) {

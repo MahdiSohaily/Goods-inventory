@@ -195,6 +195,9 @@ const createRelation = () => {
         preserveScroll: true,
         onSuccess: (response) => {
             clearAll();
+            form.name = null;
+            form.status_id = null;
+            form.car_id = null;
         },
     });
 };

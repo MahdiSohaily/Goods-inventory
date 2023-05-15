@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pattern;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -72,19 +73,33 @@ class RelationController extends Controller
         ])->validate();
         // END validation
 
-        $values = $request->input('values');
-        $pattern = $request->input('pattern');
-        $name = $request->input('name');
-        $car_id = $request->input('values');
-        $status_id = $request->input('status_id');
+
 
         $selected_index = [];
-
+        $values = $request->input('values');
         try {
             foreach ($values as $key => $value) {
                 array_push($selected_index, $value->id);
             }
-            
+
+
+            DB::transaction(function ($request, $selected_index) {
+
+                // Extract individual variables from the request body
+                $selected_index = array_unique($selected_index);
+                $serial = $request->input('pattern');
+                $name = $request->input('name');
+                $car_id = $request->input('values');
+                $status_id = $request->input('status_id');
+
+                // create the pattern record
+                $pattern = new Pattern();
+                $pattern->name = $name;
+                $pattern->serial = $serial;
+                $pattern->car_id = $car_id;
+                $pattern->status_id = $status_id;
+                $pattern->save();
+            });
         } catch (\Throwable $th) {
             //throw $th;
         }

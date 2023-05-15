@@ -30,6 +30,7 @@ const form = useForm({
 });
 
 let result = null;
+let url = "relations.store";
 
 /***  This function fires on every keyup event on a specific input field and at a specific length
  *    sends an ajax request using the axios library.
@@ -152,6 +153,7 @@ function load(e) {
     for (const item of result) {
         if (item.pattern == pattern) {
             form._method = 'PUT';
+            url = 'relations.update';
             form.values.push({ id: item.id, partNumber: item.partNumber });
             remove(item.id);
         }
@@ -165,8 +167,7 @@ function remove(id) {
 }
 
 const createRelation = () => {
-    console.log(form.values[0]);
-    form.post(route("relations.store"), {
+    form.post(route(url), {
         preserveScroll: true,
         onSuccess: (response) => {
             clearAll();

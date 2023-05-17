@@ -92,6 +92,10 @@ class RelationController extends Controller
                 $similar->nisha_id  = $value;
                 $similar->save();
             }
+
+            foreach($selectedCars as $car) {
+                DB::insert('insert into patterncars (pattern_id , car_id ) values (?, ?)', [$id, $car]);
+            }
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -148,7 +152,6 @@ class RelationController extends Controller
             throw $th;
         }
     }
-
 
     public function load(Request $request)
     {

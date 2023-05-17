@@ -144,7 +144,7 @@ const remove_selected = (e) => {
 };
 
 const clearAll = () => {
-    form._method = 'POST';
+    form._method = "POST";
     form.pattern_id = null;
     form.values = [];
 };
@@ -154,19 +154,13 @@ function load(e) {
     const pattern = e.target.getAttribute("data-pattern");
     if (!form.pattern_id) {
         form.pattern_id = pattern;
-        for (const item of result) {
-            if (item.pattern == pattern) {
-                form._method = 'PUT';
-                url = 'relations.update';
-                form.values.push({ id: item.id, partNumber: item.partNumber, pattern: item.pattern });
-                remove(item.id);
-            }
-        }
+        
         load_pattern_ifo(form.pattern_id);
     } else {
-        alert("You can't load two relation at once (clear all to load new relation)");
+        alert(
+            "You can't load two relation at once (clear all to load new relation)"
+        );
     }
-
 }
 
 const load_pattern_ifo = (id) => {
@@ -182,7 +176,7 @@ const load_pattern_ifo = (id) => {
         .catch(function (error) {
             console.log(error);
         });
-}
+};
 
 // A function to remove added goods from relation box
 function remove(id) {

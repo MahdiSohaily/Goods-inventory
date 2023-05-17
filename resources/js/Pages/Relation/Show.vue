@@ -222,32 +222,19 @@ const createRelation = () => {
 
 <template>
     <AppLayout title="Relations">
-        <div
-            class="h-70S grid grid-cols-1 my-8 md:grid-cols-3 gap-6 lg:gap-8 p-6 lg:p-8"
-        >
+        <div class="h-70S grid grid-cols-1 my-8 md:grid-cols-3 gap-6 lg:gap-8 p-6 lg:p-8">
             <div class="bg-white rounded-lg shadow-md">
                 <div class="flex items-center justify-between p-3">
-                    <h2
-                        class="text-xl font-semibold text-gray-800 flex items-center gap-2"
-                    >
-                        <i class="material-icons font-semibold text-orange-400"
-                            >search</i
-                        >
+                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+                        <i class="material-icons font-semibold text-orange-400">search</i>
                         Search Goods
                     </h2>
                 </div>
 
                 <div class="flex justify-center px-3">
-                    <input
-                        type="text"
-                        name="serial"
-                        id="serial"
+                    <input type="text" name="serial" id="serial"
                         class="rounded-md py-3 w-full border-1 text-sm border-gray-300 focus:outline-none text-gray-500"
-                        min="0"
-                        max="30"
-                        @keyup="search($event.target.value, rates)"
-                        placeholder="Part Number ..."
-                    />
+                        min="0" max="30" @keyup="search($event.target.value, rates)" placeholder="Part Number ..." />
                 </div>
                 <SectionBorder />
                 <div id="search_result" class="p-3">
@@ -257,16 +244,12 @@ const createRelation = () => {
 
             <div class="bg-white rounded-lg shadow-md">
                 <div class="flex items-center justify-between p-3">
-                    <h2
-                        class="text-xl font-semibold text-gray-800 flex items-center gap-2"
-                    >
+                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                         <i class="material-icons text-green-600">beenhere</i>
                         Selected Items
                     </h2>
-                    <button
-                        class="border-none bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 text-sm"
-                        @click="clearAll"
-                    >
+                    <button class="border-none bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 text-sm"
+                        @click="clearAll">
                         Clear All
                     </button>
                 </div>
@@ -277,20 +260,13 @@ const createRelation = () => {
 
                 <div id="selected_box" class="p-3">
                     <!-- selected items are going to be added here -->
-                    <div
-                        v-if="form.values.length > 0"
-                        v-for="item in form.values"
-                        class="w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300"
-                    >
+                    <div v-if="form.values.length > 0" v-for="item in form.values"
+                        class="w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300">
                         <p class="text-sm font-semibold text-gray-600">
                             {{ item.partNumber }}
                         </p>
-                        <i
-                            :data-id="item.id"
-                            :data-partNumber="item.partNumber"
-                            @click="remove_selected"
-                            class="material-icons add text-red-600 cursor-pointer rounded-circle hover:bg-gray-200"
-                            >do_not_disturb_on
+                        <i :data-id="item.id" :data-partNumber="item.partNumber" @click="remove_selected"
+                            class="material-icons add text-red-600 cursor-pointer rounded-circle hover:bg-gray-200">do_not_disturb_on
                         </i>
                     </div>
                 </div>
@@ -298,12 +274,8 @@ const createRelation = () => {
 
             <div class="bg-white rounded-lg shadow-md">
                 <div class="p-3">
-                    <h2
-                        class="text-xl font-semibold text-gray-800 flex items-center gap-2"
-                    >
-                        <i class="material-icons font-semibold text-blue-500"
-                            >save</i
-                        >
+                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+                        <i class="material-icons font-semibold text-blue-500">save</i>
                         Register Relation
                     </h2>
                 </div>
@@ -319,100 +291,48 @@ const createRelation = () => {
                         <!-- Name -->
                         <div class="pb-2">
                             <InputLabel for="name" value="Name" />
-                            <TextInput
-                                id="name"
-                                v-model="form.name"
-                                type="text"
-                                class="mt-1 block w-full"
-                                autocomplete="name"
-                            />
-                            <InputError
-                                :message="form.errors.name"
-                                class="mt-2"
-                            />
+                            <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full"
+                                autocomplete="name" />
+                            <InputError :message="form.errors.name" class="mt-2" />
                         </div>
                         <div class="pb-2">
                             <InputLabel for="price" value="Price" />
-                            <TextInput
-                                id="price"
-                                v-model="form.price"
-                                type="text"
-                                class="mt-1 block w-full"
-                                autocomplete="price"
-                            />
-                            <InputError
-                                :message="form.errors.price"
-                                class="mt-2"
-                            />
+                            <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
+                                autocomplete="price" />
+                            <InputError :message="form.errors.price" class="mt-2" />
                         </div>
-                        <!-- <div class="pb-2">
-                                            <InputLabel for="cars" value="Car" />
-                                            <select type="cars"
-                                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                                autocomplete="username" v-model="form.car_id" id="cars">
-                                                <option v-for="item in cars" :value="item.id" class="text-sm">
-                                                    {{ item.name }}
-                                                </option>
-                                            </select>
-                                            <InputError :message="form.errors.cars" class="mt-2" />
-                                        </div> -->
+                        <div class="pb-2">
+                            <InputLabel for="cars" value="Car" />
+                            <select type="cars"
+                                multiple
+                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                autocomplete="username" v-model="form.car_id" id="cars">
+                                <option v-for="item in cars" :value="item.id" class="text-sm">
+                                    {{ item.name }}
+                                </option>
+                            </select>
+                            <InputError :message="form.errors.cars" class="mt-2" />
+                        </div>
                         <div class="pb-2">
                             <InputLabel for="status" value="Status" />
-                            <select
-                                type="status"
+                            <select type="status"
                                 class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                autocomplete="username"
-                                v-model="form.status_id"
-                                id="status"
-                            >
-                                <option
-                                    v-for="item in status"
-                                    :value="item.id"
-                                    class="text-sm"
-                                >
+                                autocomplete="username" v-model="form.status_id" id="status">
+                                <option v-for="item in status" :value="item.id" class="text-sm">
                                     {{ item.name }}
                                 </option>
                             </select>
-                            <InputError
-                                :message="form.errors.status"
-                                class="mt-2"
-                            />
+                            <InputError :message="form.errors.status" class="mt-2" />
                         </div>
-                        <div class="pb-2">
-                            <InputLabel for="vehicle" value="Car" />
-                            <select
-                                multiple
-                                v-model="form.car_id"
-                                id="vehicle"
-                                class="mt-1 max-h-12 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            >
-                                <option
-                                    v-for="item in cars"
-                                    :value="item.id"
-                                    class="text-sm"
-                                >
-                                    {{ item.name }}
-                                </option>
-                            </select>
-                        </div>
-                        <InputError
-                            :message="form.errors.values"
-                            class="mt-2"
-                        />
+                        <InputError :message="form.errors.values" class="mt-2" />
                     </template>
 
                     <template #actions>
-                        <ActionMessage
-                            :on="form.recentlySuccessful"
-                            class="mr-3"
-                        >
+                        <ActionMessage :on="form.recentlySuccessful" class="mr-3">
                             Saved.
                         </ActionMessage>
 
-                        <PrimaryButton
-                            :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing"
-                        >
+                        <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                             Save
                         </PrimaryButton>
                     </template>

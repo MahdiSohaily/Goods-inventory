@@ -93,7 +93,7 @@ class RelationController extends Controller
                 $similar->save();
             }
 
-            foreach($selectedCars as $car) {
+            foreach ($selectedCars as $car) {
                 DB::insert('insert into patterncars (pattern_id , car_id ) values (?, ?)', [$id, $car]);
             }
         } catch (\Throwable $th) {
@@ -171,7 +171,16 @@ class RelationController extends Controller
 
     public function pattern(Request $request)
     {
-        return DB::table('patterns')->where('id', $request->input('id'))->first();
+        $id = $request->input('id');
+        $cars = DB::table('patterncars')->select('car_id ')->where('pattern_id ', $id)->get();
+
+        $cars_id = [];
+
+        foreach ($cars as $key => $value) {
+            array_push($cars_id, $value);
+        }
+
+        return ['pattern' => DB::table('patterns')->where('id', $id)->first(), 'cars' => $cars_id];
     }
 
     public function extract_id($array)

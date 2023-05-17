@@ -679,12 +679,12 @@ const createRelation = () => {
                             </select>
                             <InputError :message="form.errors.status" class="mt-2" />
                         </div>
-                        <div class="container pb-2">
+                        <div class=" pb-2">
                             <InputLabel for="vehicle" value="Car" />
                             <select multiple data-multi-select-plugin v-model="form.car_id" id="vehicle"
-                            class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                            class="mt-1 p-4 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                                 >
-                                <option v-for="item in cars" :value='`${item.id}-${item.name}`' class="text-sm">
+                                <option v-for="item in cars" :value='item.name' class="text-sm">
                                     {{ item.name }}
                                 </option>
                             </select>

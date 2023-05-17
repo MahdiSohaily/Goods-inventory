@@ -9,7 +9,7 @@ select[data-multi-select-plugin] {
   flex-wrap: wrap;
   height: auto;
   width: 100%;
-  padding: 3px 8px;
+  padding: 8px 8px;
   font-size: 14px;
   line-height: 1.42857143;
   padding-bottom: 0px;

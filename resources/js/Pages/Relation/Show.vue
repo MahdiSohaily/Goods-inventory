@@ -141,7 +141,6 @@ const remove_selected = (e) => {
     form.values = form.values.filter((item) => {
         return item.id != id;
     });
-    console.log(form.values);
 };
 
 const clearAll = () => {

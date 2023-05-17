@@ -153,11 +153,28 @@ class RelationController extends Controller
         }
     }
 
+
+    public function load(Request $request)
+    {
+        $pattern = $request->input('pattern');
+
+        $result = DB::table('similars')->select('nisha_id')->where('pattern_id', $pattern)->get();
+        $final_result = [];
+
+        foreach ($result as $key => $value) {
+
+            $item = DB::table('nisha')->select('id', 'partnumber')->where('id', $value->pattern_id)->first();
+
+            array_push($final_result, ['id' =>  $item->id, 'partNumber' => $item->partnumber, 'pattern' => $value->pattern_id]);
+        }
+
+        return $final_result;
+    }
+
     public function pattern(Request $request)
     {
         return DB::table('patterns')->where('id', $request->input('id'))->first();
     }
-
 
     public function extract_id($array)
     {

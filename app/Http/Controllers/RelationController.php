@@ -127,7 +127,7 @@ class RelationController extends Controller
 
         $current_cars = [];
         foreach ($db_cars as $item) {
-            array_push($current_cars, $item->nisha_id);
+            array_push($current_cars, $item->car_id);
         }
 
         $toAdd = $this->toBeAdded($current, $selected_index);
@@ -135,8 +135,8 @@ class RelationController extends Controller
         
 
         $selectedCars = $request->input('car_id');
-        $carsToAdd = $this->carsToAdd($current_cars, $selectedCars);
-        $carsToDelete = $this->carsToDelete($current_cars, $selectedCars);
+        $carsToAdd = $this->toBeAdded($current_cars, $selectedCars);
+        $carsToDelete = $this->toBeDeleted($current_cars, $selectedCars);
 
         try {
             // create the pattern record

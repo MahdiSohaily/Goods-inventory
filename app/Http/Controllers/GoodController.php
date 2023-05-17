@@ -81,7 +81,7 @@ class GoodController extends Controller
             }
         } else {
             $goods_count = DB::table('nisha')
-            ->count();
+                ->count();
             $goods = DB::table('nisha')
                 ->limit(10)
                 ->orderBy('id', 'asc')
@@ -144,6 +144,6 @@ class GoodController extends Controller
 
     public function delete($id)
     {
-       return DB::table('nisha')->delete($id);
+        DB::table('nisha')->delete($id);
     }
 }

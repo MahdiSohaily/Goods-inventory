@@ -116,7 +116,6 @@ class RelationController extends Controller
         $pattern_id = $request->input('pattern_id');
 
         $similar = DB::table('similars')->select('nisha_id')->where('pattern_id', $pattern_id)->get();
-        $db_cars = DB::table('patterncars')->select('car_id')->where('pattern_id', $pattern_id)->get();
 
         $selected_index = $this->extract_id($request->input('values'));
 
@@ -124,6 +123,8 @@ class RelationController extends Controller
         foreach ($similar as $item) {
             array_push($current, $item->nisha_id);
         }
+
+        $db_cars = DB::table('patterncars')->select('car_id')->where('pattern_id', $pattern_id)->get();
 
         $current_cars = [];
         foreach ($db_cars as $item) {
@@ -148,7 +149,11 @@ class RelationController extends Controller
             $pattern->save();
             if (count($toAdd) > 0) {
                 foreach ($toAdd as $value) {
-                    DB::insert('insert into patterncars (pattern_id , car_id) values (?, ?)', [$pattern_id, $value]);
+                    $similar = new Similar();
+                    $similar->pattern_id = $pattern_id;
+                    $similar->nisha_id  = $value;
+                    $similar->save();
+                   
                 }
             }
             if (count($toDelete)) {
@@ -158,15 +163,12 @@ class RelationController extends Controller
             }
             
             if (count($carsToAdd) > 0) {
-                foreach ($toAdd as $value) {
-                    $similar = new Similar();
-                    $similar->pattern_id = $pattern_id;
-                    $similar->nisha_id  = $value;
-                    $similar->save();
+                foreach ($carsToAdd as $value) {
+                    DB::insert('insert into patterncars (pattern_id , car_id) values (?, ?)', [$pattern_id, $value]);
                 }
             }
             if (count($carsToDelete)) {
-                foreach ($toDelete as $value) {
+                foreach ($carsToDelete as $value) {
                     DB::table('patterncars')->where('car_id', $value)->delete();
                 }
             }

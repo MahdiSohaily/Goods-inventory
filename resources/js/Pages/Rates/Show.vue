@@ -3,7 +3,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 const remove = (id) => {
    
    if (confirm("Are you sure you want to delete this record?") == true) {
-       router.delete(route("goods.delete", id));
+       router.delete(route("rates.delete", id));
    }
 };
 defineProps({

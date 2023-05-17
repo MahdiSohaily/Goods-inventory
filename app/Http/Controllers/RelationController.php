@@ -167,7 +167,7 @@ class RelationController extends Controller
             }
             if (count($carsToDelete)) {
                 foreach ($toDelete as $value) {
-                    DB::table('patterncars')->where('nisha_id', $value)->delete();
+                    DB::table('patterncars')->where('pattern_id', $value)->delete();
                 }
             }
 

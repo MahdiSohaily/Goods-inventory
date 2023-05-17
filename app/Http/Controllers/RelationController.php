@@ -162,10 +162,9 @@ class RelationController extends Controller
         $final_result = [];
 
         foreach ($result as $key => $value) {
+            $item = DB::table('nisha')->select('id', 'partnumber')->where('id', $value->nisha_id)->first();
 
-            $item = DB::table('nisha')->select('id', 'partnumber')->where('id', $value->pattern_id)->first();
-
-            array_push($final_result, ['id' =>  $item->id, 'partNumber' => $item->partnumber, 'pattern' => $value->pattern_id]);
+            array_push($final_result, ['id' =>  $item->id, 'partNumber' => $item->partnumber, 'pattern' => $value->nisha_id]);
         }
 
         return $final_result;

@@ -159,7 +159,7 @@ function load(e) {
                 pattern,
             })
             .then(function (response) {
-                console.log(response.data);
+                push_data(response.data);
             })
             .catch(function (error) {
                 console.log(error);
@@ -171,6 +171,13 @@ function load(e) {
         );
     }
 }
+
+const push_data = (data) => {
+    for (const item of data) {
+        remove(item.id);
+        form.values.push({ id: item.id, partNumber: item.partNumber });
+    }
+};
 
 const load_pattern_ifo = (id) => {
     axios
@@ -190,7 +197,9 @@ const load_pattern_ifo = (id) => {
 // A function to remove added goods from relation box
 function remove(id) {
     const item = document.getElementById("search-" + id);
-    item.remove();
+    if (item) {
+        item.remove();
+    }
 }
 
 const createRelation = () => {

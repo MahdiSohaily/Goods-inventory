@@ -190,11 +190,9 @@ const load_pattern_ifo = (id) => {
             id,
         })
         .then(function (response) {
-            console.log(response.data.cars);
-
             form.name = response.data.pattern.name;
             form.price = response.data.pattern.price;
-            form.car_id = response.data.cars.car_id;
+            form.car_id = response.data.cars;
             form.status_id = response.data.pattern.status_id;
         })
         .catch(function (error) {

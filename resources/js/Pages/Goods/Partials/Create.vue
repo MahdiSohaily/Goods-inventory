@@ -111,7 +111,7 @@ const clearInput = () => {
                                 class="mt-2"
                             />
                         </div>
-                        <!-- Korea -->
+                        <!-- Korea section -->
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="korea" value="Korea" />
                             <TextInput

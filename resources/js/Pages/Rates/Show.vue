@@ -1,5 +1,6 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
+import { router } from "@inertiajs/vue3";
 const remove = (id) => {
    
    if (confirm("Are you sure you want to delete this record?") == true) {

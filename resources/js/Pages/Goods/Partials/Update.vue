@@ -17,10 +17,11 @@ const form = useForm({
     price: props.good.price,
     weight: props.good.weight,
     mobis: props.good.mobis,
+    mobis: props.good.korea,
 });
 
 const updateGood = () => {
-    form.post(route("goods.update",props.good.id), {
+    form.post(route("goods.update", props.good.id), {
         errorBag: "updateGood",
         preserveScroll: true,
         // onSuccess: () => clearInput(),
@@ -103,6 +104,22 @@ const updateGood = () => {
                             />
                             <InputError
                                 :message="form.errors.mobis"
+                                class="mt-2"
+                            />
+                        </div>
+                        <!-- korea -->
+                        <div class="col-span-6 sm:col-span-4">
+                            <InputLabel for="korea" value="Korea" />
+                            <TextInput
+                                required
+                                id="korea"
+                                v-model="form.korea"
+                                type="text"
+                                class="mt-1 block w-full"
+                                autocomplete="username"
+                            />
+                            <InputError
+                                :message="form.errors.korea"
                                 class="mt-2"
                             />
                         </div>

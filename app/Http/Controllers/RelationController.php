@@ -172,7 +172,7 @@ class RelationController extends Controller
     public function pattern(Request $request)
     {
         $id = $request->input('id');
-        $cars = DB::table('patterncars')->select('car_id ')->where('pattern_id ', $id)->get();
+        $cars = DB::table('patterncars')->select('car_id')->where('pattern_id', $id)->get();
 
         $cars_id = [];
 

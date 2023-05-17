@@ -154,7 +154,18 @@ function load(e) {
     const pattern = e.target.getAttribute("data-pattern");
     if (!form.pattern_id) {
         form.pattern_id = pattern;
-        
+        axios
+            .post(route("relations.load"), {
+                pattern,
+            })
+            .then(function (response) {
+                form.name = response.data.name;
+                form.car_id = response.data.car_id;
+                form.status_id = response.data.status_id;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         load_pattern_ifo(form.pattern_id);
     } else {
         alert(

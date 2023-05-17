@@ -148,7 +148,7 @@ class RelationController extends Controller
             $pattern->save();
             if (count($toAdd) > 0) {
                 foreach ($toAdd as $value) {
-                    DB::insert('insert into patterncars (pattern_id , car_id ) values (?, ?)', [$pattern_id, $value]);
+                    DB::insert('insert into patterncars (pattern_id , car_id) values (?, ?)', [$pattern_id, $value]);
                 }
             }
             if (count($toDelete)) {
@@ -167,7 +167,7 @@ class RelationController extends Controller
             }
             if (count($carsToDelete)) {
                 foreach ($toDelete as $value) {
-                    DB::table('patterncars')->where('pattern_id', $value)->delete();
+                    DB::table('patterncars')->where('car_id', $value)->delete();
                 }
             }
 

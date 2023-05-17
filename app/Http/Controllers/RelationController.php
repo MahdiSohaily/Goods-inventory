@@ -158,12 +158,12 @@ class RelationController extends Controller
         $pattern = $request->input('pattern');
 
         $result = DB::table('similars')->select('nisha_id')->where('pattern_id', $pattern)->get();
-        $final_result = ['pattern_ifo'=>[], 'cars_ifo'=>[]];
+        $final_result = [];
 
         foreach ($result as $key => $value) {
             $item = DB::table('nisha')->select('id', 'partnumber')->where('id', $value->nisha_id)->first();
 
-            array_push($final_result['pattern_ifo'], ['id' =>  $item->id, 'partNumber' => $item->partnumber, 'pattern' => $value->nisha_id]);
+            array_push($final_result, ['id' =>  $item->id, 'partNumber' => $item->partnumber, 'pattern' => $value->nisha_id]);
         }
 
         return $final_result;

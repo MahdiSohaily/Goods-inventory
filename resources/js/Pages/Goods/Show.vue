@@ -70,7 +70,7 @@ const page = async (action) => {
 const getData = (page, pattern) => {
     const resultBox = document.getElementById("results");
     resultBox.innerHTML = `<tr class=''>
-                <td colspan='5' class='py-10 text-center'> 
+                <td colspan='6' class='py-10 text-center'> 
                     <img class=' block w-10 mx-auto h-auto' src='/img/loading.png' alt='google'>
                     </td>
             </tr>`;

@@ -14,6 +14,7 @@ const form = useForm({
     price: null,
     weight: null,
     mobis: null,
+    korea: null,
 });
 
 const createGood = () => {
@@ -28,6 +29,7 @@ const clearInput = () => {
     price.value.value = null;
     weight.value.value = null;
     mobis.value.value = null;
+    korea.value.value = null;
 };
 </script>
 
@@ -106,6 +108,22 @@ const clearInput = () => {
                             />
                             <InputError
                                 :message="form.errors.mobis"
+                                class="mt-2"
+                            />
+                        </div>
+                        <!-- Korea -->
+                        <div class="col-span-6 sm:col-span-4">
+                            <InputLabel for="korea" value="Korea" />
+                            <TextInput
+                                required
+                                id="korea"
+                                v-model="form.korea"
+                                type="text"
+                                class="mt-1 block w-full"
+                                autocomplete="username"
+                            />
+                            <InputError
+                                :message="form.errors.korea"
                                 class="mt-2"
                             />
                         </div>

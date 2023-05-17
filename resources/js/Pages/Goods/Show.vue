@@ -105,6 +105,7 @@ const print = (data) => {
             const price = item.price;
             const weight = Number(item.weight).toFixed(1);
             const mobis = item.mobis;
+            const korea = item.korea;
 
             template +=
                 `<tr class="transition duration-300 ease-in-out bg-neutral-200 hover:bg-neutral-100">
@@ -119,6 +120,9 @@ const print = (data) => {
                 `</td>
                 <td class='whitespace-nowrap font-bold text-center px-3 py-3' >` +
                 mobis +
+                `</td>
+                <td class='whitespace-nowrap font-bold text-center px-3 py-3' >` +
+                korea +
                 `</td>`;
 
             template +=
@@ -182,6 +186,9 @@ const print = (data) => {
                                     موبیز
                                 </th>
                                 <th scope="col" class="px-3 py-3 text-white text-center">
+                                    کورآ
+                                </th>
+                                <th scope="col" class="px-3 py-3 text-white text-center">
                                     عملیات
                                 </th>
                             </tr>
@@ -200,6 +207,9 @@ const print = (data) => {
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
                                     {{ item.mobis }}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                                    {{ item.korea }}
                                 </td>
                                 <td class="whitespace-nowrap w-24">
                                     <div class="flex justify-center gap-1 items-center px-2">

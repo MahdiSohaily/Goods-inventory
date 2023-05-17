@@ -101,6 +101,7 @@ class GoodController extends Controller
         $price = $request->input('price');
         $weight = $request->input('weight');
         $mobis = $request->input('mobis');
+        $korea = $request->input('korea');
 
         try {
             $good = new Good();
@@ -108,6 +109,7 @@ class GoodController extends Controller
             $good->price = $price;
             $good->weight = $weight;
             $good->mobis = $mobis;
+            $good->korea = $korea;
 
             $good->save();
         } catch (\Throwable $th) {
@@ -127,12 +129,14 @@ class GoodController extends Controller
         $price = $request->input('price');
         $weight = $request->input('weight');
         $mobis = $request->input('mobis');
+        $korea = $request->input('korea');
 
         $good = Good::find($good);
         $good->partnumber = $serial;
         $good->price = $price;
         $good->weight = $weight;
         $good->mobis = $mobis;
+        $good->korea = $korea;
         $good->save();
         return Inertia::render('Goods/Partials/Update', ['good' => $good]);
     }

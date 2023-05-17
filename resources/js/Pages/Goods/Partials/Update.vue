@@ -17,7 +17,7 @@ const form = useForm({
     price: props.good.price,
     weight: props.good.weight,
     mobis: props.good.mobis,
-    mobis: props.good.korea,
+    korea: props.good.korea,
 });
 
 const updateGood = () => {

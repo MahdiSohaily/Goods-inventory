@@ -148,7 +148,7 @@ const print = (data) => {
         return template;
     } else {
         return `<tr v-else class="transition duration-300 ease-in-out bg-neutral-200">
-                    <td colspan="5" class="whitespace-nowrap px-3 py-3 text-center font-bold text-orange-500">
+                    <td colspan="6" class="whitespace-nowrap px-3 py-3 text-center font-bold text-orange-500">
                         <i class="material-icons text-red-500">mood_bad</i>
                         <br>
                                 !قطعه ای برای  کد فنی وارد در سیستم پیدا نشد

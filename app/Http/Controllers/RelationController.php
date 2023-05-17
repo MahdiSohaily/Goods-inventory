@@ -27,17 +27,15 @@ class RelationController extends Controller
         $nisha = DB::table('nisha')
             ->where('partnumber', 'like', "$pattern%")->get();
 
-        $pattern = DB::table('patterns')->select('id')
-            ->where('serial', 'like', "$pattern%")->get();
 
-        $pattern_ids = [];
+        $searched_ids = [];
 
-        foreach ($pattern as $key => $value) {
-            array_push($pattern_ids, $value->id);
+        foreach ($nisha as $key => $value) {
+            array_push($searched_ids, $value->id);
         }
 
         $similar = DB::table('similars')->select('nisha_id', 'pattern_id')
-            ->whereIn('pattern_id', $pattern_ids)->get();
+            ->whereIn('nisha_id', $searched_ids)->get();
 
         $similar_ids = [];
 

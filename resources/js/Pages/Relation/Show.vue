@@ -388,7 +388,7 @@ const createRelation = () => {
                             >
                                 <option
                                     v-for="item in cars"
-                                    :value="item.name"
+                                    :value="item.id"
                                     class="text-sm"
                                 >
                                     {{ item.name }}

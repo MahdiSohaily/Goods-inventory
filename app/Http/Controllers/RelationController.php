@@ -75,11 +75,13 @@ class RelationController extends Controller
         $selected_index = $this->extract_id($request->input('values'));
 
         try {
+            $selectedCars = $request->input('car_id');
             // create the pattern record
             $pattern = new Pattern();
             $pattern->name = $request->input('name');
+            $pattern->price = $request->input('price');
             $pattern->serial = $request->input('serial');
-            $pattern->car_id = $request->input('car_id');
+            $pattern->car_id = $selectedCars[0];
             $pattern->status_id = $request->input('status_id');
             $pattern->save();
 
@@ -108,12 +110,7 @@ class RelationController extends Controller
         // END validation
 
 
-        $serial = $request->input('serial');
-        $name = $request->input('name');
-        $car_id = $request->input('car_id');
-        $status_id = $request->input('status_id');
         $pattern_id = $request->input('pattern_id');
-        $values = $request->input('values');
 
         $similar = DB::table('similars')->select('nisha_id')->where('pattern_id', $pattern_id)->get();
 
@@ -131,6 +128,7 @@ class RelationController extends Controller
             // create the pattern record
             $pattern = Pattern::find($pattern_id);
             $pattern->name = $request->input('name');
+            $pattern->price = $request->input('price');
             $pattern->serial = $request->input('serial');
             $pattern->car_id = $request->input('car_id');
             $pattern->status_id = $request->input('status_id');

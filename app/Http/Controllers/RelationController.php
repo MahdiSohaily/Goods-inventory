@@ -177,7 +177,7 @@ class RelationController extends Controller
         $cars_id = [];
 
         foreach ($cars as $key => $value) {
-            array_push($cars_id, $value);
+            array_push($cars_id, $value->car_id);
         }
 
         return ['pattern' => DB::table('patterns')->where('id', $id)->first(), 'cars' => $cars_id];

@@ -190,12 +190,12 @@ const load_pattern_ifo = (id) => {
             id,
         })
         .then(function (response) {
-            console.log(response.data.pattern);
+            console.log(response.data.cars);
 
-            form.name = response.data.name;
-            form.price = response.data.price;
-            form.car_id = response.data.car_id;
-            form.status_id = response.data.status_id;
+            form.name = response.data.pattern.name;
+            form.price = response.data.pattern.price;
+            form.car_id = response.data.cars.car_id;
+            form.status_id = response.data.pattern.status_id;
         })
         .catch(function (error) {
             console.log(error);

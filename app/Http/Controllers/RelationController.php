@@ -116,6 +116,7 @@ class RelationController extends Controller
         $pattern_id = $request->input('pattern_id');
 
         $similar = DB::table('similars')->select('nisha_id')->where('pattern_id', $pattern_id)->get();
+        $db_cars = DB::table('patterncars')->select('car_id')->where('pattern_id', $pattern_id)->get();
 
         $selected_index = $this->extract_id($request->input('values'));
 
@@ -124,8 +125,18 @@ class RelationController extends Controller
             array_push($current, $item->nisha_id);
         }
 
+        $current_cars = [];
+        foreach ($db_cars as $item) {
+            array_push($current_cars, $item->nisha_id);
+        }
+
         $toAdd = $this->toBeAdded($current, $selected_index);
         $toDelete = $this->toBeDeleted($current, $selected_index);
+        
+
+        $selectedCars = $request->input('car_id');
+        $carsToAdd = $this->carsToAdd($current_cars, $selectedCars);
+        $carsToDelete = $this->carsToDelete($current_cars, $selectedCars);
 
         try {
             // create the pattern record
@@ -137,10 +148,7 @@ class RelationController extends Controller
             $pattern->save();
             if (count($toAdd) > 0) {
                 foreach ($toAdd as $value) {
-                    $similar = new Similar();
-                    $similar->pattern_id = $pattern_id;
-                    $similar->nisha_id  = $value;
-                    $similar->save();
+                    DB::insert('insert into patterncars (pattern_id , car_id ) values (?, ?)', [$pattern_id, $value]);
                 }
             }
             if (count($toDelete)) {
@@ -148,6 +156,21 @@ class RelationController extends Controller
                     DB::table('similars')->where('nisha_id', $value)->delete();
                 }
             }
+            
+            if (count($carsToAdd) > 0) {
+                foreach ($toAdd as $value) {
+                    $similar = new Similar();
+                    $similar->pattern_id = $pattern_id;
+                    $similar->nisha_id  = $value;
+                    $similar->save();
+                }
+            }
+            if (count($carsToDelete)) {
+                foreach ($toDelete as $value) {
+                    DB::table('patterncars')->where('nisha_id', $value)->delete();
+                }
+            }
+
         } catch (\Throwable $th) {
             throw $th;
         }

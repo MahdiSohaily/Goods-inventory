@@ -63,8 +63,7 @@ class GoodController extends Controller
     {
         $pattern = $request->input('pattern');
         $goods = null;
-
-        if ($pattern) {
+        if (strlen($pattern) > 0) {
             $goods_count = DB::table('nisha')
                 ->where('partnumber', 'like', '%' . $pattern . '%')
                 ->count();
@@ -81,6 +80,8 @@ class GoodController extends Controller
                     ->get();
             }
         } else {
+            $goods_count = DB::table('nisha')
+            ->count();
             $goods = DB::table('nisha')
                 ->limit(10)
                 ->orderBy('id', 'asc')

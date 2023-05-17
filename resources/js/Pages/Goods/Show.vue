@@ -24,25 +24,23 @@ const search = (value) => {
                     </td>
             </tr>`;
 
-    if (pattern.length > 0) {
-        pattern = pattern.replace(/\s/g, "");
-        pattern = pattern.replace(/-/g, "");
-        pattern = pattern.replace(/_/g, "");
-        axios
-            .post("/goods/search", {
-                pattern,
-            })
-            .then(function (response) {
-                resultBox.setAttribute(
-                    "data-length",
-                    Math.ceil(response.data.count / 10)
-                );
-                resultBox.innerHTML = print(response.data.goods);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
+    pattern = pattern.replace(/\s/g, "");
+    pattern = pattern.replace(/-/g, "");
+    pattern = pattern.replace(/_/g, "");
+    axios
+        .post("/goods/search", {
+            pattern,
+        })
+        .then(function (response) {
+            resultBox.setAttribute(
+                "data-length",
+                Math.ceil(response.data.count / 10)
+            );
+            resultBox.innerHTML = print(response.data.goods);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 };
 
 const page = async (action) => {

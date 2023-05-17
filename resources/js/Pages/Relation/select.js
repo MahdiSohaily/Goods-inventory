@@ -1,3 +1,4 @@
+
 // Initialize function, create initial tokens with itens that are already selected by the user
 function init(element) {
     // Create div that wroaps all the elements inside (select, elements selected, search div) to put select inside
@@ -334,8 +335,7 @@ function addOption(target, val, text) {
     select.appendChild(opt);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    // get select that has the options available
+$(document).ready(() => {
     const select = document.querySelectorAll("[data-multi-select-plugin]");
     select.forEach((select) => {
         init(select);

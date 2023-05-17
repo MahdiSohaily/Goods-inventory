@@ -54,6 +54,7 @@ const print = (data, rates) => {
             let avgPrice = Math.round((price * 110) / 243.5);
             const weight = Number(item.weight).toFixed(1);
             const mobis = item.mobis;
+            const korea = item.korea;
             let status;
 
             if (mobis == "0.00") {
@@ -137,6 +138,24 @@ const print = (data, rates) => {
                         <td class='text-white font-bold pl-12'> ` +
                     partNumber +
                     `-M</td>
+                        <td class='font-bold whitespace-nowrap text-center px-3 py-3'>` +
+                    Math.round(avgPrice) +
+                    `</td>
+                        <td class='whitespace-nowrap px-3 py-3 text-center border-black border-r-2'>` +
+                    Math.round(avgPrice * 1.1) +
+                    `</td>`;
+                template += mobisRate(avgPrice, rates);
+                template += `<td></td><td></td></tr>`;
+            }
+            if(korea) {
+                price = korea;
+                price = price.replace(",", "");
+                avgPrice = Math.round((price * 110) / 243.5);
+                template +=
+                    `<tr class='mobis transition duration-400 ease-in-out bg-amber-600'>
+                        <td class='text-white font-bold pl-12'> ` +
+                    partNumber +
+                    `-K</td>
                         <td class='font-bold whitespace-nowrap text-center px-3 py-3'>` +
                     Math.round(avgPrice) +
                     `</td>

@@ -149,7 +149,7 @@ const clearAll = () => {
     form.name = null;
     form.price = null;
     form.status_id = null;
-    form.car_id = null;
+    form.car_id = [];
     form.values = [];
 };
 

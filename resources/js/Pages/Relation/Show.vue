@@ -24,7 +24,7 @@ const form = useForm({
     _method: "POST",
     serial: null,
     name: null,
-    status_id: null,
+    status_id: [],
     pattern_id: null,
     car_id: null,
     values: [],

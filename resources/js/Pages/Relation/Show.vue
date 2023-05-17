@@ -1,5 +1,6 @@
 p
 <script setup>
+import { ref, onMounted } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import SectionBorder from "@/Components/SectionBorder.vue";
@@ -291,7 +292,7 @@ const createRelation = () => {
                                 autocomplete="name" />
                             <InputError :message="form.errors.name" class="mt-2" />
                         </div>
-                        <div class="pb-2">
+                        <!-- <div class="pb-2">
                             <InputLabel for="cars" value="Car" />
                             <select type="cars"
                                 class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
@@ -301,7 +302,7 @@ const createRelation = () => {
                                 </option>
                             </select>
                             <InputError :message="form.errors.cars" class="mt-2" />
-                        </div>
+                        </div> -->
                         <div class="pb-2">
                             <InputLabel for="status" value="Status" />
                             <select type="status"
@@ -312,6 +313,16 @@ const createRelation = () => {
                                 </option>
                             </select>
                             <InputError :message="form.errors.status" class="mt-2" />
+                        </div>
+                        <div class="pb-2">
+                            <InputLabel for="vehicle" value="Car" />
+                            <select multiple data-multi-select-plugin
+                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                autocomplete="username" v-model="form.car_id" id="vehicle">
+                                <option v-for="item in cars" :value="item.id" class="text-sm">
+                                    {{ item.name }}
+                                </option>
+                            </select>
                         </div>
                         <InputError :message="form.errors.values" class="mt-2" />
                     </template>

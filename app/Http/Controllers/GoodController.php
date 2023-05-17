@@ -141,4 +141,9 @@ class GoodController extends Controller
         $good->save();
         return Inertia::render('Goods/Partials/Update', ['good' => $good]);
     }
+
+    public function delete($id)
+    {
+       return DB::table('nisha')->delete($id);
+    }
 }

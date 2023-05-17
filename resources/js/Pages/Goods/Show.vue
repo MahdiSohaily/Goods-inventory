@@ -11,11 +11,16 @@ const props = defineProps({
 let current_page = 0;
 let pattern = null;
 
-const remove = (id) => {
+const remove = (e) => {
+    console.log(e.target);
     if (confirm("Are you sure you want to delete this record?") == true) {
         router.delete(route("goods.delete", id));
     }
 };
+
+$(document).ready(() => {
+    $(document).on("click", ".delete_good", remove);
+});
 
 const search = (value) => {
     pattern = value;
@@ -125,21 +130,14 @@ const print = (data) => {
                 korea +
                 `</td>`;
 
-            template +=
-                `
+            template += `
                 <td class='whitespace-nowrap w-24'>
                     <div class='flex justify-center gap-1 items-center px-2'>
                         <div class="flex justify-center gap-1 items-center px-2">
-                            <a target="_self" href="/goods/` +
-                id +
-                `/edit">
+                            <a target="_self" href="/goods/${id}/edit">
                                 <i class="material-icons text-blue-500">create</i>
                             </a>
-                            <form @submit.prevent="remove(item.id)">
-                                <button type="submit">
-                                    <i class="material-icons text-red-600">delete_forever</i>
-                                </button>
-                            </form>
+                            <i data-delete='${id}' class="delete_good material-icons text-red-600 cursor-pointer">delete_forever</i>
                         </div>
                 </div>
                 </td>

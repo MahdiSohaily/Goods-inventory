@@ -1,4 +1,5 @@
 @import "search.css"; /* Using a string */
+@import "select.css"; /* Using a string */
 @import url('https://v1.fontapi.ir/css/Vazir');
 @tailwind base;
 @tailwind components;

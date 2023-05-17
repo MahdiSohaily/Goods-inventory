@@ -52,4 +52,9 @@ class RateController extends Controller
         $rate->status = $status;
         $rate->save();
     }
+
+    public function delete($id)
+    {
+        DB::table('rates')->delete($id);
+    }
 }

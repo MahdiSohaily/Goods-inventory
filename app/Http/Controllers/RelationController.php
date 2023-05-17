@@ -81,7 +81,6 @@ class RelationController extends Controller
             $pattern->name = $request->input('name');
             $pattern->price = $request->input('price');
             $pattern->serial = $request->input('serial');
-            $pattern->car_id = $selectedCars[0];
             $pattern->status_id = $request->input('status_id');
             $pattern->save();
 
@@ -130,7 +129,6 @@ class RelationController extends Controller
             $pattern->name = $request->input('name');
             $pattern->price = $request->input('price');
             $pattern->serial = $request->input('serial');
-            $pattern->car_id = $request->input('car_id');
             $pattern->status_id = $request->input('status_id');
             $pattern->save();
             if (count($toAdd) > 0) {

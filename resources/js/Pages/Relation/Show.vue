@@ -160,7 +160,7 @@ function load(e) {
             })
             .then(function (response) {
                 push_data(response.data);
-                form._method = "POST",
+                form._method = "PUT";
             })
             .catch(function (error) {
                 console.log(error);

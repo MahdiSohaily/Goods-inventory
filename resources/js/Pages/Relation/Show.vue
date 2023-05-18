@@ -575,7 +575,7 @@ function remove(id) {
 }
 
 const createRelation = () => {
-    console.log(form.car_id);
+    console.log(form);
     form.post(route(url), {
         preserveScroll: true,
         onSuccess: (response) => {

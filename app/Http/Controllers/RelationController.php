@@ -67,12 +67,16 @@ class RelationController extends Controller
         Validator::make($request->all(), [
             'values' => 'required',
             'serial' => 'required',
-            'name' =>'required',
-            'serial'=>'required',
+            'name' => 'required',
+            'serial' => 'required',
             'status_id' => 'required',
             'car_id' => 'required',
         ], [
-            'required' => "The selected items section can't be empty.",
+            'required' => "The :attribute section can't be empty.",
+        ], [
+            'values' => 'Selected Items',
+            'status_id' => 'Status',
+            'car_id' => 'cars',
         ])->validate();
         // END validation
 
@@ -136,7 +140,7 @@ class RelationController extends Controller
 
         $toAdd = $this->toBeAdded($current, $selected_index);
         $toDelete = $this->toBeDeleted($current, $selected_index);
-        
+
         $selectedCars = $request->input('car_id');
         $carsToAdd = $this->toBeAdded($current_cars, $selectedCars);
         $carsToDelete = $this->toBeDeleted($current_cars, $selectedCars);
@@ -155,7 +159,6 @@ class RelationController extends Controller
                     $similar->pattern_id = $pattern_id;
                     $similar->nisha_id  = $value;
                     $similar->save();
-                   
                 }
             }
             if (count($toDelete)) {
@@ -163,7 +166,7 @@ class RelationController extends Controller
                     DB::table('similars')->where('nisha_id', $value)->delete();
                 }
             }
-            
+
             if (count($carsToAdd) > 0) {
                 foreach ($carsToAdd as $value) {
                     DB::insert('insert into patterncars (pattern_id , car_id) values (?, ?)', [$pattern_id, $value]);
@@ -174,7 +177,6 @@ class RelationController extends Controller
                     DB::table('patterncars')->where('car_id', $value)->delete();
                 }
             }
-
         } catch (\Throwable $th) {
             throw $th;
         }

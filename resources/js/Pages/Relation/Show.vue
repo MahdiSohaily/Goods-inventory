@@ -675,7 +675,7 @@ const createRelation = () => {
                                         {{ item.name }}
                                     </option>
                                 </select>
-                                <InputError :message="form.errors.cars" class="mt-2" />
+                                <InputError :message="form.errors.car_id" class="mt-2" />
                             </div>
                         <div class="pb-2">
                             <InputLabel for="status" value="Status" />
@@ -686,7 +686,7 @@ const createRelation = () => {
                                     {{ item.name }}
                                 </option>
                             </select>
-                            <InputError :message="form.errors.status" class="mt-2" />
+                            <InputError :message="form.errors.status_id" class="mt-2" />
                         </div>
                         <!-- <div class="container">
                             <select multiple data-multi-select-plugin autocomplete="username" v-model="form.car_id"

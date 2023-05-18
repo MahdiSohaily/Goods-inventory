@@ -72,7 +72,7 @@ class RelationController extends Controller
             'status_id' => 'required',
             'car_id' => 'required',
         ], [
-            'required' => "The :attribute section can't be empty.",
+            'required' => "The :attribute field can't be empty.",
         ], [
             'values' => 'Selected Items',
             'status_id' => 'Status',

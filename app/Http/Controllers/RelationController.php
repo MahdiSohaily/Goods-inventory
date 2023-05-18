@@ -67,6 +67,9 @@ class RelationController extends Controller
         Validator::make($request->all(), [
             'values' => 'required',
             'serial' => 'required',
+            'name' =>'required',
+            'serial'=>'required',
+            'status_id' => 'required'
         ], [
             'required' => "The selected items section can't be empty.",
         ])->validate();

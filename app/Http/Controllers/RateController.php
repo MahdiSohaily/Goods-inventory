@@ -7,6 +7,7 @@ use App\Models\Rate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
 
 class RateController extends Controller
 {
@@ -25,6 +26,14 @@ class RateController extends Controller
 
     public function store(Request $request)
     {
+        Validator::make($request->all(), [
+            'amount' => 'required',
+            'status' => 'required',
+        ], [
+            'required' => "The :attribute field can't be empty.",
+        ])->validate();
+        // END validation
+
         $amount = $request->input('amount');
         $status = $request->input('status');
 

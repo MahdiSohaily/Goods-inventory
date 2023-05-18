@@ -575,10 +575,10 @@ function remove(id) {
 }
 
 const createRelation = () => {
-    console.log(form);
     form.post(route(url), {
         preserveScroll: true,
         onSuccess: (response) => {
+            console.log(response);
             clearAll();
         },
     });
@@ -697,7 +697,8 @@ const createRelation = () => {
                                 </option>
                             </select>
                         </div>
-                        <InputError :message="form.errors.values" class="mt-2" /> -->
+                         -->
+                        <InputError :message="form.errors.values" class="mt-2" />
                     </template>
 
                     <template #actions>

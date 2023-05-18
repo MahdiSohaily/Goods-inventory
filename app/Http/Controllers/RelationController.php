@@ -109,7 +109,6 @@ class RelationController extends Controller
     {
         // START Validation the request
         Validator::make($request->all(), [
-            'values' => 'required',
             'serial' => 'required',
         ], [
             'required' => "The selected items section can't be empty.",
@@ -138,7 +137,6 @@ class RelationController extends Controller
         $toAdd = $this->toBeAdded($current, $selected_index);
         $toDelete = $this->toBeDeleted($current, $selected_index);
         
-
         $selectedCars = $request->input('car_id');
         $carsToAdd = $this->toBeAdded($current_cars, $selectedCars);
         $carsToDelete = $this->toBeDeleted($current_cars, $selectedCars);

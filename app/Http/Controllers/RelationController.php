@@ -69,7 +69,8 @@ class RelationController extends Controller
             'serial' => 'required',
             'name' =>'required',
             'serial'=>'required',
-            'status_id' => 'required'
+            'status_id' => 'required',
+            'car_id' => 'required',
         ], [
             'required' => "The selected items section can't be empty.",
         ])->validate();

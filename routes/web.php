@@ -6,6 +6,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\GoodController;
 use App\Http\Controllers\RateController;
 use App\Http\Controllers\RelationController;
+use App\Http\Controllers\PriceController;
 use Inertia\Inertia;
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +62,7 @@ Route::middleware([
         Route::put('/rates/{rates}', 'update')->name('rates.update'); // Route to update an existing good
         Route::delete('/rates/{rates}', 'delete')->name('rates.delete'); // Route to delete a specific good
     });
-    
+
     // Rate Page related routs
     Route::controller(RelationController::class)->group(function () {
         Route::get('/relations', 'index')->name('relations'); // relations route lead us to the relations page
@@ -71,14 +72,14 @@ Route::middleware([
         Route::post('/relations/pattern', 'pattern')->name('relations.pattern'); // Route to create new good in the system
         Route::put('/relations', 'update')->name('relations.update'); // Route to create new good in the system
     });
-    
+
     // Rate Page related routs
-    Route::controller(RelationController::class)->group(function () {
-        Route::get('/relations', 'index')->name('relations'); // relations route lead us to the relations page
-        Route::post('/relations/search', 'search')->name('relations.search'); // Route to create new good in the system
-        Route::post('/relations/load', 'load')->name('relations.load'); // Route to create new good in the system
-        Route::post('/relations', 'store')->name('relations.store'); // Route to create new good in the system
-        Route::post('/relations/pattern', 'pattern')->name('relations.pattern'); // Route to create new good in the system
-        Route::put('/relations', 'update')->name('relations.update'); // Route to create new good in the system
+    Route::controller(PriceController::class)->group(function () {
+        Route::get('/price', 'index')->name('price'); // price route lead us to the price page
+        Route::post('/price/search', 'search')->name('price.search'); // Route to create new good in the system
+        Route::post('/price/load', 'load')->name('price.load'); // Route to create new good in the system
+        Route::post('/price', 'store')->name('price.store'); // Route to create new good in the system
+        Route::post('/price/pattern', 'pattern')->name('price.pattern'); // Route to create new good in the system
+        Route::put('/price', 'update')->name('price.update'); // Route to create new good in the system
     });
 });

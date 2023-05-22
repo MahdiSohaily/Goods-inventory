@@ -161,7 +161,7 @@ const savePrice = () => {
                     </h2>
                 </div>
                 <SectionBorder />
-                <div id="search_result" class="p-3">
+                <div class="p-3">
                     <table class="min-w-full text-left text-sm font-light">
                         <thead class="font-medium bg-green-600">
                             <tr>
@@ -204,7 +204,6 @@ const savePrice = () => {
                         Given Prices
                     </h2>
                 </div>
-                <SectionBorder />
                 <div id="search_result" class="p-3">
                     <table class="min-w-full text-left text-sm font-light">
                         <thead class="font-medium bg-green-600">

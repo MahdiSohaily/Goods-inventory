@@ -43,7 +43,9 @@ const LoadPrice = () => {
                 <div id="search_result" class="p-3">
                     <p class="text-center">{{ pattern.name }}</p>
                     <ul>
-                        <li v-for="item in cars">{{ item.name }}</li>
+                        <li class="text-center" v-for="item in cars">
+                            {{ item.name }}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -53,76 +55,9 @@ const LoadPrice = () => {
                 </div>
                 <SectionBorder />
                 <div id="search_result" class="p-3">
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
-                    <p>Search Results are going to be appended here</p>
+                    <ul>
+                        <li v-for="item in relations">{{ item }}</li>
+                    </ul>
                 </div>
             </div>
             <div class="bg-white rounded-lg shadow-md col-span-2">

@@ -96,6 +96,13 @@ class PriceController extends Controller
 
     public function store(Request $request)
     {
+        Validator::make($request->all(), [
+            'price' => 'required',
+        ], [
+            'required' => "The :attribute field can't be empty.",
+        ])->validate();
+
+        
         return $request->all();
     }
 }

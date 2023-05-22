@@ -18,9 +18,9 @@ const form = useForm({
     code: null,
 });
 
-const createRate = () => {
-    form.post(route("rates.store"), {
-        errorBag: "createRate",
+const LoadPrice = () => {
+    form.post(route("price.load"), {
+        errorBag: "LoadPrice",
         preserveScroll: true,
         onSuccess: () => clearInput(),
     });
@@ -30,7 +30,7 @@ const createRate = () => {
 <template>
     <AppLayout title="Rates">
         <div class="max-w-2xl mx-auto py-20 sm:px-6 lg:px-8 bg-white rounded-lg shadow-sm mt-11">
-            <FormRelation @submitted="createRelation">
+            <FormRelation @submitted="LoadPrice">
                 <template #form>
                     <!-- Name -->
                     <div class="pb-2">

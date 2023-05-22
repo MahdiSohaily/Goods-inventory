@@ -12,4 +12,9 @@ class PriceController extends Controller
     {
         return Inertia::render('Price/Show');
     }
+
+    public function load(Request $request)
+    {
+        
+    }
 }

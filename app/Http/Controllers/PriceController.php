@@ -22,5 +22,6 @@ class PriceController extends Controller
         ], [
             'required' => "The :attribute field can't be empty.",
         ])->validate();
+
     }
 }

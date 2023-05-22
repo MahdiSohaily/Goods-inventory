@@ -14,6 +14,7 @@ const props = defineProps({
     relations: Array,
     customer: Object,
     cars: Object,
+    rates: Array,
 });
 
 const form = useForm({
@@ -33,10 +34,14 @@ const LoadPrice = () => {
 
 <template>
     <AppLayout title="Rates">
-        <div class="h-70S grid grid-cols-1 my-8 md:grid-cols-9 gap-6 lg:gap-2 lg:p-2">
+        <div
+            class="h-70S grid grid-cols-1 my-8 md:grid-cols-9 gap-6 lg:gap-2 lg:p-2"
+        >
             <div class="bg-white rounded-lg shadow-md">
                 <div class="flex items-center justify-between p-3">
-                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+                    <h2
+                        class="text-xl font-semibold text-gray-800 flex items-center gap-2"
+                    >
                         {{ code }}
                     </h2>
                 </div>
@@ -51,7 +56,9 @@ const LoadPrice = () => {
             </div>
             <div class="bg-white rounded-lg shadow-md col-span-4">
                 <div class="flex items-center justify-between p-3">
-                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2"></h2>
+                    <h2
+                        class="text-xl font-semibold text-gray-800 flex items-center gap-2"
+                    ></h2>
                 </div>
                 <SectionBorder />
                 <div id="search_result" class="p-3">
@@ -62,8 +69,12 @@ const LoadPrice = () => {
             </div>
             <div class="bg-white rounded-lg shadow-md col-span-2">
                 <div class="flex items-center justify-between p-3">
-                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
-                        <i class="material-icons font-semibold text-orange-400">search</i>
+                    <h2
+                        class="text-xl font-semibold text-gray-800 flex items-center gap-2"
+                    >
+                        <i class="material-icons font-semibold text-orange-400"
+                            >search</i
+                        >
                         Search Goods
                     </h2>
                 </div>
@@ -74,8 +85,12 @@ const LoadPrice = () => {
             </div>
             <div class="bg-white rounded-lg shadow-md col-span-2">
                 <div class="flex items-center justify-between p-3">
-                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
-                        <i class="material-icons font-semibold text-orange-400">search</i>
+                    <h2
+                        class="text-xl font-semibold text-gray-800 flex items-center gap-2"
+                    >
+                        <i class="material-icons font-semibold text-orange-400"
+                            >search</i
+                        >
                         Search Goods
                     </h2>
                 </div>

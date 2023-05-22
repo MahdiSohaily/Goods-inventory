@@ -40,7 +40,7 @@ const LoadPrice = () => {
             <div class="bg-white rounded-lg shadow-md max-w-2xl m-auto">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
-                       Selected Part Number
+                        Selected Part Number
                     </h2>
                 </div>
                 <div id="search_result" class="p-3">
@@ -52,9 +52,9 @@ const LoadPrice = () => {
                         </li>
                     </ul>
                 </div>
+            </div>
         </div>
-        </div>
-        <div class="h-70S grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-2 lg:p-2">         
+        <div class="h-70S grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-2 lg:p-2">
             <div class="bg-white rounded-lg shadow-md col-span-2">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
@@ -154,7 +154,7 @@ const LoadPrice = () => {
                     </table>
                 </div>
             </div>
-            <div class="bg-white rounded-lg shadow-md ">
+            <div class="bg-white rounded-lg shadow-md">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
                         Related Parts
@@ -196,10 +196,30 @@ const LoadPrice = () => {
                             </tr>
                         </tbody>
                     </table>
-                    
+                    <FormRelation @submitted="createRelation">
+                        <template #form>
+                        <!-- Name -->
+                        <div class="pb-2">
+                            <InputLabel for="price" value="Price" />
+                            <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
+                                autocomplete="price" />
+                            <InputError :message="form.errors.price" class="mt-2" />
+                        </div>
+                        </template>
+
+                        <template #actions>
+                            <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                                Saved.
+                            </ActionMessage>
+
+                            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                Save
+                            </PrimaryButton>
+                        </template>
+                    </FormRelation>
                 </div>
             </div>
-            <div class="bg-white rounded-lg shadow-md ">
+            <div class="bg-white rounded-lg shadow-md">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
                         Related Parts
@@ -233,9 +253,7 @@ const LoadPrice = () => {
                                         </li>
                                     </ul>
                                 </td>
-                                <td>
-                                   g
-                                </td>
+                                <td>g</td>
                             </tr>
                         </tbody>
                     </table>

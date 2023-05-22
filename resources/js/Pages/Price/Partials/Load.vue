@@ -78,25 +78,26 @@ const LoadPrice = () => {
                             </tr>
                         </thead>
                         <tbody id="results">
-                            <tr class="bg-gray-300 border-2 border-b-gray-700" v-for="relation in relations">
+                            <tr class="bg-gray-300 border-2 border-b-gray-500" v-for="relation in relations">
                                 <td class="px-3">
                                     {{ relation.partnumber }}
                                 </td>
                                 <td>
+                                    {{ relation.mobis }}
                                 </td>
-                                <td class="py-2">
-                                    <table class="min-w-full text-left text-sm font-light bg-gray-200 p-2">
+                                <td class="px-2 py-3">
+                                    <table class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-700">
                                         <thead class="font-medium">
                                             <tr>
                                                 <th v-for="rate in selected_rates" scope="col"
-                                                    class="text-gray-800 text-center">
+                                                    class="text-gray-800 text-center bg-orange-200 py-2">
                                                     {{ rate }}
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody id="results">
-                                            <tr>
-                                                <td class="whitespace-nowrap px-3 py-3 text-center"
+                                            <tr class="bg-violet-200 py-3">
+                                                <td class="whitespace-nowrap px-3 py-2 text-center"
                                                     v-for="rate in selected_rates">
                                                     {{
                                                         Math.round(
@@ -111,8 +112,8 @@ const LoadPrice = () => {
                                                     }}
                                                 </td>
                                             </tr>
-                                            <tr v-if="relation.mobis">
-                                                <td class="whitespace-nowrap px-3 text-center"
+                                            <tr class="bg-indigo-200" v-if="relation.mobis !== null && relation.mobis !== '-'">
+                                                <td class="whitespace-nowrap px-3 text-center py-2"
                                                     v-for="rate in selected_rates">
                                                     {{
                                                         Math.round(

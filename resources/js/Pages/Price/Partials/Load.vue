@@ -86,7 +86,8 @@ const LoadPrice = () => {
                                     {{ relation.mobis }}
                                 </td>
                                 <td class="px-2 py-3">
-                                    <table class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-700">
+                                    <table
+                                        class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-700">
                                         <thead class="font-medium">
                                             <tr>
                                                 <th v-for="rate in selected_rates" scope="col"
@@ -112,7 +113,8 @@ const LoadPrice = () => {
                                                     }}
                                                 </td>
                                             </tr>
-                                            <tr class="bg-indigo-200" v-if="relation.mobis !== null && relation.mobis !== '-'">
+                                            <tr class="bg-indigo-200"
+                                                v-if="relation.mobis !== null && relation.mobis !== '-'">
                                                 <td class="whitespace-nowrap px-3 text-center py-2"
                                                     v-for="rate in selected_rates">
                                                     {{

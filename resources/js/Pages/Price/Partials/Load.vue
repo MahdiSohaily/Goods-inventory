@@ -1,0 +1,84 @@
+<script setup>
+import AppLayout from "@/Layouts/AppLayout.vue";
+import { useForm } from "@inertiajs/vue3";
+import ActionMessage from "@/Components/ActionMessage.vue";
+import FormRelation from "@/Components/FormRelation.vue";
+import InputError from "@/Components/InputError.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import TextInput from "@/Components/TextInput.vue";
+
+const props = defineProps({
+    pattern: Object,
+    relations: Array,
+    customer: Object,
+    cars: Object,
+});
+
+const form = useForm({
+    _method: "POST",
+    customer: null,
+    code: null,
+});
+
+const LoadPrice = () => {
+    form.post(route("price.load"), {
+        errorBag: "LoadPrice",
+        preserveScroll: true,
+        onSuccess: () => clearInput(),
+    });
+};
+</script>
+
+<template>
+    <AppLayout title="Rates">
+        <div
+            class="max-w-2xl mx-auto py-20 sm:px-6 lg:px-8 bg-white rounded-lg shadow-sm mt-11"
+        >
+            <FormRelation @submitted="LoadPrice">
+                <template #form>
+                    <!-- Name -->
+                    <div class="pb-2">
+                        <InputLabel for="customer" value="customer" />
+                        <TextInput
+                            id="customer"
+                            v-model="form.customer"
+                            type="text"
+                            class="mt-1 block w-full"
+                            autocomplete="customer"
+                        />
+                        <InputError
+                            :message="form.errors.customer"
+                            class="mt-2"
+                        />
+                    </div>
+                    <div class="pb-2">
+                        <InputLabel for="code" value="code" />
+                        <textarea
+                            rows="7"
+                            id="code"
+                            v-model="form.code"
+                            type="text"
+                            class="mt-1 shadow-sm block w-full rounded-md border-gray-300"
+                        >
+                        </textarea>
+                        <InputError :message="form.errors.code" class="mt-2" />
+                    </div>
+                </template>
+
+                <template #actions>
+                    <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                        Saved.
+                    </ActionMessage>
+
+                    <PrimaryButton
+                        :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing"
+                    >
+                        Save
+                    </PrimaryButton>
+                </template>
+            </FormRelation>
+        </div>
+    </AppLayout>
+</template>

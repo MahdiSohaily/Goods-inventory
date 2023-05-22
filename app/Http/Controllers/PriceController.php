@@ -16,8 +16,23 @@ class PriceController extends Controller
     }
 
     public function create()
-    {   
-        return Inertia::render("Price/Partials/Load");
+    {
+        $code = '553113F650';
+        $customer = 1;
+
+        $code_id = DB::table('nisha')->select('id')->where('partnumber', $code)->first();
+        $pattern_id = DB::table('similars')->where('nisha_id', $code_id->id)->first();
+        $pattern = DB::table('patterns')->where('id', $pattern_id->pattern_id)->first();
+
+        $all_relations = DB::table('similars')->where('pattern_id', $pattern_id->pattern_id)->get();
+        $cars = DB::table('patterncars')
+            ->join('cars', 'patterncars.car_id', '=', 'cars.id')
+            ->where('patterncars.pattern_id', $pattern_id->pattern_id)->get();
+
+        return Inertia::render(
+            'Price/Partials/Load',
+            ['code' => $code ,'pattern' => $pattern, 'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars]
+        );
     }
 
     public function load(Request $request)

@@ -9,6 +9,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 
 const props = defineProps({
+    code: String,
     pattern: Object,
     relations: Array,
     customer: Object,
@@ -32,8 +33,100 @@ const LoadPrice = () => {
 
 <template>
     <AppLayout title="Rates">
-        <div class="h-70S grid grid-cols-1 my-8 md:grid-cols-4 gap-6 lg:gap-8 p-6 lg:p-8">
-            <div class="bg-white rounded-lg shadow-md w-40">
+        <div class="h-70S grid grid-cols-1 my-8 md:grid-cols-9 gap-6 lg:gap-2 lg:p-2">
+            <div class="bg-white rounded-lg shadow-md py-12">
+                <div class="flex items-center justify-between p-3">
+                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+                        {{ code }}
+                    </h2>
+                </div>
+                <div id="search_result" class="p-3">
+                    {{ pattern.name }}
+                    <ul>
+                        <li v-for="item in cars">{{ item.name }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md col-span-4">
+                <div class="flex items-center justify-between p-3">
+                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+                    </h2>
+                </div>
+                <SectionBorder />
+                <div id="search_result" class="p-3">
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                    <p>Search Results are going to be appended here</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md col-span-2">
                 <div class="flex items-center justify-between p-3">
                     <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                         <i class="material-icons font-semibold text-orange-400">search</i>
@@ -45,31 +138,7 @@ const LoadPrice = () => {
                     <!-- Search Results are going to be appended here -->
                 </div>
             </div>
-            <div class="bg-white rounded-lg shadow-md">
-                <div class="flex items-center justify-between p-3">
-                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
-                        <i class="material-icons font-semibold text-orange-400">search</i>
-                        Search Goods
-                    </h2>
-                </div>
-                <SectionBorder />
-                <div id="search_result" class="p-3">
-                    <!-- Search Results are going to be appended here -->
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md">
-                <div class="flex items-center justify-between p-3">
-                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
-                        <i class="material-icons font-semibold text-orange-400">search</i>
-                        Search Goods
-                    </h2>
-                </div>
-                <SectionBorder />
-                <div id="search_result" class="p-3">
-                    <!-- Search Results are going to be appended here -->
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md">
+            <div class="bg-white rounded-lg shadow-md col-span-2">
                 <div class="flex items-center justify-between p-3">
                     <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                         <i class="material-icons font-semibold text-orange-400">search</i>

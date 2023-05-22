@@ -10,5 +10,6 @@ class PriceController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Price/Show')
+        return Inertia::render('Price/Show');
     }
+}

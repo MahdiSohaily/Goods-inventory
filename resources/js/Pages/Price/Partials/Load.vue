@@ -165,35 +165,38 @@ const LoadPrice = () => {
                     <table class="min-w-full text-left text-sm font-light">
                         <thead class="font-medium bg-green-600">
                             <tr>
-                                <th scope="col" class="px-3 text-gray-800 py-3 break-words w-36">
+                                <th scope="col" class="px-3 text-gray-800 py-3">
+                                    Price
+                                </th>
+                                <th scope="col" class="px-3 text-gray-800 py-3">
                                     Part Number
                                 </th>
                                 <th scope="col" class="px-3 text-gray-800 py-3">
-                                    Goods Amount
+                                    client
                                 </th>
                                 <th scope="col" class="px-3 text-gray-800 py-3">
-                                    Price
+                                    date
                                 </th>
                             </tr>
                         </thead>
                         <tbody id="results">
                             <tr class="bg-gray-200" v-for="relation in relations">
-                                <td class="px-3">
-                                    {{ relation.partnumber }}
+                                <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                    Price
                                 </td>
-                                <td>
-                                    <ul>
-                                        <li v-for="item in relations">
-                                            {{ item }}
-                                        </li>
-                                    </ul>
+                                <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                    Part Number
                                 </td>
-                                <td>
-                                   g
+                                <td scope="col" class="px-3 text-gray-800 py-3">
+                                    client
+                                </td>
+                                <td scope="col" class="px-3 text-gray-800 py-3">
+                                    date
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                    
                 </div>
             </div>
             <div class="bg-white rounded-lg shadow-md ">

@@ -38,25 +38,23 @@ const savePrice = () => {
 
 <template>
     <AppLayout title="Rates">
-        <!-- <div class="pt-9">
-                <div class="bg-white rounded-lg shadow-md max-w-2xl m-auto">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
-                            Selected Part Number
-                        </h2>
-                    </div>
-                    <div id="search_result" class="p-3">
-                        <p class="text-center">{{ code }}</p>
-                        <p class="text-center">{{ pattern.name }}</p>
-                        <ul>
-                            <li class="text-center" v-for="item in cars">
-                                {{ item.name }}
-                            </li>
-                        </ul>
-                    </div>
+        <div class="h-70S grid grid-cols-1 md:grid-cols-6 gap-6 lg:gap-2 lg:p-2">
+            <div class="bg-white rounded-lg">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
+                        Selected Part Number
+                    </h2>
                 </div>
-            </div> -->
-        <div class="h-70S grid grid-cols-1 md:grid-cols-5 gap-6 lg:gap-2 lg:p-2">
+                <div id="search_result" class="p-3">
+                    <p class="text-center">{{ code }}</p>
+                    <p class="text-center">{{ pattern.name }}</p>
+                    <ul>
+                        <li class="text-center" v-for="item in cars">
+                            {{ item.name }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="bg-white rounded-lg col-span-3">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
@@ -201,10 +199,12 @@ const savePrice = () => {
                         </table>
                     </div>
                 </div>
+            </div>
+            <div class="rounded-lg col-span-2">
                 <div class="rounded-lg mb-4 bg-white shadow-md col-span-2">
                     <div class="flex items-center justify-between">
                         <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
-                           Given Prices
+                            Given Prices
                         </h2>
                     </div>
                     <SectionBorder />

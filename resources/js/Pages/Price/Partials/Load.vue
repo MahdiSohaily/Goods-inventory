@@ -42,7 +42,7 @@ const savePrice = () => {
             <div class="bg-white rounded-lg">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
-                        Selected Part Number
+                        Part Number
                     </h2>
                 </div>
                 <div id="search_result" class="p-3">

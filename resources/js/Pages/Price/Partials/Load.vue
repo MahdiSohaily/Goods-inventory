@@ -17,6 +17,8 @@ const props = defineProps({
     rates: Array,
 });
 
+const selected_rates = [50, 51, 52, 55];
+
 const form = useForm({
     _method: "POST",
     customer: null,
@@ -34,10 +36,14 @@ const LoadPrice = () => {
 
 <template>
     <AppLayout title="Rates">
-        <div class="h-70S grid grid-cols-1 my-8 md:grid-cols-7 gap-6 lg:gap-2 lg:p-2">
+        <div
+            class="h-70S grid grid-cols-1 my-8 md:grid-cols-7 gap-6 lg:gap-2 lg:p-2"
+        >
             <div class="bg-white rounded-lg shadow-md">
                 <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
+                    <h2
+                        class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white"
+                    >
                         {{ code }}
                     </h2>
                 </div>
@@ -52,72 +58,32 @@ const LoadPrice = () => {
             </div>
             <div class="bg-white rounded-lg shadow-md col-span-4">
                 <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
+                    <h2
+                        class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white"
+                    >
                         Related Parts
                     </h2>
                 </div>
                 <SectionBorder />
                 <div id="search_result" class="p-3">
                     <table class="min-w-full text-left text-sm font-light">
-                        <thead class="font-medium">
+                        <thead class="font-medium bg-green-600">
                             <tr>
-                                <th scope="col" class="px-3 text-gray-800 py-3">
-                                    شماره فنی
+                                <th scope="col" class="px-3 text-gray-800 py-3 break-words w-36">
+                                    Part Number
                                 </th>
                                 <th scope="col" class="px-3 text-gray-800 py-3">
-                                    دلار پایه
+                                    Goods Amount
                                 </th>
                                 <th scope="col" class="px-3 text-gray-800 py-3">
-                                    +10%
+                                    Price
                                 </th>
                             </tr>
                         </thead>
                         <tbody id="results">
-                            <tr v-for="relation in relations">
-                                <td>
+                            <tr class="bg-gray-200" v-for="relation in relations">
+                                <td class="px-3">
                                     {{ relation.partnumber }}
-                                </td>
-                                <td>
-                                    <table class="min-w-full text-left text-sm font-light">
-                                        <thead class="font-medium">
-                                            <tr>
-                                                <th v-for="rate in rates" scope="col" class=" text-gray-800 ">
-                                                    {{ rate.amount }}
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="results">
-                                            <tr>
-                                                <td class='whitespace-nowrap px-3 py-3 text-center' v-for="rate in rates">
-                                                    {{
-                                                        Math.round(
-                                                            (relation.price *
-                                                                110) /
-                                                            243.5
-                                                        ) *
-                                                        rate.amount *
-                                                        1.2 *
-                                                        1.2 *
-                                                        1.3
-                                                    }}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <ul>
-                                        <li v-for="rate in rates">
-                                            {{
-                                                Math.round(
-                                                    (relation.price * 110) /
-                                                    243.5
-                                                ) *
-                                                rate.amount *
-                                                1.2 *
-                                                1.2 *
-                                                1.3
-                                            }}
-                                        </li>
-                                    </ul>
                                 </td>
                                 <td>
                                     <ul>
@@ -126,6 +92,77 @@ const LoadPrice = () => {
                                         </li>
                                     </ul>
                                 </td>
+                                <td>
+                                    <table
+                                        class="min-w-full text-left text-sm font-light"
+                                    >
+                                        <thead class="font-medium">
+                                            <tr>
+                                                <th
+                                                    v-for="rate in selected_rates"
+                                                    scope="col"
+                                                    class="text-gray-800 text-center"
+                                                >
+                                                    {{ rate }}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="results">
+                                            <tr>
+                                                <td
+                                                    class="whitespace-nowrap px-3 py-3 text-center"
+                                                    v-for="rate in selected_rates"
+                                                >
+                                                    {{
+                                                        Math.round(
+                                                            (relation.price *
+                                                                110) /
+                                                                243.5
+                                                        ) *
+                                                        rate *
+                                                        1.2 *
+                                                        1.2 *
+                                                        1.3
+                                                    }}
+                                                </td>
+                                            </tr>
+                                            <tr v-if="relation.mobis">
+                                                <td
+                                                    class="whitespace-nowrap px-3 text-center"
+                                                    v-for="rate in selected_rates"
+                                                >
+                                                    {{
+                                                        Math.round(
+                                                            (relation.price *
+                                                                110) /
+                                                                243.5
+                                                        ) *
+                                                        rate *
+                                                        1.25 *
+                                                        1.3
+                                                    }}
+                                                </td>
+                                            </tr>
+                                            <tr v-if="relation.korea">
+                                                <td
+                                                    class="whitespace-nowrap px-3 text-center"
+                                                    v-for="rate in selected_rates"
+                                                >
+                                                    {{
+                                                        Math.round(
+                                                            (relation.price *
+                                                                110) /
+                                                                243.5
+                                                        ) *
+                                                        rate *
+                                                        1.25 *
+                                                        1.3
+                                                    }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -133,8 +170,12 @@ const LoadPrice = () => {
             </div>
             <div class="bg-white rounded-lg shadow-md col-span-2">
                 <div class="flex items-center justify-between p-3">
-                    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
-                        <i class="material-icons font-semibold text-orange-400">search</i>
+                    <h2
+                        class="text-xl font-semibold text-gray-800 flex items-center gap-2"
+                    >
+                        <i class="material-icons font-semibold text-orange-400"
+                            >search</i
+                        >
                         Search Goods
                     </h2>
                 </div>

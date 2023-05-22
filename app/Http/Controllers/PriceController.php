@@ -32,7 +32,9 @@ class PriceController extends Controller
             ->join('cars', 'patterncars.car_id', '=', 'cars.id')
             ->where('patterncars.pattern_id', $pattern_id->pattern_id)->get();
 
-        $rates = DB::table('rates')->get();
+        $rates = DB::table('rates')
+            ->orderBy('amount', 'asc')
+            ->get();
 
         return Inertia::render(
             'Price/Partials/Load',

@@ -28,6 +28,14 @@ class PriceController extends Controller
         $customer = $request->input('customer');
 
         $code_id = DB::table('nisha')->select('id')->where('partnumber', $code)->first();
-        return $code_id;
+        $pattern = DB::table('similars')->where('nisha_id', $code_id->id)->first();
+
+        $all_relations = DB::table('similars')->where('pattern_id', $pattern->pattern_id)->get();
+        $cars = DB::table('patterncars')
+            ->join('cars', 'patterncars.car_id', '=', 'cars.id')
+            ->where('patterncars.pattern_id', $pattern->pattern_id)->get();
+
+        return Inertia::render('Price/Load', ['pattern' => $pattern, 'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars]);
+        return $cars;
     }
 }

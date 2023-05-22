@@ -78,13 +78,13 @@ const LoadPrice = () => {
                             </tr>
                         </thead>
                         <tbody id="results">
-                            <tr v-for="relation in relations">
+                            <tr class="bg-gray-300 border-2 border-b-gray-700" v-for="relation in relations">
                                 <td class="px-3">
                                     {{ relation.partnumber }}
                                 </td>
                                 <td>
                                 </td>
-                                <td class="py-5">
+                                <td class="py-2">
                                     <table class="min-w-full text-left text-sm font-light bg-gray-200 p-2">
                                         <thead class="font-medium">
                                             <tr>

@@ -33,7 +33,7 @@ const LoadPrice = () => {
 <template>
     <AppLayout title="Rates">
         <div class="h-70S grid grid-cols-1 my-8 md:grid-cols-4 gap-6 lg:gap-8 p-6 lg:p-8">
-            <div class="bg-white rounded-lg shadow-md">
+            <div class="bg-white rounded-lg shadow-md w-40">
                 <div class="flex items-center justify-between p-3">
                     <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                         <i class="material-icons font-semibold text-orange-400">search</i>

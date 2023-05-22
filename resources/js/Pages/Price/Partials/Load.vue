@@ -28,7 +28,7 @@ const form = useForm({
 });
 
 const savePrice = () => {
-    form.post(route("price.load"), {
+    form.post(route("price.store"), {
         errorBag: "LoadPrice",
         preserveScroll: true,
         onSuccess: () => clearInput(),

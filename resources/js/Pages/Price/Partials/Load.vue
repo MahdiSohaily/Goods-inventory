@@ -12,20 +12,22 @@ const props = defineProps({
     code: String,
     pattern: Object,
     relations: Array,
-    customer: Object,
+    customer: String,
     cars: Object,
     rates: Array,
+    prices: Array,
 });
 
 const selected_rates = [50, 51, 52, 55];
 
 const form = useForm({
     _method: "POST",
-    customer: null,
-    code: null,
+    customer: props.customer,
+    partnumber: props.code,
+    price: null,
 });
 
-const LoadPrice = () => {
+const savePrice = () => {
     form.post(route("price.load"), {
         errorBag: "LoadPrice",
         preserveScroll: true,
@@ -36,26 +38,26 @@ const LoadPrice = () => {
 
 <template>
     <AppLayout title="Rates">
-        <div class="pt-9">
-            <div class="bg-white rounded-lg shadow-md max-w-2xl m-auto">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
-                        Selected Part Number
-                    </h2>
+        <!-- <div class="pt-9">
+                <div class="bg-white rounded-lg shadow-md max-w-2xl m-auto">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
+                            Selected Part Number
+                        </h2>
+                    </div>
+                    <div id="search_result" class="p-3">
+                        <p class="text-center">{{ code }}</p>
+                        <p class="text-center">{{ pattern.name }}</p>
+                        <ul>
+                            <li class="text-center" v-for="item in cars">
+                                {{ item.name }}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div id="search_result" class="p-3">
-                    <p class="text-center">{{ code }}</p>
-                    <p class="text-center">{{ pattern.name }}</p>
-                    <ul>
-                        <li class="text-center" v-for="item in cars">
-                            {{ item.name }}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="h-70S grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-2 lg:p-2">
-            <div class="bg-white rounded-lg shadow-md col-span-2">
+            </div> -->
+        <div class="h-70S grid grid-cols-1 md:grid-cols-5 gap-6 lg:gap-2 lg:p-2">
+            <div class="bg-white rounded-lg col-span-3">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
                         Related Parts
@@ -113,8 +115,10 @@ const LoadPrice = () => {
                                                     }}
                                                 </td>
                                             </tr>
-                                            <tr class="bg-indigo-200"
-                                                v-if="relation.mobis !== null && relation.mobis !== '-'">
+                                            <tr class="bg-indigo-200" v-if="
+                                                relation.mobis !== null &&
+                                                relation.mobis !== '-'
+                                            ">
                                                 <td class="whitespace-nowrap px-3 text-center py-2"
                                                     v-for="rate in selected_rates">
                                                     {{
@@ -152,113 +156,115 @@ const LoadPrice = () => {
                     </table>
                 </div>
             </div>
-            <div class="bg-white rounded-lg shadow-md">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
-                        Related Parts
-                    </h2>
+            <div class="rounded-lg col-span-2">
+                <div class="rounded-lg mb-4 bg-white shadow-md col-span-2">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
+                            Received Prices
+                        </h2>
+                    </div>
+                    <SectionBorder />
+                    <div id="search_result" class="p-3">
+                        <table class="min-w-full text-left text-sm font-light">
+                            <thead class="font-medium bg-green-600">
+                                <tr>
+                                    <th scope="col" class="px-3 text-gray-800 py-3">
+                                        Part Number
+                                    </th>
+                                    <th scope="col" class="px-3 text-gray-800 py-3">
+                                        Price
+                                    </th>
+                                    <th scope="col" class="px-3 text-gray-800 py-3">
+                                        client
+                                    </th>
+                                    <th scope="col" class="px-3 text-gray-800 py-3">
+                                        date
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="results">
+                                <tr class="bg-gray-200" v-for="price in prices">
+                                    <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                        {{ price.partnumber }}
+                                    </td>
+                                    <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                        {{ price.price }}
+                                    </td>
+                                    <td scope="col" class="px-3 text-gray-800 py-3">
+                                        {{ price.name }}
+                                    </td>
+                                    <td scope="col" class="px-3 text-gray-800 py-3">
+                                        {{ price.created_at }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <SectionBorder />
-                <div id="search_result" class="p-3">
-                    <table class="min-w-full text-left text-sm font-light">
-                        <thead class="font-medium bg-green-600">
-                            <tr>
-                                <th scope="col" class="px-3 text-gray-800 py-3">
-                                    Price
-                                </th>
-                                <th scope="col" class="px-3 text-gray-800 py-3">
-                                    Part Number
-                                </th>
-                                <th scope="col" class="px-3 text-gray-800 py-3">
-                                    client
-                                </th>
-                                <th scope="col" class="px-3 text-gray-800 py-3">
-                                    date
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody id="results">
-                            <tr class="bg-gray-200" v-for="relation in relations">
-                                <td scope="col" class="px-3 text-gray-800 py-3 break-words">
-                                    Price
-                                </td>
-                                <td scope="col" class="px-3 text-gray-800 py-3 break-words">
-                                    Part Number
-                                </td>
-                                <td scope="col" class="px-3 text-gray-800 py-3">
-                                    client
-                                </td>
-                                <td scope="col" class="px-3 text-gray-800 py-3">
-                                    date
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <FormRelation @submitted="createRelation">
-                        <template #form>
-                            <!-- Name -->
-                            <div class="pb-2">
-                                <InputLabel for="price" value="Price" />
-                                <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
-                                    autocomplete="price" />
-                                <InputError :message="form.errors.price" class="mt-2" />
-                            </div>
-                        </template>
+                <div class="rounded-lg mb-4 bg-white shadow-md col-span-2">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
+                           Given Prices
+                        </h2>
+                    </div>
+                    <SectionBorder />
+                    <div id="search_result" class="p-3">
+                        <table class="min-w-full text-left text-sm font-light">
+                            <thead class="font-medium bg-green-600">
+                                <tr>
+                                    <th scope="col" class="px-3 text-gray-800 py-3">
+                                        Part Number
+                                    </th>
+                                    <th scope="col" class="px-3 text-gray-800 py-3">
+                                        Price
+                                    </th>
+                                    <th scope="col" class="px-3 text-gray-800 py-3">
+                                        client
+                                    </th>
+                                    <th scope="col" class="px-3 text-gray-800 py-3">
+                                        date
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="results">
+                                <tr class="bg-gray-200" v-for="price in prices">
+                                    <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                        {{ price.partnumber }}
+                                    </td>
+                                    <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                        {{ price.price }}
+                                    </td>
+                                    <td scope="col" class="px-3 text-gray-800 py-3">
+                                        {{ price.name }}
+                                    </td>
+                                    <td scope="col" class="px-3 text-gray-800 py-3">
+                                        {{ price.created_at }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <FormRelation @submitted="createRelation">
+                            <template #form>
+                                <!-- Name -->
+                                <div class="pb-2">
+                                    <InputLabel for="price" value="Price" />
+                                    <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
+                                        autocomplete="price" />
+                                    <InputError :message="form.errors.price" class="mt-2" />
+                                </div>
+                            </template>
 
-                        <template #actions>
-                            <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                                Saved.
-                            </ActionMessage>
+                            <template #actions>
+                                <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                                    Saved.
+                                </ActionMessage>
 
-                            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                Save
-                            </PrimaryButton>
-                        </template>
-                    </FormRelation>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
-                        Related Parts
-                    </h2>
-                </div>
-                <SectionBorder />
-                <div id="search_result" class="p-3">
-                    <table class="min-w-full text-left text-sm font-light">
-                        <thead class="font-medium bg-green-600">
-                            <tr>
-                                <th scope="col" class="px-3 text-gray-800 py-3">
-                                    Price
-                                </th>
-                                <th scope="col" class="px-3 text-gray-800 py-3">
-                                    Part Number
-                                </th>
-                                <th scope="col" class="px-3 text-gray-800 py-3">
-                                    client
-                                </th>
-                                <th scope="col" class="px-3 text-gray-800 py-3">
-                                    date
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody id="results">
-                            <tr class="bg-gray-200" v-for="relation in relations">
-                                <td scope="col" class="px-3 text-gray-800 py-3 break-words">
-                                    Price
-                                </td>
-                                <td scope="col" class="px-3 text-gray-800 py-3 break-words">
-                                    Part Number
-                                </td>
-                                <td scope="col" class="px-3 text-gray-800 py-3">
-                                    client
-                                </td>
-                                <td scope="col" class="px-3 text-gray-800 py-3">
-                                    date
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                    Save
+                                </PrimaryButton>
+                            </template>
+                        </FormRelation>
+                    </div>
                 </div>
             </div>
         </div>

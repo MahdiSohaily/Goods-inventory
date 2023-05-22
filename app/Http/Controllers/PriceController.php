@@ -36,11 +36,17 @@ class PriceController extends Controller
             ->orderBy('amount', 'asc')
             ->get();
 
+        $pattern = substr($code, 0, 5);
+
+        $prices = DB::table('prices')
+            ->join('customers', 'prices.customer_id', 'customers.id')
+            ->where('prices.partnumber', 'like', "$pattern%")->get();
+
         return Inertia::render(
             'Price/Partials/Load',
             [
                 'code' => $code, 'pattern' => $pattern, 'relations' => $all_relations,
-                'customer' => $customer, 'cars' => $cars, 'rates' => $rates,
+                'customer' => $customer, 'cars' => $cars, 'rates' => $rates, 'prices' => $prices
             ]
         );
     }
@@ -58,16 +64,33 @@ class PriceController extends Controller
         $customer = $request->input('customer');
 
         $code_id = DB::table('nisha')->select('id')->where('partnumber', $code)->first();
-        $pattern = DB::table('similars')->where('nisha_id', $code_id->id)->first();
+        $pattern_id = DB::table('similars')->where('nisha_id', $code_id->id)->first();
+        $pattern = DB::table('patterns')->where('id', $pattern_id->pattern_id)->first();
 
-        $all_relations = DB::table('similars')->where('pattern_id', $pattern->pattern_id)->get();
+        $all_relations = DB::table('similars')
+            ->join('nisha', 'similars.nisha_id', '=', 'nisha.id')
+            ->where('pattern_id', $pattern_id->pattern_id)->get();
+
         $cars = DB::table('patterncars')
             ->join('cars', 'patterncars.car_id', '=', 'cars.id')
-            ->where('patterncars.pattern_id', $pattern->pattern_id)->get();
+            ->where('patterncars.pattern_id', $pattern_id->pattern_id)->get();
+
+        $rates = DB::table('rates')
+            ->orderBy('amount', 'asc')
+            ->get();
+
+        $pattern = substr($code, 0, 5);
+
+        $prices = DB::table('prices')
+            ->join('customers', 'prices.customer_id', 'customers.id')
+            ->where('prices.partnumber', 'like', "$pattern%")->get();
 
         return Inertia::render(
             'Price/Partials/Load',
-            ['pattern' => $pattern, 'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars]
+            [
+                'code' => $code, 'pattern' => $pattern, 'relations' => $all_relations,
+                'customer' => $customer, 'cars' => $cars, 'rates' => $rates, 'prices' => $prices
+            ]
         );
     }
 }

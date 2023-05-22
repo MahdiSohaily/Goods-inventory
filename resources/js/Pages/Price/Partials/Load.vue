@@ -78,19 +78,14 @@ const LoadPrice = () => {
                             </tr>
                         </thead>
                         <tbody id="results">
-                            <tr class="bg-gray-200" v-for="relation in relations">
+                            <tr v-for="relation in relations">
                                 <td class="px-3">
                                     {{ relation.partnumber }}
                                 </td>
                                 <td>
-                                    <ul>
-                                        <li v-for="item in relations">
-                                            {{ item }}
-                                        </li>
-                                    </ul>
                                 </td>
-                                <td>
-                                    <table class="min-w-full text-left text-sm font-light">
+                                <td class="py-5">
+                                    <table class="min-w-full text-left text-sm font-light bg-gray-200 p-2">
                                         <thead class="font-medium">
                                             <tr>
                                                 <th v-for="rate in selected_rates" scope="col"
@@ -198,13 +193,13 @@ const LoadPrice = () => {
                     </table>
                     <FormRelation @submitted="createRelation">
                         <template #form>
-                        <!-- Name -->
-                        <div class="pb-2">
-                            <InputLabel for="price" value="Price" />
-                            <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
-                                autocomplete="price" />
-                            <InputError :message="form.errors.price" class="mt-2" />
-                        </div>
+                            <!-- Name -->
+                            <div class="pb-2">
+                                <InputLabel for="price" value="Price" />
+                                <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
+                                    autocomplete="price" />
+                                <InputError :message="form.errors.price" class="mt-2" />
+                            </div>
                         </template>
 
                         <template #actions>
@@ -230,30 +225,34 @@ const LoadPrice = () => {
                     <table class="min-w-full text-left text-sm font-light">
                         <thead class="font-medium bg-green-600">
                             <tr>
-                                <th scope="col" class="px-3 text-gray-800 py-3 break-words w-36">
+                                <th scope="col" class="px-3 text-gray-800 py-3">
+                                    Price
+                                </th>
+                                <th scope="col" class="px-3 text-gray-800 py-3">
                                     Part Number
                                 </th>
                                 <th scope="col" class="px-3 text-gray-800 py-3">
-                                    Goods Amount
+                                    client
                                 </th>
                                 <th scope="col" class="px-3 text-gray-800 py-3">
-                                    Price
+                                    date
                                 </th>
                             </tr>
                         </thead>
                         <tbody id="results">
                             <tr class="bg-gray-200" v-for="relation in relations">
-                                <td class="px-3">
-                                    {{ relation.partnumber }}
+                                <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                    Price
                                 </td>
-                                <td>
-                                    <ul>
-                                        <li v-for="item in relations">
-                                            {{ item }}
-                                        </li>
-                                    </ul>
+                                <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                    Part Number
                                 </td>
-                                <td>g</td>
+                                <td scope="col" class="px-3 text-gray-800 py-3">
+                                    client
+                                </td>
+                                <td scope="col" class="px-3 text-gray-800 py-3">
+                                    date
+                                </td>
                             </tr>
                         </tbody>
                     </table>

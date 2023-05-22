@@ -36,6 +36,5 @@ class PriceController extends Controller
             ->where('patterncars.pattern_id', $pattern->pattern_id)->get();
 
         return Inertia::render('Price/Load', ['pattern' => $pattern, 'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars]);
-        return $cars;
     }
 }

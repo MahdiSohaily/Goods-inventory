@@ -154,7 +154,7 @@ const savePrice = () => {
                     </table>
                 </div>
             </div>
-            <div class="rounded-lg mb-4 bg-white shadow-md">
+            <div class="rounded-lg bg-white shadow-md">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
                         Received Prices
@@ -198,7 +198,7 @@ const savePrice = () => {
                     </table>
                 </div>
             </div>
-            <div class="rounded-lg mb-4 bg-white shadow-md">
+            <div class="rounded-lg bg-white shadow-md">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
                         Given Prices

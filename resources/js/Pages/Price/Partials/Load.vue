@@ -243,7 +243,7 @@ const savePrice = () => {
                                 </tr>
                             </tbody>
                         </table>
-                        <FormRelation @submitted="createRelation">
+                        <FormRelation @submitted="savePrice">
                             <template #form>
                                 <!-- Name -->
                                 <div class="pb-2">

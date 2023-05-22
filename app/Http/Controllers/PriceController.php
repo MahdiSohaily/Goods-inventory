@@ -28,5 +28,6 @@ class PriceController extends Controller
         $customer = $request->input('customer');
 
         $code_id = DB::table('nisha')->select('id')->where('partnumber', $code)->first();
+        return $code_id;
     }
 }

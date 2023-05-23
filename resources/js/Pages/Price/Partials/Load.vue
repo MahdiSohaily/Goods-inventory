@@ -87,7 +87,7 @@ const savePrice = () => {
                                 </td>
                                 <td class="px-2 py-3">
                                     <table
-                                        class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-700">
+                                        class=" text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-700">
                                         <thead class="font-medium">
                                             <tr>
                                                 <th v-for="rate in selected_rates" scope="col"
@@ -101,7 +101,7 @@ const savePrice = () => {
                                                 <td class="whitespace-nowrap px-3 py-2 text-center"
                                                     v-for="rate in selected_rates">
                                                     {{
-                                                        Math.round(
+                                                        Number(Math.round(
                                                             (relation.price *
                                                                 110) /
                                                             243.5
@@ -109,7 +109,7 @@ const savePrice = () => {
                                                         rate *
                                                         1.2 *
                                                         1.2 *
-                                                        1.3
+                                                        1.3).toFixed(1)
                                                     }}
                                                 </td>
                                             </tr>
@@ -120,14 +120,14 @@ const savePrice = () => {
                                                 <td class="whitespace-nowrap px-3 text-center py-2"
                                                     v-for="rate in selected_rates">
                                                     {{
-                                                        Math.round(
+                                                        Number(Math.round(
                                                             (relation.price *
                                                                 110) /
                                                             243.5
                                                         ) *
                                                         rate *
                                                         1.25 *
-                                                        1.3
+                                                        1.3).toFixed(1)
                                                     }}
                                                 </td>
                                             </tr>

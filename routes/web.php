@@ -31,10 +31,9 @@ Route::get('/', function () {
 
 Route::get('/bio/{user}', function ($user) {
     $response = Http::get("https://torre.bio/api/bios/$user");
-    return $response->withHeaders([
-        'X-Requested-With' => 'XMLHttpRequest',
-        'Access-Control-Allow-Origin' => 'https://torre.bio/api/bios/',
-    ]);;
+    $response->header('X-Requested-With', 'XMLHttpRequest');
+    $response->header('Access-Control-Allow-Origin', 'https://torre.bio/api/bios/');
+    return $response;
 });
 
 Route::middleware([

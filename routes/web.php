@@ -7,6 +7,7 @@ use App\Http\Controllers\GoodController;
 use App\Http\Controllers\RateController;
 use App\Http\Controllers\RelationController;
 use App\Http\Controllers\PriceController;
+use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,14 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+});
+
+Route::get('/bio/{user}', function ($user) {
+    $response = Http::get("https://torre.bio/api/bios/$user");
+    return $response->withHeaders([
+        'X-Requested-With' => 'XMLHttpRequest',
+        'Access-Control-Allow-Origin' => 'https://torre.bio/api/bios/',
+    ]);;
 });
 
 Route::middleware([

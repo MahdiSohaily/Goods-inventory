@@ -35,7 +35,7 @@ const LoadPrice = () => {
                     <!-- Name -->
                     <div class="pb-2">
                         <InputLabel for="customer" value="customer" />
-                        <TextInput id="customer" v-model="form.customer" type="text" class="mt-1 block w-full"
+                        <TextInput id="customer" v-model="form.customer" type="number" class="mt-1 block w-full"
                             autocomplete="customer" />
                         <InputError :message="form.errors.customer" class="mt-2" />
                     </div>

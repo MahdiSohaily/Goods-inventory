@@ -54,8 +54,9 @@ class PriceController extends Controller
     public function load(Request $request)
     {
         Validator::make($request->all(), [
-            'customer' => 'required',
-            'code' => 'required',
+            'customer' => 'required|string|exists:Customers,id',
+            'code' => 'required|string|exists:nisha,partnumber',
+
         ], [
             'required' => "The :attribute field can't be empty.",
         ])->validate();

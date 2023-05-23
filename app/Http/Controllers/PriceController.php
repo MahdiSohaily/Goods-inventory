@@ -54,7 +54,7 @@ class PriceController extends Controller
     public function load(Request $request)
     {
         Validator::make($request->all(), [
-            'customer' => 'required|string|exists:Customers,id',
+            'customer' => 'required|string|exists:customers,id',
             'code' => 'required|string|exists:nisha,partnumber',
 
         ], [

@@ -13,7 +13,7 @@ defineProps({
 });
 
 const form = useForm({
-    _method: "GET",
+    _method: "POST",
     customer: null,
     code: null,
 });

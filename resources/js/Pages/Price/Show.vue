@@ -22,7 +22,7 @@ const LoadPrice = () => {
     form.post(route("price.load"), {
         errorBag: "LoadPrice",
         preserveScroll: true,
-        onSuccess: () => clearInput(),
+        onSuccess: (response) => console.log(response),
     });
 };
 </script>

@@ -85,13 +85,12 @@ class PriceController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(), [
-            'customer' => 'required|string|exists:customers,id',
-            'code' => 'required|string',
+            'partnumber' => 'required|string|exists:nisha,partnumber'
 
         ], [
             'required' => "The :attribute field can't be empty.",
         ])->validate();
-        
+
         DB::table('prices')->insert([
             'partnumber' => $request->input('partnumber'),
             'price' => $request->input('price'),

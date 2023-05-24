@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class PriceController extends Controller
@@ -95,6 +96,8 @@ class PriceController extends Controller
             'partnumber' => $request->input('partnumber'),
             'price' => $request->input('price'),
             'customer_id' => $request->input('customer'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
     }
 

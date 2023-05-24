@@ -25,6 +25,8 @@ const LoadPrice = () => {
         onSuccess: () => clearInput(),
     });
 };
+
+const clearInput = () => {};
 </script>
 
 <template>

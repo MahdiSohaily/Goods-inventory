@@ -17,7 +17,6 @@ const selected_rates = [50, 51, 52, 55];
 
 const form = useForm({
     _method: "POST",
-    form_id: null,
     customer: props.customer,
     partnumber: null,
     price: null,

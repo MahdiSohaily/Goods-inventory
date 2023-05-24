@@ -53,30 +53,33 @@ class PriceController extends Controller
 
     public function load(Request $request)
     {
-        // $arr = explode("\n", $request->input('code'));
-        Validator::make($request->all(), [
-            'customer' => 'required|string|exists:customers,id',
-            'code' => 'required|string',
+        if ($request->input('customer')) {
+            // $arr = explode("\n", $request->input('code'));
+            Validator::make($request->all(), [
+                'customer' => 'required|string|exists:customers,id',
+                'code' => 'required|string',
 
-        ], [
-            'required' => "The :attribute field can't be empty.",
-        ])->validate();
+            ], [
+                'required' => "The :attribute field can't be empty.",
+            ])->validate();
 
-        $customer = $request->input('customer');
+            $customer = $request->input('customer');
 
-        $codes = explode("\n", $request->input('code'));
-        $allCodeData = [];
+            $codes = explode("\n", $request->input('code'));
+            $allCodeData = [];
 
-        foreach ($codes as $key => $value) {
-            $good = DB::table('nisha')->where('partNumber', $value)->first();
-            if ($good) {
-                array_push($allCodeData, ['result' => $this->getCodeData($good->id, $customer, $value), 'search' => $value]);
-            } else {
-                array_push($allCodeData, ['result' => null, 'search' => $value]);
+            foreach ($codes as $key => $value) {
+                $good = DB::table('nisha')->where('partNumber', $value)->first();
+                if ($good) {
+                    array_push($allCodeData, ['result' => $this->getCodeData($good->id, $customer, $value), 'search' => $value]);
+                } else {
+                    array_push($allCodeData, ['result' => null, 'search' => $value]);
+                }
             }
-        }
 
-        return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer]);
+            return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer]);
+        }
+        return Inertia::render('Price/Show');
     }
 
     public function store(Request $request)

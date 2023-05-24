@@ -16,7 +16,7 @@ const props = defineProps({
 const selected_rates = [50, 51, 52, 55];
 
 const form = useForm({
-    _method: "POST",
+    _method: "GET",
     form_id: null,
     customer: props.customer,
     partnumber: null,
@@ -37,7 +37,7 @@ const savePrice = () => {
         <div v-for="item in allCodeData">
             <div
                 v-if="null != item.result"
-                class="h-70S grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2"
+                class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2"
             >
                 <div class="bg-white rounded-lg">
                     <div id="search_result" class="p-3">
@@ -342,7 +342,9 @@ const savePrice = () => {
                     </div>
                 </div>
             </div>
-            <div v-else class="bg-white rounded-lg"></div>
+            <div v-else class="bg-white rounded-lg lg:p-2">
+                <p>No result for{{ item.search }}</p>
+            </div>
         </div>
     </AppLayout>
 </template>

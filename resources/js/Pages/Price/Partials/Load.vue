@@ -34,16 +34,11 @@ const savePrice = () => {
 
 <template>
     <AppLayout title="Rates">
-        <div v-for="item in allCodeData" class="h-70S grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
-            <div v-if="null != item.result">
+        <div v-for="item in allCodeData" >
+            <div v-if="null != item.result" class="h-70S grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
                 <div class="bg-white rounded-lg">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
-                            Part Number
-                        </h2>
-                    </div>
                     <div id="search_result" class="p-3">
-                        <p class="text-center">{{ item.result.code }}</p>
+                        <p class="text-center">{{ item.search }}</p>
                         <!-- <p class="text-center">{{ pattern.name }}</p> -->
                         <ul>
                             <li class="text-center" v-for="elem in item.result.cars">
@@ -53,12 +48,6 @@ const savePrice = () => {
                     </div>
                 </div>
                 <div class="bg-white rounded-lg col-span-5">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
-                            Related Parts
-                        </h2>
-                    </div>
-                    <SectionBorder />
                     <div id="search_result" class="p-3">
                         <table class="min-w-full text-left text-sm font-light">
                             <thead class="font-medium bg-green-600">
@@ -157,11 +146,6 @@ const savePrice = () => {
                     </div>
                 </div>
                 <div class="rounded-lg bg-white shadow-md col-span-2">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
-                            Given Prices
-                        </h2>
-                    </div>
                     <div id="search_result" class="p-3">
                         <table class="min-w-full text-left text-sm font-light">
                             <thead class="font-medium bg-green-600">
@@ -221,12 +205,6 @@ const savePrice = () => {
                     </div>
                 </div>
                 <div class="rounded-lg bg-white shadow-md col-span-2">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
-                            Received Prices
-                        </h2>
-                    </div>
-                    <SectionBorder />
                     <div class="p-3">
                         <table class="min-w-full text-left text-sm font-light">
                             <thead class="font-medium bg-green-600">

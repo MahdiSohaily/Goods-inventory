@@ -29,13 +29,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/bio/{user}', function ($user) {
-    $response = Http::get("https://torre.bio/api/bios/$user");
-    $response->header('X-Requested-With', 'XMLHttpRequest');
-    $response->header('Access-Control-Allow-Origin', 'https://torre.bio/api/bios/');
-    return $response;
-});
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

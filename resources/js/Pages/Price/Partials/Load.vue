@@ -35,13 +35,16 @@ const savePrice = () => {
 <template>
     <AppLayout title="Rates">
         <div v-for="item in allCodeData">
+            {{ allCodeData }}
             <div
                 v-if="null != item.result"
                 class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2"
             >
                 <div class="bg-white rounded-lg">
                     <div id="search_result" class="p-3">
-                        <p class="text-center">{{ item.search }}</p>
+                        <p class="text-center bg-gray-600 text-white">
+                            {{ item.search }}
+                        </p>
                         <!-- <p class="text-center">{{ pattern.name }}</p> -->
                         <ul>
                             <li
@@ -176,7 +179,7 @@ const savePrice = () => {
                         </table>
                     </div>
                 </div>
-                <div class="rounded-lg bg-white shadow-md col-span-2">
+                <div class="bg-white shadow-md col-span-2">
                     <div id="search_result" class="p-3">
                         <table class="min-w-full text-left text-sm font-light">
                             <thead class="font-medium bg-green-600">
@@ -239,7 +242,7 @@ const savePrice = () => {
                                 </tr>
                             </tbody>
                         </table>
-                        <FormRelation @submitted="savePrice">
+                        <FormRelation @submitted="savePrice()">
                             <template #form>
                                 <!-- Name -->
                                 <div class="pb-2">
@@ -276,7 +279,7 @@ const savePrice = () => {
                         </FormRelation>
                     </div>
                 </div>
-                <div class="rounded-lg bg-white shadow-md col-span-2">
+                <div class="bg-white shadow-md col-span-2">
                     <div class="p-3">
                         <table class="min-w-full text-left text-sm font-light">
                             <thead class="font-medium bg-green-600">

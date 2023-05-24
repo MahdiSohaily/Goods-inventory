@@ -109,7 +109,8 @@ class PriceController extends Controller
             ->orderBy('amount', 'asc')
             ->get();
 
-        $pattern = substr($code, 0, 5);
+        $good = DB::table('nisha')->where('id', $code)->first();
+        $pattern = substr($good->partnumber, 0, 5);
 
         $prices = DB::table('prices')
             ->join('customers', 'prices.customer_id', 'customers.id')

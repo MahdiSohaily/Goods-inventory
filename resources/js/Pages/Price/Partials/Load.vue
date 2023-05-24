@@ -34,8 +34,8 @@ const savePrice = () => {
 
 <template>
     <AppLayout title="Rates">
-        <div v-for="item in allCodeData.result" class="h-70S grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
-            <div v-if="null != item">
+        <div v-for="item in allCodeData" class="h-70S grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
+            <div v-if="null != item.result">
                 <div class="bg-white rounded-lg">
                     <div class="flex items-center justify-between">
                         <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
@@ -43,11 +43,11 @@ const savePrice = () => {
                         </h2>
                     </div>
                     <div id="search_result" class="p-3">
-                        <p class="text-center">{{ code }}</p>
-                        <p class="text-center">{{ pattern.name }}</p>
+                        <p class="text-center">{{ item.result.code }}</p>
+                        <!-- <p class="text-center">{{ pattern.name }}</p> -->
                         <ul>
-                            <li class="text-center" v-for="item in cars">
-                                {{ item.name }}
+                            <li class="text-center" v-for="elem in item.result.cars">
+                                {{ elem.name }}
                             </li>
                         </ul>
                     </div>
@@ -75,7 +75,7 @@ const savePrice = () => {
                                 </tr>
                             </thead>
                             <tbody id="results">
-                                <tr class="bg-gray-300 border-2 border-b-gray-500" v-for="relation in relations">
+                                <tr class="bg-gray-300 border-2 border-b-gray-500" v-for="relation in item.result.relations">
                                     <td class="px-3">
                                         {{ relation.partnumber }}
                                     </td>
@@ -181,7 +181,7 @@ const savePrice = () => {
                                 </tr>
                             </thead>
                             <tbody id="results">
-                                <tr class="bg-gray-200" v-for="price in prices">
+                                <tr class="bg-gray-200" v-for="price in item.result.prices">
                                     <td scope="col" class="px-3 text-gray-800 py-3 break-words">
                                         {{ price.partnumber }}
                                     </td>
@@ -246,7 +246,7 @@ const savePrice = () => {
                                 </tr>
                             </thead>
                             <tbody id="results">
-                                <tr class="bg-gray-200" v-for="price in prices">
+                                <tr class="bg-gray-200" v-for="price in item.result.prices">
                                     <td scope="col" class="px-3 text-gray-800 py-3 break-words">
                                         {{ price.partnumber }}
                                     </td>

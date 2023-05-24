@@ -72,6 +72,7 @@ class PriceController extends Controller
             if ($good) {
                 array_push($allCodeData, $this->getCodeData($good->id, $customer));
             } else {
+                array_push($allCodeData, null);
             }
         }
 
@@ -90,8 +91,8 @@ class PriceController extends Controller
     public function getCodeData($code, $customer)
     {
 
-        $code_id = DB::table('nisha')->select('id')->where('partnumber', $code)->first();
-        $pattern_id = DB::table('similars')->where('nisha_id', $code_id->id)->first();
+        
+        $pattern_id = DB::table('similars')->where('nisha_id', $code)->first();
         $pattern = DB::table('patterns')->where('id', $pattern_id->pattern_id)->first();
 
         $all_relations = DB::table('similars')

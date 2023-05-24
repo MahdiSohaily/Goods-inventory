@@ -9,21 +9,17 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 
 const props = defineProps({
-    code: String,
-    pattern: Object,
-    relations: Array,
+    allCodeData: Array,
     customer: String,
-    cars: Object,
-    rates: Array,
-    prices: Array,
 });
 
 const selected_rates = [50, 51, 52, 55];
 
 const form = useForm({
     _method: "POST",
+    form_id: null,
     customer: props.customer,
-    partnumber: props.code,
+    partnumber: null,
     price: null,
 });
 
@@ -38,10 +34,14 @@ const savePrice = () => {
 
 <template>
     <AppLayout title="Rates">
-        <div class="h-70S grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
+        <div
+            class="h-70S grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2"
+        >
             <div class="bg-white rounded-lg">
                 <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
+                    <h2
+                        class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white"
+                    >
                         Part Number
                     </h2>
                 </div>
@@ -57,7 +57,9 @@ const savePrice = () => {
             </div>
             <div class="bg-white rounded-lg col-span-5">
                 <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
+                    <h2
+                        class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white"
+                    >
                         Related Parts
                     </h2>
                 </div>
@@ -66,7 +68,10 @@ const savePrice = () => {
                     <table class="min-w-full text-left text-sm font-light">
                         <thead class="font-medium bg-green-600">
                             <tr>
-                                <th scope="col" class="px-3 text-gray-800 py-3 break-words w-36">
+                                <th
+                                    scope="col"
+                                    class="px-3 text-gray-800 py-3 break-words w-36"
+                                >
                                     Part Number
                                 </th>
                                 <th scope="col" class="px-3 text-gray-800 py-3">
@@ -78,7 +83,10 @@ const savePrice = () => {
                             </tr>
                         </thead>
                         <tbody id="results">
-                            <tr class="bg-gray-300 border-2 border-b-gray-500" v-for="relation in relations">
+                            <tr
+                                class="bg-gray-300 border-2 border-b-gray-500"
+                                v-for="relation in relations"
+                            >
                                 <td class="px-3">
                                     {{ relation.partnumber }}
                                 </td>
@@ -87,58 +95,75 @@ const savePrice = () => {
                                 </td>
                                 <td class="px-2 py-3">
                                     <table
-                                        class=" text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-700">
+                                        class="text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-700"
+                                    >
                                         <thead class="font-medium">
                                             <tr>
-                                                <th v-for="rate in selected_rates" scope="col"
-                                                    class="text-gray-800 text-center bg-orange-200 py-2">
+                                                <th
+                                                    v-for="rate in selected_rates"
+                                                    scope="col"
+                                                    class="text-gray-800 text-center bg-orange-200 py-2"
+                                                >
                                                     {{ rate }}
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody id="results">
                                             <tr class="bg-violet-200 py-3">
-                                                <td class="whitespace-nowrap px-3 py-2 text-center"
-                                                    v-for="rate in selected_rates">
+                                                <td
+                                                    class="whitespace-nowrap px-3 py-2 text-center"
+                                                    v-for="rate in selected_rates"
+                                                >
                                                     {{
-                                                        Number(Math.round(
-                                                            (relation.price *
-                                                                110) /
-                                                            243.5
-                                                        ) *
-                                                        rate *
-                                                        1.2 *
-                                                        1.2 *
-                                                        1.3).toFixed(1)
+                                                        Number(
+                                                            Math.round(
+                                                                (relation.price *
+                                                                    110) /
+                                                                    243.5
+                                                            ) *
+                                                                rate *
+                                                                1.2 *
+                                                                1.2 *
+                                                                1.3
+                                                        ).toFixed(1)
                                                     }}
                                                 </td>
                                             </tr>
-                                            <tr class="bg-indigo-200" v-if="
-                                                relation.mobis !== null &&
-                                                relation.mobis !== '-'
-                                            ">
-                                                <td class="whitespace-nowrap px-3 text-center py-2"
-                                                    v-for="rate in selected_rates">
+                                            <tr
+                                                class="bg-indigo-200"
+                                                v-if="
+                                                    relation.mobis !== null &&
+                                                    relation.mobis !== '-'
+                                                "
+                                            >
+                                                <td
+                                                    class="whitespace-nowrap px-3 text-center py-2"
+                                                    v-for="rate in selected_rates"
+                                                >
                                                     {{
-                                                        Number(Math.round(
-                                                            (relation.price *
-                                                                110) /
-                                                            243.5
-                                                        ) *
-                                                        rate *
-                                                        1.25 *
-                                                        1.3).toFixed(1)
+                                                        Number(
+                                                            Math.round(
+                                                                (relation.price *
+                                                                    110) /
+                                                                    243.5
+                                                            ) *
+                                                                rate *
+                                                                1.25 *
+                                                                1.3
+                                                        ).toFixed(1)
                                                     }}
                                                 </td>
                                             </tr>
                                             <tr v-if="relation.korea">
-                                                <td class="whitespace-nowrap px-3 text-center"
-                                                    v-for="rate in selected_rates">
+                                                <td
+                                                    class="whitespace-nowrap px-3 text-center"
+                                                    v-for="rate in selected_rates"
+                                                >
                                                     {{
                                                         Math.round(
                                                             (relation.price *
                                                                 110) /
-                                                            243.5
+                                                                243.5
                                                         ) *
                                                         rate *
                                                         1.25 *
@@ -156,7 +181,9 @@ const savePrice = () => {
             </div>
             <div class="rounded-lg bg-white shadow-md col-span-2">
                 <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
+                    <h2
+                        class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white"
+                    >
                         Given Prices
                     </h2>
                 </div>
@@ -180,10 +207,16 @@ const savePrice = () => {
                         </thead>
                         <tbody id="results">
                             <tr class="bg-gray-200" v-for="price in prices">
-                                <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                <td
+                                    scope="col"
+                                    class="px-3 text-gray-800 py-3 break-words"
+                                >
                                     {{ price.partnumber }}
                                 </td>
-                                <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                <td
+                                    scope="col"
+                                    class="px-3 text-gray-800 py-3 break-words"
+                                >
                                     {{ price.price }}
                                 </td>
                                 <td scope="col" class="px-3 text-gray-800 py-3">
@@ -200,18 +233,32 @@ const savePrice = () => {
                             <!-- Name -->
                             <div class="pb-2">
                                 <InputLabel for="price" value="Price" />
-                                <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
-                                    autocomplete="price" />
-                                <InputError :message="form.errors.price" class="mt-2" />
+                                <TextInput
+                                    id="price"
+                                    v-model="form.price"
+                                    type="text"
+                                    class="mt-1 block w-full"
+                                    autocomplete="price"
+                                />
+                                <InputError
+                                    :message="form.errors.price"
+                                    class="mt-2"
+                                />
                             </div>
                         </template>
 
                         <template #actions>
-                            <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                            <ActionMessage
+                                :on="form.recentlySuccessful"
+                                class="mr-3"
+                            >
                                 Saved.
                             </ActionMessage>
 
-                            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                            <PrimaryButton
+                                :class="{ 'opacity-25': form.processing }"
+                                :disabled="form.processing"
+                            >
                                 Save
                             </PrimaryButton>
                         </template>
@@ -220,7 +267,9 @@ const savePrice = () => {
             </div>
             <div class="rounded-lg bg-white shadow-md col-span-2">
                 <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white">
+                    <h2
+                        class="text-xl font-semibold bg-violet-600 w-full rounded-t-md p-3 text-center text-white"
+                    >
                         Received Prices
                     </h2>
                 </div>
@@ -245,10 +294,16 @@ const savePrice = () => {
                         </thead>
                         <tbody id="results">
                             <tr class="bg-gray-200" v-for="price in prices">
-                                <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                <td
+                                    scope="col"
+                                    class="px-3 text-gray-800 py-3 break-words"
+                                >
                                     {{ price.partnumber }}
                                 </td>
-                                <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                <td
+                                    scope="col"
+                                    class="px-3 text-gray-800 py-3 break-words"
+                                >
                                     {{ price.price }}
                                 </td>
                                 <td scope="col" class="px-3 text-gray-800 py-3">

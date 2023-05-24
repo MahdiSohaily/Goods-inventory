@@ -53,8 +53,7 @@ class PriceController extends Controller
 
     public function load(Request $request)
     {
-        $arr = explode("\n", $request->input('code'));
-        return $arr;
+        // $arr = explode("\n", $request->input('code'));
         Validator::make($request->all(), [
             'customer' => 'required|string|exists:customers,id',
             'code' => 'required|string',
@@ -63,8 +62,33 @@ class PriceController extends Controller
             'required' => "The :attribute field can't be empty.",
         ])->validate();
 
-        $code = $request->input('code');
         $customer = $request->input('customer');
+
+        $codes = explode("\n", $request->input('code'));
+        $allCodeData = [];
+
+        foreach ($codes as $key => $value) {
+            $good = DB::table('nisha')->where('partNumber', $value)->first();
+            if ($good) {
+                array_push($allCodeData, $this->getCodeData($good->id, $customer));
+            } else {
+            }
+        }
+
+        return Inertia::render('Price/Partials/Load', $allCodeData);
+    }
+
+    public function store(Request $request)
+    {
+        DB::table('prices')->insert([
+            'partnumber' => $request->input('partnumber'),
+            'price' => $request->input('price'),
+            'customer_id' => $request->input('customer'),
+        ]);
+    }
+
+    public function getCodeData($code, $customer)
+    {
 
         $code_id = DB::table('nisha')->select('id')->where('partnumber', $code)->first();
         $pattern_id = DB::table('similars')->where('nisha_id', $code_id->id)->first();
@@ -88,21 +112,9 @@ class PriceController extends Controller
             ->join('customers', 'prices.customer_id', 'customers.id')
             ->where('prices.partnumber', 'like', "$pattern%")->get();
 
-        return Inertia::render(
-            'Price/Partials/Load',
-            [
-                'code' => $code, 'pattern' => $pattern, 'relations' => $all_relations,
-                'customer' => $customer, 'cars' => $cars, 'rates' => $rates, 'prices' => $prices
-            ]
-        );
-    }
-
-    public function store(Request $request)
-    {
-        DB::table('prices')->insert([
-            'partnumber' => $request->input('partnumber'),
-            'price' => $request->input('price'),
-            'customer_id' => $request->input('customer'),
-        ]);
+        return  [
+            'code' => $code, 'pattern' => $pattern, 'relations' => $all_relations,
+            'customer' => $customer, 'cars' => $cars, 'rates' => $rates, 'prices' => $prices
+        ];
     }
 }

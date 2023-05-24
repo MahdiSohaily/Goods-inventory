@@ -68,7 +68,7 @@ Route::middleware([
     Route::controller(RelationController::class)->group(function () {
         Route::get('/relations', 'index')->name('relations'); // relations route lead us to the relations page
         Route::post('/relations/search', 'search')->name('relations.search'); // Route to create new good in the system
-        Route::get('/relations/load', 'load')->name('relations.load'); // Route to create new good in the system
+        Route::post('/relations/load', 'load')->name('relations.load'); // Route to create new good in the system
         Route::post('/relations', 'store')->name('relations.store'); // Route to create new good in the system
         Route::post('/relations/pattern', 'pattern')->name('relations.pattern'); // Route to create new good in the system
         Route::put('/relations', 'update')->name('relations.update'); // Route to create new good in the system
@@ -78,7 +78,7 @@ Route::middleware([
     Route::controller(PriceController::class)->group(function () {
         Route::get('/price', 'index')->name('price.give'); // price route lead us to the price page
         Route::get('/price/test', 'create')->name('price.test'); // price route lead us to the price page
-        Route::post('/price/load', 'load')->name('price.load'); // Route to create new good in the system
+        Route::get('/price/load', 'load')->name('price.load'); // Route to create new good in the system
         Route::post('/price', 'store')->name('price.store'); // Route to create new good in the system
         Route::post('/price/pattern', 'pattern')->name('price.pattern'); // Route to create new good in the system
         Route::put('/price', 'update')->name('price.update'); // Route to create new good in the system

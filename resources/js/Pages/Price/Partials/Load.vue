@@ -16,7 +16,7 @@ const props = defineProps({
 const selected_rates = [50, 51, 52, 55];
 
 const form = useForm({
-    _method: "GET",
+    _method: "POST",
     form_id: null,
     customer: props.customer,
     partnumber: null,
@@ -343,7 +343,7 @@ const savePrice = () => {
                 </div>
             </div>
             <div v-else class="bg-white rounded-lg lg:p-2">
-                <p>No result for{{ item.search }}</p>
+                <p>No result for {{ item.search }}</p>
             </div>
         </div>
     </AppLayout>

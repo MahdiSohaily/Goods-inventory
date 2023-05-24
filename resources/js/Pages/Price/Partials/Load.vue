@@ -34,7 +34,7 @@ const savePrice = () => {
 
 <template>
     <AppLayout title="Rates">
-        <div v-for="item in allCodeData" class="h-70S grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
+        <div v-for="item in allCodeData.result" class="h-70S grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
             <div v-if="null != item">
                 <div class="bg-white rounded-lg">
                     <div class="flex items-center justify-between">

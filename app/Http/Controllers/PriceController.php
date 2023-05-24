@@ -70,7 +70,7 @@ class PriceController extends Controller
         foreach ($codes as $key => $value) {
             $good = DB::table('nisha')->where('partNumber', $value)->first();
             if ($good) {
-                array_push($allCodeData, $this->getCodeData($good->id, $customer, $value));
+                array_push($allCodeData, ['result' => $this->getCodeData($good->id, $customer, $value), 'search' => $value]);
             } else {
                 array_push($allCodeData, ['result' => null, 'search' => $value]);
             }

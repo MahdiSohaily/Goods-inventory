@@ -117,7 +117,7 @@ class PriceController extends Controller
             ->where('prices.partnumber', 'like', "$partNumber%")->get();
 
         return  [
-            'search' => $search, 'code' => $code, 'pattern' => $partNumber,
+            'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
             'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars,
             'rates' => $rates, 'prices' => $prices, 'name' => $pattern->name
         ];

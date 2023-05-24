@@ -23,7 +23,8 @@ const form = useForm({
     price: null,
 });
 
-const savePrice = () => {
+const savePrice = (pattern) => {
+    form.partnumber = pattern;
     form.post(route("price.store"), {
         errorBag: "savePrice",
         preserveScroll: true,
@@ -44,7 +45,7 @@ const savePrice = () => {
                         <p class="text-center bg-gray-600 text-white">
                             {{ item.search }}
                         </p>
-                        <!-- <p class="text-center">{{ pattern.name }}</p> -->
+                        <p class="text-center">{{ item.name }}</p>
                         <ul>
                             <li
                                 class="text-center"
@@ -241,7 +242,9 @@ const savePrice = () => {
                                 </tr>
                             </tbody>
                         </table>
-                        <FormRelation @submitted="savePrice()">
+                        <FormRelation
+                            @submitted="savePrice(item.result.pattern)"
+                        >
                             <template #form>
                                 <!-- Name -->
                                 <div class="pb-2">

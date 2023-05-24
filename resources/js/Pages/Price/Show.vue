@@ -13,7 +13,7 @@ defineProps({
 });
 
 const form = useForm({
-    _method: "POST",
+    _method: "GET",
     customer: null,
     code: null,
 });
@@ -29,21 +29,36 @@ const LoadPrice = () => {
 
 <template>
     <AppLayout title="Rates">
-        <div class="max-w-2xl mx-auto py-20 sm:px-6 lg:px-8 bg-white rounded-lg shadow-sm mt-11">
+        <div
+            class="max-w-2xl mx-auto py-20 sm:px-6 lg:px-8 bg-white rounded-lg shadow-sm mt-11"
+        >
             <FormRelation @submitted="LoadPrice">
                 <template #form>
                     <!-- Name -->
                     <div class="pb-2">
                         <InputLabel for="customer" value="customer" />
-                        <TextInput id="customer" v-model="form.customer" type="number" class="mt-1 block w-full"
-                            autocomplete="customer" />
-                        <InputError :message="form.errors.customer" class="mt-2" />
+                        <TextInput
+                            id="customer"
+                            v-model="form.customer"
+                            type="number"
+                            class="mt-1 block w-full"
+                            autocomplete="customer"
+                        />
+                        <InputError
+                            :message="form.errors.customer"
+                            class="mt-2"
+                        />
                     </div>
                     <div class="pb-2">
                         <InputLabel for="code" value="code" />
-                        <textarea rows="7" id="code" v-model="form.code" type="text"
-                            class="mt-1 shadow-sm block w-full rounded-md border-gray-300">
-                            </textarea>
+                        <textarea
+                            rows="7"
+                            id="code"
+                            v-model="form.code"
+                            type="text"
+                            class="mt-1 shadow-sm block w-full rounded-md border-gray-300"
+                        >
+                        </textarea>
                         <InputError :message="form.errors.code" class="mt-2" />
                     </div>
                 </template>
@@ -53,7 +68,10 @@ const LoadPrice = () => {
                         Saved.
                     </ActionMessage>
 
-                    <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <PrimaryButton
+                        :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing"
+                    >
                         Save
                     </PrimaryButton>
                 </template>

@@ -70,12 +70,13 @@ class PriceController extends Controller
         foreach ($codes as $key => $value) {
             $good = DB::table('nisha')->where('partNumber', $value)->first();
             if ($good) {
-                array_push($allCodeData, $this->getCodeData($good->id, $customer));
+                array_push($allCodeData, $this->getCodeData($good->id, $customer, $value));
             } else {
-                array_push($allCodeData, null);
+                array_push($allCodeData, ['result' => null, 'search' => $value]);
             }
         }
 
+        return $allCodeData;
         return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer]);
     }
 
@@ -88,9 +89,8 @@ class PriceController extends Controller
         ]);
     }
 
-    public function getCodeData($code, $customer)
+    public function getCodeData($code, $customer, $search)
     {
-
 
         $pattern_id = DB::table('similars')->where('nisha_id', $code)->first();
         $pattern = DB::table('patterns')->where('id', $pattern_id->pattern_id)->first();
@@ -114,8 +114,9 @@ class PriceController extends Controller
             ->where('prices.partnumber', 'like', "$pattern%")->get();
 
         return  [
-            'code' => $code, 'pattern' => $pattern, 'relations' => $all_relations,
-            'customer' => $customer, 'cars' => $cars, 'rates' => $rates, 'prices' => $prices
+            'search' => $search, 'code' => $code, 'pattern' => $pattern,
+            'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars,
+            'rates' => $rates, 'prices' => $prices
         ];
     }
 }

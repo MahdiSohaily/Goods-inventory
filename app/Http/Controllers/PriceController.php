@@ -76,7 +76,7 @@ class PriceController extends Controller
             }
         }
 
-        return Inertia::render('Price/Partials/Load', $allCodeData);
+        return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData]);
     }
 
     public function store(Request $request)
@@ -91,7 +91,7 @@ class PriceController extends Controller
     public function getCodeData($code, $customer)
     {
 
-        
+
         $pattern_id = DB::table('similars')->where('nisha_id', $code)->first();
         $pattern = DB::table('patterns')->where('id', $pattern_id->pattern_id)->first();
 

@@ -76,7 +76,6 @@ class PriceController extends Controller
             }
         }
 
-        return $allCodeData;
         return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer]);
     }
 

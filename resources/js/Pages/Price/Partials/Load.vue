@@ -243,6 +243,9 @@ const savePrice = () => {
                     </div>
                 </div>
             </div>
+            <div v-else>
+                <p>Nothing</p>
+            </div>
         </div>
     </AppLayout>
 </template>

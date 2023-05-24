@@ -54,7 +54,7 @@ class PriceController extends Controller
 
     public function load(Request $request)
     {
-        if ($request->input('customer')) {
+        // if ($request->input('customer')) {
             // $arr = explode("\n", $request->input('code'));
             Validator::make($request->all(), [
                 'customer' => 'required|string|exists:customers,id',
@@ -65,6 +65,7 @@ class PriceController extends Controller
             ])->validate();
 
             $customer = $request->input('customer');
+            $completeCode = $request->input('code');
 
             $codes = explode("\n", $request->input('code'));
             $allCodeData = [];
@@ -79,8 +80,8 @@ class PriceController extends Controller
             }
 
             return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer]);
-        }
-        return Inertia::render('Price/Show');
+        // }
+        // return Inertia::render('Price/Show');
     }
 
     public function store(Request $request)

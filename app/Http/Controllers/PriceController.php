@@ -110,16 +110,16 @@ class PriceController extends Controller
             ->get();
 
         $good = DB::table('nisha')->where('id', $code)->first();
-        $pattern = substr($good->partnumber, 0, 5);
+        $partNumber = substr($good->partnumber, 0, 5);
 
         $prices = DB::table('prices')
             ->join('customers', 'prices.customer_id', 'customers.id')
-            ->where('prices.partnumber', 'like', "$pattern%")->get();
+            ->where('prices.partnumber', 'like', "$partNumber%")->get();
 
         return  [
-            'search' => $search, 'code' => $code, 'pattern' => $pattern,
+            'search' => $search, 'code' => $code, 'pattern' => $partNumber,
             'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars,
-            'rates' => $rates, 'prices' => $prices
+            'rates' => $rates, 'prices' => $prices, 'name' => $pattern->name
         ];
     }
 }

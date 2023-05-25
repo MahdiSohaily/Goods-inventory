@@ -249,13 +249,15 @@ const arrangeTime = (dateTime) => {
                             <thead>
                                 <tr>
                                     <th>
-                                        <span>part Number</span><span>Price</span><span>Client</span>
+                                        <span class="px-4 text-gray-600">part NA</span>
+                                        <span class="px-4 text-gray-600">Price</span>
+                                        <span class="px-4 text-gray-600">Client</span>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody id="results">
-                                <div class="min-w-full bg-indigo-300" v-for="price in item.result.prices">
-                                    <div class="min-w-full">
+                                <div class="min-w-full mb-1 border-2 border-gray-400" v-for="price in item.result.prices">
+                                    <div class="min-w-full bg-indigo-100">
                                         <td scope="col" class="px-3 text-gray-800 py-1 break-words">
                                             {{ price.partnumber }}
                                         </td>
@@ -266,8 +268,8 @@ const arrangeTime = (dateTime) => {
                                             {{ price.name }}
                                         </td>
                                     </div>
-                                    <div class="min-w-full bg-orange-300">
-                                        <td colspan="3" scope="col" class="px-3 text-gray-800 py-2">
+                                    <div class="min-w-full bg-orange-100 py-1">
+                                        <td colspan="3" scope="col" class="px-3 text-gray-800">
                                             {{ arrangeTime(price.created_at) }}
                                         </td>
                                     </div>

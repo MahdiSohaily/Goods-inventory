@@ -13,6 +13,7 @@ class PriceController extends Controller
 {
     public function index()
     {
+        return Carbon::now();
         return Inertia::render('Price/Show');
     }
 

@@ -77,7 +77,7 @@ const savePrice = (pattern) => {
                                     </td>
                                     <td class="px-2 py-3">
                                         <table
-                                            class="text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-700">
+                                            class="max-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-700">
                                             <thead class="font-medium">
                                                 <tr>
                                                     <th v-for="rate in selected_rates" scope="col"

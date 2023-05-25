@@ -102,7 +102,10 @@ class PriceController extends Controller
 
         $prices = DB::table('prices')
             ->join('customers', 'prices.customer_id', 'customers.id')
-            ->where('prices.partnumber', 'like', "$partNumber%")->get();
+            ->where('prices.partnumber', 'like', "$partNumber%")
+            ->orderBy('prices.created_at', 'asc')
+            ->limit(4)
+            ->get();
 
         return  [
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,

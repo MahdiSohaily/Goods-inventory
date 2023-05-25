@@ -74,13 +74,10 @@ Route::middleware([
         Route::put('/relations', 'update')->name('relations.update'); // Route to create new good in the system
     });
 
-    // Rate Page related routs
+    // Price Page related routs
     Route::controller(PriceController::class)->group(function () {
         Route::get('/price', 'index')->name('price.give'); // price route lead us to the price page
-        Route::get('/price/test', 'create')->name('price.test'); // price route lead us to the price page
         Route::get('/price/load', 'load')->name('price.load'); // Route to create new good in the system
         Route::post('/price', 'store')->name('price.store'); // Route to create new good in the system
-        Route::post('/price/pattern', 'pattern')->name('price.pattern'); // Route to create new good in the system
-        Route::put('/price', 'update')->name('price.update'); // Route to create new good in the system
     });
 });

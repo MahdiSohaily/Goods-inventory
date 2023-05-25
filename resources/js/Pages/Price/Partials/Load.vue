@@ -27,7 +27,7 @@ const savePrice = (pattern) => {
     form.post(route("price.store"), {
         errorBag: "savePrice",
         preserveScroll: true,
-        onSuccess: () => alert("price added"),
+        onSuccess: () =>{ alert("price added")},
     });
 };
 </script>

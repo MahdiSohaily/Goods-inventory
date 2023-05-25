@@ -34,6 +34,30 @@ const savePrice = (pattern) => {
         },
     });
 };
+const arrangeTime = (dateTime) => {
+    const now = new Date();
+    const create = new Date(dateTime);
+    const [date, time] = dateTime.split(" ");
+    const diff = now - create;
+
+    var msec = diff;
+    var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
+    msec -= dd * 1000 * 60 * 60 * 24;
+    var hh = Math.floor(msec / 1000 / 60 / 60);
+    msec -= hh * 1000 * 60 * 60;
+
+    let text = "";
+
+    if (dd) {
+        dd > 1 ? (text += `${dd} days and`) : (text += `${dd} day and `);
+    }
+
+    if (hh) {
+        hh > 1 ? (text += `${hh} hours`) : (text += `${hh} hour `);
+    }
+
+    return `${text} ago`;
+};
 </script>
 
 <template>
@@ -320,7 +344,7 @@ const savePrice = (pattern) => {
                                         scope="col"
                                         class="px-3 text-gray-800 py-3"
                                     >
-                                        {{ price.created_at }}
+                                        {{ arrangeTime(price.created_at) }}
                                     </td>
                                 </tr>
                             </tbody>

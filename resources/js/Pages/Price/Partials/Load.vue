@@ -24,7 +24,6 @@ const form = useForm({
 
 const savePrice = (pattern) => {
     form.partnumber = pattern;
-    alert("called");
     form.post(route("price.store"), {
         errorBag: "savePrice",
         preserveScroll: true,

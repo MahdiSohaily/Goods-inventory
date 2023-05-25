@@ -96,6 +96,7 @@ class PriceController extends Controller
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+        return true;
     }
 
     public function getCodeData($code, $customer, $search)

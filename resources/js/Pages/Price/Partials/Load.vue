@@ -21,6 +21,8 @@ const form = useForm({
     customer: props.customer,
     partnumber: null,
     price: null,
+    created_at: new Date(),
+    updated_at: new Date(),
     code: props.completeCode,
 });
 

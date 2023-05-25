@@ -35,6 +35,7 @@ const savePrice = (pattern) => {
 
 <template>
     <AppLayout title="Rates">
+        {{ allCodeData }}
         <div v-for="item in allCodeData">
             <div v-if="null != item.result" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
                 <div class="bg-white rounded-lg">

@@ -246,21 +246,28 @@ const arrangeTime = (dateTime) => {
                 <div class="bg-white shadow-md col-span-2">
                     <div id="search_result" class="p-3">
                         <table class="min-w-full text-left text-sm font-light">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span>part Number</span><span>Price</span><span>Client</span>
+                                    </th>
+                                </tr>
+                            </thead>
                             <tbody id="results">
                                 <div class="min-w-full bg-indigo-300" v-for="price in item.result.prices">
                                     <div class="min-w-full">
-                                        <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                        <td scope="col" class="px-3 text-gray-800 py-1 break-words">
                                             {{ price.partnumber }}
                                         </td>
-                                        <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                        <td scope="col" class="px-3 text-gray-800 py-1 break-words">
                                             {{ price.price }}
                                         </td>
-                                        <td scope="col" class="px-3 text-gray-800 py-3">
+                                        <td scope="col" class="px-3 text-gray-800 py-1">
                                             {{ price.name }}
                                         </td>
                                     </div>
                                     <div class="min-w-full bg-orange-300">
-                                        <td colspan="3" scope="col" class="px-3 text-gray-800 py-1">
+                                        <td colspan="3" scope="col" class="px-3 text-gray-800 py-2">
                                             {{ arrangeTime(price.created_at) }}
                                         </td>
                                     </div>

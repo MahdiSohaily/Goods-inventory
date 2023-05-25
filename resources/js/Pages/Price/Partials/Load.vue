@@ -61,7 +61,7 @@ const savePrice = (pattern) => {
                 <div class="bg-white rounded-lg col-span-5">
                     <div id="search_result" class="p-3">
                         <table class="min-w-full text-left text-sm font-light">
-                            <thead class="font-medium bg-green-600">
+                            <thead class="font-medium bg-green-300">
                                 <tr>
                                     <th
                                         scope="col"
@@ -85,12 +85,12 @@ const savePrice = (pattern) => {
                             </thead>
                             <tbody id="results">
                                 <tr v-for="relation in item.result.relations">
-                                    <td class="px-3 bold">
-                                        <b>{{ relation.partnumber }}</b>
+                                    <td class="px-1 pt-2">
+                                        <p class="bold">{{ relation.partnumber }}</p>
                                     </td>
-                                    <td>
+                                    <td class="px-1 pt-2">
                                         <table
-                                            class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-700"
+                                            class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-400"
                                         >
                                             <thead class="font-medium">
                                                 <tr>
@@ -170,9 +170,9 @@ const savePrice = (pattern) => {
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td class="px-2 py-3">
+                                    <td class="px-1 pt-2">
                                         <table
-                                            class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-700"
+                                            class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-400"
                                         >
                                             <thead class="font-medium">
                                                 <tr>

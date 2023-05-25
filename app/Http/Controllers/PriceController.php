@@ -13,7 +13,6 @@ class PriceController extends Controller
 {
     public function index()
     {
-        // return Carbon::now();
         return Inertia::render('Price/Show');
     }
 
@@ -58,8 +57,8 @@ class PriceController extends Controller
             'partnumber' => $request->input('partnumber'),
             'price' => $request->input('price'),
             'customer_id' => $request->input('customer'),
-            'created_at' => $request->input('created_at'),
-            'updated_at' => $request->input('updated_at'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
         $customer = $request->input('customer');

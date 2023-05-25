@@ -27,7 +27,9 @@ const savePrice = (pattern) => {
     form.post(route("price.store"), {
         errorBag: "savePrice",
         preserveScroll: true,
-        onSuccess: () => clearInput(),
+        onSuccess: () => {
+            alert("price added");
+        },
     });
 };
 </script>
@@ -85,7 +87,9 @@ const savePrice = (pattern) => {
                             <tbody id="results">
                                 <tr v-for="relation in item.result.relations">
                                     <td class="px-1 pt-2">
-                                        <p class="bold">{{ relation.partnumber }}</p>
+                                        <p class="bold">
+                                            {{ relation.partnumber }}
+                                        </p>
                                     </td>
                                     <td class="px-1 pt-2">
                                         <table

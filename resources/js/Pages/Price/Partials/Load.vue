@@ -27,7 +27,7 @@ const savePrice = (pattern) => {
     form.post(route("price.store"), {
         errorBag: "savePrice",
         preserveScroll: true,
-        onSuccess: () =>{ alert("price added")},
+        onSuccess: () => { alert("price added") },
     });
 };
 </script>
@@ -313,8 +313,9 @@ const savePrice = (pattern) => {
                     </div>
                 </div>
             </div>
-            <div v-else class="bg-white rounded-lg lg:p-2">
-                <p>No result for {{ item.search }}</p>
+            <div v-else
+                class="w-96 my-96 mx-auto text-center h-40 bg-white rounded-lg lg:p-2 flex justify-center items-center">
+                <p>No result ! {{ item.search }}</p>
             </div>
         </div>
     </AppLayout>

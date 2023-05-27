@@ -113,7 +113,7 @@ class PriceController extends Controller
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
             'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars,
             'rates' => $rates, 'prices' => $prices, 'name' => $pattern->name,
-            'existing' => $existing
+            'existing'
         ];
     }
 
@@ -121,11 +121,10 @@ class PriceController extends Controller
     public function exist($id)
     {
         $result =
-            DB::table('qtybank')->groupBy('brand.name')
-            ->join('brand', 'brand.id', '=', 'qtybank.brand')
+            DB::table('qtybank')
+            ->select('id', 'codeid', 'brand')
             ->where('codeid', $id)
-            ->selectRaw('sum(qty) as sum, name')
-            ->pluck('sum', 'name');
+            ->get();
         return $result;
     }
 }

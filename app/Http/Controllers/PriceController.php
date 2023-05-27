@@ -117,26 +117,9 @@ class PriceController extends Controller
 
     public function exist()
     {
-        $result = DB::table('qtybank')->select(
-            'nisha.partnumber',
-            'nisha.id',
-            'stock.name AS stckname',
-            'nisha.price AS nprice',
-            'seller.name',
-            'brand.name AS brn',
-            'qtybank.qty',
-            'qtybank.pos1',
-            'qtybank.pos2',
-            'qtybank.des',
-            'qtybank.id AS qtyid',
-            'qtybank.qty AS entqty'
-        )
-            ->leftJoin('nisha', 'nisha.id', '=', 'qtybank.codeid')
-            ->leftJoin('seller', 'seller.id', '=', 'qtybank.seller')
-            ->leftJoin('brand', 'brand.id', '=', 'qtybank.brand')
-            ->leftJoin('stock', 'stock.id', '=', 'qtybank.stock_id')
-            ->orderBy('nisha.partnumber', 'DESC')
-            ->where('nisha.partnumber','553113f700')
+        $result = DB::table('brand')
+            ->leftJoin('qtybank', 'qtybank.brand', '=', 'brand.id')
+            ->where('qtybank.codeid', '539615')
             ->get();
         return $result;
     }

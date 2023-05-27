@@ -123,13 +123,14 @@ class PriceController extends Controller
         $result =
             DB::table('exitrecord')
             ->select('qty')
-            ->where('qtyid', 17)
+            ->where('qtyid', $id)
             ->first();
         return $result;
     }
 
-    public function exist($id)
+    public function exist()
     {
+        $id = 252845;
         $result =
             DB::table('qtybank')
             ->join('brand', 'brand.id', '=', 'qtybank.brand')

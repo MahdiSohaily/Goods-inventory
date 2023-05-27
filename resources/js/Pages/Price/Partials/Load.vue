@@ -138,7 +138,8 @@ const arrangeTime = (dateTime) => {
                                             <thead class="font-medium">
                                                 <tr>
                                                     <th
-                                                        v-for="rate in item.result.existing[1]"
+                                                        v-for="rate in item
+                                                            .result.existing[1]"
                                                         scope="col"
                                                         class="text-gray-800 text-center bg-orange-200 py-2"
                                                     >
@@ -150,64 +151,10 @@ const arrangeTime = (dateTime) => {
                                                 <tr class="bg-violet-200 py-3">
                                                     <td
                                                         class="whitespace-nowrap px-3 py-2 text-center"
-                                                        v-for="rate in selected_rates"
+                                                        v-for="rate in item
+                                                            .result.existing[0]"
                                                     >
-                                                        {{
-                                                            Number(
-                                                                Math.round(
-                                                                    (relation.price *
-                                                                        110) /
-                                                                        243.5
-                                                                ) *
-                                                                    rate *
-                                                                    1.2 *
-                                                                    1.2 *
-                                                                    1.3
-                                                            ).toFixed(1)
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr
-                                                    class="bg-indigo-200"
-                                                    v-if="
-                                                        relation.mobis !==
-                                                            null &&
-                                                        relation.mobis !== '-'
-                                                    "
-                                                >
-                                                    <td
-                                                        class="whitespace-nowrap px-3 text-center py-2"
-                                                        v-for="rate in selected_rates"
-                                                    >
-                                                        {{
-                                                            Number(
-                                                                Math.round(
-                                                                    (relation.price *
-                                                                        110) /
-                                                                        243.5
-                                                                ) *
-                                                                    rate *
-                                                                    1.25 *
-                                                                    1.3
-                                                            ).toFixed(1)
-                                                        }}
-                                                    </td>
-                                                </tr>
-                                                <tr v-if="relation.korea">
-                                                    <td
-                                                        class="whitespace-nowrap px-3 text-center"
-                                                        v-for="rate in selected_rates"
-                                                    >
-                                                        {{
-                                                            Math.round(
-                                                                (relation.price *
-                                                                    110) /
-                                                                    243.5
-                                                            ) *
-                                                            rate *
-                                                            1.25 *
-                                                            1.3
-                                                        }}
+                                                        {{ rate }}
                                                     </td>
                                                 </tr>
                                             </tbody>

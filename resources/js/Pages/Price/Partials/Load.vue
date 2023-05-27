@@ -66,7 +66,7 @@ const arrangeTime = (dateTime) => {
         mm > 1 ? (text += `${mm} minutes `) : (text += `${mm} minute `);
     }
 
-    if (!mm && !hh && mss) {
+    if (!mm && !hh) {
         ss > 1 ? (text += `${ss} seconds `) : (text += `1 second `);
     }
 

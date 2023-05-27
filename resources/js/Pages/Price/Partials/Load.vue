@@ -37,7 +37,6 @@ const savePrice = (pattern) => {
 const arrangeTime = (dateTime) => {
     const now = new Date();
     const create = new Date(dateTime);
-    const [date, time] = dateTime.split(" ");
     const diff = now - create;
 
     var msec = diff;

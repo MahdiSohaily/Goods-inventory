@@ -67,7 +67,7 @@ const arrangeTime = (dateTime) => {
     }
 
     if (!ss && !hh && mm) {
-        ss > 1 ? (text += `${ss} seconds `) : (text += `${ss} second `);
+        ss > 1 ? (text += `${ss} seconds `) : (text += `1 second `);
     }
 
     return `${text} ago`;

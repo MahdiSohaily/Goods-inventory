@@ -114,7 +114,7 @@ class PriceController extends Controller
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
             'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars,
             'rates' => $rates, 'prices' => $prices, 'name' => $pattern->name,
-            'existing'
+            'existing' => $existing
         ];
     }
 
@@ -128,9 +128,8 @@ class PriceController extends Controller
         return $result;
     }
 
-    public function exist()
+    public function exist($id)
     {
-        $id = 598228;
         $result =
             DB::table('qtybank')
             ->join('brand', 'brand.id', '=', 'qtybank.brand')
@@ -138,6 +137,7 @@ class PriceController extends Controller
             ->where('codeid', $id)
             ->get();
         $brands = [];
+        $amount = [];
 
         foreach ($result as $key => $value) {
             $out = $this->out($value->id) ? (int) $this->out($value->id)->qty : 0;
@@ -145,8 +145,19 @@ class PriceController extends Controller
 
             array_push($brands, $value->name);
         }
-        
         $brands = array_unique($brands);
 
+        foreach ($brands as $key => $value) {
+            $item = $value;
+            $total = 0;
+            foreach ($result as $key => $value) {
+                if ($item == $value->name) {
+                    $total += $value->qty;
+                }
+            }
+            array_push($amount, $total);
+        }
+
+        return [$amount, $brands];
     }
 }

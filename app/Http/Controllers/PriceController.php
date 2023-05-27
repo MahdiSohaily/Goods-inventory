@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Carbon\Carbon;
+use Faker\Core\Number;
 use Illuminate\Support\Facades\DB;
 use League\CommonMark\Node\Block\Document;
 
@@ -117,14 +118,29 @@ class PriceController extends Controller
         ];
     }
 
-
-    public function exist($id)
+    public function out($id)
     {
         $result =
+            DB::table('exitrecord')
+            ->select('qty')
+            ->where('qtyid', 17)
+            ->first();
+        return $result;
+    }
+
+    public function exist()
+    {
+        $id = 598228;
+        $result =
             DB::table('qtybank')
-            ->select('id', 'codeid', 'brand')
+            ->select('id', 'codeid', 'brand', 'qty')
             ->where('codeid', $id)
             ->get();
+
+        foreach ($result as $key => $value) {
+            $out = $this->out($value->id) ? (int) $this->out($value->id)->qty : 0;
+            $value->qty = (int)($value->qty) - $out;
+        }
         return $result;
     }
 }

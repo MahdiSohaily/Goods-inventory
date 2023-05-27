@@ -98,7 +98,7 @@ class PriceController extends Controller
             ->get();
 
         $good = DB::table('nisha')->where('id', $code)->first();
-        $partNumber = substr($good->partnumber, 0, 5);
+        $partNumber = substr($good->partnumber, 0, 7);
 
         $prices = DB::table('prices')
             ->join('customers', 'prices.customer_id', 'customers.id')

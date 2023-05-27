@@ -24,6 +24,10 @@ const form = useForm({
     code: props.completeCode,
 });
 
+const changeVal = (value) => {
+    form.price = value;
+};
+
 const savePrice = (pattern) => {
     form.partnumber = pattern;
     form.post(route("price.store"), {
@@ -311,7 +315,7 @@ const arrangeTime = (dateTime) => {
                                     <InputLabel for="price" value="Price" />
                                     <TextInput
                                         id="price"
-                                        v-model="form.price"
+                                        onchange="(e)=>{ changeVal(e.target.value)}"
                                         type="text"
                                         class="mt-1 block w-full"
                                         autocomplete="price"

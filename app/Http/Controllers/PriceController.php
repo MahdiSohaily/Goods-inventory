@@ -85,37 +85,63 @@ class PriceController extends Controller
     {
 
         $pattern_id = DB::table('similars')->where('nisha_id', $code)->first();
-        $pattern = DB::table('patterns')->where('id', $pattern_id->pattern_id)->first();
 
-        $all_relations = DB::table('similars')
-            ->join('nisha', 'similars.nisha_id', '=', 'nisha.id')
-            ->where('pattern_id', $pattern_id->pattern_id)->get();
+        if ($pattern_id) {
 
-        $cars = DB::table('patterncars')
-            ->join('cars', 'patterncars.car_id', '=', 'cars.id')
-            ->where('patterncars.pattern_id', $pattern_id->pattern_id)->get();
+            $pattern = $pattern_id ? DB::table('patterns')->where('id', $pattern_id->pattern_id)->first() : null;
 
-        $rates = DB::table('rates')
-            ->orderBy('amount', 'asc')
-            ->get();
+            $all_relations = DB::table('similars')
+                ->join('nisha', 'similars.nisha_id', '=', 'nisha.id')
+                ->where('pattern_id', $pattern_id->pattern_id)->get();
 
-        $good = DB::table('nisha')->where('id', $code)->first();
-        $partNumber = substr($good->partnumber, 0, 7);
+            $cars = DB::table('patterncars')
+                ->join('cars', 'patterncars.car_id', '=', 'cars.id')
+                ->where('patterncars.pattern_id', $pattern_id->pattern_id)->get();
 
-        $prices = DB::table('prices')
-            ->select('prices.*', 'customers.name', 'customers.lastname')
-            ->join('customers', 'prices.customer_id', 'customers.id')
-            ->where('prices.partnumber', 'like', "$partNumber%")
-            ->orderBy('prices.created_at', 'desc')
-            ->limit(4)
-            ->get();
-        $existing = $this->exist($code);
-        return  [
-            'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
-            'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars,
-            'rates' => $rates, 'prices' => $prices, 'name' => $pattern->name,
-            'existing' => $existing
-        ];
+            $rates = DB::table('rates')
+                ->orderBy('amount', 'asc')
+                ->get();
+
+            $good = DB::table('nisha')->where('id', $code)->first();
+            $partNumber = substr($good->partnumber, 0, 7);
+
+            $prices = DB::table('prices')
+                ->select('prices.*', 'customers.name', 'customers.lastname')
+                ->join('customers', 'prices.customer_id', 'customers.id')
+                ->where('prices.partnumber', 'like', "$partNumber%")
+                ->orderBy('prices.created_at', 'desc')
+                ->limit(4)
+                ->get();
+            $existing = $this->exist($code);
+            return  [
+                'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
+                'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars,
+                'rates' => $rates, 'prices' => $prices, 'name' => $pattern->name,
+                'existing' => $existing
+            ];
+        } else {
+            $rates = DB::table('rates')
+                ->orderBy('amount', 'asc')
+                ->get();
+
+            $good = DB::table('nisha')->where('id', $code)->first();
+            $partNumber = substr($good->partnumber, 0, 7);
+
+            $prices = DB::table('prices')
+                ->select('prices.*', 'customers.name', 'customers.lastname')
+                ->join('customers', 'prices.customer_id', 'customers.id')
+                ->where('prices.partnumber', 'like', "$partNumber%")
+                ->orderBy('prices.created_at', 'desc')
+                ->limit(4)
+                ->get();
+            $existing = $this->exist($code);
+            return  [
+                'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
+                'relations' => null, 'customer' => $customer, 'cars' => null,
+                'rates' => $rates, 'prices' => $prices, 'name' => null,
+                'existing' => $existing
+            ];
+        }
     }
 
     public function out($id)
@@ -128,9 +154,8 @@ class PriceController extends Controller
         return $result;
     }
 
-    public function exist()
+    public function exist($id)
     {
-        $id = 252845;
         $result =
             DB::table('qtybank')
             ->join('brand', 'brand.id', '=', 'qtybank.brand')

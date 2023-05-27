@@ -133,14 +133,20 @@ class PriceController extends Controller
         $id = 598228;
         $result =
             DB::table('qtybank')
-            ->select('id', 'codeid', 'brand', 'qty')
+            ->join('brand', 'brand.id', '=', 'qtybank.brand')
+            ->select('qtybank.id', 'codeid', 'brand.name', 'qty')
             ->where('codeid', $id)
             ->get();
+        $brands = [];
 
         foreach ($result as $key => $value) {
             $out = $this->out($value->id) ? (int) $this->out($value->id)->qty : 0;
             $value->qty = (int)($value->qty) - $out;
+
+            array_push($brands, $value->name);
         }
-        return $result;
+        
+        $brands = array_unique($brands);
+
     }
 }

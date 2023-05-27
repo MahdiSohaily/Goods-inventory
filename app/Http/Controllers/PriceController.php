@@ -108,21 +108,22 @@ class PriceController extends Controller
             ->orderBy('prices.created_at', 'desc')
             ->limit(4)
             ->get();
-
+        $existing = $this->exist($code);
         return  [
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
             'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars,
-            'rates' => $rates, 'prices' => $prices, 'name' => $pattern->name
+            'rates' => $rates, 'prices' => $prices, 'name' => $pattern->name,
+            'existing' => $existing
         ];
     }
 
 
-    public function exist()
+    public function exist($id)
     {
         $result =
             DB::table('qtybank')->groupBy('brand.name')
             ->join('brand', 'brand.id', '=', 'qtybank.brand')
-            ->where('codeid', '598228')
+            ->where('codeid', $id)
             ->selectRaw('sum(qty) as sum, name')
             ->pluck('sum', 'name');
         return $result;

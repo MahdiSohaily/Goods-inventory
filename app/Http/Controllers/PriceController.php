@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use League\CommonMark\Node\Block\Document;
 
 class PriceController extends Controller
 {
@@ -118,9 +119,12 @@ class PriceController extends Controller
 
     public function exist()
     {
-        $result = DB::table('qtybank')
-            ->sum('qty')
-            ->where('qtybank.codeid', '539615');
+        $result =
+            DB::table('qtybank')->groupBy('brand.name')
+            ->join('brand', 'brand.id', '=', 'qtybank.brand')
+            ->where('codeid', '598228')
+            ->selectRaw('sum(qty) as sum, name')
+            ->pluck('sum', 'name');
         return $result;
     }
 }

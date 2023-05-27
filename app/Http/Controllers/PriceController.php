@@ -101,7 +101,7 @@ class PriceController extends Controller
         $partNumber = substr($good->partnumber, 0, 7);
 
         $prices = DB::table('prices')
-        ->select('prices.*','customers.name','customers.lastname')
+            ->select('prices.*', 'customers.name', 'customers.lastname')
             ->join('customers', 'prices.customer_id', 'customers.id')
             ->where('prices.partnumber', 'like', "$partNumber%")
             ->orderBy('prices.created_at', 'desc')
@@ -118,10 +118,9 @@ class PriceController extends Controller
 
     public function exist()
     {
-        $result = DB::table('brand')
-            ->leftJoin('qtybank', 'qtybank.brand', '=', 'brand.id')
-            ->where('qtybank.codeid', '539615')
-            ->get();
+        $result = DB::table('qtybank')
+            ->sum('qty')
+            ->where('qtybank.codeid', '539615');
         return $result;
     }
 }

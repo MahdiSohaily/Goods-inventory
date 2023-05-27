@@ -101,6 +101,7 @@ class PriceController extends Controller
         $partNumber = substr($good->partnumber, 0, 7);
 
         $prices = DB::table('prices')
+        ->select('prices.*','customers.name','customers.lastname')
             ->join('customers', 'prices.customer_id', 'customers.id')
             ->where('prices.partnumber', 'like', "$partNumber%")
             ->orderBy('prices.created_at', 'desc')

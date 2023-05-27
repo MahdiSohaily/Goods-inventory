@@ -37,6 +37,7 @@ const savePrice = (pattern) => {
 const arrangeTime = (dateTime) => {
     const now = new Date();
     const create = new Date(dateTime);
+    console.log(dateTime);
     const diff = now - create;
 
     var msec = diff;
@@ -44,6 +45,12 @@ const arrangeTime = (dateTime) => {
     msec -= dd * 1000 * 60 * 60 * 24;
     var hh = Math.floor(msec / 1000 / 60 / 60);
     msec -= hh * 1000 * 60 * 60;
+
+    var mm = Math.floor(msec / 1000 / 60);
+    msec -= mm * 1000 * 60;
+
+    var ss = Math.floor(msec / 1000);
+    msec -= ss * 1000;
 
     let text = "";
 
@@ -55,6 +62,14 @@ const arrangeTime = (dateTime) => {
         hh > 1 ? (text += `${hh} hours `) : (text += `${hh} hour `);
     }
 
+    if (!hh && mm) {
+        mm > 1 ? (text += `${mm} minutes `) : (text += `${mm} minute `);
+    }
+
+    if (!ss && !hh && mm) {
+        ss > 1 ? (text += `${ss} seconds `) : (text += `${ss} second `);
+    }
+
     return `${text} ago`;
 };
 </script>
@@ -62,15 +77,23 @@ const arrangeTime = (dateTime) => {
 <template>
     <AppLayout title="Rates">
         <div v-for="item in allCodeData">
-            <div v-if="null != item.result" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
+            <div
+                v-if="null != item.result"
+                class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2"
+            >
                 <div class="bg-white rounded-lg">
                     <div id="search_result" class="p-3">
-                        <p class="text-center bg-gray-600 text-white p-2 my-3 rounded-md">
+                        <p
+                            class="text-center bg-gray-600 text-white p-2 my-3 rounded-md"
+                        >
                             {{ item.search }}
                         </p>
                         <p class="text-center my-2">{{ item.result.name }}</p>
                         <ul>
-                            <li class="text-center" v-for="elem in item.result.cars">
+                            <li
+                                class="text-center"
+                                v-for="elem in item.result.cars"
+                            >
                                 {{ elem.name }}
                             </li>
                         </ul>
@@ -81,13 +104,22 @@ const arrangeTime = (dateTime) => {
                         <table class="min-w-full text-left text-sm font-light">
                             <thead class="font-medium bg-green-300">
                                 <tr>
-                                    <th scope="col" class="px-3 text-center text-gray-800 py-3">
+                                    <th
+                                        scope="col"
+                                        class="px-3 text-center text-gray-800 py-3"
+                                    >
                                         Part Number
                                     </th>
-                                    <th scope="col" class="px-3 text-center text-gray-800 py-3">
+                                    <th
+                                        scope="col"
+                                        class="px-3 text-center text-gray-800 py-3"
+                                    >
                                         Goods Amount
                                     </th>
-                                    <th scope="col" class="px-3 text-center text-gray-800 py-3">
+                                    <th
+                                        scope="col"
+                                        class="px-3 text-center text-gray-800 py-3"
+                                    >
                                         Price
                                     </th>
                                 </tr>
@@ -101,63 +133,76 @@ const arrangeTime = (dateTime) => {
                                     </td>
                                     <td class="px-1 pt-2">
                                         <table
-                                            class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-400">
+                                            class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-400"
+                                        >
                                             <thead class="font-medium">
                                                 <tr>
-                                                    <th v-for="rate in selected_rates" scope="col"
-                                                        class="text-gray-800 text-center bg-orange-200 py-2">
+                                                    <th
+                                                        v-for="rate in selected_rates"
+                                                        scope="col"
+                                                        class="text-gray-800 text-center bg-orange-200 py-2"
+                                                    >
                                                         {{ rate }}
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody id="results">
                                                 <tr class="bg-violet-200 py-3">
-                                                    <td class="whitespace-nowrap px-3 py-2 text-center"
-                                                        v-for="rate in selected_rates">
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-2 text-center"
+                                                        v-for="rate in selected_rates"
+                                                    >
                                                         {{
                                                             Number(
                                                                 Math.round(
                                                                     (relation.price *
                                                                         110) /
-                                                                    243.5
+                                                                        243.5
                                                                 ) *
-                                                                rate *
-                                                                1.2 *
-                                                                1.2 *
-                                                                1.3
+                                                                    rate *
+                                                                    1.2 *
+                                                                    1.2 *
+                                                                    1.3
                                                             ).toFixed(1)
                                                         }}
                                                     </td>
                                                 </tr>
-                                                <tr class="bg-indigo-200" v-if="
-                                                    relation.mobis !==
-                                                    null &&
-                                                    relation.mobis !== '-'
-                                                ">
-                                                    <td class="whitespace-nowrap px-3 text-center py-2"
-                                                        v-for="rate in selected_rates">
+                                                <tr
+                                                    class="bg-indigo-200"
+                                                    v-if="
+                                                        relation.mobis !==
+                                                            null &&
+                                                        relation.mobis !== '-'
+                                                    "
+                                                >
+                                                    <td
+                                                        class="whitespace-nowrap px-3 text-center py-2"
+                                                        v-for="rate in selected_rates"
+                                                    >
                                                         {{
                                                             Number(
                                                                 Math.round(
                                                                     (relation.price *
                                                                         110) /
-                                                                    243.5
+                                                                        243.5
                                                                 ) *
-                                                                rate *
-                                                                1.25 *
-                                                                1.3
+                                                                    rate *
+                                                                    1.25 *
+                                                                    1.3
                                                             ).toFixed(1)
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="relation.korea">
-                                                    <td class="whitespace-nowrap px-3 text-center"
-                                                        v-for="rate in selected_rates">
+                                                    <td
+                                                        class="whitespace-nowrap px-3 text-center"
+                                                        v-for="rate in selected_rates"
+                                                    >
                                                         {{
                                                             Math.round(
                                                                 (relation.price *
                                                                     110) /
-                                                                243.5
+                                                                    243.5
                                                             ) *
                                                             rate *
                                                             1.25 *
@@ -170,63 +215,76 @@ const arrangeTime = (dateTime) => {
                                     </td>
                                     <td class="px-1 pt-2">
                                         <table
-                                            class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-400">
+                                            class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-400"
+                                        >
                                             <thead class="font-medium">
                                                 <tr>
-                                                    <th v-for="rate in selected_rates" scope="col"
-                                                        class="text-gray-800 text-center bg-orange-200 py-2">
+                                                    <th
+                                                        v-for="rate in selected_rates"
+                                                        scope="col"
+                                                        class="text-gray-800 text-center bg-orange-200 py-2"
+                                                    >
                                                         {{ rate }}
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody id="results">
                                                 <tr class="bg-violet-200 py-3">
-                                                    <td class="whitespace-nowrap px-3 py-2 text-center"
-                                                        v-for="rate in selected_rates">
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-2 text-center"
+                                                        v-for="rate in selected_rates"
+                                                    >
                                                         {{
                                                             Number(
                                                                 Math.round(
                                                                     (relation.price *
                                                                         110) /
-                                                                    243.5
+                                                                        243.5
                                                                 ) *
-                                                                rate *
-                                                                1.2 *
-                                                                1.2 *
-                                                                1.3
+                                                                    rate *
+                                                                    1.2 *
+                                                                    1.2 *
+                                                                    1.3
                                                             ).toFixed(1)
                                                         }}
                                                     </td>
                                                 </tr>
-                                                <tr class="bg-indigo-200" v-if="
-                                                    relation.mobis !==
-                                                    null &&
-                                                    relation.mobis !== '-'
-                                                ">
-                                                    <td class="whitespace-nowrap px-3 text-center py-2"
-                                                        v-for="rate in selected_rates">
+                                                <tr
+                                                    class="bg-indigo-200"
+                                                    v-if="
+                                                        relation.mobis !==
+                                                            null &&
+                                                        relation.mobis !== '-'
+                                                    "
+                                                >
+                                                    <td
+                                                        class="whitespace-nowrap px-3 text-center py-2"
+                                                        v-for="rate in selected_rates"
+                                                    >
                                                         {{
                                                             Number(
                                                                 Math.round(
                                                                     (relation.price *
                                                                         110) /
-                                                                    243.5
+                                                                        243.5
                                                                 ) *
-                                                                rate *
-                                                                1.25 *
-                                                                1.3
+                                                                    rate *
+                                                                    1.25 *
+                                                                    1.3
                                                             ).toFixed(1)
                                                         }}
                                                     </td>
                                                 </tr>
                                                 <tr v-if="relation.korea">
-                                                    <td class="whitespace-nowrap px-3 text-center"
-                                                        v-for="rate in selected_rates">
+                                                    <td
+                                                        class="whitespace-nowrap px-3 text-center"
+                                                        v-for="rate in selected_rates"
+                                                    >
                                                         {{
                                                             Math.round(
                                                                 (relation.price *
                                                                     110) /
-                                                                243.5
+                                                                    243.5
                                                             ) *
                                                             rate *
                                                             1.25 *
@@ -248,50 +306,88 @@ const arrangeTime = (dateTime) => {
                             <thead>
                                 <tr>
                                     <th>
-                                        <span class="px-4 text-gray-600">part NA</span>
-                                        <span class="px-4 text-gray-600">Price</span>
-                                        <span class="px-4 text-gray-600">Client</span>
+                                        <span class="px-4 text-gray-600"
+                                            >part NA</span
+                                        >
+                                        <span class="px-4 text-gray-600"
+                                            >Price</span
+                                        >
+                                        <span class="px-4 text-gray-600"
+                                            >Client</span
+                                        >
                                     </th>
                                 </tr>
                             </thead>
                             <tbody id="results">
-                                <div class="min-w-full mb-1 border-2 border-gray-400" v-for="price in item.result.prices">
+                                <div
+                                    class="min-w-full mb-1 border-2 border-gray-400"
+                                    v-for="price in item.result.prices"
+                                >
                                     <div class="min-w-full bg-indigo-100">
-                                        <td scope="col" class="px-3 text-gray-800 py-1 break-words">
+                                        <td
+                                            scope="col"
+                                            class="px-3 text-gray-800 py-1 break-words"
+                                        >
                                             {{ price.partnumber }}
                                         </td>
-                                        <td scope="col" class="px-3 text-gray-800 py-1 break-words">
+                                        <td
+                                            scope="col"
+                                            class="px-3 text-gray-800 py-1 break-words"
+                                        >
                                             {{ price.price }}
                                         </td>
-                                        <td scope="col" class="px-3 text-gray-800 py-1">
+                                        <td
+                                            scope="col"
+                                            class="px-3 text-gray-800 py-1"
+                                        >
                                             {{ price.name }}
                                         </td>
                                     </div>
                                     <div class="min-w-full bg-orange-100 py-1">
-                                        <td colspan="3" scope="col" class="px-3 text-gray-800">
+                                        <td
+                                            colspan="3"
+                                            scope="col"
+                                            class="px-3 text-gray-800"
+                                        >
                                             {{ arrangeTime(price.created_at) }}
                                         </td>
                                     </div>
                                 </div>
                             </tbody>
                         </table>
-                        <FormRelation @submitted="savePrice(item.result.pattern)">
+                        <FormRelation
+                            @submitted="savePrice(item.result.pattern)"
+                        >
                             <template #form>
                                 <!-- Name -->
                                 <div class="pb-2">
                                     <InputLabel for="price" value="Price" />
-                                    <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
-                                        autocomplete="price" />
-                                    <InputError :message="form.errors.price" class="mt-2" />
+                                    <TextInput
+                                        id="price"
+                                        v-model="form.price"
+                                        type="text"
+                                        class="mt-1 block w-full"
+                                        autocomplete="price"
+                                    />
+                                    <InputError
+                                        :message="form.errors.price"
+                                        class="mt-2"
+                                    />
                                 </div>
                             </template>
 
                             <template #actions>
-                                <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                                <ActionMessage
+                                    :on="form.recentlySuccessful"
+                                    class="mr-3"
+                                >
                                     Saved.
                                 </ActionMessage>
 
-                                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                <PrimaryButton
+                                    :class="{ 'opacity-25': form.processing }"
+                                    :disabled="form.processing"
+                                >
                                     Save
                                 </PrimaryButton>
                             </template>
@@ -303,32 +399,59 @@ const arrangeTime = (dateTime) => {
                         <table class="min-w-full text-left text-sm font-light">
                             <thead class="font-medium bg-green-600">
                                 <tr>
-                                    <th scope="col" class="px-3 text-gray-800 py-3">
+                                    <th
+                                        scope="col"
+                                        class="px-3 text-gray-800 py-3"
+                                    >
                                         Part Number
                                     </th>
-                                    <th scope="col" class="px-3 text-gray-800 py-3">
+                                    <th
+                                        scope="col"
+                                        class="px-3 text-gray-800 py-3"
+                                    >
                                         Price
                                     </th>
-                                    <th scope="col" class="px-3 text-gray-800 py-3">
+                                    <th
+                                        scope="col"
+                                        class="px-3 text-gray-800 py-3"
+                                    >
                                         client
                                     </th>
-                                    <th scope="col" class="px-3 text-gray-800 py-3">
+                                    <th
+                                        scope="col"
+                                        class="px-3 text-gray-800 py-3"
+                                    >
                                         date
                                     </th>
                                 </tr>
                             </thead>
                             <tbody id="results">
-                                <tr class="bg-gray-200" v-for="price in item.result.prices">
-                                    <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                <tr
+                                    class="bg-gray-200"
+                                    v-for="price in item.result.prices"
+                                >
+                                    <td
+                                        scope="col"
+                                        class="px-3 text-gray-800 py-3 break-words"
+                                    >
                                         {{ price.partnumber }}
                                     </td>
-                                    <td scope="col" class="px-3 text-gray-800 py-3 break-words">
+                                    <td
+                                        scope="col"
+                                        class="px-3 text-gray-800 py-3 break-words"
+                                    >
                                         {{ price.price }}
                                     </td>
-                                    <td scope="col" class="px-3 text-gray-800 py-3">
+                                    <td
+                                        scope="col"
+                                        class="px-3 text-gray-800 py-3"
+                                    >
                                         {{ price.name }}
                                     </td>
-                                    <td scope="col" class="px-3 text-gray-800 py-3">
+                                    <td
+                                        scope="col"
+                                        class="px-3 text-gray-800 py-3"
+                                    >
                                         {{ price.created_at }}
                                     </td>
                                 </tr>
@@ -337,8 +460,10 @@ const arrangeTime = (dateTime) => {
                     </div>
                 </div>
             </div>
-            <div v-else
-                class="w-96 my-96 mx-auto text-center h-40 bg-white rounded-lg lg:p-2 flex justify-center items-center">
+            <div
+                v-else
+                class="w-96 my-96 mx-auto text-center h-40 bg-white rounded-lg lg:p-2 flex justify-center items-center"
+            >
                 <p>No result ! {{ item.search }}</p>
             </div>
         </div>

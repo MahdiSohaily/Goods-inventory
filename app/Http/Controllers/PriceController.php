@@ -86,8 +86,6 @@ class PriceController extends Controller
 
         $pattern_id = DB::table('similars')->where('nisha_id', $code)->first();
 
-        if ($pattern_id) {
-
             $pattern = $pattern_id ? DB::table('patterns')->where('id', $pattern_id->pattern_id)->first() : null;
 
             $all_relations = DB::table('similars')
@@ -119,29 +117,7 @@ class PriceController extends Controller
                 'rates' => $rates, 'prices' => $prices, 'name' => $pattern->name,
                 'existing' => $existing
             ];
-        } else {
-            $rates = DB::table('rates')
-                ->orderBy('amount', 'asc')
-                ->get();
-
-            $good = DB::table('nisha')->where('id', $code)->first();
-            $partNumber = substr($good->partnumber, 0, 7);
-
-            $prices = DB::table('prices')
-                ->select('prices.*', 'customers.name', 'customers.last_name')
-                ->join('customers', 'prices.customer_id', 'customers.id')
-                ->where('prices.partnumber', 'like', "$partNumber%")
-                ->orderBy('prices.created_at', 'desc')
-                ->limit(4)
-                ->get();
-            $existing = $this->exist($code);
-            return  [
-                'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
-                'relations' => null, 'customer' => $customer, 'cars' => null,
-                'rates' => $rates, 'prices' => $prices, 'name' => null,
-                'existing' => $existing
-            ];
-        }
+        
     }
 
     public function out($id)

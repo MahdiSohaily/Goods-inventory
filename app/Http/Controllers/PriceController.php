@@ -80,7 +80,7 @@ class PriceController extends Controller
         $estelam = DB::table('estelam')
             ->select('estelam.*', 'seller.name')
             ->join('seller', 'estelam.seller', 'seller.id')
-            ->where('estelam.partnumber', 'like', "$partNumber%")
+            ->where('estelam.codename', 'like', "$partNumber%")
             ->orderBy('estelam.time', 'desc')
             ->limit(4)
             ->get();

@@ -304,9 +304,9 @@ const arrangeTime = (dateTime) => {
                 </tr>
               </thead>
               <tbody id="results">
-                <tr class="bg-gray-200" v-for="price in item.result.prices">
+                <tr class="bg-gray-200" v-for="price in item.result.estelam">
                   <td scope="col" class="px-3 text-gray-800 py-3 break-words">
-                    {{ price.partnumber }}
+                    {{ price.codename }}
                   </td>
                   <td scope="col" class="px-3 text-gray-800 py-3 break-words">
                     {{ price.price }}
@@ -315,7 +315,7 @@ const arrangeTime = (dateTime) => {
                     {{ price.name }}
                   </td>
                   <td scope="col" class="px-3 text-gray-800 py-3">
-                    {{ price.created_at }}
+                    {{ price.time }}
                   </td>
                 </tr>
               </tbody>

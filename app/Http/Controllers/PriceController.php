@@ -78,13 +78,12 @@ class PriceController extends Controller
             ->get();
 
         $estelam = DB::table('estelam')
-            ->select('estelam.*', 'seller.name')
-            ->join('seller', 'estelam.seller', 'seller.id')
-            ->where('estelam.codename', 'like', "$partNumber%")
-            ->orderBy('estelam.time', 'desc')
-            ->limit(4)
-            ->get();
+            ->select('estelam.*')
+            ->where('codename', "$partNumber")
+            ->orderBy('time', 'desc')
+            ->limit(4)->get();
         $existing = [];
+
         foreach ($all_relations as $key => $value) {
             $existing["$value->id"] = $this->exist($value->id);
         }

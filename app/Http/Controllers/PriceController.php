@@ -80,7 +80,10 @@ class PriceController extends Controller
             ->orderBy('prices.created_at', 'desc')
             ->limit(4)
             ->get();
-        $existing = $this->exist($code);
+        $existing = [];
+        foreach ($all_relations as $key => $value) {
+            array_push($existing, $this->exist($value->id));
+        }
         return  [
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
             'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars,
@@ -129,7 +132,7 @@ class PriceController extends Controller
             array_push($amount, $total);
         }
 
-        return [$amount, $brands];
+        return ['id' => $id, 'brands' => $brands, 'amount' => $amount];
     }
 
     public function store(Request $request)

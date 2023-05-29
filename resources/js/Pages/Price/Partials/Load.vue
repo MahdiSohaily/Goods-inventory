@@ -78,6 +78,8 @@ const arrangeTime = (dateTime) => {
 
 <template>
   <AppLayout title="Rates">
+
+    {{ allCodeData }}
     <div v-for="item in allCodeData">
       <div
         v-if="null != item.result"

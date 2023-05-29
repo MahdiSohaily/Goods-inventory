@@ -82,7 +82,7 @@ class PriceController extends Controller
             ->get();
         $existing = [];
         foreach ($all_relations as $key => $value) {
-            array_push($existing, $this->exist($value->id));
+            $existing["$value->id"] = $this->exist($value->id);
         }
         return  [
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,

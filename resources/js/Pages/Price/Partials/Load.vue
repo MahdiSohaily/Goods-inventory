@@ -128,7 +128,7 @@ const arrangeTime = (dateTime) => {
                       <thead class="font-medium">
                         <tr>
                           <th
-                            v-for="rate in item.result.existing[1]"
+                            v-for="rate in item.result.existing"
                             scope="col"
                             class="text-gray-800 text-center bg-orange-200 py-2"
                           >

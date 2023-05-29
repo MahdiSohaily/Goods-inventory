@@ -45,10 +45,6 @@ class PriceController extends Controller
 
         return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
     }
-    public function get(Type $var = null)
-    {
-        # code...
-    }
 
     public function getCodeData($code, $customer, $search)
     {

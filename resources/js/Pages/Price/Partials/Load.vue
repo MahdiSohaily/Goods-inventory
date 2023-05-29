@@ -25,7 +25,8 @@ const form = useForm({
 });
 
 const changeVal = (value) => {
-  form.price = value;
+  const validated = value.replace(/\D+/g, "");
+  form.price = validated;
 };
 
 const savePrice = (pattern) => {
@@ -78,7 +79,6 @@ const arrangeTime = (dateTime) => {
 <template>
   <AppLayout title="Rates">
     <div v-for="item in allCodeData">
-      {{ allCodeData }}
       <div
         v-if="null != item.result"
         class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2"
@@ -262,7 +262,11 @@ const arrangeTime = (dateTime) => {
                   <InputLabel for="price" value="Price" />
                   <TextInput
                     id="price"
-                    @keyup="(e)=>{ changeVal(e.target.value)}"
+                    @keyup="
+                      (e) => {
+                        changeVal(e.target.value);
+                      }
+                    "
                     type="text"
                     class="mt-1 block w-full"
                     autocomplete="price"

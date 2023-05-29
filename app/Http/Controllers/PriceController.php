@@ -78,10 +78,13 @@ class PriceController extends Controller
             ->get();
 
         $estelam = DB::table('estelam')
-            ->select('estelam.*')
-            ->where('codename', "$partNumber")
+            ->join('seller', 'seller.id', 'estelam.seller')
+            ->where('codename', 'like', '553113f%')
+            ->select('estelam.*', 'seller.name')
+            ->limit(4)
             ->orderBy('time', 'desc')
-            ->limit(4)->get();
+            ->get();
+
         $existing = [];
 
         foreach ($all_relations as $key => $value) {
@@ -171,5 +174,17 @@ class PriceController extends Controller
         }
 
         return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
+    }
+
+    public function test()
+    {
+        $estelam = DB::table('estelam')
+            ->join('seller', 'seller.id', 'estelam.seller')
+            ->where('codename', 'like', '553113f%')
+            ->select('estelam.*', 'seller.name')
+            ->limit(4)
+            ->orderBy('time', 'desc')
+            ->get();
+        return $estelam;
     }
 }

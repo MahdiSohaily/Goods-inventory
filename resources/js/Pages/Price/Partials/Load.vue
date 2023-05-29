@@ -262,7 +262,7 @@ const arrangeTime = (dateTime) => {
                   <InputLabel for="price" value="Price" />
                   <TextInput
                     id="price"
-                    onchange="(e)=>{ changeVal(e.target.value)}"
+                    @keyup="(e)=>{ changeVal(e.target.value)}"
                     type="text"
                     class="mt-1 block w-full"
                     autocomplete="price"

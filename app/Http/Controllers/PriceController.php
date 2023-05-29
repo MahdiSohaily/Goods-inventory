@@ -55,6 +55,8 @@ class PriceController extends Controller
             'required' => "The :attribute field can't be empty.",
         ])->validate();
 
+        return $request->all();
+
         DB::table('prices')->insert([
             'partnumber' => $request->input('partnumber'),
             'price' => $request->input('price'),

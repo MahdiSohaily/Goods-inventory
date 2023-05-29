@@ -132,7 +132,7 @@ class PriceController extends Controller
             array_push($amount, $total);
         }
 
-        return ['id' => $id, 'brands' => $brands, 'amount' => $amount];
+        return [ $brands, $amount];
     }
 
     public function store(Request $request)

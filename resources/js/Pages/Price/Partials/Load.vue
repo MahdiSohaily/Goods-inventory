@@ -78,8 +78,6 @@ const arrangeTime = (dateTime) => {
 
 <template>
   <AppLayout title="Rates">
-
-    {{ allCodeData }}
     <div v-for="item in allCodeData">
       <div
         v-if="null != item.result"
@@ -128,7 +126,7 @@ const arrangeTime = (dateTime) => {
                       <thead class="font-medium">
                         <tr>
                           <th
-                            v-for="rate in item.result.existing"
+                            v-for="rate in item.result.existing[relation.id][0]"
                             scope="col"
                             class="text-gray-800 text-center bg-orange-200 py-2"
                           >
@@ -140,7 +138,7 @@ const arrangeTime = (dateTime) => {
                         <tr class="bg-violet-200 py-3">
                           <td
                             class="whitespace-nowrap px-3 py-2 text-center"
-                            v-for="rate in item.result.existing[0]"
+                            v-for="rate in item.result.existing[relation.id][1]"
                           >
                             {{ rate }}
                           </td>

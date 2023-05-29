@@ -76,6 +76,14 @@ class PriceController extends Controller
             ->orderBy('prices.created_at', 'desc')
             ->limit(4)
             ->get();
+
+        $estelam = DB::table('estelam')
+            ->select('estelam.*', 'seller.name')
+            ->join('seller', 'estelam.seller', 'seller.id')
+            ->where('estelam.partnumber', 'like', "$partNumber%")
+            ->orderBy('estelam.time', 'desc')
+            ->limit(4)
+            ->get();
         $existing = [];
         foreach ($all_relations as $key => $value) {
             $existing["$value->id"] = $this->exist($value->id);
@@ -84,7 +92,7 @@ class PriceController extends Controller
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
             'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars,
             'rates' => $rates, 'prices' => $prices, 'name' => $pattern ? $pattern->name : 'Not in relation',
-            'existing' => $existing
+            'existing' => $existing, 'estelam' => $estelam,
         ];
     }
 
@@ -128,7 +136,7 @@ class PriceController extends Controller
             array_push($amount, $total);
         }
 
-        return [ $brands, $amount];
+        return [$brands, $amount];
     }
 
     public function store(Request $request)

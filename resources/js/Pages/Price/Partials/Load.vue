@@ -7,11 +7,11 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
-import axios from "axios";
 
 const props = defineProps({
-  codes: Array,
+  allCodeData: Array,
   customer: String,
+  completeCode: String,
 });
 
 const selected_rates = [50, 51, 52, 55];
@@ -25,7 +25,7 @@ const form = useForm({
 });
 
 const changeVal = (value) => {
-  form.price = value;
+  form.price = validated;
 };
 
 const savePrice = (pattern) => {
@@ -73,30 +73,24 @@ const arrangeTime = (dateTime) => {
 
   return `${text} ago`;
 };
-
-const relation_info = (code) => {
-  axios
-    .post(route("price.info"), {
-      code,
-    })
-    .then((response) => console.log(response.data));
-};
-
 </script>
 
 <template>
   <AppLayout title="Rates">
-    <div v-for="(code, index) in codes" v-bind:key="index">
-      <div class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
+    <div v-for="item in allCodeData">
+      <div
+        v-if="null != item.result"
+        class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2"
+      >
         <div class="bg-white rounded-lg">
           <div id="search_result" class="p-3">
             <p class="text-center bg-gray-600 text-white p-2 my-3 rounded-md">
-              {{ relation_info(code) }}
+              {{ item.search }}
             </p>
-            <p class="text-center my-2">{{ code }}</p>
+            <p class="text-center my-2">{{ item.result.name }}</p>
             <ul>
-              <li class="text-center">
-                {{ code }}
+              <li class="text-center" v-for="elem in item.result.cars">
+                {{ elem.name }}
               </li>
             </ul>
           </div>
@@ -117,7 +111,7 @@ const relation_info = (code) => {
                   </th>
                 </tr>
               </thead>
-              <!-- <tbody id="results">
+              <tbody id="results">
                 <tr v-for="relation in item.result.relations">
                   <td class="px-1 pt-2">
                     <p class="bold">
@@ -220,7 +214,7 @@ const relation_info = (code) => {
                     </table>
                   </td>
                 </tr>
-              </tbody> -->
+              </tbody>
             </table>
           </div>
         </div>
@@ -237,7 +231,7 @@ const relation_info = (code) => {
                 </tr>
               </thead>
               <tbody id="results">
-                <!-- <div
+                <div
                   class="min-w-full mb-1 border-2 border-gray-400"
                   v-for="price in item.result.prices"
                 >
@@ -257,10 +251,10 @@ const relation_info = (code) => {
                       {{ arrangeTime(price.created_at) }}
                     </td>
                   </div>
-                </div> -->
+                </div>
               </tbody>
             </table>
-            <FormRelation @submitted="savePrice(code)">
+            <FormRelation @submitted="savePrice(item.result.pattern)">
               <template #form>
                 <!-- Name -->
                 <div class="pb-2">
@@ -308,7 +302,7 @@ const relation_info = (code) => {
                   <th scope="col" class="px-3 text-gray-800 py-3">date</th>
                 </tr>
               </thead>
-              <!-- <tbody id="results">
+              <tbody id="results">
                 <tr class="bg-gray-200" v-for="price in item.result.estelam">
                   <td scope="col" class="px-3 text-gray-800 py-3 break-words">
                     {{ price.codename }}
@@ -323,10 +317,16 @@ const relation_info = (code) => {
                     {{ arrangeTime(price.time) }}
                   </td>
                 </tr>
-              </tbody> -->
+              </tbody>
             </table>
           </div>
         </div>
+      </div>
+      <div
+        v-else
+        class="w-96 my-96 mx-auto text-center h-40 bg-white rounded-lg lg:p-2 flex justify-center items-center"
+      >
+        <p>No result ! {{ item.search }}</p>
       </div>
     </div>
   </AppLayout>

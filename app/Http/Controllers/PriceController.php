@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -18,46 +17,30 @@ class PriceController extends Controller
 
     public function load(Request $request)
     {
-        // Validator::make($request->all(), [
-        //     'customer' => 'required|string|exists:customers,id',
-        //     'code' => 'required|string',
+        Validator::make($request->all(), [
+            'customer' => 'required|string|exists:customers,id',
+            'code' => 'required|string',
 
-        // ], [
-        //     'required' => "The :attribute field can't be empty.",
-        // ])->validate();
+        ], [
+            'required' => "The :attribute field can't be empty.",
+        ])->validate();
 
-        // $customer = $request->input('customer');
-        $customer = 1;
+        $customer = $request->input('customer');
+        $completeCode = $request->input('code');
 
-        // $codes = explode("\n", $request->input('code'));
-        $codes = ['553113f650', '553113f650'];
+        $codes = explode("\n", $request->input('code'));
+        $allCodeData = [];
 
-        return Inertia::render('Price/Partials/Load', ['codes' =>  $codes, 'customer' => $customer]);
-    }
-
-    public function info(Request $request)
-    {
-        $code = $request->input('code');
-
-        $pattern_id = $this->get_pattern_id($code);
-
-
-        return $pattern_id;
-        if($pattern_id) {
-            $relation_info = DB::table('patterns')->where('id', $pattern_id)->first();
+        foreach ($codes as $key => $value) {
+            $good = DB::table('nisha')->where('partNumber', $value)->first();
+            if ($good) {
+                array_push($allCodeData, ['result' => $this->getCodeData($good->id, $customer, $value), 'search' => $value]);
+            } else {
+                array_push($allCodeData, ['result' => null, 'search' => $value]);
+            }
         }
 
-        // return $good;
-    }
-
-
-    public function get_pattern_id($nisha_id)
-    {
-        $good = DB::table('nisha')->where('partnumber', $nisha_id)->first();
-
-        $is_in_relation = DB::table('similars')->select('pattern_id')->where('nisha_id', $good->id)->first();
-
-        return $is_in_relation ? $is_in_relation->pattern_id : false;
+        return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
     }
 
     public function getCodeData($code, $customer, $search)
@@ -167,7 +150,7 @@ class PriceController extends Controller
         ])->validate();
 
         DB::table('prices')->insert([
-            'partnumber' => $request->input('par3tnumber'),
+            'partnumber' => $request->input('partnumber'),
             'price' => $request->input('price'),
             'customer_id' => $request->input('customer'),
             'created_at' => Carbon::now(),
@@ -194,7 +177,6 @@ class PriceController extends Controller
 
     public function test()
     {
-        echo "hello world";
         $partnumber = '553113f650';
         $codename = substr($partnumber, 0, 7) . '%';
 

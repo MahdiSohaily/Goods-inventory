@@ -81,20 +81,17 @@ const get_rates = () => {
 
 <template>
   <AppLayout title="Rates">
-    <div v-for="item in allCodeData">
-      <div
-        v-if="null != item.result"
-        class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2"
-      >
+    <div v-for="(code, index) in codes" v-bind:key="index">
+      <div class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
         <div class="bg-white rounded-lg">
           <div id="search_result" class="p-3">
             <p class="text-center bg-gray-600 text-white p-2 my-3 rounded-md">
-              {{ item.search }}
+              {{ code }}
             </p>
-            <p class="text-center my-2">{{ item.result.name }}</p>
+            <p class="text-center my-2">{{ code }}</p>
             <ul>
-              <li class="text-center" v-for="elem in item.result.cars">
-                {{ elem.name }}
+              <li class="text-center">
+                {{ code }}
               </li>
             </ul>
           </div>
@@ -115,7 +112,7 @@ const get_rates = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody id="results">
+              <!-- <tbody id="results">
                 <tr v-for="relation in item.result.relations">
                   <td class="px-1 pt-2">
                     <p class="bold">
@@ -218,7 +215,7 @@ const get_rates = () => {
                     </table>
                   </td>
                 </tr>
-              </tbody>
+              </tbody> -->
             </table>
           </div>
         </div>
@@ -235,7 +232,7 @@ const get_rates = () => {
                 </tr>
               </thead>
               <tbody id="results">
-                <div
+                <!-- <div
                   class="min-w-full mb-1 border-2 border-gray-400"
                   v-for="price in item.result.prices"
                 >
@@ -255,10 +252,10 @@ const get_rates = () => {
                       {{ arrangeTime(price.created_at) }}
                     </td>
                   </div>
-                </div>
+                </div> -->
               </tbody>
             </table>
-            <FormRelation @submitted="savePrice(item.result.pattern)">
+            <FormRelation @submitted="savePrice(code)">
               <template #form>
                 <!-- Name -->
                 <div class="pb-2">
@@ -306,7 +303,7 @@ const get_rates = () => {
                   <th scope="col" class="px-3 text-gray-800 py-3">date</th>
                 </tr>
               </thead>
-              <tbody id="results">
+              <!-- <tbody id="results">
                 <tr class="bg-gray-200" v-for="price in item.result.estelam">
                   <td scope="col" class="px-3 text-gray-800 py-3 break-words">
                     {{ price.codename }}
@@ -321,16 +318,10 @@ const get_rates = () => {
                     {{ arrangeTime(price.time) }}
                   </td>
                 </tr>
-              </tbody>
+              </tbody> -->
             </table>
           </div>
         </div>
-      </div>
-      <div
-        v-else
-        class="w-96 my-96 mx-auto text-center h-40 bg-white rounded-lg lg:p-2 flex justify-center items-center"
-      >
-        <p>No result ! {{ item.search }}</p>
       </div>
     </div>
     {{ get_rates() }}

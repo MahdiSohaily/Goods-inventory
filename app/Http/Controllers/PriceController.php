@@ -18,19 +18,21 @@ class PriceController extends Controller
 
     public function load(Request $request)
     {
-        Validator::make($request->all(), [
-            'customer' => 'required|string|exists:customers,id',
-            'code' => 'required|string',
+        // Validator::make($request->all(), [
+        //     'customer' => 'required|string|exists:customers,id',
+        //     'code' => 'required|string',
 
-        ], [
-            'required' => "The :attribute field can't be empty.",
-        ])->validate();
+        // ], [
+        //     'required' => "The :attribute field can't be empty.",
+        // ])->validate();
 
-        $customer = $request->input('customer');
+        // $customer = $request->input('customer');
+        $customer = 1;
 
-        $codes = explode("\n", $request->input('code'));
+        // $codes = explode("\n", $request->input('code'));
+        $codes = ['553113f650', '553113f650'];
 
-        return Inertia::render('Price/Partials/Load', ['cods' =>  $codes, 'customer' => $customer]);
+        return Inertia::render('Price/Partials/Load', ['codes' =>  $codes, 'customer' => $customer]);
     }
 
     public function getCodeData($code, $customer, $search)

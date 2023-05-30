@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -26,21 +27,10 @@ class PriceController extends Controller
         ])->validate();
 
         $customer = $request->input('customer');
-        $completeCode = $request->input('code');
 
         $codes = explode("\n", $request->input('code'));
-        $allCodeData = [];
 
-        foreach ($codes as $key => $value) {
-            $good = DB::table('nisha')->where('partNumber', $value)->first();
-            if ($good) {
-                array_push($allCodeData, ['result' => $this->getCodeData($good->id, $customer, $value), 'search' => $value]);
-            } else {
-                array_push($allCodeData, ['result' => null, 'search' => $value]);
-            }
-        }
-
-        return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
+        return Inertia::render('Price/Partials/Load', ['cods' =>  $codes, 'customer' => $customer]);
     }
 
     public function getCodeData($code, $customer, $search)

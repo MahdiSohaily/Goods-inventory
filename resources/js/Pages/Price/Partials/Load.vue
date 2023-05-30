@@ -79,12 +79,9 @@ const relation_info = (code) => {
     .post(route("price.info"), {
       code,
     })
-    .then((response) => console.log(response.data, "hello!"));
+    .then((response) => console.log(response.data));
 };
 
-const get_rates = () => {
-  axios.get(route("test_rates")).then((rate) => console.log(rate, "hello!"));
-};
 </script>
 
 <template>
@@ -332,6 +329,5 @@ const get_rates = () => {
         </div>
       </div>
     </div>
-    {{ get_rates() }}
   </AppLayout>
 </template>

@@ -36,8 +36,28 @@ class PriceController extends Controller
     }
 
     public function info(Request $request)
-    {   
-        return $request->input('code');
+    {
+        $code = $request->input('code');
+
+        $pattern_id = $this->get_pattern_id($code);
+
+
+        return $pattern_id;
+        if($pattern_id) {
+            $relation_info = DB::table('patterns')->where('id', $pattern_id)->first();
+        }
+
+        // return $good;
+    }
+
+
+    public function get_pattern_id($nisha_id)
+    {
+        $good = DB::table('nisha')->where('partnumber', $nisha_id)->first();
+
+        $is_in_relation = DB::table('similars')->select('pattern_id')->where('nisha_id', $good->id)->first();
+
+        return $is_in_relation ? $is_in_relation->pattern_id : false;
     }
 
     public function getCodeData($code, $customer, $search)

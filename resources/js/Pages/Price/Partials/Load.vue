@@ -74,6 +74,8 @@ const arrangeTime = (dateTime) => {
   return `${text} ago`;
 };
 
+const relation_info = () => {};
+
 const get_rates = () => {
   axios.get(route("test_rates")).then((rate) => console.log(rate, "hello!"));
 };

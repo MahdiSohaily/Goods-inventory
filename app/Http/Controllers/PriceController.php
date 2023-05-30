@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Carbon\Carbon;
-use Faker\Core\Number;
 use Illuminate\Support\Facades\DB;
-use League\CommonMark\Node\Block\Document;
 
 class PriceController extends Controller
 {

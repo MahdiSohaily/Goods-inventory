@@ -74,7 +74,13 @@ const arrangeTime = (dateTime) => {
   return `${text} ago`;
 };
 
-const relation_info = () => {};
+const relation_info = (code) => {
+  axios
+    .post(route("price.info"), {
+      code,
+    })
+    .then((response) => console.log(response.data, "hello!"));
+};
 
 const get_rates = () => {
   axios.get(route("test_rates")).then((rate) => console.log(rate, "hello!"));
@@ -88,7 +94,7 @@ const get_rates = () => {
         <div class="bg-white rounded-lg">
           <div id="search_result" class="p-3">
             <p class="text-center bg-gray-600 text-white p-2 my-3 rounded-md">
-              {{ code }}
+              {{ relation_info(code) }}
             </p>
             <p class="text-center my-2">{{ code }}</p>
             <ul>

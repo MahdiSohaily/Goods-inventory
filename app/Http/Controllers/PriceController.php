@@ -35,6 +35,11 @@ class PriceController extends Controller
         return Inertia::render('Price/Partials/Load', ['codes' =>  $codes, 'customer' => $customer]);
     }
 
+    public function info(Request $request)
+    {   
+        return $request->input('code');
+    }
+
     public function getCodeData($code, $customer, $search)
     {
         $good = DB::table('nisha')->where('id', $code)->first();

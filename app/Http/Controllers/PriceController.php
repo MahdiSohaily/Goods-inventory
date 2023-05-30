@@ -69,6 +69,14 @@ class PriceController extends Controller
 
         $partNumber = substr($good->partnumber, 0, 7);
 
+        $estelam = DB::table('estelam')
+            ->select('estelam.*', 'seller.name')
+            ->join('seller', 'seller.id', 'estelam.seller')
+            ->where('estelam.codename', 'like', "$partNumber%")
+            ->limit(4)
+            ->orderBy('time', 'desc')
+            ->get();
+
         $prices = DB::table('prices')
             ->select('prices.*', 'customers.name', 'customers.last_name')
             ->join('customers', 'prices.customer_id', 'customers.id')
@@ -77,13 +85,7 @@ class PriceController extends Controller
             ->limit(4)
             ->get();
 
-        $estelam = DB::table('estelam')
-            ->join('seller', 'seller.id', 'estelam.seller')
-            ->where('codename', 'like', '553113f%')
-            ->select('estelam.*', 'seller.name')
-            ->limit(4)
-            ->orderBy('time', 'desc')
-            ->get();
+
 
         $existing = [];
 
@@ -94,7 +96,7 @@ class PriceController extends Controller
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
             'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars,
             'rates' => $rates, 'prices' => $prices, 'name' => $pattern ? $pattern->name : 'Not in relation',
-            'existing' => $existing, 'estelam' => $estelam,
+            'existing' => $existing, 'estelam' => $estelam, 'codename' => ($partNumber)
         ];
     }
 
@@ -178,9 +180,12 @@ class PriceController extends Controller
 
     public function test()
     {
+        $partnumber = '553113f650';
+        $codename = substr($partnumber, 0, 7) . '%';
+
         $estelam = DB::table('estelam')
             ->join('seller', 'seller.id', 'estelam.seller')
-            ->where('codename', 'like', '553113f%')
+            ->where('codename', 'like', $codename)
             ->select('estelam.*', 'seller.name')
             ->limit(4)
             ->orderBy('time', 'desc')

@@ -80,6 +80,6 @@ Route::middleware([
         Route::get('/price/load', 'load')->name('price.load'); // Route to create new good in the system
         Route::post('/price', 'store')->name('price.store'); // Route to create new good in the system
         Route::get('/exist', 'exist')->name('price.exist'); // Route to create new good in the system
-        Route::get('/test', 'test')->name('price.test'); // Route to create new good in the system
+        Route::get('/test', 'test')->name('test_rates'); // Route to create new good in the system
     });
 });

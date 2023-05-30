@@ -7,6 +7,7 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
+import axios from "axios";
 
 const props = defineProps({
   allCodeData: Array,
@@ -72,6 +73,10 @@ const arrangeTime = (dateTime) => {
   }
 
   return `${text} ago`;
+};
+
+const get_rates = () => {
+  axios.get(route("test_rates")).then((rate) => console.log(rate,'hello!'));
 };
 </script>
 
@@ -329,5 +334,6 @@ const arrangeTime = (dateTime) => {
         <p>No result ! {{ item.search }}</p>
       </div>
     </div>
+    {{ get_rates() }}
   </AppLayout>
 </template>

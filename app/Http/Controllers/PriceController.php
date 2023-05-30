@@ -150,7 +150,7 @@ class PriceController extends Controller
         ])->validate();
 
         DB::table('prices')->insert([
-            'partnumber' => $request->input('partnumber'),
+            'partnumber' => $request->input('par3tnumber'),
             'price' => $request->input('price'),
             'customer_id' => $request->input('customer'),
             'created_at' => Carbon::now(),
@@ -177,6 +177,7 @@ class PriceController extends Controller
 
     public function test()
     {
+        echo "hello world";
         $partnumber = '553113f650';
         $codename = substr($partnumber, 0, 7) . '%';
 

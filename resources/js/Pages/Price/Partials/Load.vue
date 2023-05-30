@@ -10,9 +10,8 @@ import TextInput from "@/Components/TextInput.vue";
 import axios from "axios";
 
 const props = defineProps({
-  allCodeData: Array,
+  codes: Array,
   customer: String,
-  completeCode: String,
 });
 
 const selected_rates = [50, 51, 52, 55];
@@ -76,7 +75,7 @@ const arrangeTime = (dateTime) => {
 };
 
 const get_rates = () => {
-  axios.get(route("test_rates")).then((rate) => console.log(rate,'hello!'));
+  axios.get(route("test_rates")).then((rate) => console.log(rate, "hello!"));
 };
 </script>
 

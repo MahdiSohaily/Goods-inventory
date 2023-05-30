@@ -25,6 +25,7 @@ const form = useForm({
 });
 
 const changeVal = (value) => {
+  const validated = value.replace(/\D+/g, "");
   form.price = validated;
 };
 

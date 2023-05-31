@@ -42,7 +42,7 @@ class PriceController extends Controller
                     array_push($allCodeData, ['result' => null, 'search' => $value]);
                 }
             }
-
+            
             return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
         } else {
             return Inertia::render('Price/Show');

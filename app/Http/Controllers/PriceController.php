@@ -61,11 +61,6 @@ class PriceController extends Controller
             ->join('nisha', 'similars.nisha_id', '=', 'nisha.id')
             ->where('pattern_id', $pattern_id->pattern_id)->get() : [$good];
 
-        foreach ($all_relations as $key => $value) {
-            $check_Price = DB::table('nisha')->where('id', $value->nisha_id)->first();
-            $existing["$value->id"] = $this->exist($value->id);
-        }
-
         $cars = $pattern_id ? DB::table('patterncars')
             ->join('cars', 'patterncars.car_id', '=', 'cars.id')
             ->where('patterncars.pattern_id', $pattern_id->pattern_id)->get() : null;
@@ -121,7 +116,7 @@ class PriceController extends Controller
         return $result;
     }
 
-    public function exist($id)
+    public function exist($id, $nisha)
     {
         $result =
             DB::table('qtybank')
@@ -150,9 +145,14 @@ class PriceController extends Controller
             }
             array_push($amount, $total);
         }
+
+        $final_result = [];
         $final = array_combine($brands, $amount);
         arsort($final);
-        return $final;
+
+        $final_result['existing'] = $final;
+        $final_result['nisha'] = $nisha;
+        return $final_result;
     }
 
     public function store(Request $request)
@@ -190,7 +190,7 @@ class PriceController extends Controller
         return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
     }
 
-    public function test($code = '445096')
+    public function test($code = '445096', $nisha)
     {
         $good = DB::table('nisha')->where('id', $code)->first();
 
@@ -201,13 +201,27 @@ class PriceController extends Controller
         $all_relations =  $pattern_id ? DB::table('similars')
             ->join('nisha', 'similars.nisha_id', '=', 'nisha.id')
             ->where('pattern_id', $pattern_id->pattern_id)->get() : [$good];
-
         $existing = [];
+
         foreach ($all_relations as $key => $value) {
-            $check_Price = DB::table('nisha')->where('id', $value->nisha_id)->first();
-            $existing["$value->id"] = $this->exist1($value->id, $check_Price);
+            $existing["$value->id"] = $this->exist($value->id);
         }
 
-        return $existing;
+        $sorted = [];
+        foreach ($existing as $key => $value) {
+            $sorted[$key] = $this->getMax($value);
+        }
+        arsort($sorted);
+
+        return $sorted;
+    }
+
+    function getMax($array)
+    {
+        $max = 0;
+        foreach ($array as $k => $v) {
+            $max = $max < $v ? $v : $max;
+        }
+        return $max;
     }
 }

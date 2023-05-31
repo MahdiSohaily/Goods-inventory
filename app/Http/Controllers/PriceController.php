@@ -61,6 +61,11 @@ class PriceController extends Controller
             ->join('nisha', 'similars.nisha_id', '=', 'nisha.id')
             ->where('pattern_id', $pattern_id->pattern_id)->get() : [$good];
 
+        foreach ($all_relations as $key => $value) {
+            $check_Price = DB::table('nisha')->where('id', $value->nisha_id)->first();
+            $existing["$value->id"] = $this->exist($value->id);
+        }
+
         $cars = $pattern_id ? DB::table('patterncars')
             ->join('cars', 'patterncars.car_id', '=', 'cars.id')
             ->where('patterncars.pattern_id', $pattern_id->pattern_id)->get() : null;
@@ -96,7 +101,8 @@ class PriceController extends Controller
         $existing = [];
 
         foreach ($all_relations as $key => $value) {
-            $existing["$value->id"] = $this->exist($value->id);
+            $check_Price = DB::table('nisha')->where('id', $value->nisha_id)->first();
+            $existing["$value->id"] = $this->exist1($value->id, $check_Price);
         }
         return  [
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
@@ -116,7 +122,7 @@ class PriceController extends Controller
         return $result;
     }
 
-    public function exist($id)
+    public function exist($id, $nisha)
     {
         $result =
             DB::table('qtybank')
@@ -148,7 +154,7 @@ class PriceController extends Controller
 
         $final = array_combine($brands, $amount);
         arsort($final);
-
+        $final['nisha'] = $nisha;
         return $final;
     }
 
@@ -187,12 +193,24 @@ class PriceController extends Controller
         return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
     }
 
-    public function test($id = '445096')
+    public function test($code = '445096')
     {
-        $ordered_price = DB::table('patterns')
-        ->select('price')
-        ->where('id', 1)
-        ->first();
-        return $ordered_price;
+        $good = DB::table('nisha')->where('id', $code)->first();
+
+        $pattern_id = DB::table('similars')->where('nisha_id', $code)->first();
+
+        $pattern = $pattern_id ? DB::table('patterns')->where('id', $pattern_id->pattern_id)->first() : null;
+
+        $all_relations =  $pattern_id ? DB::table('similars')
+            ->join('nisha', 'similars.nisha_id', '=', 'nisha.id')
+            ->where('pattern_id', $pattern_id->pattern_id)->get() : [$good];
+
+        $existing = [];
+        foreach ($all_relations as $key => $value) {
+            $check_Price = DB::table('nisha')->where('id', $value->nisha_id)->first();
+            $existing["$value->id"] = $this->exist1($value->id, $check_Price);
+        }
+
+        return $existing;
     }
 }

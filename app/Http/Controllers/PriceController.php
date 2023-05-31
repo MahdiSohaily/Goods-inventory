@@ -68,7 +68,7 @@ class PriceController extends Controller
 
         $sorted = [];
         foreach ($existing as $key => $value) {
-            $sorted[$key] = $this->getMax($value);
+            $sorted[$key.'z'] = $this->getMax($value);
         }
 
         arsort($sorted);

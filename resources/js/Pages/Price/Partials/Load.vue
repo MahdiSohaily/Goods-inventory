@@ -15,7 +15,6 @@ const props = defineProps({
 });
 
 
-
 const selected_rates = [50, 51, 52, 55];
 
 const form = useForm({
@@ -80,6 +79,7 @@ const arrangeTime = (dateTime) => {
 
 <template>
   <AppLayout title="Rates">
+    {{ sortable }}
     <div v-for="item in allCodeData">
       <div v-if="null != item.result" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
         <div class="bg-white rounded-lg">
@@ -115,14 +115,14 @@ const arrangeTime = (dateTime) => {
                 <tr v-for="element, key in item.result.sorted">
                   <td class="px-1 pt-2">
                     <p class="bold">
-                      {{ item.result.relations[key].partnumber }}
+                      {{ item.result.relations[key.replace('z','')].partnumber }}
                     </p>
                   </td>
                   <td class="px-1 pt-2">
                     <table class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-400">
                       <thead class="font-medium">
                         <tr>
-                          <th v-for="rate, index in item.result.existing[item.result.relations[key].id]" scope="col"
+                          <th v-for="rate, index in item.result.existing[item.result.relations[key.replace('z','')].id]" scope="col"
                             class="text-gray-800 text-center bg-orange-200 py-2">
                             {{ index }}
                           </th>
@@ -131,7 +131,7 @@ const arrangeTime = (dateTime) => {
                       <tbody>
                         <tr class="bg-violet-200 py-3">
                           <td class="whitespace-nowrap px-3 py-2 text-center"
-                            v-for="rate, index in item.result.existing[item.result.relations[key].id]">
+                            v-for="rate, index in item.result.existing[item.result.relations[key.replace('z','')].id]">
                             {{ rate }}
                           </td>
                         </tr>
@@ -153,7 +153,7 @@ const arrangeTime = (dateTime) => {
                           <td class="whitespace-nowrap px-3 py-2 text-center" v-for="rate in selected_rates">
                             {{
                               Number(
-                                Math.round((item.result.relations[key].price * 110) / 243.5) *
+                                Math.round((item.result.relations[key.replace('z','')].price * 110) / 243.5) *
                                 rate *
                                 1.2 *
                                 1.2 *
@@ -163,12 +163,12 @@ const arrangeTime = (dateTime) => {
                           </td>
                         </tr>
                         <tr class="bg-indigo-200" v-if="
-                          item.result.relations[key].mobis !== null && item.result.relations[key].mobis !== '-'
+                          item.result.relations[key.replace('z','')].mobis !== null && item.result.relations[key.replace('z','')].mobis !== '-'
                         ">
                           <td class="whitespace-nowrap px-3 text-center py-2" v-for="rate in selected_rates">
                             {{
                               Number(
-                                Math.round((item.result.relations[key].price * 110) / 243.5) *
+                                Math.round((item.result.relations[key.replace('z','')].price * 110) / 243.5) *
                                 rate *
                                 1.25 *
                                 1.3
@@ -176,10 +176,10 @@ const arrangeTime = (dateTime) => {
                             }}
                           </td>
                         </tr>
-                        <tr v-if="item.result.relations[key].korea">
+                        <tr v-if="item.result.relations[key.replace('z','')].korea">
                           <td class="whitespace-nowrap px-3 text-center" v-for="rate in selected_rates">
                             {{
-                              Math.round((item.result.relations[key].price * 110) / 243.5) *
+                              Math.round((item.result.relations[key.replace('z','')].price * 110) / 243.5) *
                               rate *
                               1.25 *
                               1.3

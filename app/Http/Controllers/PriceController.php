@@ -88,6 +88,11 @@ class PriceController extends Controller
             ->limit(4)
             ->get();
 
+        $ordered_price = DB::table('patterns')
+            ->select('price')
+            ->where('id', "$pattern_id->pattern_id")
+            ->get();
+
         $existing = [];
 
         foreach ($all_relations as $key => $value) {
@@ -97,7 +102,7 @@ class PriceController extends Controller
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
             'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars,
             'rates' => $rates, 'prices' => $prices, 'name' => $pattern ? $pattern->name : 'Not in relation',
-            'existing' => $existing, 'estelam' => $estelam, 'codename' => ($partNumber)
+            'existing' => $existing, 'estelam' => $estelam, 'ordered_price' => $ordered_price
         ];
     }
 

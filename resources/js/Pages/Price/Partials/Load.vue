@@ -152,13 +152,13 @@ const arrangeTime = (dateTime) => {
                         <tr class="bg-violet-200 py-3">
                           <td class="whitespace-nowrap px-3 py-2 text-center" v-for="rate in selected_rates">
                             {{
-                              Number(
+                              Math.round(
                                 Math.round((item.result.relations[key.replace('z','')].price * 110) / 243.5) *
                                 rate *
                                 1.2 *
                                 1.2 *
                                 1.3
-                              ).toFixed(1)
+                              )
                             }}
                           </td>
                         </tr>
@@ -167,12 +167,12 @@ const arrangeTime = (dateTime) => {
                         ">
                           <td class="whitespace-nowrap px-3 text-center py-2" v-for="rate in selected_rates">
                             {{
-                              Number(
+                              Math.round(
                                 Math.round((item.result.relations[key.replace('z','')].price * 110) / 243.5) *
                                 rate *
                                 1.25 *
                                 1.3
-                              ).toFixed(1)
+                              )
                             }}
                           </td>
                         </tr>

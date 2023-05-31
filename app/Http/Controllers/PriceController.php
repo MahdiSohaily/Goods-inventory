@@ -101,8 +101,7 @@ class PriceController extends Controller
         $existing = [];
 
         foreach ($all_relations as $key => $value) {
-            $check_Price = DB::table('nisha')->where('id', $value->nisha_id)->first();
-            $existing["$value->id"] = $this->exist1($value->id, $check_Price);
+            $existing["$value->id"] = $this->exist($value->id);
         }
         return  [
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
@@ -122,7 +121,7 @@ class PriceController extends Controller
         return $result;
     }
 
-    public function exist($id, $nisha)
+    public function exist($id)
     {
         $result =
             DB::table('qtybank')
@@ -151,10 +150,8 @@ class PriceController extends Controller
             }
             array_push($amount, $total);
         }
-
         $final = array_combine($brands, $amount);
         arsort($final);
-        $final['nisha'] = $nisha;
         return $final;
     }
 

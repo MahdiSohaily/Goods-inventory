@@ -32,6 +32,7 @@ class PriceController extends Controller
 
             $codes = explode("\n", $request->input('code'));
             $allCodeData = [];
+            
 
             foreach ($codes as $key => $value) {
                 $good = DB::table('nisha')->where('partNumber', $value)->first();

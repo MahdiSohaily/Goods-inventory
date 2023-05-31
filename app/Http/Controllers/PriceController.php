@@ -91,7 +91,7 @@ class PriceController extends Controller
         $ordered_price = DB::table('patterns')
             ->select('price')
             ->where('id', "$pattern_id->pattern_id")
-            ->get();
+            ->first();
 
         $existing = [];
 
@@ -189,37 +189,10 @@ class PriceController extends Controller
 
     public function test($id = '445096')
     {
-        $result =
-            DB::table('qtybank')
-            ->join('brand', 'brand.id', '=', 'qtybank.brand')
-            ->select('qtybank.id', 'codeid', 'brand.name', 'qty')
-            ->where('codeid', $id)
-            ->get();
-        $brands = [];
-        $amount = [];
-
-        foreach ($result as $key => $value) {
-            $out = $this->out($value->id) ? (int) $this->out($value->id)->qty : 0;
-            $value->qty = (int)($value->qty) - $out;
-
-            array_push($brands, $value->name);
-        }
-        $brands = array_unique($brands);
-
-        foreach ($brands as $key => $value) {
-            $item = $value;
-            $total = 0;
-            foreach ($result as $key => $value) {
-                if ($item == $value->name) {
-                    $total += $value->qty;
-                }
-            }
-            array_push($amount, $total);
-        }
-
-        $final = array_combine($brands, $amount);
-        arsort($final);
-
-        return $final;
+        $ordered_price = DB::table('patterns')
+        ->select('price')
+        ->where('id', 1)
+        ->first();
+        return $ordered_price;
     }
 }

@@ -109,7 +109,7 @@ const arrangeTime = (dateTime) => {
                   </th>
                 </tr>
               </thead>
-              <tbody id="results">
+              <tbody>
                 <tr v-for="relation in item.result.relations">
                   <td class="px-1 pt-2">
                     <p class="bold">
@@ -126,10 +126,10 @@ const arrangeTime = (dateTime) => {
                           </th>
                         </tr>
                       </thead>
-                      <tbody id="results">
+                      <tbody>
                         <tr class="bg-violet-200 py-3">
                           <td class="whitespace-nowrap px-3 py-2 text-center"
-                          v-for="rate, index in item.result.existing[relation.id]">
+                            v-for="rate, index in item.result.existing[relation.id]">
                             {{ rate }}
                           </td>
                         </tr>
@@ -146,7 +146,7 @@ const arrangeTime = (dateTime) => {
                           </th>
                         </tr>
                       </thead>
-                      <tbody id="results">
+                      <tbody>
                         <tr class="bg-violet-200 py-3">
                           <td class="whitespace-nowrap px-3 py-2 text-center" v-for="rate in selected_rates">
                             {{
@@ -204,7 +204,12 @@ const arrangeTime = (dateTime) => {
                   </th>
                 </tr>
               </thead>
-              <tbody id="results">
+              <tbody>
+                <div lass="min-w-full mb-1 border-2 border-gray-400" v-if="item.result.ordered_price">
+                  <div class="px-3 text-gray-800 py-1 break-words">
+                    {{ item.result.ordered_price.price }}
+                  </div>
+                </div>
                 <div class="min-w-full mb-1 border-2 border-gray-400" v-for="price in item.result.prices">
                   <div class="min-w-full bg-indigo-100">
                     <td scope="col" class="px-3 text-gray-800 py-1 break-words">
@@ -264,7 +269,7 @@ const arrangeTime = (dateTime) => {
                   <th scope="col" class="px-3 text-gray-800 py-3">date</th>
                 </tr>
               </thead>
-              <tbody id="results">
+              <tbody>
                 <tr class="bg-gray-200" v-for="price in item.result.estelam">
                   <td scope="col" class="px-3 text-gray-800 py-3 break-words">
                     {{ price.codename }}

@@ -60,6 +60,18 @@ class PriceController extends Controller
         $all_relations =  $pattern_id ? DB::table('similars')
             ->join('nisha', 'similars.nisha_id', '=', 'nisha.id')
             ->where('pattern_id', $pattern_id->pattern_id)->get() : [$good];
+        $existing = [];
+
+        foreach ($all_relations as $key => $value) {
+            $existing["$value->id"] = $this->exist($value->id);
+        }
+
+        $sorted = [];
+        foreach ($existing as $key => $value) {
+            $sorted[$key] = $this->getMax($value);
+        }
+
+        arsort($sorted);
 
         $cars = $pattern_id ? DB::table('patterncars')
             ->join('cars', 'patterncars.car_id', '=', 'cars.id')
@@ -98,18 +110,6 @@ class PriceController extends Controller
         foreach ($all_relations as $key => $value) {
             $display_relation["$value->id"] = $value;
         }
-
-        $existing = [];
-
-        foreach ($all_relations as $key => $value) {
-            $existing["$value->id"] = $this->exist($value->id);
-        }
-
-        $sorted = [];
-        foreach ($existing as $key => $value) {
-            $sorted[$key] = $this->getMax($value);
-        }
-        arsort($sorted);
         return  [
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
             'relations' => $display_relation, 'customer' => $customer, 'cars' => $cars,

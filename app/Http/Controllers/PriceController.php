@@ -88,19 +88,31 @@ class PriceController extends Controller
             ->limit(4)
             ->get();
 
-        $ordered_price = DB::table('patterns')
+        $ordered_price = $pattern_id ? DB::table('patterns')
             ->select('price')
             ->where('id', "$pattern_id->pattern_id")
-            ->first();
+            ->first() : null;
 
         $existing = [];
 
         foreach ($all_relations as $key => $value) {
             $existing["$value->id"] = $this->exist($value->id);
         }
+
+        $sorted = [];
+        foreach ($existing as $key => $value) {
+            $sorted[$key] = $this->getMax($value);
+        }
+
+        $display_relation = [];
+
+        foreach ($all_relations as $key => $value) {
+            $display_relation["$value->id"] = $value;
+        }
+
         return  [
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
-            'relations' => $all_relations, 'customer' => $customer, 'cars' => $cars,
+            'relations' => $display_relation, 'customer' => $customer, 'cars' => $cars,
             'rates' => $rates, 'prices' => $prices, 'name' => $pattern ? $pattern->name : 'Not in relation',
             'existing' => $existing, 'estelam' => $estelam, 'ordered_price' => $ordered_price
         ];
@@ -116,7 +128,7 @@ class PriceController extends Controller
         return $result;
     }
 
-    public function exist($id, $nisha)
+    public function exist($id)
     {
         $result =
             DB::table('qtybank')
@@ -145,14 +157,9 @@ class PriceController extends Controller
             }
             array_push($amount, $total);
         }
-
-        $final_result = [];
         $final = array_combine($brands, $amount);
         arsort($final);
-
-        $final_result['existing'] = $final;
-        $final_result['nisha'] = $nisha;
-        return $final_result;
+        return $final;
     }
 
     public function store(Request $request)
@@ -190,7 +197,7 @@ class PriceController extends Controller
         return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
     }
 
-    public function test($code = '445096', $nisha)
+    public function test($code = '445096')
     {
         $good = DB::table('nisha')->where('id', $code)->first();
 
@@ -211,7 +218,8 @@ class PriceController extends Controller
         foreach ($existing as $key => $value) {
             $sorted[$key] = $this->getMax($value);
         }
-        arsort($sorted);
+
+        usort($existing, fn ($a, $b) => strcmp($a->name, $b->name));
 
         return $sorted;
     }

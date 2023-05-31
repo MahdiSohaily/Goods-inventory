@@ -141,7 +141,10 @@ class PriceController extends Controller
             array_push($amount, $total);
         }
 
-        return [$brands, $amount];
+        $final = array_combine($brands, $amount);
+        arsort($final);
+
+        return $final;
     }
 
     public function store(Request $request)
@@ -179,7 +182,7 @@ class PriceController extends Controller
         return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
     }
 
-    public function test($id = '581012sa70')
+    public function test($id = '445096')
     {
         $result =
             DB::table('qtybank')
@@ -209,6 +212,9 @@ class PriceController extends Controller
             array_push($amount, $total);
         }
 
-        return [$brands, $amount];
+        $final = array_combine($brands, $amount);
+        arsort($final);
+
+        return $final;
     }
 }

@@ -34,7 +34,7 @@ const savePrice = (pattern) => {
   form.post(route("price.store"), {
     errorBag: "savePrice",
     preserveScroll: true,
-    onSuccess: () => {},
+    onSuccess: () => { },
   });
 };
 const arrangeTime = (dateTime) => {
@@ -79,10 +79,7 @@ const arrangeTime = (dateTime) => {
 <template>
   <AppLayout title="Rates">
     <div v-for="item in allCodeData">
-      <div
-        v-if="null != item.result"
-        class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2"
-      >
+      <div v-if="null != item.result" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
         <div class="bg-white rounded-lg">
           <div id="search_result" class="p-3">
             <p class="text-center bg-gray-600 text-white p-2 my-3 rounded-md">
@@ -120,26 +117,19 @@ const arrangeTime = (dateTime) => {
                     </p>
                   </td>
                   <td class="px-1 pt-2">
-                    <table
-                      class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-400"
-                    >
+                    <table class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-400">
                       <thead class="font-medium">
                         <tr>
-                          <th
-                            v-for="rate in item.result.existing[relation.id][0]"
-                            scope="col"
-                            class="text-gray-800 text-center bg-orange-200 py-2"
-                          >
+                          <th v-for="rate in item.result.existing[relation.id][0]" scope="col"
+                            class="text-gray-800 text-center bg-orange-200 py-2">
                             {{ rate }}
                           </th>
                         </tr>
                       </thead>
                       <tbody id="results">
                         <tr class="bg-violet-200 py-3">
-                          <td
-                            class="whitespace-nowrap px-3 py-2 text-center"
-                            v-for="rate in item.result.existing[relation.id][1]"
-                          >
+                          <td class="whitespace-nowrap px-3 py-2 text-center"
+                            v-for="rate in item.result.existing[relation.id][1]">
                             {{ rate }}
                           </td>
                         </tr>
@@ -147,62 +137,45 @@ const arrangeTime = (dateTime) => {
                     </table>
                   </td>
                   <td class="px-1 pt-2">
-                    <table
-                      class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-400"
-                    >
+                    <table class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-400">
                       <thead class="font-medium">
                         <tr>
-                          <th
-                            v-for="rate in selected_rates"
-                            scope="col"
-                            class="text-gray-800 text-center bg-orange-200 py-2"
-                          >
+                          <th v-for="rate in selected_rates" scope="col"
+                            class="text-gray-800 text-center bg-orange-200 py-2">
                             {{ rate }}
                           </th>
                         </tr>
                       </thead>
                       <tbody id="results">
                         <tr class="bg-violet-200 py-3">
-                          <td
-                            class="whitespace-nowrap px-3 py-2 text-center"
-                            v-for="rate in selected_rates"
-                          >
+                          <td class="whitespace-nowrap px-3 py-2 text-center" v-for="rate in selected_rates">
                             {{
                               Number(
                                 Math.round((relation.price * 110) / 243.5) *
-                                  rate *
-                                  1.2 *
-                                  1.2 *
-                                  1.3
+                                rate *
+                                1.2 *
+                                1.2 *
+                                1.3
                               ).toFixed(1)
                             }}
                           </td>
                         </tr>
-                        <tr
-                          class="bg-indigo-200"
-                          v-if="
-                            relation.mobis !== null && relation.mobis !== '-'
-                          "
-                        >
-                          <td
-                            class="whitespace-nowrap px-3 text-center py-2"
-                            v-for="rate in selected_rates"
-                          >
+                        <tr class="bg-indigo-200" v-if="
+                          relation.mobis !== null && relation.mobis !== '-'
+                        ">
+                          <td class="whitespace-nowrap px-3 text-center py-2" v-for="rate in selected_rates">
                             {{
                               Number(
                                 Math.round((relation.price * 110) / 243.5) *
-                                  rate *
-                                  1.25 *
-                                  1.3
+                                rate *
+                                1.25 *
+                                1.3
                               ).toFixed(1)
                             }}
                           </td>
                         </tr>
                         <tr v-if="relation.korea">
-                          <td
-                            class="whitespace-nowrap px-3 text-center"
-                            v-for="rate in selected_rates"
-                          >
+                          <td class="whitespace-nowrap px-3 text-center" v-for="rate in selected_rates">
                             {{
                               Math.round((relation.price * 110) / 243.5) *
                               rate *
@@ -232,10 +205,7 @@ const arrangeTime = (dateTime) => {
                 </tr>
               </thead>
               <tbody id="results">
-                <div
-                  class="min-w-full mb-1 border-2 border-gray-400"
-                  v-for="price in item.result.prices"
-                >
+                <div class="min-w-full mb-1 border-2 border-gray-400" v-for="price in item.result.prices">
                   <div class="min-w-full bg-indigo-100">
                     <td scope="col" class="px-3 text-gray-800 py-1 break-words">
                       {{ price.partnumber }}
@@ -260,17 +230,11 @@ const arrangeTime = (dateTime) => {
                 <!-- Name -->
                 <div class="pb-2">
                   <InputLabel for="price" value="Price" />
-                  <TextInput
-                    id="price"
-                    @keyup="
-                      (e) => {
-                        changeVal(e.target.value);
-                      }
-                    "
-                    type="text"
-                    class="mt-1 block w-full"
-                    autocomplete="price"
-                  />
+                  <TextInput id="price" @keyup="
+                    (e) => {
+                      changeVal(e.target.value);
+                    }
+                  " type="text" class="mt-1 block w-full" autocomplete="price" />
                   <InputError :message="form.errors.price" class="mt-2" />
                 </div>
               </template>
@@ -280,10 +244,7 @@ const arrangeTime = (dateTime) => {
                   Saved.
                 </ActionMessage>
 
-                <PrimaryButton
-                  :class="{ 'opacity-25': form.processing }"
-                  :disabled="form.processing"
-                >
+                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                   Save
                 </PrimaryButton>
               </template>
@@ -323,10 +284,7 @@ const arrangeTime = (dateTime) => {
           </div>
         </div>
       </div>
-      <div
-        v-else
-        class="w-96 my-96 mx-auto text-center h-40 bg-white rounded-lg lg:p-2 flex justify-center items-center"
-      >
+      <div v-else class="w-96 my-96 mx-auto text-center h-40 bg-white rounded-lg lg:p-2 flex justify-center items-center">
         <p>No result ! {{ item.search }}</p>
       </div>
     </div>

@@ -32,7 +32,7 @@ class PriceController extends Controller
 
             $codes = explode("\n", $request->input('code'));
             $allCodeData = [];
-            
+
 
             foreach ($codes as $key => $value) {
                 $good = DB::table('nisha')->where('partNumber', $value)->first();
@@ -87,8 +87,6 @@ class PriceController extends Controller
             ->orderBy('prices.created_at', 'desc')
             ->limit(4)
             ->get();
-
-
 
         $existing = [];
 
@@ -181,18 +179,36 @@ class PriceController extends Controller
         return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
     }
 
-    public function test()
+    public function test($id = '581012sa70')
     {
-        $partnumber = '553113f650';
-        $codename = substr($partnumber, 0, 7) . '%';
-
-        $estelam = DB::table('estelam')
-            ->join('seller', 'seller.id', 'estelam.seller')
-            ->where('codename', 'like', $codename)
-            ->select('estelam.*', 'seller.name')
-            ->limit(4)
-            ->orderBy('time', 'desc')
+        $result =
+            DB::table('qtybank')
+            ->join('brand', 'brand.id', '=', 'qtybank.brand')
+            ->select('qtybank.id', 'codeid', 'brand.name', 'qty')
+            ->where('codeid', $id)
             ->get();
-        return $estelam;
+        $brands = [];
+        $amount = [];
+
+        foreach ($result as $key => $value) {
+            $out = $this->out($value->id) ? (int) $this->out($value->id)->qty : 0;
+            $value->qty = (int)($value->qty) - $out;
+
+            array_push($brands, $value->name);
+        }
+        $brands = array_unique($brands);
+
+        foreach ($brands as $key => $value) {
+            $item = $value;
+            $total = 0;
+            foreach ($result as $key => $value) {
+                if ($item == $value->name) {
+                    $total += $value->qty;
+                }
+            }
+            array_push($amount, $total);
+        }
+
+        return [$brands, $amount];
     }
 }

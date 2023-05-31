@@ -78,8 +78,15 @@ const arrangeTime = (dateTime) => {
 
 <template>
   <AppLayout title="Rates">
+
+    
     <div v-for="item in allCodeData">
-      <div v-if="null != item.result" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
+      <ul>
+      <li v-for="element, key in item.result.sorted">
+        {{ key }} : {{ element }}
+      </li>
+    </ul>
+    <div v-if="null != item.result" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
         <div class="bg-white rounded-lg">
           <div id="search_result" class="p-3">
             <p class="text-center bg-gray-600 text-white p-2 my-3 rounded-md">
@@ -110,17 +117,17 @@ const arrangeTime = (dateTime) => {
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="relation in item.result.relations">
+                <tr v-for="element, key in item.result.sorted">
                   <td class="px-1 pt-2">
                     <p class="bold">
-                      {{ relation.partnumber }}
+                      {{ item.result.relations[key].partnumber }}
                     </p>
                   </td>
                   <td class="px-1 pt-2">
                     <table class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-400">
                       <thead class="font-medium">
                         <tr>
-                          <th v-for="rate, index in item.result.existing[relation.id]" scope="col"
+                          <th v-for="rate, index in item.result.existing[item.result.relations[key].id]" scope="col"
                             class="text-gray-800 text-center bg-orange-200 py-2">
                             {{ index }}
                           </th>
@@ -129,7 +136,7 @@ const arrangeTime = (dateTime) => {
                       <tbody>
                         <tr class="bg-violet-200 py-3">
                           <td class="whitespace-nowrap px-3 py-2 text-center"
-                            v-for="rate, index in item.result.existing[relation.id]">
+                            v-for="rate, index in item.result.existing[item.result.relations[key].id]">
                             {{ rate }}
                           </td>
                         </tr>
@@ -151,7 +158,7 @@ const arrangeTime = (dateTime) => {
                           <td class="whitespace-nowrap px-3 py-2 text-center" v-for="rate in selected_rates">
                             {{
                               Number(
-                                Math.round((relation.price * 110) / 243.5) *
+                                Math.round((item.result.relations[key].price * 110) / 243.5) *
                                 rate *
                                 1.2 *
                                 1.2 *
@@ -161,12 +168,12 @@ const arrangeTime = (dateTime) => {
                           </td>
                         </tr>
                         <tr class="bg-indigo-200" v-if="
-                          relation.mobis !== null && relation.mobis !== '-'
+                          item.result.relations[key].mobis !== null && item.result.relations[key].mobis !== '-'
                         ">
                           <td class="whitespace-nowrap px-3 text-center py-2" v-for="rate in selected_rates">
                             {{
                               Number(
-                                Math.round((relation.price * 110) / 243.5) *
+                                Math.round((item.result.relations[key].price * 110) / 243.5) *
                                 rate *
                                 1.25 *
                                 1.3
@@ -174,10 +181,10 @@ const arrangeTime = (dateTime) => {
                             }}
                           </td>
                         </tr>
-                        <tr v-if="relation.korea">
+                        <tr v-if="item.result.relations[key].korea">
                           <td class="whitespace-nowrap px-3 text-center" v-for="rate in selected_rates">
                             {{
-                              Math.round((relation.price * 110) / 243.5) *
+                              Math.round((item.result.relations[key].price * 110) / 243.5) *
                               rate *
                               1.25 *
                               1.3
@@ -208,7 +215,7 @@ const arrangeTime = (dateTime) => {
                 <div class="min-w-full mb-1 border-2 border-gray-400" v-if="item.result.ordered_price">
                   <div class="min-w-full bg-red-400">
                     <td scope="col" class="px-3 text-white py-2 break-words">
-                     Ordered Price
+                      Ordered Price
                     </td>
                     <td colspan="2" scope="col" class="px-3 text-white py-2 break-words">
                       {{ item.result.ordered_price.price }}

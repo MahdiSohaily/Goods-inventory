@@ -103,6 +103,7 @@ class PriceController extends Controller
         foreach ($existing as $key => $value) {
             $sorted[$key] = $this->getMax($value);
         }
+        arsort($sorted);
 
         $display_relation = [];
 
@@ -114,7 +115,7 @@ class PriceController extends Controller
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
             'relations' => $display_relation, 'customer' => $customer, 'cars' => $cars,
             'rates' => $rates, 'prices' => $prices, 'name' => $pattern ? $pattern->name : 'Not in relation',
-            'existing' => $existing, 'estelam' => $estelam, 'ordered_price' => $ordered_price
+            'existing' => $existing, 'estelam' => $estelam, 'ordered_price' => $ordered_price, 'sorted' => $sorted
         ];
     }
 

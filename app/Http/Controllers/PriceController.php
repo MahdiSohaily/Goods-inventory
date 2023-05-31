@@ -93,6 +93,12 @@ class PriceController extends Controller
             ->where('id', "$pattern_id->pattern_id")
             ->first() : null;
 
+        $display_relation = [];
+
+        foreach ($all_relations as $key => $value) {
+            $display_relation["$value->id"] = $value;
+        }
+
         $existing = [];
 
         foreach ($all_relations as $key => $value) {
@@ -104,13 +110,6 @@ class PriceController extends Controller
             $sorted[$key] = $this->getMax($value);
         }
         arsort($sorted);
-
-        $display_relation = [];
-
-        foreach ($all_relations as $key => $value) {
-            $display_relation["$value->id"] = $value;
-        }
-
         return  [
             'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
             'relations' => $display_relation, 'customer' => $customer, 'cars' => $cars,
@@ -220,7 +219,7 @@ class PriceController extends Controller
             $sorted[$key] = $this->getMax($value);
         }
 
-        usort($existing, fn ($a, $b) => strcmp($a->name, $b->name));
+        arsort($sorted);
 
         return $sorted;
     }

@@ -79,14 +79,12 @@ const arrangeTime = (dateTime) => {
 <template>
   <AppLayout title="Rates">
 
-    
+
     <div v-for="item in allCodeData">
       <ul>
-      <li v-for="element, key in item.result.sorted">
-        {{ key }} : {{ element }}
-      </li>
-    </ul>
-    <div v-if="null != item.result" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
+        <li>{{ item.result.sorted }}</li>
+      </ul>
+      <div v-if="null != item.result" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
         <div class="bg-white rounded-lg">
           <div id="search_result" class="p-3">
             <p class="text-center bg-gray-600 text-white p-2 my-3 rounded-md">

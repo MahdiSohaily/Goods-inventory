@@ -207,7 +207,7 @@ const arrangeTime = (dateTime) => {
                 </tr>
               </thead>
               <tbody>
-                <div class="min-w-full mb-1 border-2 border-gray-400" v-if="item.result.ordered_price">
+                <div class="min-w-full mb-1 border-2 border-gray-400" v-if="item.result.ordered_price.price != null">
                   <div class="min-w-full bg-red-400">
                     <td scope="col" class="px-3 text-white py-2 break-words">
                       Ordered Price

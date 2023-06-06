@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { router } from "@inertiajs/vue3";
+import { router, useForm } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import axios from "axios";
 import DangerButton from '@/Components/DangerButton.vue';
@@ -36,6 +36,7 @@ const removeItem = (e) => {
 
 const remove = () => {
     router.delete(route("goods.delete", deletId.value));
+    search(pattern)
 };
 
 $(document).ready(() => {
@@ -281,8 +282,7 @@ const print = (data) => {
                 <SecondaryButton @click="closeModal">
                     لغو
                 </SecondaryButton>
-                <DangerButton class="ml-3"
-                    @click="remove">
+                <DangerButton class="ml-3" @click="remove">
                     حذف حساب کاربری
                 </DangerButton>
 

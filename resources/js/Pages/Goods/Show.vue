@@ -283,7 +283,7 @@ const print = (data) => {
                     لغو
                 </SecondaryButton>
                 <DangerButton class="ml-3" @click="remove">
-                    حذف حساب کاربری
+                    حذف
                 </DangerButton>
 
             </template>

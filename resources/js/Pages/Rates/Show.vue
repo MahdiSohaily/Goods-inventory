@@ -1,5 +1,6 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
+import axios from "axios";
 import { router } from "@inertiajs/vue3";
 const remove = (id) => {
     if (confirm("Are you sure you want to delete this record?") == true) {
@@ -11,7 +12,17 @@ defineProps({
 });
 
 const toggleSelected = (e) => {
-    alert(e.target.checked)
+    axios
+        .post("/rate/toggle/selected", {
+            pattern,
+            superMode,
+        })
+        .then(function (response) {
+            resultBox.innerHTML = print(response.data, rates);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 </script>
 

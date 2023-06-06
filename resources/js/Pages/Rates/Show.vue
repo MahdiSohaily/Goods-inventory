@@ -9,6 +9,10 @@ const remove = (id) => {
 defineProps({
     rates: Object,
 });
+
+const toggleSelected = (e) => {
+    alert(e.target.checked)
+}
 </script>
 
 <template>
@@ -51,7 +55,8 @@ defineProps({
                             {{}}
                         </td>
                         <td class="whitespace-nowrap px-3 py-3 text-center font-bold" :class="item.selected">
-                            <input type="checkbox" name="selected" id="selected" :checked="item.selected">
+                            <input type="checkbox" name="selected" id="selected" :checked="item.selected"
+                                @click="toggleSelected">
                         </td>
                         <td class="whitespace-nowrap w-24">
                             <div class="flex justify-center gap-1 items-center px-2">

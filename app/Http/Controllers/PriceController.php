@@ -61,6 +61,12 @@ class PriceController extends Controller
         }
     }
 
+    public function info(Request $request)
+    {
+        $id = $request->input('id');
+        return $id;
+    }
+
     public function getCodeData($code, $customer, $search)
     {
         $good = DB::table('nisha')->where('id', $code)->first();

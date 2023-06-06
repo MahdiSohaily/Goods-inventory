@@ -30,19 +30,18 @@ const updateRate = () => {
 
 <template>
     <AppLayout title="Rates">
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="rtl max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             <FormSection @submitted="updateRate">
-                <template #title> Price Rate </template>
+                <template #title>ویرایش نرخ ارز </template>
 
                 <template #description>
-                    Fill the following form to insert new rate fot hte goods
-                    price.
+                    برای ویرایش نرخ ارز انتخاب شده اطلاعات ذیل را به دقت ویرایش نمایید.
                 </template>
 
                 <template #form>
                     <!-- Amount -->
                     <div class="col-span-6 sm:col-span-4">
-                        <InputLabel for="amount" value="Amount" />
+                        <InputLabel for="amount" value="نرخ ارز" />
                         <TextInput
                             id="amount"
                             v-model="form.amount"
@@ -58,7 +57,7 @@ const updateRate = () => {
 
                     <!-- status -->
                     <div class="col-span-6 sm:col-span-4">
-                        <InputLabel for="status" value="Status" />
+                        <InputLabel for="status" value="شاخص نرخ ارز" />
                         <select
                             type="status"
                             class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
@@ -84,14 +83,15 @@ const updateRate = () => {
 
                 <template #actions>
                     <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                        Saved.
+                        ویرایش موفقانه صورت گرفت.
                     </ActionMessage>
 
                     <PrimaryButton
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                     >
-                        Save
+                    <i class="px-2 material-icons hover:cursor-pointer">import_export</i>
+                        ویرایش
                     </PrimaryButton>
                 </template>
             </FormSection>

@@ -587,19 +587,19 @@ const createRelation = () => {
 
 <template>
     <AppLayout title="Relations">
-        <div class="h-70S grid grid-cols-1 my-8 md:grid-cols-3 gap-6 lg:gap-8 p-6 lg:p-8">
+        <div class="rtl h-70S grid grid-cols-1 my-8 md:grid-cols-3 gap-6 lg:gap-8 p-6 lg:p-8">
             <div class="bg-white rounded-lg shadow-md">
                 <div class="flex items-center justify-between p-3">
                     <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                         <i class="material-icons font-semibold text-orange-400">search</i>
-                        Search Goods
+                        جستجوی اجناس
                     </h2>
                 </div>
 
                 <div class="flex justify-center px-3">
                     <input type="text" name="serial" id="serial"
                         class="rounded-md py-3 w-full border-1 text-sm border-gray-300 focus:outline-none text-gray-500"
-                        min="0" max="30" @keyup="search($event.target.value, rates)" placeholder="Part Number ..." />
+                        min="0" max="30" @keyup="search($event.target.value, rates)" placeholder="شماره فنی ..." />
                 </div>
                 <SectionBorder />
                 <div id="search_result" class="p-3">
@@ -611,15 +611,16 @@ const createRelation = () => {
                 <div class="flex items-center justify-between p-3">
                     <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                         <i class="material-icons text-green-600">beenhere</i>
-                        Selected Items
+                        اجناس انتخاب شده
                     </h2>
-                    <button class="border-none bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 text-sm"
+                    <button class="flex items-center border-none bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 text-sm"
                         @click="clearAll">
-                        Clear All
+                        <i class="px-2 material-icons hover:cursor-pointer">delete</i>
+                       حذف همه
                     </button>
                 </div>
                 <p class="px-3 mb-4 text-gray-500 text-sm leading-relaxed">
-                    List of the selected items to be added on relation!.
+                   لیست اجناس انتخاب شده برای افزودن به رابطه!
                 </p>
                 <SectionBorder />
 
@@ -641,12 +642,12 @@ const createRelation = () => {
                 <div class="p-3">
                     <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                         <i class="material-icons font-semibold text-blue-500">save</i>
-                        Register Relation
+                      ثبت رابطه در سیستم
                     </h2>
                 </div>
 
                 <p class="px-3 py-1 mb-4 text-gray-500 text-sm leading-relaxed">
-                    Fill out the following form in order to register a relation.
+                   برای ثبت رایطه در سیستم فورم ذیل را با دقت پر نمایید.
                 </p>
 
                 <SectionBorder />
@@ -655,19 +656,19 @@ const createRelation = () => {
                     <template #form>
                         <!-- Name -->
                         <div class="pb-2">
-                            <InputLabel for="name" value="Name" />
+                            <InputLabel for="name" value="اسم رابطه" />
                             <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full"
                                 autocomplete="name" />
                             <InputError :message="form.errors.name" class="mt-2" />
                         </div>
                         <div class="pb-2">
-                            <InputLabel for="price" value="Price" />
+                            <InputLabel for="price" value="قیمت" />
                             <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
                                 autocomplete="price" />
                             <InputError :message="form.errors.price" class="mt-2" />
                         </div>
                         <div class="pb-2">
-                                <InputLabel for="cars" value="Car" />
+                                <InputLabel for="cars" value="خودرو های مرتبط" />
                                 <select type="cars" multiple
                                     class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                                     autocomplete="username" v-model="form.car_id" id="cars">
@@ -678,7 +679,7 @@ const createRelation = () => {
                                 <InputError :message="form.errors.car_id" class="mt-2" />
                             </div>
                         <div class="pb-2">
-                            <InputLabel for="status" value="Status" />
+                            <InputLabel for="status" value="وضعیت" />
                             <select type="status"
                                 class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                                 autocomplete="username" v-model="form.status_id" id="status">
@@ -703,11 +704,12 @@ const createRelation = () => {
 
                     <template #actions>
                         <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                            Saved.
+                            ذخیره سازی موفقانه صورت گرفت.
                         </ActionMessage>
 
                         <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                            Save
+                            <i class="px-2 material-icons hover:cursor-pointer">save</i>
+                            ذخیره سازی
                         </PrimaryButton>
                     </template>
                 </FormRelation>

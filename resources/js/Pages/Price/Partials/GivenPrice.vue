@@ -7,19 +7,19 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 
-const selected_rates = [50, 51, 52, 55];
+const props = defineProps({
+    customer: String,
+    partNumber: String,
+    completeCode: String
+});
 
 const form = useForm({
     _method: "POST",
     customer: props.customer,
-    partnumber: null,
+    partnumber: props.partNumber,
+    completeCode: props.completeCode,
     price: null,
-    code: props.completeCode,
 });
-
-const changeVal = (value) => {
-    form.price = value;
-};
 
 const savePrice = (pattern) => {
     form.partnumber = pattern;
@@ -118,11 +118,8 @@ const arrangeTime = (dateTime) => {
                     <!-- Name -->
                     <div class="pb-2">
                         <InputLabel for="price" value="Price" />
-                        <TextInput id="price" @keyup="
-                            (e) => {
-                                changeVal(e.target.value);
-                            }
-                        " type="text" class="mt-1 block w-full" autocomplete="price" />
+                        <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
+                            autocomplete="price" />
                         <InputError :message="form.errors.price" class="mt-2" />
                     </div>
                 </template>

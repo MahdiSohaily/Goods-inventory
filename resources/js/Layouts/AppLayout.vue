@@ -51,7 +51,7 @@ const logout = () => {
                     </NavLink>
                     <NavLink :href="route('price.give')" :active="route().current('price.give')">
                         <i class="px-2 material-icons hover:cursor-pointer">receipt</i>
-                        قیمت گذاری
+                    قیمت دهی
                     </NavLink>
                     <NavLink :href="route('profile.show')" :active="route().current('profile')">
                         <i class="px-2 material-icons hover:cursor-pointer">portrait</i>

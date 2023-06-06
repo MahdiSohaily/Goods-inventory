@@ -1,7 +1,7 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import CodeInfo from "./CodeInfo.vue";
-import RelationsDelatils from "./RelationsDelatils.vue";
+import RelationsDetails from "./RelationsDetails.vue";
 import GivenPrice from "./GivenPrice.vue";
 import Estelam from "./Estelam.vue";
 

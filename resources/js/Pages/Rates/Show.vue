@@ -20,7 +20,7 @@ const toggleSelected = (e) => {
             id
         })
         .then(function (response) {
-            resultBox.innerHTML = print(response.data, rates);
+            
         })
         .catch(function (error) {
             console.log(error);

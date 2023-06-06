@@ -55,8 +55,8 @@ const logout = () => {
                 <!-- Authentication -->
                 <form @submit.prevent="logout">
                     <button type="submit"
-                        class="inline-flex items-end py-3 pl-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 w-full hover:text-white focus:outline-none transition duration-150 ease-in-out">
-                        Log Out
+                        class="rtl inline-flex items-end py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 w-full hover:text-white focus:outline-none transition duration-150 ease-in-out">
+                        خروج از حساب
                     </button>
                 </form>
             </nav>

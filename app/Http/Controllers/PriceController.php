@@ -17,15 +17,18 @@ class PriceController extends Controller
 
     public function load(Request $request)
     {
+        Validator::make($request->all(), [
+            'customer' => 'required|string|exists:customers,id',
+            'code' => 'required|string',
+
+        ], [
+            'required' => "وارد کردن :attribute الزامی می باشد.",
+        ], [
+            'customer' => 'مشتری',
+            'code' => 'کد'
+        ])->validate();
+        
         if ($request->input('customer')) {
-
-            Validator::make($request->all(), [
-                'customer' => 'required|string|exists:customers,id',
-                'code' => 'required|string',
-
-            ], [
-                'required' => "The :attribute field can't be empty.",
-            ])->validate();
 
             $customer = $request->input('customer');
             $completeCode = $request->input('code');

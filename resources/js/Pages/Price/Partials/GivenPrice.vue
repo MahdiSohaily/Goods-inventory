@@ -29,6 +29,44 @@ const savePrice = (pattern) => {
         onSuccess: () => { },
     });
 };
+
+const arrangeTime = (dateTime) => {
+    const now = new Date();
+    const create = new Date(dateTime);
+    const diff = now - create;
+
+    var msec = diff;
+    var dd = Math.floor(msec / 1000 / 60 / 60 / 24);
+    msec -= dd * 1000 * 60 * 60 * 24;
+    var hh = Math.floor(msec / 1000 / 60 / 60);
+    msec -= hh * 1000 * 60 * 60;
+
+    var mm = Math.floor(msec / 1000 / 60);
+    msec -= mm * 1000 * 60;
+
+    var ss = Math.floor(msec / 1000);
+    msec -= ss * 1000;
+
+    let text = "";
+
+    if (dd) {
+        dd > 1 ? (text += `${dd} days and `) : (text += `${dd} day and `);
+    }
+
+    if (hh) {
+        hh > 1 ? (text += `${hh} hours `) : (text += `${hh} hour `);
+    }
+
+    if (!hh && mm) {
+        mm > 1 ? (text += `${mm} minutes `) : (text += `${mm} minute `);
+    }
+
+    if (!mm && !hh) {
+        ss > 1 ? (text += `${ss} seconds `) : (text += `1 second `);
+    }
+
+    return `${text} ago`;
+};
 </script>
 
 <template>

@@ -63,7 +63,7 @@ const logout = () => {
             <!-- Page Content -->
             <main>
                 <div class="flex justify-between">
-                    <i class="p-2 material-icons hover:cursor-pointer fixed" @click="toggleNav">menu</i>
+                    <i class="p-2 right-0 material-icons hover:cursor-pointer fixed" @click="toggleNav">menu</i>
                 </div>
                 <slot />
             </main>

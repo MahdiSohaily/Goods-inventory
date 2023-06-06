@@ -1,28 +1,43 @@
 <script setup>
-import { router } from "@inertiajs/vue3";
+import { ref } from 'vue';
+import { router, useForm } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import axios from "axios";
+import DangerButton from '@/Components/DangerButton.vue';
+import DialogModal from '@/Components/DialogModal.vue';
+import InputError from '@/Components/InputError.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
 
 const props = defineProps({
     goods: Object,
     count: Number,
 });
 
+const confirmingDeletion = ref(false);
+const deletId = ref(null);
+
+const confirmDeletion = (e) => {
+    confirmingDeletion.value = true;
+    deletId.value = e.target.getAttribute('data-id');
+};
+
+const closeModal = () => {
+    confirmingDeletion.value = false;
+
+    form.reset();
+};
+
 let current_page = 0;
 let pattern = null;
 
 const removeItem = (e) => {
-    const id = e.target.getAttribute('data-delete');
-    if (confirm("Are you sure you want to delete this record?") == true) {
-        router.delete(route("goods.delete", id));
-    }
+    confirmingDeletion.value = true;
+    deletId.value = e.target.getAttribute('data-delete');
 };
 
-const remove = (id) => {
-
-    if (confirm("Are you sure you want to delete this record?") == true) {
-        router.delete(route("goods.delete", id));
-    }
+const remove = () => {
+    router.delete(route("goods.delete", deletId.value));
 };
 
 $(document).ready(() => {
@@ -173,7 +188,7 @@ const print = (data) => {
                     <i class="px-2 material-icons hover:cursor-pointer">add_circle_outline</i>
                 </a>
                 <input type="text" name="serial" id="serial" class="rtl rounded-md py-2 w-96 border-2 bg-gray-100" min="0"
-                    max="30" @keyup="search($event.target.value, rates)" placeholder="جستجو به اساس شماره فنی ..."/>
+                    max="30" @keyup="search($event.target.value, rates)" placeholder="جستجو به اساس شماره فنی ..." />
             </div>
             <div class="bg-gray-100 bg-opacity-25">
                 <div class="max-w-7xl overflow-x-auto mx-auto">
@@ -223,11 +238,10 @@ const print = (data) => {
                                         <a :href="route('goods.edit', item.id)">
                                             <i class="material-icons text-blue-500 hover:text-blue-700">create</i>
                                         </a>
-                                        <form @submit.prevent="remove(item.id)">
-                                            <button type="submit">
-                                                <i class="material-icons text-red-600 hover:text-red-800">delete_forever</i>
-                                            </button>
-                                        </form>
+                                        <button type="submit" @click="confirmDeletion" :data-id="item.id">
+                                            <i :data-id="item.id"
+                                                class="material-icons text-red-600 hover:text-red-800">delete_forever</i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -256,5 +270,25 @@ const print = (data) => {
                 </div>
             </div>
         </div>
+        <DialogModal :show="confirmingDeletion" @close="closeModal">
+            <template #title>
+                حذف جنس مورد نظر
+            </template>
+
+            <template #content>
+                آیا مطمئن هستید که می خواهید جنس مورد نظر را حذف کنید؟ پس از حذف جنس مورد نظر دیگر در دسترس نخواهد بود.
+            </template>
+
+            <template #footer>
+                <SecondaryButton @click="closeModal">
+                    لغو
+                </SecondaryButton>
+                <DangerButton class="ml-3"
+                    @click="remove">
+                    حذف حساب کاربری
+                </DangerButton>
+
+            </template>
+        </DialogModal>
     </AppLayout>
 </template>

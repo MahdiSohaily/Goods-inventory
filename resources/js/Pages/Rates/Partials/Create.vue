@@ -66,10 +66,9 @@ const clearInput = () => {
                         </select>
                         <InputError :message="form.errors.status" class="mt-2" />
                     </div>
-                    {{ form.selected }}
-                    <div class="col-span-6 sm:col-span-4 flex items-center">
+                    <div class="col-span-6 sm:col-span-4 flex items-stretch ">
                         <input class="mx-2" type="checkbox" v-model="form.selected" name="selected" id="selected">
-                        <label for="selected" value="">Show values for this rate </label>
+                        <label for="selected" class="text-sm cursor-pointer">Show values for this rate in Price page </label>
                         <InputError :message="form.errors.selected" class="mt-2" />
                     </div>
                 </template>

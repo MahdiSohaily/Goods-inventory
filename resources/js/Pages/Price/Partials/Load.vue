@@ -3,6 +3,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import CodeInfo from "./CodeInfo.vue";
 import RelationsDelatils from "./RelationsDelatils.vue";
 import GivenPrice from "./GivenPrice.vue";
+import Estelam from "./Estelam.vue";
 
 const props = defineProps({
   allCodeData: Array,
@@ -59,7 +60,7 @@ const arrangeTime = (dateTime) => {
         <CodeInfo />
         <RelationsDelatils />
         <GivenPrice />
-       
+        <Estelam />
       </div>
       <div v-else class="w-96 my-96 mx-auto text-center h-40 bg-white rounded-lg lg:p-2 flex justify-center items-center">
         <p>No result ! {{ item.search }}</p>

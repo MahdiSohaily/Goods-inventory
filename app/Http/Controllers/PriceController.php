@@ -33,16 +33,18 @@ class PriceController extends Controller
             $codes = explode("\n", $request->input('code'));
             $allCodeData = [];
 
+            $good = null;
 
             foreach ($codes as $key => $value) {
-                $good = DB::table('nisha')->where('partNumber', $value)->first();
-                if ($good) {
-                    array_push($allCodeData, ['result' => $this->getCodeData($good->id, $customer, $value), 'search' => $value]);
-                } else {
-                    array_push($allCodeData, ['result' => null, 'search' => $value]);
-                }
+                $good = DB::table('nisha')->where('partNumber', 'like', "$value%")->get();
+                // if ($good) {
+                //     array_push($allCodeData, ['result' => $this->getCodeData($good->id, $customer, $value), 'search' => $value]);
+                // } else {
+                //     array_push($allCodeData, ['result' => null, 'search' => $value]);
+                // }
             }
-            
+            return $good;
+
             return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
         } else {
             return Inertia::render('Price/Show');
@@ -68,7 +70,7 @@ class PriceController extends Controller
 
         $sorted = [];
         foreach ($existing as $key => $value) {
-            $sorted[$key.'z'] = $this->getMax($value);
+            $sorted[$key . 'z'] = $this->getMax($value);
         }
 
         arsort($sorted);

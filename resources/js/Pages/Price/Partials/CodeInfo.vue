@@ -15,7 +15,7 @@ const getRelationInfo = (id) => {
             id,
         })
         .then(function (response) {
-            console.log("response: " + response.data);
+            response.data ? relationInfo.value = response.data : false;
         })
         .catch(function (error) {
             console.log(error);
@@ -33,13 +33,18 @@ onMounted(() => {
             <p class="text-center bg-gray-600 text-white p-2 my-3 rounded-md">
                 {{ props.partNumber }}
             </p>
-            <!-- <p class="text-center my-2">{{ item.result.name }}</p>
-                                                    <p class="text-center my-2">{{ item.result.status }}</p>
-                                                    <ul>
-                                                        <li class="text-center" v-for="elem in item.result.cars">
-                                                            {{ elem.name }}
-                                                        </li>
-                                                    </ul> -->
+            <div v-if="relationInfo">
+                <p class="text-center my-2">{{ relationInfo.name }}</p>
+                <p class="text-center my-2">{{ relationInfo.status_name }}</p>
+                <!-- <ul>
+                        <li class="text-center" v-for="elem in item.result.cars">
+                            {{ elem.name }}
+                        </li>
+                    </ul> -->
+            </div>
+            <p v-else>
+                رابطه ای پیدا نشد
+            </p>
         </div>
     </div>
 </template>

@@ -65,13 +65,17 @@ class PriceController extends Controller
     {
         $id = $request->input('id');
         $isInRelation = DB::table('similars')->select('pattern_id')->where('nisha_id', $id)->first();
+        $info = false;
+        if ($isInRelation) {
 
-
-        if ($isInRelation->pattern_id) {
-            
+            $info = DB::table('patterns')
+                ->join('status', 'status.id', '=', 'patterns.status_id')
+                ->select('patterns.*', 'status.name AS  status_name')
+                ->where('patterns.id', $isInRelation->pattern_id)
+                ->first();
         }
 
-        return $isInRelation->pattern_id;
+        return $info;
     }
 
     public function getCodeData($code, $customer, $search)

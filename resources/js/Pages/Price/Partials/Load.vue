@@ -62,9 +62,7 @@ const arrangeTime = (dateTime) => {
         <GivenPrice />
         <Estelam />
       </div>
-      <div v-else class="w-96 my-96 mx-auto text-center h-40 bg-white rounded-lg lg:p-2 flex justify-center items-center">
-        <p>No result ! {{ item.search }}</p>
-      </div>
+     
     </div>
   </AppLayout>
 </template>

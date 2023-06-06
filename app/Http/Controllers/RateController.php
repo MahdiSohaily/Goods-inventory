@@ -64,6 +64,16 @@ class RateController extends Controller
         $rate->save();
     }
 
+    public function toggleSelected(Request $request)
+    {
+        $id = $request->input('id');
+        $value = $request->input('value');
+
+        $rate = Rate::find($id);
+        $rate->selected = $value;
+        $rate->save();
+    }
+
     public function delete($id)
     {
         DB::table('rates')->delete($id);

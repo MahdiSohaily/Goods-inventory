@@ -20,7 +20,7 @@ const toggleSelected = (e) => {
             id
         })
         .then(function (response) {
-            
+
         })
         .catch(function (error) {
             console.log(error);
@@ -67,8 +67,9 @@ const toggleSelected = (e) => {
                         <td class="whitespace-nowrap px-3 py-3 text-center font-bold" :class="item.status">
                             {{}}
                         </td>
-                        <td class="whitespace-nowrap px-3 py-3 text-center font-bold" :class="item.selected">
-                            <input type="checkbox" name="selected" id="selected" :data-id="item.id" @click="toggleSelected">
+                        <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                            <input type="checkbox" name="selected" id="selected" :checked="item.selected" :data-id="item.id"
+                                @click="toggleSelected">
                         </td>
                         <td class="whitespace-nowrap w-24">
                             <div class="flex justify-center gap-1 items-center px-2">

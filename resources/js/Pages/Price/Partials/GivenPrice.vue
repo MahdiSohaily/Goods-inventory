@@ -106,7 +106,7 @@ const arrangeTime = (dateTime) => {
                             </td>
                         </div>
                         <div class="min-w-full bg-orange-100 py-1">
-                            <td colspan="3" scope="col" class="px-3 text-gray-800">
+                            <td colspan="3" scope="col" class="px-3 text-gray-800 text-sm">
                                 {{ arrangeTime(price.created_at) }}
                             </td>
                         </div>

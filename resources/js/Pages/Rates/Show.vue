@@ -1,15 +1,33 @@
 <script setup>
-import AppLayout from "@/Layouts/AppLayout.vue";
-import axios from "axios";
+import { ref } from 'vue';
 import { router } from "@inertiajs/vue3";
-const remove = (id) => {
-    if (confirm("Are you sure you want to delete this record?") == true) {
-        router.delete(route("rates.delete", id));
-    }
-};
+import axios from "axios";
+import AppLayout from "@/Layouts/AppLayout.vue";
+import DangerButton from '@/Components/DangerButton.vue';
+import DialogModal from '@/Components/DialogModal.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+
 defineProps({
     rates: Object,
 });
+
+const confirmingDeletion = ref(false);
+const deletId = ref(null);
+
+const confirmDeletion = (e) => {
+    confirmingDeletion.value = true;
+    deletId.value = e.target.getAttribute('data-id');
+};
+
+const closeModal = () => {
+    confirmingDeletion.value = false;
+
+    form.reset();
+};
+
+const remove = () => {
+    router.delete(route("rates.delete", deletId.value));
+};
 
 const toggleSelected = (e) => {
     const value = e.target.checked;
@@ -78,16 +96,35 @@ const toggleSelected = (e) => {
                                 <a :href="route('rates.edit', item.id)">
                                     <i class="material-icons text-blue-500">create</i>
                                 </a>
-                                <form @submit.prevent="remove(item.id)">
-                                    <button type="submit">
-                                        <i class="material-icons text-red-600">delete_forever</i>
-                                    </button>
-                                </form>
+
+                                <button @click="confirmDeletion" type="submit" :data-id="item.id">
+                                    <i :data-id="item.id" class="material-icons text-red-600">delete_forever</i>
+                                </button>
+
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <DialogModal :show="confirmingDeletion" @close="closeModal">
+            <template #title>
+                حذف جنس مورد نظر
+            </template>
+
+            <template #content>
+                آیا مطمئن هستید که می خواهید جنس مورد نظر را حذف کنید؟ پس از حذف جنس مورد نظر دیگر در دسترس نخواهد بود.
+            </template>
+
+            <template #footer>
+                <SecondaryButton @click="closeModal">
+                    لغو
+                </SecondaryButton>
+                <DangerButton class="ml-3" @click="remove">
+                    حذف
+                </DangerButton>
+
+            </template>
+        </DialogModal>
     </AppLayout>
 </template>

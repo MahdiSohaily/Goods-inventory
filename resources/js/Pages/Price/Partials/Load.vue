@@ -59,38 +59,7 @@ const arrangeTime = (dateTime) => {
         <CodeInfo />
         <RelationsDelatils />
         <GivenPrice />
-        <div class="bg-white rounded-lg shadow-md col-span-2">
-          <div class="p-3">
-            <table class="min-w-full text-left text-sm font-light">
-              <thead class="font-medium bg-green-600">
-                <tr>
-                  <th scope="col" class="px-3 text-gray-800 py-3">
-                    Part Number
-                  </th>
-                  <th scope="col" class="px-3 text-gray-800 py-3">Price</th>
-                  <th scope="col" class="px-3 text-gray-800 py-3">client</th>
-                  <th scope="col" class="px-3 text-gray-800 py-3">date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="bg-gray-200" v-for="price in item.result.estelam">
-                  <td scope="col" class="px-3 text-gray-800 py-3 break-words">
-                    {{ price.codename }}
-                  </td>
-                  <td scope="col" class="px-3 text-gray-800 py-3 break-words">
-                    {{ price.price }}
-                  </td>
-                  <td scope="col" class="px-3 text-gray-800 py-3">
-                    {{ price.name }}
-                  </td>
-                  <td scope="col" class="px-3 text-gray-800 py-3">
-                    {{ arrangeTime(price.time) }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+       
       </div>
       <div v-else class="w-96 my-96 mx-auto text-center h-40 bg-white rounded-lg lg:p-2 flex justify-center items-center">
         <p>No result ! {{ item.search }}</p>

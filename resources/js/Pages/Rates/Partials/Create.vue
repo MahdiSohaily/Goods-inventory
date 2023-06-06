@@ -31,19 +31,18 @@ const clearInput = () => {
 
 <template>
     <AppLayout title="Rates">
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="rtl max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             <FormSection @submitted="createRate">
-                <template #title> Price Rate </template>
+                <template #title>ثبت نرخ ارز</template>
 
                 <template #description>
-                    Fill the following form to insert new rate fot hte goods
-                    price.
+                    برای ثبت نرخ ارز جدید در سیستم لطفا فورم ذیل را با دقت پر نمایید.
                 </template>
 
                 <template #form>
                     <!-- Amount -->
                     <div class="col-span-6 sm:col-span-4">
-                        <InputLabel for="amount" value="Amount" />
+                        <InputLabel for="amount" value="نرخ ارز" />
                         <TextInput id="amount" v-model="form.amount" type="text" class="mt-1 block w-full"
                             autocomplete="amount" />
                         <InputError :message="form.errors.amount" class="mt-2" />
@@ -51,7 +50,7 @@ const clearInput = () => {
 
                     <!-- status -->
                     <div class="col-span-6 sm:col-span-4">
-                        <InputLabel for="status" value="Status" />
+                        <InputLabel for="status" value="شاخص نرخ ارز" />
                         <select type="status"
                             class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             autocomplete="username" v-model="form.status" id="status">
@@ -68,18 +67,19 @@ const clearInput = () => {
                     </div>
                     <div class="col-span-6 sm:col-span-4 flex items-stretch ">
                         <input class="mx-2" type="checkbox" v-model="form.selected" name="selected" id="selected">
-                        <label for="selected" class="text-sm cursor-pointer">Show values for this rate in Price page </label>
+                        <label for="selected" class="text-sm cursor-pointer">نمایش قیمت برای این نرخ ارز در صفحه قیمت های داده شده </label>
                         <InputError :message="form.errors.selected" class="mt-2" />
                     </div>
                 </template>
 
                 <template #actions>
                     <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                        Saved.
+                        ثبت نرخ ارز موفقانه صورت گرفت.
                     </ActionMessage>
 
                     <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Save
+                        <i class="px-2 material-icons hover:cursor-pointer">save</i>
+                        ثبت
                     </PrimaryButton>
                 </template>
             </FormSection>

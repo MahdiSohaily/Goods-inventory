@@ -30,10 +30,12 @@ const toggleSelected = (e) => {
 
 <template>
     <AppLayout title="Rates">
-        <div class="max-w-5xl mx-auto py-20 sm:px-6 lg:px-8">
+        <div class="rtl max-w-5xl mx-auto py-20 sm:px-6 lg:px-8">
             <div class="mb-3">
                 <a :href="route('rates.create')"
-                    class="bg-indigo-500 hover:bg-indigo-400 rounded-md text-white px-4 py-2">Create</a>
+                    class=" flex items-center w-52 bg-indigo-500 hover:bg-indigo-400 rounded-md text-white px-4 py-2">
+                    <i class="px-2 material-icons hover:cursor-pointer">add_circle_outline</i>
+                    ثبت نرخ ارز جدید</a>
             </div>
             <table class="min-w-full text-left text-sm font-light">
                 <thead class="font-medium dark:border-neutral-500">

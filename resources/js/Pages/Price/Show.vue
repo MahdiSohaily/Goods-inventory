@@ -26,41 +26,27 @@ const LoadPrice = () => {
     });
 };
 
-const clearInput = () => {};
+const clearInput = () => { };
 </script>
 
 <template>
     <AppLayout title="Rates">
-        <div
-            class="max-w-2xl mx-auto py-20 sm:px-6 lg:px-8 bg-white rounded-lg shadow-sm mt-11"
-        >
+        <div class="rtl max-w-2xl mx-auto py-20 sm:px-6 lg:px-8 bg-white rounded-lg shadow-sm mt-11">
             <FormRelation @submitted="LoadPrice">
                 <template #form>
                     <!-- Name -->
                     <div class="pb-2">
-                        <InputLabel for="customer" value="customer" />
-                        <TextInput
-                            id="customer"
-                            v-model="form.customer"
-                            type="number"
-                            class="mt-1 block w-full"
-                            autocomplete="customer"
-                        />
-                        <InputError
-                            :message="form.errors.customer"
-                            class="mt-2"
-                        />
+                        <InputLabel for="customer" value="مشتری" />
+                        <TextInput id="customer" v-model="form.customer" type="number" class="mt-1 block w-full"
+                            autocomplete="customer" />
+                        <InputError :message="form.errors.customer" class="mt-2" />
                     </div>
                     <div class="pb-2">
-                        <InputLabel for="code" value="code" />
-                        <textarea
-                            rows="7"
-                            id="code"
-                            v-model="form.code"
-                            type="text"
+                        <InputLabel for="code" value="کدهای مدنظر" />
+                        <textarea rows="7" id="code" v-model="form.code" type="text"
                             class="mt-1 shadow-sm block w-full rounded-md border-gray-300"
-                        >
-                        </textarea>
+                            placeholder="لطف نموده کد های مختلف را با کلید Enter از هم جدا نمایید.">
+                            </textarea>
                         <InputError :message="form.errors.code" class="mt-2" />
                     </div>
                 </template>
@@ -70,14 +56,16 @@ const clearInput = () => {};
                         Saved.
                     </ActionMessage>
 
-                    <PrimaryButton
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing"
-                    >
-                        Save
-                    </PrimaryButton>
+                    <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        جستجو </PrimaryButton>
                 </template>
             </FormRelation>
         </div>
     </AppLayout>
 </template>
+
+<style scoped>
+::placeholder {
+    font-size: 13px;
+}
+</style>

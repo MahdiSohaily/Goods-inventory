@@ -69,14 +69,11 @@ class RelationController extends Controller
             'serial' => 'required',
             'name' => 'required',
             'serial' => 'required',
-            'status_id' => 'required',
-            'car_id' => 'required',
         ], [
-            'required' => "The :attribute field can't be empty.",
+            'required' => "مقدار :attribute خالی بوده نمی تواند.",
         ], [
-            'values' => 'Selected Items',
-            'status_id' => 'Status',
-            'car_id' => 'cars',
+            'name' => 'نام',
+            'values' => 'اجناس انتخاب شده',
         ])->validate();
         // END validation
 

@@ -21,12 +21,11 @@ const confirmDeletion = (e) => {
 
 const closeModal = () => {
     confirmingDeletion.value = false;
-
-    form.reset();
 };
 
 const remove = () => {
     router.delete(route("rates.delete", deletId.value));
+    confirmingDeletion.value = false;
 };
 
 const toggleSelected = (e) => {
@@ -109,11 +108,11 @@ const toggleSelected = (e) => {
         </div>
         <DialogModal :show="confirmingDeletion" @close="closeModal">
             <template #title>
-                حذف جنس مورد نظر
+                حذف نرخ ارز مورد نظر
             </template>
 
             <template #content>
-                آیا مطمئن هستید که می خواهید جنس مورد نظر را حذف کنید؟ پس از حذف جنس مورد نظر دیگر در دسترس نخواهد بود.
+                آیا مطمئن هستید که می خواهید نرخ ارز مورد نظر را حذف کنید؟ پس از حذف نرخ ارز مورد نظر دیگر در دسترس نخواهد بود.
             </template>
 
             <template #footer>

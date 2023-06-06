@@ -55,7 +55,7 @@ const logout = () => {
                     </NavLink>
                     <NavLink :href="route('profile.show')" :active="route().current('profile')">
                         <i class="px-2 material-icons hover:cursor-pointer">portrait</i>
-                        جساب کاربری
+                        حساب کاربری
                     </NavLink>
                 </ul>
                 <!-- Authentication -->

@@ -50,22 +50,22 @@ const arrangeTime = (dateTime) => {
     let text = "";
 
     if (dd) {
-        dd > 1 ? (text += `${dd} days and `) : (text += `${dd} day and `);
+        text += `${dd}روز و `;
     }
 
     if (hh) {
-        hh > 1 ? (text += `${hh} hours `) : (text += `${hh} hour `);
+        text += `${hh} ساعت `;
     }
 
     if (!hh && mm) {
-        mm > 1 ? (text += `${mm} minutes `) : (text += `${mm} minute `);
+        text += `${mm} دقیقه `;
     }
 
     if (!mm && !hh) {
-        ss > 1 ? (text += `${ss} seconds `) : (text += `1 second `);
+        text += `${ss} ثانیه `;
     }
 
-    return `${text} ago`;
+    return `${text} قبل`;
 };
 </script>
 

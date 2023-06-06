@@ -170,7 +170,7 @@ function load(e) {
         load_pattern_ifo(form.pattern_id);
     } else {
         alert(
-            "You can't load two relation at once (clear all to load new relation)"
+            "شما همزمان نمی توانید ۲ رابطه را بارگذاری نمایید.(شما میتوانید با حذف همه رابطه جدید را وارد نمایید)"
         );
     }
 }
@@ -245,14 +245,15 @@ const createRelation = () => {
                         <i class="material-icons text-green-600">beenhere</i>
                         اجناس انتخاب شده
                     </h2>
-                    <button class="flex items-center border-none bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 text-sm"
+                    <button
+                        class="flex items-center border-none bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 text-sm"
                         @click="clearAll">
                         <i class="px-2 material-icons hover:cursor-pointer">delete</i>
-                       حذف همه
+                        حذف همه
                     </button>
                 </div>
                 <p class="px-3 mb-4 text-gray-500 text-sm leading-relaxed">
-                   لیست اجناس انتخاب شده برای افزودن به رابطه!
+                    لیست اجناس انتخاب شده برای افزودن به رابطه!
                 </p>
                 <SectionBorder />
 
@@ -274,12 +275,12 @@ const createRelation = () => {
                 <div class="p-3">
                     <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                         <i class="material-icons font-semibold text-blue-500">save</i>
-                      ثبت رابطه در سیستم
+                        ثبت رابطه در سیستم
                     </h2>
                 </div>
 
                 <p class="px-3 py-1 mb-4 text-gray-500 text-sm leading-relaxed">
-                   برای ثبت رایطه در سیستم فورم ذیل را با دقت پر نمایید.
+                    برای ثبت رایطه در سیستم فورم ذیل را با دقت پر نمایید.
                 </p>
 
                 <SectionBorder />
@@ -300,16 +301,16 @@ const createRelation = () => {
                             <InputError :message="form.errors.price" class="mt-2" />
                         </div>
                         <div class="pb-2">
-                                <InputLabel for="cars" value="خودرو های مرتبط" />
-                                <select type="cars" multiple
-                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                    autocomplete="username" v-model="form.car_id" id="cars">
-                                    <option v-for="item in cars" :value="item.id" class="text-sm">
-                                        {{ item.name }}
-                                    </option>
-                                </select>
-                                <InputError :message="form.errors.car_id" class="mt-2" />
-                            </div>
+                            <InputLabel for="cars" value="خودرو های مرتبط" />
+                            <select type="cars" multiple
+                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                autocomplete="username" v-model="form.car_id" id="cars">
+                                <option v-for="item in cars" :value="item.id" class="text-sm">
+                                    {{ item.name }}
+                                </option>
+                            </select>
+                            <InputError :message="form.errors.car_id" class="mt-2" />
+                        </div>
                         <div class="pb-2">
                             <InputLabel for="status" value="وضعیت" />
                             <select type="status"
@@ -322,15 +323,15 @@ const createRelation = () => {
                             <InputError :message="form.errors.status_id" class="mt-2" />
                         </div>
                         <!-- <div class="container">
-                            <select multiple data-multi-select-plugin autocomplete="username" v-model="form.car_id"
-                                id="cars">
-                                <option v-for="item in cars" :value="item.id" class="text-sm"
-                                    :selected="form.car_id != null && form.car_id.includes(item.id)">
-                                    {{ item.name }}
-                                </option>
-                            </select>
-                        </div>
-                         -->
+                                <select multiple data-multi-select-plugin autocomplete="username" v-model="form.car_id"
+                                    id="cars">
+                                    <option v-for="item in cars" :value="item.id" class="text-sm"
+                                        :selected="form.car_id != null && form.car_id.includes(item.id)">
+                                        {{ item.name }}
+                                    </option>
+                                </select>
+                            </div>
+                             -->
                         <InputError :message="form.errors.values" class="mt-2" />
                     </template>
 

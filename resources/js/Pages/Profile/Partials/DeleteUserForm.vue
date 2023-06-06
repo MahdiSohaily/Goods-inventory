@@ -40,11 +40,11 @@ const closeModal = () => {
 <template>
     <ActionSection>
         <template #title>
-            Delete Account
+            حذف حساب کاربری
         </template>
 
         <template #description>
-            Permanently delete your account.
+            اکانت خود را برای همیشه حذف کنید.
         </template>
 
         <template #content>

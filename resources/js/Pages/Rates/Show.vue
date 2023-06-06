@@ -12,17 +12,20 @@ defineProps({
 });
 
 const toggleSelected = (e) => {
-    axios
-        .post("/rate/toggle/selected", {
-            pattern,
-            superMode,
-        })
-        .then(function (response) {
-            resultBox.innerHTML = print(response.data, rates);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    const value = e.target.checked;
+    const id = e.target.getAttribute('data-id');
+
+    alert(id)
+    // axios
+    //     .post("/rate/toggle/selected", {
+    //         pattern,
+    //     })
+    //     .then(function (response) {
+    //         resultBox.innerHTML = print(response.data, rates);
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error);
+    //     });
 }
 </script>
 
@@ -66,8 +69,7 @@ const toggleSelected = (e) => {
                             {{}}
                         </td>
                         <td class="whitespace-nowrap px-3 py-3 text-center font-bold" :class="item.selected">
-                            <input type="checkbox" name="selected" id="selected" :checked="item.selected"
-                                @click="toggleSelected">
+                            <input type="checkbox" name="selected" id="selected" :data-id="item.id" @click="toggleSelected">
                         </td>
                         <td class="whitespace-nowrap w-24">
                             <div class="flex justify-center gap-1 items-center px-2">

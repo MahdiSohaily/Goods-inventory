@@ -59,6 +59,7 @@ Route::middleware([
         Route::get('/rates', 'index')->name('rates'); // rates route lead us to the rates page
         Route::get('/rates/create', 'create')->name('rates.create'); // Route to show the form for creating a new rate in the system
         Route::post('/rates', 'store')->name('rates.store'); // Route to create new good in the system
+        Route::post('/rate/toggle/selected', 'toggleSelected')->name('rates.toggle'); // Route to create new good in the system
         Route::get('/rates/{rates}/edit', 'edit')->name('rates.edit'); // Route to show the selected good for update
         Route::put('/rates/{rates}', 'update')->name('rates.update'); // Route to update an existing good
         Route::delete('/rates/{rates}', 'delete')->name('rates.delete'); // Route to delete a specific good

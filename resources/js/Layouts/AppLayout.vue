@@ -31,25 +31,25 @@ const logout = () => {
         <div class="min-h-screen bg-gray-100">
             <nav id="nav" ref="nav" class="main-nav bg-white shadow-lg flex flex-col justify-between">
                 <i id="close" @click="toggleNav()"
-                    class="material-icons absolute m-3 right-0 hover:cursor-pointer">close</i>
-                <ul class="flex flex-col pt-5">
+                    class="material-icons absolute m-3 left-0 hover:cursor-pointer">close</i>
+                <ul class="rtl flex flex-col pt-5">
                     <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                        Search
+                        جستجوی اجناس
                     </NavLink>
                     <NavLink :href="route('goods')" :active="route().current('goods')">
-                        Goods
+                        اجناس
                     </NavLink>
                     <NavLink :href="route('rates')" :active="route().current('rates')">
-                        Rates
+                        نرخ های ارز
                     </NavLink>
                     <NavLink :href="route('relations')" :active="route().current('relations')">
-                        Relations
+                        تعریف رابطه اجناس
                     </NavLink>
                     <NavLink :href="route('price.give')" :active="route().current('price.give')">
-                        Price
+                        قیمت گذاری
                     </NavLink>
                     <NavLink :href="route('profile.show')" :active="route().current('profile')">
-                        Profile
+                        جساب کاربری
                     </NavLink>
                 </ul>
                 <!-- Authentication -->

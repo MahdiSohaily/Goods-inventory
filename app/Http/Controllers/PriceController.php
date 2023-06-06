@@ -55,9 +55,7 @@ class PriceController extends Controller
                 }
             }
 
-            return  $searhCodes;
-
-            return Inertia::render('Price/Partials/Load', ['codes' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
+            return Inertia::render('Price/Partials/Load', ['codes' => $searhCodes, 'customer' => $customer, 'completeCode' => $completeCode]);
         } else {
             return Inertia::render('Price/Show');
         }

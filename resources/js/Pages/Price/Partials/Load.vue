@@ -5,11 +5,11 @@ import RelationsDetails from "./RelationsDetails.vue";
 import GivenPrice from "./GivenPrice.vue";
 import Estelam from "./Estelam.vue";
 
-// const props = defineProps({
-//   allCodeData: Array,
-//   customer: String,
-//   completeCode: String,
-// });
+const props = defineProps({
+  codes: Array,
+  customer: String,
+  completeCode: String,
+});
 
 
 
@@ -18,14 +18,11 @@ import Estelam from "./Estelam.vue";
 
 <template>
   <AppLayout title="Rates">
-    <div>
-      <div class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
-        <CodeInfo :partNumber="null"  />
-        <RelationsDetails />
-        <GivenPrice :customer="1" :partNumber="null" :completeCode="null" />
-        <Estelam />
-      </div>
-
+    <div v-for="code of props.codes" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
+      <CodeInfo :id="code.id" :partNumber="code.partnumber" />
+      <!-- <RelationsDetails />
+              <GivenPrice :customer="1" :partNumber="null" :completeCode="null" />
+              <Estelam /> -->
     </div>
   </AppLayout>
 </template>

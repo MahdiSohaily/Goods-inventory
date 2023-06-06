@@ -1,23 +1,7 @@
 <script setup>
-defineProps({
-    rates: Object,
+const props = defineProps({
+    partNumber: String,
 });
-
-const form = useForm({
-    _method: "GET",
-    customer: null,
-    code: null,
-});
-
-const LoadPrice = () => {
-    form.post(route("price.load"), {
-        errorBag: "LoadPrice",
-        preserveScroll: true,
-        onSuccess: () => clearInput(),
-    });
-};
-
-const clearInput = () => { };
 </script>
 
 <template>
@@ -27,6 +11,7 @@ const clearInput = () => { };
                 {{ item.search }}
             </p>
             <p class="text-center my-2">{{ item.result.name }}</p>
+            <p class="text-center my-2">{{ item.result.status }}</p>
             <ul>
                 <li class="text-center" v-for="elem in item.result.cars">
                     {{ elem.name }}

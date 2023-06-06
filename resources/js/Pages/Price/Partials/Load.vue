@@ -5,11 +5,11 @@ import RelationsDetails from "./RelationsDetails.vue";
 import GivenPrice from "./GivenPrice.vue";
 import Estelam from "./Estelam.vue";
 
-const props = defineProps({
-  allCodeData: Array,
-  customer: String,
-  completeCode: String,
-});
+// const props = defineProps({
+//   allCodeData: Array,
+//   customer: String,
+//   completeCode: String,
+// });
 
 
 
@@ -18,12 +18,11 @@ const props = defineProps({
 
 <template>
   <AppLayout title="Rates">
-    {{ sortable }}
-    <div v-for="item in allCodeData">
-      <div v-if="null != item.result" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
-        <CodeInfo />
+    <div>
+      <div class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
+        <CodeInfo :partNumber="null"  />
         <RelationsDetails />
-        <GivenPrice :customer="1" :partNumber="553113f650" :completeCode="553113f650" />
+        <GivenPrice :customer="1" :partNumber="null" :completeCode="null" />
         <Estelam />
       </div>
 

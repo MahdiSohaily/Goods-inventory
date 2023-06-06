@@ -1,7 +1,4 @@
 <script setup>
-defineProps({
-    rates: Object,
-});
 
 const form = useForm({
     _method: "GET",

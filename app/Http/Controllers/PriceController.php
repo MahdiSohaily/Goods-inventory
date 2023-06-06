@@ -27,7 +27,7 @@ class PriceController extends Controller
             'customer' => 'مشتری',
             'code' => 'کد'
         ])->validate();
-        
+
         if ($request->input('customer')) {
 
             $customer = $request->input('customer');
@@ -36,19 +36,28 @@ class PriceController extends Controller
             $codes = explode("\n", $request->input('code'));
             $allCodeData = [];
 
-            $good = null;
-
-            foreach ($codes as $key => $value) {
-                $good = DB::table('nisha')->where('partNumber', 'like', "$value%")->get();
-                // if ($good) {
-                //     array_push($allCodeData, ['result' => $this->getCodeData($good->id, $customer, $value), 'search' => $value]);
-                // } else {
-                //     array_push($allCodeData, ['result' => null, 'search' => $value]);
-                // }
+            foreach ($codes as $value) {
+                $good = DB::table('nisha')->select('id', 'partnumber')->where('partNumber', 'like', "$value%")->get();
+                if ($good) {
+                    array_push($allCodeData, $good);
+                } else {
+                    array_push($allCodeData, null);
+                }
             }
-            return $good;
 
-            return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
+            $searhCodes = [];
+
+            for ($counter = 0; $counter < count($allCodeData); $counter++) {
+                if ($allCodeData[$counter]) {
+                    array_push($searhCodes, ...$allCodeData[$counter]);
+                } else {
+                    array_push($searhCodes, [null]);
+                }
+            }
+
+            return  $searhCodes;
+
+            return Inertia::render('Price/Partials/Load', ['codes' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
         } else {
             return Inertia::render('Price/Show');
         }

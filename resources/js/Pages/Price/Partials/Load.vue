@@ -8,6 +8,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import CodeInfo from "./CodeInfo.vue";
+import RelationsDelatils from "./RelationsDelatils.vue";
 
 const props = defineProps({
   allCodeData: Array,
@@ -82,8 +83,9 @@ const arrangeTime = (dateTime) => {
     {{ sortable }}
     <div v-for="item in allCodeData">
       <div v-if="null != item.result" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
-       <CodeInfo />
-     
+        <CodeInfo />
+        <RelationsDelatils />
+        <
         <div class="bg-white rounded-lg shadow-md col-span-2">
           <div id="search_result" class="p-3">
             <table class="min-w-full text-left text-sm font-light">

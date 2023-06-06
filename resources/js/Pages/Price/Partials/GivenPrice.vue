@@ -1,0 +1,37 @@
+<script setup>
+defineProps({
+    rates: Object,
+});
+
+const form = useForm({
+    _method: "GET",
+    customer: null,
+    code: null,
+});
+
+const LoadPrice = () => {
+    form.post(route("price.load"), {
+        errorBag: "LoadPrice",
+        preserveScroll: true,
+        onSuccess: () => clearInput(),
+    });
+};
+
+const clearInput = () => { };
+</script>
+
+<template>
+    <div class="bg-white rounded-lg">
+        <div id="search_result" class="p-3">
+            <p class="text-center bg-gray-600 text-white p-2 my-3 rounded-md">
+                {{ item.search }}
+            </p>
+            <p class="text-center my-2">{{ item.result.name }}</p>
+            <ul>
+                <li class="text-center" v-for="elem in item.result.cars">
+                    {{ elem.name }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</template>

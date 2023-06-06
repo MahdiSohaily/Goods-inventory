@@ -14,18 +14,17 @@ defineProps({
 const toggleSelected = (e) => {
     const value = e.target.checked;
     const id = e.target.getAttribute('data-id');
-
-    alert(id)
-    // axios
-    //     .post("/rate/toggle/selected", {
-    //         pattern,
-    //     })
-    //     .then(function (response) {
-    //         resultBox.innerHTML = print(response.data, rates);
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     });
+    axios
+        .post("/rate/toggle/selected", {
+            value,
+            id
+        })
+        .then(function (response) {
+            resultBox.innerHTML = print(response.data, rates);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 </script>
 

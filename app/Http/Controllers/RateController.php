@@ -36,10 +36,12 @@ class RateController extends Controller
 
         $amount = $request->input('amount');
         $status = $request->input('status');
+        $selected = $request->input('selected');
 
         $rate = new Rate();
         $rate->amount = $amount;
         $rate->status = $status;
+        $rate->selected = $selected;
         $rate->save();
     }
 

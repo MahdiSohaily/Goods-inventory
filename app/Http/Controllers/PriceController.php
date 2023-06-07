@@ -33,15 +33,22 @@ class PriceController extends Controller
             $customer = $request->input('customer');
             $completeCode = $request->input('code');
 
-            $codes = explode("\n", $request->input('code'));
-            $allCodeData = [];
+            $explodedCodes = explode("\n", $request->input('code'));
 
-            foreach ($codes as $value) {
-                $good = DB::table('nisha')->select('id', 'partnumber')->where('partNumber', 'like', "$value%")->get();
+            $results_arry = [
+                'not_exist' => [],
+                'not_in_relationship' => [],
+                'in_relationship' => [],
+            ];
+
+            $similar_codes = []; //this array contains all the similar codes for the current item in exploded codes array
+
+            foreach ($explodedCodes as $code) {
+                $good = DB::table('nisha')->select('id')->where('partNumber', 'like', "$code%")->get();
                 if ($good) {
                     array_push($allCodeData, $good);
                 } else {
-                    array_push($allCodeData, null);
+                    array_push($results_arry['not_exist'], $code);
                 }
             }
 

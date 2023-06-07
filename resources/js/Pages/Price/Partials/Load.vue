@@ -29,9 +29,10 @@ const props = defineProps({
         <div class="accordion__content overflow-hidden bg-grey-lighter">
           <div v-for="item of existing[code]" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
             <CodeInfo :id="item.id" :partNumber="item.partnumber" />
-            <!-- <RelationsDetails />
-                      <GivenPrice :customer="1" :partNumber="null" :completeCode="null" />
-                      <Estelam /> -->
+            <RelationsDetails :id="item.id" :partNumber="item.partnumber" />
+            <!--
+              <GivenPrice :customer="1" :partNumber="null" :completeCode="null" />
+              <Estelam /> -->
           </div>
         </div>
       </div>

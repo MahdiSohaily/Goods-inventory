@@ -1,20 +1,37 @@
 <script setup>
+import { onMounted, ref } from 'vue';
+import axios from 'axios';
 
-const form = useForm({
-    _method: "GET",
-    customer: null,
-    code: null,
+const props = defineProps({
+    id: String,
+    partNumber: String,
 });
 
-const LoadPrice = () => {
-    form.post(route("price.load"), {
-        errorBag: "LoadPrice",
-        preserveScroll: true,
-        onSuccess: () => clearInput(),
-    });
-};
+const allRelations = ref(null);
+const relationCars = ref(null);
 
-const clearInput = () => { };
+const getRelationInfo = (id) => {
+    axios
+        .post("/price/info", {
+            id,
+        })
+        .then(function (response) {
+            if (response.data) {
+                console.log(response.data);
+                relationInfo.value = response.data.info;
+                relationCars.value = response.data.cars;
+            }
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+
+onMounted(() => {
+    getRelationInfo(props.id);
+})
 </script>
 
 <template>

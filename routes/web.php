@@ -87,5 +87,6 @@ Route::middleware([
         
         
         Route::post('/price/info', 'info')->name('price.info'); // Route to create new good in the system
+        Route::post('/price/relations', 'relations')->name('price.relations'); // Route to create new good in the system
     });
 });

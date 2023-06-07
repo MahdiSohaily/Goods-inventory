@@ -24,13 +24,13 @@ onMounted(() => {
                 <thead class="font-medium bg-green-300">
                     <tr>
                         <th scope="col" class="px-3 text-gray-800 py-3">
-                            Part Number
+                           شماره فنی
                         </th>
                         <th scope="col" class="px-3 text-gray-800 py-3">
-                            Goods Amount
+                            مقدار موجودی
                         </th>
                         <th scope="col" class="px-3 text-gray-800 py-3">
-                            Price
+                            قیمت به اساس نرخ ارز
                         </th>
                     </tr>
                 </thead>

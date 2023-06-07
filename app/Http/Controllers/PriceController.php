@@ -90,11 +90,30 @@ class PriceController extends Controller
         return $info ? ['info' => $info, 'cars' => $cars] : false;
     }
 
-    public function checkRelation($id)
+    public function relations(Request $request)
     {
-        $relation = DB::table('similars')->where('nisha_id', $id)->first();
+        $id = $request->input('id');
+        $isInRelation = DB::table('similars')->select('pattern_id')->where('nisha_id', $id)->first();
+        $relations = false;
+        
+        if ($isInRelation) {
 
-        return $relation->id  ? true : false;
+            $relations = DB::table('nisha')
+                ->join('similars', 'nisha.id', '=', 'similars.nisha_id')
+                ->select('nisha.*')
+                ->where('similars.pattern_id', $isInRelation->pattern_id)
+                ->first();
+
+            $cars = DB::table('patterncars')
+                ->join('cars', 'cars.id', '=', 'patterncars.car_id')
+                ->select('cars.name')
+                ->where('patterncars.pattern_id', $isInRelation->pattern_id)
+                ->get();
+        } else {
+            $relations = DB::table('nisha')->where('id', $id)->get();
+        }
+
+        return $relations;
     }
 
     public function getCodeData($code, $customer, $search)

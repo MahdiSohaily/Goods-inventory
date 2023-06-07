@@ -59,6 +59,6 @@ input:checked+label:after {
 
 input[name='panel']:checked~.accordion__content {
   /* Get this as close to what height you expect */
-  max-height: 150em;
+  max-height: 150000em;
 }
 </style>

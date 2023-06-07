@@ -49,12 +49,9 @@ class PriceController extends Controller
                     foreach ($existing_code[$code] as $item) {
                         $data[$code][$item->partnumber]['information'] = $this->info($item->id);
                         $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
-                        $data[$code][$item->partnumber]['estelam'] = $this->exist($item->id);
                     }
                 }
             }
-
-            return $data;
 
             return Inertia::render('Price/Partials/Load', [
                 'explodedCodes' => $explodedCodes,
@@ -132,7 +129,17 @@ class PriceController extends Controller
         } else {
             $relations = DB::table('nisha')->where('id', $id)->get();
         }
-        return $relations;
+
+        $existing = [];
+        $sortedGoods = [];
+        foreach ($relations as $relation) {
+            $existing[$relation->partnumber] = $this->exist($relation->id);
+            $sortedGoods[$relation->partnumber] = $relation;
+        }
+
+        arsort($existing);
+
+        return ['goods' => $sortedGoods, 'existing' => $existing];
     }
 
     public function getCodeData($code, $customer, $search)

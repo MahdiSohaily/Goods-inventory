@@ -6,7 +6,9 @@ import GivenPrice from "./GivenPrice.vue";
 import Estelam from "./Estelam.vue";
 
 const props = defineProps({
-  codes: Array,
+  explodedCodes: Array,
+  not_exist: Array,
+  existing: Array,
   customer: String,
   completeCode: String,
 });
@@ -18,68 +20,18 @@ const props = defineProps({
 
 <template>
   <AppLayout title="Rates">
-    <div v-for="code of props.codes" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
-      <CodeInfo :id="code.id" :partNumber="code.partnumber" />
-      <!-- <RelationsDetails />
-                      <GivenPrice :customer="1" :partNumber="null" :completeCode="null" />
-                      <Estelam /> -->
-    </div>
-    <div class="rtl accordion">
+    <div class="rtl accordion mt-12">
       <!--  Panel 1  -->
-      <div>
-        <input type="checkbox" checked="true" name="panel" id="panel-1" class="hidden">
-        <label for="panel-1" class="relative block bg-black text-white p-4 shadow border-b border-grey"></label>
+      <div v-for="code, index of explodedCodes">
+        <input type="checkbox" checked="true" name="panel" :id="index" class="hidden">
+        <label :for="index" class="relative block bg-black text-white p-4 shadow border-b border-grey"></label>
         <div class="accordion__content overflow-hidden bg-grey-lighter">
-          <p class="accordion__body p-4" id="panel1">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto
-            possimus at a cum saepe molestias modi illo facere ducimus voluptatibus praesentium deleniti fugiat ab error
-            quia sit perspiciatis velit necessitatibus.Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Lorem ipsum dolor sit amet.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto
-            possimus at a cum saepe molestias modi illo facere ducimus voluptatibus praesentium deleniti fugiat ab error
-            quia sit perspiciatis velit necessitatibus.Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Lorem ipsum dolor sit amet.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto
-            possimus at a cum saepe molestias modi illo facere ducimus voluptatibus praesentium deleniti fugiat ab error
-            quia sit perspiciatis velit necessitatibus.Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Lorem ipsum dolor sit amet.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto
-            possimus at a cum saepe molestias modi illo facere ducimus voluptatibus praesentium deleniti fugiat ab error
-            quia sit perspiciatis velit necessitatibus.Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Lorem ipsum dolor sit amet.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto
-            possimus at a cum saepe molestias modi illo facere ducimus voluptatibus praesentium deleniti fugiat ab error
-            quia sit perspiciatis velit necessitatibus.Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Lorem ipsum dolor sit amet.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto
-            possimus at a cum saepe molestias modi illo facere ducimus voluptatibus praesentium deleniti fugiat ab error
-            quia sit perspiciatis velit necessitatibus.Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Lorem ipsum dolor sit amet.
-          </p>
-        </div>
-      </div>
-      <!-- Panel 2 -->
-      <div>
-        <input type="checkbox" checked="true" name="panel" id="panel-2" class="hidden">
-        <label for="panel-2" class="relative block bg-black text-white p-4 shadow border-b border-grey">Panel 2</label>
-        <div class="accordion__content overflow-hidden bg-grey-lighter">
-          <h2 class="accordion__header pt-4 pl-4">Header</h2>
-          <p class="accordion__body p-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto possimus at a cum
-            saepe molestias modi illo facere ducimus voluptatibus praesentium deleniti fugiat ab error quia sit
-            perspiciatis velit necessitatibus.Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Lorem ipsum dolor sit amet.</p>
-        </div>
-      </div>
-      <!--  Panel 3  -->
-      <div>
-        <input type="checkbox" checked="true" name="panel" id="panel-3" class="hidden">
-        <label for="panel-3" class="relative block bg-black text-white p-4 shadow border-b border-grey">Panel 3</label>
-        <div class="accordion__content overflow-hidden bg-grey-lighter">
-          <h2 class="accordion__header pt-4 pl-4">Header</h2>
-          <p class="accordion__body p-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto possimus at a cum
-            saepe molestias modi illo facere ducimus voluptatibus praesentium deleniti fugiat ab error quia sit
-            perspiciatis velit necessitatibus.Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Lorem ipsum dolor sit amet.</p>
+          <div v-for="item of existing[code]" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
+            <CodeInfo :id="item.id" :partNumber="item.partnumber" />
+            <!-- <RelationsDetails />
+                  <GivenPrice :customer="1" :partNumber="null" :completeCode="null" />
+                  <Estelam /> -->
+          </div>
         </div>
       </div>
     </div>

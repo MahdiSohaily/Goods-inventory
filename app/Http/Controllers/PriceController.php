@@ -30,17 +30,16 @@ class PriceController extends Controller
             ];
 
             foreach ($explodedCodes as $code) {
-                $good = DB::table('nisha')->select('id')->where('partNumber', 'like', "$code%")->get();
-                if ($good) {
-                    array_push($results_arry['existing'], ["$code" => $good]);
+                $good = DB::table('nisha')->select('id', 'partnumber')->where('partNumber', 'like', "$code%")->get();
+                if (count($good)) {
+                    $results_arry['existing']["$code"] = $good;
                 } else {
                     array_push($results_arry['not_exist'], $code);
                 }
             }
 
-            return $results_arry;
-
             return Inertia::render('Price/Partials/Load', [
+                'explodedCodes' => $explodedCodes,
                 'not_exist' => $results_arry['not_exist'],
                 'existing' => $results_arry['existing'],
                 'customer' => $customer,

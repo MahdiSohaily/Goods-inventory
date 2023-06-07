@@ -218,8 +218,8 @@ const mobisRate = (avg, rates) => {
                 min="0" max="30" @keyup="search($event.target.value, rates)" placeholder="... کد فنی قطعه را وارد کنید" />
         </div>
         <div class="flex justify-center items-center pb-6">
-            <label for="mode" class="ml-1">جستجوی پیشرفته</label>
-            <input type="checkbox" name="super" id="mode" class="rounded-md" />
+            <label for="mode" class="px-2">جستجوی پیشرفته</label>
+            <input type="checkbox" name="super" id="mode" class="rounded-md " />
         </div>
         <div class="bg-gray-100 bg-opacity-25">
             <div class="max-w-7xl overflow-x-auto mx-auto">

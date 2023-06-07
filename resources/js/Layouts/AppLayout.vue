@@ -23,11 +23,8 @@ const logout = () => {
 
 <template>
     <div>
-
         <Head :title="title" />
-
         <Banner />
-
         <div class="min-h-screen bg-gray-100">
             <nav id="nav" ref="nav" class="main-nav bg-white shadow-lg flex flex-col justify-between">
                 <i id="close" @click="toggleNav()"
@@ -49,7 +46,7 @@ const logout = () => {
                         <i class="px-2 material-icons hover:cursor-pointer">sync</i>
                         تعریف رابطه اجناس
                     </NavLink>
-                    <NavLink :href="route('price.give')" :active="route().current('price.give')">
+                    <NavLink :href="route('price.give')" :active="route().current('price.give') || route().current('price.load')">
                         <i class="px-2 material-icons hover:cursor-pointer">receipt</i>
                     قیمت دهی
                     </NavLink>

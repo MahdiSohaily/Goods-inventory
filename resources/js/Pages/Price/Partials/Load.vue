@@ -24,10 +24,10 @@ const props = defineProps({
                       <GivenPrice :customer="1" :partNumber="null" :completeCode="null" />
                       <Estelam /> -->
     </div>
-    <div class="accordion">
+    <div class="rtl accordion">
       <!--  Panel 1  -->
       <div>
-        <input type="checkbox" name="panel" id="panel-1" class="hidden">
+        <input type="checkbox" checked="true" name="panel" id="panel-1" class="hidden">
         <label for="panel-1" class="relative block bg-black text-white p-4 shadow border-b border-grey"></label>
         <div class="accordion__content overflow-hidden bg-grey-lighter">
           <p class="accordion__body p-4" id="panel1">
@@ -60,7 +60,7 @@ const props = defineProps({
       </div>
       <!-- Panel 2 -->
       <div>
-        <input type="checkbox" name="panel" id="panel-2" class="hidden">
+        <input type="checkbox" checked="true" name="panel" id="panel-2" class="hidden">
         <label for="panel-2" class="relative block bg-black text-white p-4 shadow border-b border-grey">Panel 2</label>
         <div class="accordion__content overflow-hidden bg-grey-lighter">
           <h2 class="accordion__header pt-4 pl-4">Header</h2>
@@ -72,7 +72,7 @@ const props = defineProps({
       </div>
       <!--  Panel 3  -->
       <div>
-        <input type="checkbox" name="panel" id="panel-3" class="hidden">
+        <input type="checkbox" checked="true" name="panel" id="panel-3" class="hidden">
         <label for="panel-3" class="relative block bg-black text-white p-4 shadow border-b border-grey">Panel 3</label>
         <div class="accordion__content overflow-hidden bg-grey-lighter">
           <h2 class="accordion__header pt-4 pl-4">Header</h2>
@@ -90,7 +90,7 @@ const props = defineProps({
 label:after {
   content: '+';
   position: absolute;
-  right: 1em;
+  left: 1em;
   color: #fff;
 }
 

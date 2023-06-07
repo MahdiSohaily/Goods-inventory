@@ -29,14 +29,30 @@ class PriceController extends Controller
                 'existing' => [],
             ];
 
+
+            $existing_code = [];
+
             foreach ($explodedCodes as $code) {
                 $good = DB::table('nisha')->select('id', 'partnumber')->where('partNumber', 'like', "$code%")->get();
                 if (count($good)) {
-                    $results_arry['existing']["$code"] = $good;
+                    $existing_code[$code] = $good;
                 } else {
                     array_push($results_arry['not_exist'], $code);
                 }
             }
+
+            $data = [];
+
+            foreach ($explodedCodes as $code) {
+                $data[$code] = [];
+                foreach ($existing_code[$code] as $item) {
+                    $data[$code][$item->id]['information'] = $this->info($item->id);
+                    $data[$code][$item->id]['relation'] = $this->relations($item->id);
+                    $data[$code][$item->id]['exist'] = $this->exist($item->id);
+                }
+            }
+
+            return $data;
 
             return Inertia::render('Price/Partials/Load', [
                 'explodedCodes' => $explodedCodes,
@@ -44,6 +60,7 @@ class PriceController extends Controller
                 'existing' => $results_arry['existing'],
                 'customer' => $customer,
                 'completeCode' => $completeCode,
+                'rates' => $this->getSelectedRates()
             ]);
         } else {
             $this->validateRequest($request->all());
@@ -66,9 +83,17 @@ class PriceController extends Controller
         ])->validate();
     }
 
-    public function info(Request $request)
+    public function getSelectedRates()
     {
-        $id = $request->input('id');
+        $rates = DB::table('rates')
+            ->select('amount')
+            ->where('selected', '1')
+            ->get();
+        return $rates;
+    }
+
+    public function info($id)
+    {
         $isInRelation = DB::table('similars')->select('pattern_id')->where('nisha_id', $id)->first();
         $info = false;
         $cars = null;
@@ -90,9 +115,8 @@ class PriceController extends Controller
         return $info ? ['info' => $info, 'cars' => $cars] : false;
     }
 
-    public function relations(Request $request)
+    public function relations($id)
     {
-        $id = $request->input('id');
         $isInRelation = DB::table('similars')->select('pattern_id')->where('nisha_id', $id)->first();
         $relations = false;
 
@@ -106,11 +130,6 @@ class PriceController extends Controller
         } else {
             $relations = DB::table('nisha')->where('id', $id)->get();
         }
-        $data = [];
-        foreach ($relations as $relation) {
-            array_push($data, $this->exist($relation->id));
-        }
-        return $data;
         return $relations;
     }
 
@@ -262,7 +281,7 @@ class PriceController extends Controller
         return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
     }
 
-    public function test($code = '445096')
+    public function test($code)
     {
         $good = DB::table('nisha')->where('id', $code)->first();
 

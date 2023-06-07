@@ -106,7 +106,11 @@ class PriceController extends Controller
         } else {
             $relations = DB::table('nisha')->where('id', $id)->get();
         }
-
+        $data = [];
+        foreach ($relations as $relation) {
+            array_push($data, $this->exist($relation->id));
+        }
+        return $data;
         return $relations;
     }
 

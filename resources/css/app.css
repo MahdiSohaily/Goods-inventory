@@ -16,3 +16,7 @@
 .rtl {
     direction: rtl !important;
 }
+
+.text-bold {
+    font-weight: bold !important;
+}

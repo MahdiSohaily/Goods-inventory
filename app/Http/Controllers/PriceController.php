@@ -44,11 +44,13 @@ class PriceController extends Controller
             $data = [];
 
             foreach ($explodedCodes as $code) {
-                $data[$code] = [];
-                foreach ($existing_code[$code] as $item) {
-                    $data[$code][$item->id]['information'] = $this->info($item->id);
-                    $data[$code][$item->id]['relation'] = $this->relations($item->id);
-                    $data[$code][$item->id]['exist'] = $this->exist($item->id);
+                if (!in_array($code, $results_arry['not_exist'])) {
+                    $data[$code] = [];
+                    foreach ($existing_code[$code] as $item) {
+                        $data[$code][$item->partnumber]['information'] = $this->info($item->id);
+                        $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
+                        $data[$code][$item->partnumber]['estelam'] = $this->exist($item->id);
+                    }
                 }
             }
 
@@ -57,7 +59,7 @@ class PriceController extends Controller
             return Inertia::render('Price/Partials/Load', [
                 'explodedCodes' => $explodedCodes,
                 'not_exist' => $results_arry['not_exist'],
-                'existing' => $results_arry['existing'],
+                'existing' => $data,
                 'customer' => $customer,
                 'completeCode' => $completeCode,
                 'rates' => $this->getSelectedRates()
@@ -86,7 +88,7 @@ class PriceController extends Controller
     public function getSelectedRates()
     {
         $rates = DB::table('rates')
-            ->select('amount')
+            ->select('amount', 'status')
             ->where('selected', '1')
             ->get();
         return $rates;
@@ -112,7 +114,7 @@ class PriceController extends Controller
                 ->get();
         }
 
-        return $info ? ['info' => $info, 'cars' => $cars] : false;
+        return $info ? ['relationInfo' => $info, 'cars' => $cars] : false;
     }
 
     public function relations($id)

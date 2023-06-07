@@ -3,33 +3,16 @@ import { onMounted, ref } from 'vue';
 import axios from 'axios';
 
 const props = defineProps({
-    id: String,
+    information: String,
     partNumber: String,
 });
 
 const relationInfo = ref(null);
 const relationCars = ref(null);
 
-const getRelationInfo = (id) => {
-    axios
-        .post("/price/info", {
-            id,
-        })
-        .then(function (response) {
-            if (response.data) {
-                relationInfo.value = response.data.info;
-                relationCars.value = response.data.cars;
-            }
-
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
-
-
 onMounted(() => {
-    getRelationInfo(props.id);
+    relationInfo.value = props.information.relationInfo;
+    relationCars.value = props.information.cars;
 })
 </script>
 

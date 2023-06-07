@@ -46,23 +46,15 @@ class PriceController extends Controller
             foreach ($explodedCodes as $code) {
                 $good = DB::table('nisha')->select('id')->where('partNumber', 'like', "$code%")->get();
                 if ($good) {
-                    array_push($allCodeData, $good);
+                    array_push($similar_codes, $good);
                 } else {
                     array_push($results_arry['not_exist'], $code);
                 }
             }
 
-            $searhCodes = [];
+            return $similar_codes;
 
-            for ($counter = 0; $counter < count($allCodeData); $counter++) {
-                if ($allCodeData[$counter]) {
-                    array_push($searhCodes, ...$allCodeData[$counter]);
-                } else {
-                    array_push($searhCodes, [null]);
-                }
-            }
-
-            return Inertia::render('Price/Partials/Load', ['codes' => $searhCodes, 'customer' => $customer, 'completeCode' => $completeCode]);
+            return Inertia::render('Price/Partials/Load', ['codes' => null, 'customer' => $customer, 'completeCode' => $completeCode]);
         } else {
             return Inertia::render('Price/Show');
         }

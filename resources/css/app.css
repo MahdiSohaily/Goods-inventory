@@ -16,6 +16,9 @@
 .rtl {
     direction: rtl !important;
 }
+.tiny-text {
+    font-size: 12px;
+}
 
 .text-bold {
     font-weight: bold !important;

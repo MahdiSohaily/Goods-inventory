@@ -49,12 +49,12 @@ class PriceController extends Controller
                     foreach ($existing_code[$code] as $item) {
                         $data[$code][$item->partnumber]['information'] = $this->info($item->id);
                         $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
-                        $data[$code][$item->partnumber]['estelam'] = $this->estelam($code);
+                        $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($code);
                     }
                 }
             }
 
-            return $data;
+            // return $data;
 
             return Inertia::render('Price/Partials/Load', [
                 'explodedCodes' => $explodedCodes,
@@ -149,6 +149,15 @@ class PriceController extends Controller
         arsort($sorted);
 
         return ['goods' => $sortedGoods, 'existing' => $existing, 'sorted' => $sorted];
+    }
+
+    public function givenPrice($code)
+    {
+        $givenPrices = DB::table('prices')->where('partnumber', 'like', "$code%")
+            ->orderBy('created_at')
+            ->limit(4)->get();
+
+        return $givenPrices;
     }
 
     public function out($id)

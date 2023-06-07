@@ -29,9 +29,9 @@ const props = defineProps({
             <CodeInfo :information="existing[code][index]['information']" :partNumber="index" />
             <RelationsDetails :rates="props.rates" :relation="existing[code][index]['relation']"
               :exist="existing[code][index]['exist']" />
-            <!--
-                    <GivenPrice :customer="1" :partNumber="null" :completeCode="null" />
-                    <Estelam /> -->
+
+            <GivenPrice :givenPrice="existing[code][index]['givenPrice']" />
+            <!--  <Estelam /> -->
           </div>
         </div>
       </div>

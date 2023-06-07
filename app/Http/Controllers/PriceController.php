@@ -82,6 +82,7 @@ class PriceController extends Controller
 
             $cars = DB::table('patterncars')
                 ->join('cars', 'cars.id', '=', 'patterncars.car_id')
+                ->select('cars.name')
                 ->where('patterncars.pattern_id', $isInRelation->pattern_id)
                 ->get();
         }

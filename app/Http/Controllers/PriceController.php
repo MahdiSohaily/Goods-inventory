@@ -17,19 +17,8 @@ class PriceController extends Controller
 
     public function load(Request $request)
     {
-        Validator::make($request->all(), [
-            'customer' => 'required|string|exists:customers,id',
-            'code' => 'required|string',
-
-        ], [
-            'required' => "وارد کردن :attribute الزامی می باشد.",
-        ], [
-            'customer' => 'مشتری',
-            'code' => 'کد'
-        ])->validate();
-
         if ($request->input('customer')) {
-
+            $this->validateRequest($request->all());
             $customer = $request->input('customer');
             $completeCode = $request->input('code');
 
@@ -56,8 +45,24 @@ class PriceController extends Controller
 
             return Inertia::render('Price/Partials/Load', ['codes' => null, 'customer' => $customer, 'completeCode' => $completeCode]);
         } else {
+            $this->validateRequest($request->all());
+
             return Inertia::render('Price/Show');
         }
+    }
+
+    public function validateRequest($all_data)
+    {
+        Validator::make($all_data, [
+            'customer' => 'required|string|exists:customers,id',
+            'code' => 'required|string',
+
+        ], [
+            'required' => "وارد کردن :attribute الزامی می باشد.",
+        ], [
+            'customer' => 'مشتری',
+            'code' => 'کد'
+        ])->validate();
     }
 
     public function info(Request $request)

@@ -8,6 +8,7 @@ const props = defineProps({
 });
 
 const relationInfo = ref(null);
+const relationCars = ref(null);
 
 const getRelationInfo = (id) => {
     axios
@@ -16,11 +17,13 @@ const getRelationInfo = (id) => {
         })
         .then(function (response) {
             response.data ? relationInfo.value = response.data : false;
+
         })
         .catch(function (error) {
             console.log(error);
         });
 }
+
 
 onMounted(() => {
     getRelationInfo(props.id);

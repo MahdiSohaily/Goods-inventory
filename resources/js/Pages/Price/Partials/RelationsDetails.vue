@@ -35,26 +35,28 @@ onMounted(() => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="element, key of props.relation.existing">
+                    <tr v-for="element, key of props.relation.sorted">
                         <td class="text-bold px-1 pt-2">
                             <p class="bold">
                                 {{ props.relation.goods[key].partnumber }}
                             </p>
                         </td>
                         <td class="px-1 pt-2">
-                            <table class="min-w-full text-left text-sm font-light bg-gray-200 p-2 border-2 border-gray-400">
+                            <table class="min-w-full text-left text-sm font-light p-2 border-2 border-gray-400">
                                 <thead class="font-medium">
                                     <tr>
-                                        <th v-for="goodAmount, index in element" scope="col"
-                                            class="text-gray-800 text-center bg-orange-200 py-2">
+                                        <th v-for="goodAmount, index in  props.relation.existing[key]" scope="col"
+                                            :class="index == 'GEN' || index == 'MOB' ? index : 'brand-default'"
+                                            class="text-white text-center py-2">
                                             {{ index }}
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr class="py-3">
-                                        <td class="whitespace-nowrap px-3 py-2 text-center"
-                                            v-for="goodAmount, index in element">
+                                        <td :class="index == 'GEN' || index == 'MOB' ? index : 'brand-default'"
+                                            class="whitespace-nowrap text-white px-3 py-2 text-center"
+                                            v-for="goodAmount, index in  props.relation.existing[key]">
                                             {{ goodAmount }}
                                         </td>
                                     </tr>

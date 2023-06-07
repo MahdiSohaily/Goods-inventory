@@ -49,9 +49,12 @@ class PriceController extends Controller
                     foreach ($existing_code[$code] as $item) {
                         $data[$code][$item->partnumber]['information'] = $this->info($item->id);
                         $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
+                        $data[$code][$item->partnumber]['estelam'] = $this->estelam($code);
                     }
                 }
             }
+
+            return $data;
 
             return Inertia::render('Price/Partials/Load', [
                 'explodedCodes' => $explodedCodes,
@@ -138,79 +141,16 @@ class PriceController extends Controller
         }
 
         arsort($existing);
-
-        return ['goods' => $sortedGoods, 'existing' => $existing];
-    }
-
-    public function getCodeData($code, $customer, $search)
-    {
-        $good = DB::table('nisha')->where('id', $code)->first();
-
-        $pattern_id = DB::table('similars')->where('nisha_id', $code)->first();
-
-        $pattern = $pattern_id ? DB::table('patterns')->where('id', $pattern_id->pattern_id)->first() : null;
-
-        $all_relations =  $pattern_id ? DB::table('similars')
-            ->join('nisha', 'similars.nisha_id', '=', 'nisha.id')
-            ->where('pattern_id', $pattern_id->pattern_id)->get() : [$good];
-        $existing = [];
-
-        foreach ($all_relations as $key => $value) {
-            $existing["$value->id"] = $this->exist($value->id);
-        }
-
         $sorted = [];
         foreach ($existing as $key => $value) {
-            $sorted[$key . 'z'] = $this->getMax($value);
+            $sorted[$key] = $this->getMax($value);
         }
 
         arsort($sorted);
 
-        $cars = $pattern_id ? DB::table('patterncars')
-            ->join('cars', 'patterncars.car_id', '=', 'cars.id')
-            ->where('patterncars.pattern_id', $pattern_id->pattern_id)->get() : null;
-
-        $rates = DB::table('rates')
-            ->orderBy('amount', 'asc')
-            ->get();
-
-
-        $partNumber = substr($good->partnumber, 0, 7);
-
-        $estelam = DB::table('estelam')
-            ->select('estelam.*', 'seller.name')
-            ->join('seller', 'seller.id', 'estelam.seller')
-            ->where('estelam.codename', 'like', "$partNumber%")
-            ->limit(4)
-            ->orderBy('time', 'desc')
-            ->get();
-
-        $prices = DB::table('prices')
-            ->select('prices.*', 'customers.name', 'customers.last_name')
-            ->join('customers', 'prices.customer_id', 'customers.id')
-            ->where('prices.partnumber', 'like', "$partNumber%")
-            ->orderBy('prices.created_at', 'desc')
-            ->limit(4)
-            ->get();
-
-        $ordered_price = $pattern_id ? DB::table('patterns')
-            ->select('price')
-            ->where('id', "$pattern_id->pattern_id")
-            ->first() : null;
-
-        $display_relation = [];
-
-        foreach ($all_relations as $key => $value) {
-            $display_relation["$value->id"] = $value;
-        }
-        return  [
-            'search' => $search, 'code' => $code, 'pattern' => $good->partnumber,
-            'relations' => $display_relation, 'customer' => $customer, 'cars' => $cars,
-            'rates' => $rates, 'prices' => $prices, 'name' => $pattern ? $pattern->name : 'Not in relation',
-            'existing' => $existing, 'estelam' => $estelam, 'ordered_price' => $ordered_price, 'sorted' => $sorted
-        ];
+        return ['goods' => $sortedGoods, 'existing' => $existing, 'sorted' => $sorted];
     }
-
+    
     public function out($id)
     {
         $result =

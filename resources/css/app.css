@@ -21,17 +21,17 @@
     font-weight: bold !important;
 }
 
-td.brand-default {
+.brand-default {
     font-weight: bold;
     font-size: 14px;
     color: #d6d6d6;
     background: red;
 }
 
-td.MOB {
+.MOB {
     background: #195d8c;
 }
 
-td.GEN {
+.GEN {
     background: #042135;
 }

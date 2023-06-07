@@ -26,24 +26,26 @@ class PriceController extends Controller
 
             $results_arry = [
                 'not_exist' => [],
-                'not_in_relationship' => [],
-                'in_relationship' => [],
+                'existing' => [],
             ];
-
-            $similar_codes = []; //this array contains all the similar codes for the current item in exploded codes array
 
             foreach ($explodedCodes as $code) {
                 $good = DB::table('nisha')->select('id')->where('partNumber', 'like', "$code%")->get();
                 if ($good) {
-                    array_push($similar_codes, $good);
+                    array_push($results_arry['existing'], ["$code" => $good]);
                 } else {
                     array_push($results_arry['not_exist'], $code);
                 }
             }
 
-            return $similar_codes;
+            return $results_arry;
 
-            return Inertia::render('Price/Partials/Load', ['codes' => null, 'customer' => $customer, 'completeCode' => $completeCode]);
+            return Inertia::render('Price/Partials/Load', [
+                'not_exist' => $results_arry['not_exist'],
+                'existing' => $results_arry['existing'],
+                'customer' => $customer,
+                'completeCode' => $completeCode,
+            ]);
         } else {
             $this->validateRequest($request->all());
 
@@ -80,6 +82,13 @@ class PriceController extends Controller
         }
 
         return $info;
+    }
+
+    public function checkRelation($id)
+    {
+        $relation = DB::table('similars')->where('nisha_id', $id)->first();
+
+        return $relation->id  ? true : false;
     }
 
     public function getCodeData($code, $customer, $search)

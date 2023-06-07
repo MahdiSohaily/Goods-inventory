@@ -150,7 +150,7 @@ class PriceController extends Controller
 
         return ['goods' => $sortedGoods, 'existing' => $existing, 'sorted' => $sorted];
     }
-    
+
     public function out($id)
     {
         $result =
@@ -228,33 +228,6 @@ class PriceController extends Controller
         }
 
         return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
-    }
-
-    public function test($code)
-    {
-        $good = DB::table('nisha')->where('id', $code)->first();
-
-        $pattern_id = DB::table('similars')->where('nisha_id', $code)->first();
-
-        $pattern = $pattern_id ? DB::table('patterns')->where('id', $pattern_id->pattern_id)->first() : null;
-
-        $all_relations =  $pattern_id ? DB::table('similars')
-            ->join('nisha', 'similars.nisha_id', '=', 'nisha.id')
-            ->where('pattern_id', $pattern_id->pattern_id)->get() : [$good];
-        $existing = [];
-
-        foreach ($all_relations as $key => $value) {
-            $existing["$value->id"] = $this->exist($value->id);
-        }
-
-        $sorted = [];
-        foreach ($existing as $key => $value) {
-            $sorted[$key] = $this->getMax($value);
-        }
-
-        arsort($sorted);
-
-        return $sorted;
     }
 
     function getMax($array)

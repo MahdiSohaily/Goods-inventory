@@ -17,7 +17,6 @@ const getRelationInfo = (id) => {
         })
         .then(function (response) {
             if (response.data) {
-                console.log(response.data);
                 relationInfo.value = response.data.info;
                 relationCars.value = response.data.cars;
             }
@@ -36,7 +35,7 @@ onMounted(() => {
 
 <template>
     <div class="bg-white rounded-lg">
-        <div id="search_result" class="p-3">
+        <div id="search_result" class="rtl p-3">
             <p class="text-center bg-gray-600 text-white p-2 my-3 rounded-md">
                 {{ props.partNumber }}
             </p>

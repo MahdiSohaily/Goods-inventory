@@ -95,19 +95,13 @@ class PriceController extends Controller
         $id = $request->input('id');
         $isInRelation = DB::table('similars')->select('pattern_id')->where('nisha_id', $id)->first();
         $relations = false;
-        
+
         if ($isInRelation) {
 
             $relations = DB::table('nisha')
                 ->join('similars', 'nisha.id', '=', 'similars.nisha_id')
                 ->select('nisha.*')
                 ->where('similars.pattern_id', $isInRelation->pattern_id)
-                ->first();
-
-            $cars = DB::table('patterncars')
-                ->join('cars', 'cars.id', '=', 'patterncars.car_id')
-                ->select('cars.name')
-                ->where('patterncars.pattern_id', $isInRelation->pattern_id)
                 ->get();
         } else {
             $relations = DB::table('nisha')->where('id', $id)->get();

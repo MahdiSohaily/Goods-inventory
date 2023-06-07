@@ -4,24 +4,19 @@ import axios from 'axios';
 
 const props = defineProps({
     id: String,
-    partNumber: String,
 });
 
 const allRelations = ref(null);
-const relationCars = ref(null);
 
-const getRelationInfo = (id) => {
+const getRelations = (id) => {
     axios
-        .post("/price/info", {
+        .post("/price/relations", {
             id,
         })
         .then(function (response) {
             if (response.data) {
-                console.log(response.data);
-                relationInfo.value = response.data.info;
-                relationCars.value = response.data.cars;
+                allRelations.value = response.data;
             }
-
         })
         .catch(function (error) {
             console.log(error);
@@ -30,29 +25,30 @@ const getRelationInfo = (id) => {
 
 
 onMounted(() => {
-    getRelationInfo(props.id);
+    getRelations(props.id);
 })
 </script>
 
 <template>
     <div class="bg-white rounded-lg col-span-5 scroll-auto">
-        <div id="search_result" class="p-3">
-            <table class="min-w-full text-left text-sm font-light">
-                <thead class="font-medium bg-green-300">
-                    <tr>
-                        <th scope="col" class="px-3 text-center text-gray-800 py-3">
-                            Part Number
-                        </th>
-                        <th scope="col" class="px-3 text-center text-gray-800 py-3">
-                            Goods Amount
-                        </th>
-                        <th scope="col" class="px-3 text-center text-gray-800 py-3">
-                            Price
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="element, key in item.result.sorted">
+    <div id="search_result" class="p-3">
+        <table class="min-w-full text-left text-sm font-light">
+            <thead class="font-medium bg-green-300">
+                <tr>
+                    <th scope="col" class="px-3 text-center text-gray-800 py-3">
+                        Part Number
+                    </th>
+                    <th scope="col" class="px-3 text-center text-gray-800 py-3">
+                        Goods Amount
+                    </th>
+                    <th scope="col" class="px-3 text-center text-gray-800 py-3">
+                        Price
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ allRelations }}
+                <!-- <tr v-for="element, key in item.result.sorted">
                         <td class="px-1 pt-2">
                             <p class="bold">
                                 {{ item.result.relations[key.replace('z', '')].partnumber }}
@@ -99,37 +95,37 @@ onMounted(() => {
                                                     1.2 *
                                                     1.3
                                                 )
-                                            }}
-                                        </td>
-                                    </tr>
-                                    <tr class="bg-indigo-200" v-if="
-                                        item.result.relations[key.replace('z', '')].mobis !== null && item.result.relations[key.replace('z', '')].mobis !== '-'
-                                    ">
-                                        <td class="whitespace-nowrap px-3 text-center py-2" v-for="rate in selected_rates">
-                                            {{
-                                                Math.round(
+                                                }}
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-indigo-200" v-if="
+                                            item.result.relations[key.replace('z', '')].mobis !== null && item.result.relations[key.replace('z', '')].mobis !== '-'
+                                        ">
+                                            <td class="whitespace-nowrap px-3 text-center py-2" v-for="rate in selected_rates">
+                                                {{
+                                                    Math.round(
+                                                        Math.round((item.result.relations[key.replace('z', '')].price * 110) / 243.5) *
+                                                        rate *
+                                                        1.25 *
+                                                        1.3
+                                                    )
+                                                }}
+                                            </td>
+                                        </tr>
+                                        <tr v-if="item.result.relations[key.replace('z', '')].korea">
+                                            <td class="whitespace-nowrap px-3 text-center" v-for="rate in selected_rates">
+                                                {{
                                                     Math.round((item.result.relations[key.replace('z', '')].price * 110) / 243.5) *
                                                     rate *
                                                     1.25 *
                                                     1.3
-                                                )
-                                            }}
-                                        </td>
-                                    </tr>
-                                    <tr v-if="item.result.relations[key.replace('z', '')].korea">
-                                        <td class="whitespace-nowrap px-3 text-center" v-for="rate in selected_rates">
-                                            {{
-                                                Math.round((item.result.relations[key.replace('z', '')].price * 110) / 243.5) *
-                                                rate *
-                                                1.25 *
-                                                1.3
-                                            }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
+                                                }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr> -->
                 </tbody>
             </table>
         </div>

@@ -12,27 +12,24 @@ const props = defineProps({
   customer: String,
   completeCode: String,
 });
-
-
-
-
 </script>
 
 <template>
   <AppLayout title="Rates">
-    <div class="rtl accordion mt-12">
+    <div class="accordion mt-12">
       <!--  Panel 1  -->
       <div v-for="code, index of explodedCodes">
         <input type="checkbox" checked="true" name="panel" :id="index" class="hidden">
         <label :for="index" class="relative flex items-center bg-gray-700 text-white p-4 shadow border-b border-grey">
-          شماره فنی: {{ code }}</label>
+          {{ code }}
+        </label>
         <div class="accordion__content overflow-hidden bg-grey-lighter">
           <div v-for="item of existing[code]" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
             <CodeInfo :id="item.id" :partNumber="item.partnumber" />
-            <RelationsDetails :id="item.id" :partNumber="item.partnumber" />
+            <RelationsDetails :id="item.id" />
             <!--
-              <GivenPrice :customer="1" :partNumber="null" :completeCode="null" />
-              <Estelam /> -->
+                <GivenPrice :customer="1" :partNumber="null" :completeCode="null" />
+                <Estelam /> -->
           </div>
         </div>
       </div>
@@ -44,7 +41,7 @@ const props = defineProps({
 label:after {
   content: '+';
   position: absolute;
-  left: 1em;
+  right: 1em;
   color: #fff;
 }
 

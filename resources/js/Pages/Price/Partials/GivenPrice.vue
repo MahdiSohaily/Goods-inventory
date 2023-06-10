@@ -34,42 +34,41 @@ const savePrice = (pattern) => {
 <template>
     <div class="bg-white rounded-lg shadow-md col-span-2">
         <div id="search_result" class="p-3">
-            <table class="min-w-full text-left text-sm font-light">
+            <table class="rtl min-w-full text-right text-sm font-light">
                 <thead>
-                    <tr>
-                        <th>
-                        <th class="px-4 text-gray-600">قیمت</th>
-                        <th class="px-4 text-gray-600">شماره فنی</th>
-                        <th class="px-4 text-gray-600">مشتری</th>
-                        </th>
+                    <tr class="min-w-full bg-green-600">
+                        <td class="text-gray-600 bold py-2 pr-2">قیمت</td>
+                        <td class="text-gray-600 bold py-2 pr-2">شماره فنی</td>
+                        <td class="text-gray-600 bold py-2 pr-2">مشتری</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <div class="min-w-full mb-1 border-2 border-gray-400" v-for="price in givenPrice">
-                        <div class="min-w-full bg-indigo-100">
+                    <template v-for="price in givenPrice">
+                        <tr class="min-w-full mb-1 bg-indigo-200">
 
-                            <td scope="col" class="px-3 text-gray-800 py-1 break-words">
+                            <td scope="col" class="text-gray-800 pr-2 py-1">
                                 {{ price.price }}
                             </td>
-                            <td scope="col" class="px-3 text-gray-800 py-1 break-words">
+                            <td scope="col" class="text-gray-800 pr-2 py-1">
                                 {{ price.partnumber }}
                             </td>
-                            <td scope="col" class="px-3 text-gray-800 py-1">
+                            <td scope="col" class="text-gray-800 pr-2 py-1">
                                 {{ price.name }}
                             </td>
-                        </div>
-                        <div class="min-w-full bg-orange-100 py-1">
-                            <td colspan="3" scope="col" class="rtl px-3 text-gray-800 tiny-text">
+                        </tr>
+                        <tr class="min-w-full mb-4 bg-orange-100">
+                            <td colspan="3" scope="col" class="text-gray-800 pr-2 tiny-text">
                                 {{ arrangeTime(price.created_at) }}
                             </td>
-                        </div>
-                    </div>
+                        </tr>
+                    </template>
+
                 </tbody>
             </table>
             <FormRelation @submitted="savePrice(item.result.pattern)">
                 <template #form>
                     <div class="pb-2">
-                        <InputLabel for="price" value="Price" />
+                        <InputLabel for="price" value="قیمت" />
                         <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
                             autocomplete="price" />
                         <InputError :message="form.errors.price" class="mt-2" />
@@ -78,11 +77,17 @@ const savePrice = (pattern) => {
 
                 <template #actions>
                     <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                        Saved.
+                        عملیات موفقانه صورت گرفت.
                     </ActionMessage>
 
                     <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Save
+                        ثبت
+                    </PrimaryButton>
+                    <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        ارسال به نیایش
+                    </PrimaryButton>
+                    <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        !!!نداریم
                     </PrimaryButton>
                 </template>
             </FormRelation>

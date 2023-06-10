@@ -104,14 +104,17 @@ onMounted(() => {
                                             }}
                                         </td>
                                     </tr>
-                                    <tr class="bg-amber-600" v-if="props.relation.goods[key].korea">
-                                        <td class="text-bold whitespace-nowrap px-3 text-center"
-                                            v-for="rate in selected_rates">
+
+                                    <tr class="bg-amber-600" v-if="props.relation.goods[key].korea > 0">
+                                        <td class="text-bold whitespace-nowrap px-3 text-center py-2 "
+                                            v-for="rate in rates">
                                             {{
-                                                Math.round((props.relation.goods[key].price * 110) / 243.5) *
-                                                rate.amount *
-                                                1.25 *
-                                                1.3
+                                                Math.round(
+                                                    Math.round((props.relation.goods[key].price * 110) / 243.5) *
+                                                    rate.amount *
+                                                    1.25 *
+                                                    1.3
+                                                )
                                             }}
                                         </td>
                                     </tr>

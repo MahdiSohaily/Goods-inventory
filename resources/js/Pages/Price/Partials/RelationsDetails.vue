@@ -10,20 +10,25 @@ const stockRecords = ref(null);
 
 const seekExist = (e) => {
     const element = e.target;
-    const partNumber = element.getAttribute('data-key');
-    const brand = element.getAttribute('data-brand');
+    if (element.hasAttribute("data-key")) {
+        const partNumber = element.getAttribute('data-key');
+        const brand = element.getAttribute('data-brand');
 
-    const target = document.getElementById(partNumber + '-' + brand)
-    target.style.display = 'block';
+        const target = document.getElementById(partNumber + '-' + brand)
+        target.style.display = 'block';
+    }
 }
 
 const closeSeekExist = (e) => {
     const element = e.target;
-    const partNumber = element.getAttribute('data-key');
-    const brand = element.getAttribute('data-brand');
+    if (element.hasAttribute("data-key")) {
+        const partNumber = element.getAttribute('data-key');
+        const brand = element.getAttribute('data-brand');
 
-    const target = document.getElementById(partNumber + '-' + brand)
-    target.style.display = 'none';
+        const target = document.getElementById(partNumber + '-' + brand)
+        target.style.display = 'none';
+    }
+
 }
 
 

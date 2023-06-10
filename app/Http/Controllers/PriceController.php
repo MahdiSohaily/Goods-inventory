@@ -64,6 +64,8 @@ class PriceController extends Controller
                 }
             }
 
+            //  return $data;
+
             return Inertia::render('Price/Partials/Load', [
                 'explodedCodes' => $explodedCodes,
                 'not_exist' => $results_arry['not_exist'],
@@ -150,9 +152,11 @@ class PriceController extends Controller
         }
 
         $existing = [];
+        $stockinfo = [];
         $sortedGoods = [];
         foreach ($relations as $relation) {
-            $existing[$relation->partnumber] = $this->exist($relation->id);
+            $existing[$relation->partnumber] = $this->exist($relation->id)['final'];
+            $stockinfo[$relation->partnumber] = $this->exist($relation->id)['stockInfo'];
             $sortedGoods[$relation->partnumber] = $relation;
         }
 
@@ -164,7 +168,7 @@ class PriceController extends Controller
 
         arsort($sorted);
 
-        return ['goods' => $sortedGoods, 'existing' => $existing, 'sorted' => $sorted, 'stock'];
+        return ['goods' => $sortedGoods, 'existing' => $existing, 'sorted' => $sorted, 'stockInfo' => $stockinfo];
     }
 
     public function givenPrice($code)
@@ -258,13 +262,14 @@ class PriceController extends Controller
                 if ($item == $value->name) {
                     $total += $value->qty;
                 }
+                $stockInfo[$value->name] =  $this->stockInfo($id, $value->name);
             }
-            array_push($stockInfo, $this->stockInfo($id, $value->name));
+
             array_push($amount, $total);
         }
         $final = array_combine($brands, $amount);
         arsort($final);
-        return ['staockInfo' => $stockInfo, 'final' => $final];
+        return ['stockInfo' => $stockInfo, 'final' => $final];
     }
 
     public function store(Request $request)

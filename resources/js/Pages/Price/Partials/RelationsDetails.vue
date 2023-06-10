@@ -7,29 +7,20 @@ const props = defineProps({
     relation: Array,
 });
 
-const allRelations = ref(null);
+const stockRecords = ref(null);
 
 const seekExist = (e) => {
     const element = e.target;
     const partNumber = element.getAttribute('data-key');
     const brand = element.getAttribute('data-brand');
 
-    axios
-        .post("/price/stockInfo", {
-            partNumber,
-            brand
-        })
-        .then(function (response) {
-            console.log(response.data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    console.log(stockRecords.value[partNumber][brand]);
 }
 
 
 onMounted(() => {
-    // getRelations(props.id);
+    stockRecords.value = props.relation.stockInfo;
+    console.log(stockRecords.value);
 })
 </script>
 
@@ -62,7 +53,7 @@ onMounted(() => {
                             <table class="min-w-full text-sm font-light p-2">
                                 <thead class="font-medium">
                                     <tr>
-                                        <th v-for="goodAmount, index in  props.relation.existing[key].final" scope="col"
+                                        <th v-for="goodAmount, index in  props.relation.existing[key]" scope="col"
                                             :class="index == 'GEN' || index == 'MOB' ? index : 'brand-default'"
                                             class="text-white text-center py-2" :data-key="key" :data-brand="index"
                                             @dblclick="seekExist">
@@ -74,7 +65,7 @@ onMounted(() => {
                                     <tr class="py-3">
                                         <td :class="index == 'GEN' || index == 'MOB' ? index : 'brand-default'"
                                             class="whitespace-nowrap text-white px-3 py-2 text-center"
-                                            v-for="goodAmount, index in  props.relation.existing[key].final">
+                                            v-for="goodAmount, index in  props.relation.existing[key]">
                                             {{ goodAmount }}
                                         </td>
                                     </tr>

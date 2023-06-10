@@ -9,7 +9,13 @@ const props = defineProps({
 
 const allRelations = ref(null);
 
+const seekExist = (e) => {
+    const element = e.target;
+    const partNumber = element.getAttribute('data-key');
+    const brand = element.getAttribute('data-brand');
 
+    
+}
 
 
 onMounted(() => {
@@ -47,7 +53,8 @@ onMounted(() => {
                                     <tr>
                                         <th v-for="goodAmount, index in  props.relation.existing[key]" scope="col"
                                             :class="index == 'GEN' || index == 'MOB' ? index : 'brand-default'"
-                                            class="text-white text-center py-2">
+                                            class="text-white text-center py-2" :data-key="key" :data-brand="index"
+                                            @mouseover="seekExist">
                                             {{ index }}
                                         </th>
                                     </tr>

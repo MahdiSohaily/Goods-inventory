@@ -15,15 +15,12 @@ const seekExist = (e) => {
     const brand = element.getAttribute('data-brand');
 
     axios
-        .post("/goods/search", {
-            pattern,
+        .post("/price/stockInfo", {
+            partNumber,
+            brand
         })
         .then(function (response) {
-            resultBox.setAttribute(
-                "data-length",
-                Math.ceil(response.data.count / 10)
-            );
-            resultBox.innerHTML = print(response.data.goods);
+            console.log(response.data);
         })
         .catch(function (error) {
             console.log(error);
@@ -55,7 +52,7 @@ onMounted(() => {
                 </thead>
                 <tbody>
                     <tr class="relative" v-for="element, key of props.relation.sorted">
-                       
+
                         <td class="text-bold px-1 pt-2">
                             <p class="bold">
                                 {{ props.relation.goods[key].partnumber }}

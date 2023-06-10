@@ -189,8 +189,11 @@ class PriceController extends Controller
     }
 
 
-    public function stockInfo($partNumber, $brand)
+    public function stockInfo(Request $request)
     {
+        $partNumber = $request->input('partNumber');
+        $brand = $request->input('brand');
+
         $good = DB::table('nisha')
             ->select('id')
             ->where('partnumber', '=', $partNumber)

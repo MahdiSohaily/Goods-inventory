@@ -24,7 +24,7 @@ onMounted(() => {
                 <thead class="font-medium bg-green-300">
                     <tr>
                         <th scope="col" class="px-3 text-gray-800 py-3">
-                           شماره فنی
+                            شماره فنی
                         </th>
                         <th scope="col" class="px-3 text-gray-800 py-3">
                             مقدار موجودی
@@ -90,9 +90,9 @@ onMounted(() => {
                                             }}
                                         </td>
                                     </tr>
-                                    <tr v-if="element.mobis !== null && element.mobis !== '-'">
-                                        <td class="text-bold whitespace-nowrap px-3 text-center py-2"
-                                            :class="rate.status !== 'N' ? rate.status : 'bg-indigo-100'"
+                                    <tr class="bg-neutral-500"
+                                        v-if="props.relation.goods[key].mobis !== null && props.relation.goods[key].mobis !== '-'">
+                                        <td class="text-bold whitespace-nowrap px-3 text-center py-2 "
                                             v-for="rate in rates">
                                             {{
                                                 Math.round(
@@ -104,9 +104,8 @@ onMounted(() => {
                                             }}
                                         </td>
                                     </tr>
-                                    <tr v-if="element.korea">
+                                    <tr v-if="props.relation.goods[key].korea">
                                         <td class="text-bold whitespace-nowrap px-3 text-center"
-                                            :class="rate.status !== 'N' ? rate.status : 'bg-indigo-100'"
                                             v-for="rate in selected_rates">
                                             {{
                                                 Math.round((props.relation.goods[key].price * 110) / 243.5) *

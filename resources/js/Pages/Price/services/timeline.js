@@ -15,10 +15,10 @@ export default function arrangeTime(dateTime) {
     var ss = Math.floor(msec / 1000);
     msec -= ss * 1000;
 
-    let text = "";
+    let text = " ";
 
     if (dd) {
-        text += `${dd}روز و `;
+        text += ` ${dd}روز و `;
     }
 
     if (hh) {

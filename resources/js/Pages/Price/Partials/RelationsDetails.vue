@@ -42,7 +42,7 @@ onMounted(() => {
                             </p>
                         </td>
                         <td class="px-1 pt-2">
-                            <table class="min-w-full text-left text-sm font-light p-2">
+                            <table class="min-w-full text-sm font-light p-2">
                                 <thead class="font-medium">
                                     <tr>
                                         <th v-for="goodAmount, index in  props.relation.existing[key]" scope="col"
@@ -64,7 +64,7 @@ onMounted(() => {
                             </table>
                         </td>
                         <td class="px-1 pt-2">
-                            <table class="min-w-full text-left text-sm font-light p-4 mb-3">
+                            <table class="min-w-full text-left text-sm font-light">
                                 <thead class="font-medium">
                                     <tr>
                                         <th v-for="rate in rates" scope="col" class="text-gray-800 text-center py-2"

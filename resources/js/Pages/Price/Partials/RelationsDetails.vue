@@ -18,7 +18,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="bg-white rounded-lg col-span-5 scroll-auto">
+    <div class="bg-white rounded-lg col-span-5 overflow-auto">
         <div id="search_result" class="p-3">
             <table class="min-w-full text-left text-sm font-light">
                 <thead class="font-medium bg-green-300">

@@ -62,7 +62,7 @@ onMounted(() => {
                             <table class="min-w-full text-sm font-light p-2">
                                 <thead class="font-medium">
                                     <tr>
-                                        <th v-for="goodAmount, index in  props.relation.existing[key]" scope="col"
+                                        <th v-for="goodAmount, index in  props.relation.existing[key].final" scope="col"
                                             :class="index == 'GEN' || index == 'MOB' ? index : 'brand-default'"
                                             class="text-white text-center py-2" :data-key="key" :data-brand="index"
                                             @dblclick="seekExist">
@@ -74,7 +74,7 @@ onMounted(() => {
                                     <tr class="py-3">
                                         <td :class="index == 'GEN' || index == 'MOB' ? index : 'brand-default'"
                                             class="whitespace-nowrap text-white px-3 py-2 text-center"
-                                            v-for="goodAmount, index in  props.relation.existing[key]">
+                                            v-for="goodAmount, index in  props.relation.existing[key].final">
                                             {{ goodAmount }}
                                         </td>
                                     </tr>

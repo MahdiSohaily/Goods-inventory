@@ -189,15 +189,8 @@ class PriceController extends Controller
     }
 
 
-    public function stockInfo(Request $request)
+    public function stockInfo($id, $brand)
     {
-        $partNumber = $request->input('partNumber');
-        $brand = $request->input('brand');
-
-        $good = DB::table('nisha')
-            ->select('id')
-            ->where('partnumber', '=', $partNumber)
-            ->first();
 
         $brand_id = DB::table('brand')->select('id')->where('brand.name', '=', $brand)
             ->first();
@@ -206,7 +199,7 @@ class PriceController extends Controller
             DB::table('qtybank')
             ->select('qtybank.id', 'qtybank.qty', 'seller.name')
             ->join('seller', 'qtybank.seller', '=', 'seller.id')
-            ->where('codeid', $good->id)
+            ->where('codeid', $id)
             ->where('brand', $brand_id->id)
             ->get();
 
@@ -248,6 +241,7 @@ class PriceController extends Controller
             ->get();
         $brands = [];
         $amount = [];
+        $stockInfo = [];
 
         foreach ($result as $key => $value) {
             $out = $this->out($value->id) ? (int) $this->out($value->id)->qty : 0;
@@ -265,11 +259,12 @@ class PriceController extends Controller
                     $total += $value->qty;
                 }
             }
+            array_push($stockInfo, $this->stockInfo($id, $value->name));
             array_push($amount, $total);
         }
         $final = array_combine($brands, $amount);
         arsort($final);
-        return $final;
+        return ['staockInfo' => $stockInfo, 'final' => $final];
     }
 
     public function store(Request $request)

@@ -164,7 +164,7 @@ class PriceController extends Controller
 
         arsort($sorted);
 
-        return ['goods' => $sortedGoods, 'existing' => $existing, 'sorted' => $sorted];
+        return ['goods' => $sortedGoods, 'existing' => $existing, 'sorted' => $sorted, 'stock'];
     }
 
     public function givenPrice($code)
@@ -186,6 +186,53 @@ class PriceController extends Controller
             ->where('qtyid', $id)
             ->first();
         return $result;
+    }
+
+
+    public function stockInfo($partNumber, $brand)
+    {
+        $good = DB::table('nisha')
+            ->select('id')
+            ->where('partnumber', '=', $partNumber)
+            ->first();
+
+        $brand_id = DB::table('brand')->select('id')->where('brand.name', '=', $brand)
+            ->first();
+
+        $result =
+            DB::table('qtybank')
+            ->select('qtybank.id', 'qtybank.qty', 'seller.name')
+            ->join('seller', 'qtybank.seller', '=', 'seller.id')
+            ->where('codeid', $good->id)
+            ->where('brand', $brand_id->id)
+            ->get();
+
+        $existing_record = [];
+        $customers = [];
+        foreach ($result as $key => $item) {
+            $out = $this->out($item->id) ? (int) $this->out($item->id)->qty : 0;
+            $item->qty = (int)($item->qty) - $out;
+
+            array_push($existing_record, $item);
+            array_push($customers, $item->name);
+        }
+
+        $customers = array_unique($customers);
+
+        $final_result = [];
+
+        foreach ($customers as $customer) {
+            $total = 0;
+            foreach ($existing_record as $record) {
+                if ($customer === $record->name) {
+                    $total += $record->qty;
+                }
+            }
+
+            $final_result[$customer] = $total;
+        }
+
+        return $final_result;
     }
 
     public function exist($id)
@@ -264,5 +311,46 @@ class PriceController extends Controller
             $max = $max < $v ? $v : $max;
         }
         return $max;
+    }
+
+    public function test($id = '277776', $brand = 'GEN')
+    {
+        $brand_id = DB::table('brand')->select('id')->where('brand.name', '=', $brand)
+            ->first();
+
+        $result =
+            DB::table('qtybank')
+            ->select('qtybank.id', 'qtybank.qty', 'seller.name')
+            ->join('seller', 'qtybank.seller', '=', 'seller.id')
+            ->where('codeid', $id)
+            ->where('brand', $brand_id->id)
+            ->get();
+
+        $existing_record = [];
+        $customers = [];
+        foreach ($result as $key => $item) {
+            $out = $this->out($item->id) ? (int) $this->out($item->id)->qty : 0;
+            $item->qty = (int)($item->qty) - $out;
+
+            array_push($existing_record, $item);
+            array_push($customers, $item->name);
+        }
+
+        $customers = array_unique($customers);
+
+        $final_result = [];
+
+        foreach ($customers as $customer) {
+            $total = 0;
+            foreach ($existing_record as $record) {
+                if ($customer === $record->name) {
+                    $total += $record->qty;
+                }
+            }
+
+            $final_result[$customer] = $total;
+        }
+
+        return $final_result;
     }
 }

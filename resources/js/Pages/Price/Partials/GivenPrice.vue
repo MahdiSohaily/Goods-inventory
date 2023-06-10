@@ -51,9 +51,9 @@ onMounted(() => {
             <table class="rtl min-w-full text-right text-sm font-light">
                 <thead>
                     <tr class="min-w-full bg-green-600">
-                        <td class="text-gray-600 bold py-2 pr-2">قیمت</td>
-                        <td class="text-gray-600 bold py-2 pr-2">شماره فنی</td>
-                        <td class="text-gray-600 bold py-2 pr-2">مشتری</td>
+                        <td class="text-white bold py-2 pr-2">قیمت</td>
+                        <td class="text-white bold py-2 pr-2">شماره فنی</td>
+                        <td class="text-white bold py-2 pr-2">مشتری</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,10 +74,12 @@ onMounted(() => {
                         <tr class="min-w-full mb-4 border-b-2 border-white"
                             :class="price.ordered ? 'bg-red-500' : 'bg-indigo-300'">
                             <td :class="price.ordered && 'text-white'" colspan="3" scope="col"
-                                class="text-gray-800 pr-2 tiny-text">
-                                <i class="px-1 material-icons tiny-text "
-                                    :class="price.ordered ? 'text-white' : 'text-gray-800'">access_time</i>
-                                {{ arrangeTime(price.created_at) }}
+                                class="text-gray-800 pr-2 tiny-text ">
+                                <div class="flex items-center w-full">
+                                    <i class="px-1 material-icons tiny-text "
+                                        :class="price.ordered ? 'text-white' : 'text-gray-800'">access_time</i>
+                                    {{ arrangeTime(price.created_at) }}
+                                </div>
                             </td>
                         </tr>
                     </template>

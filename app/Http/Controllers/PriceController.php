@@ -41,41 +41,28 @@ class PriceController extends Controller
                 }
             }
 
-            $relation_id = [
-                'in_relationship' => [],
-                'no_relationship' => [],
-            ];
-
+            $data = [];
+            $relation_id = [];
             foreach ($explodedCodes as $code) {
                 if (!in_array($code, $results_arry['not_exist'])) {
                     $data[$code] = [];
                     foreach ($existing_code[$code] as $item) {
                         $relation_exist = $this->isInRelation($item->id);
                         if ($relation_exist) {
-                            array_push($relation_id['in_relationship'], $relation_exist);
+                            if (!in_array($relation_exist, $relation_id)) {
+                                array_push($relation_id, $relation_exist);
+                                $data[$code][$item->partnumber]['information'] = $this->info($item->id);
+                                $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
+                                $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($code);
+                            }
                         } else {
-                            array_push($relation_id['no_relationship'], $item);
+                            $data[$code][$item->partnumber]['information'] = $this->info($item->id);
+                            $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
+                            $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($code);
                         }
                     }
                 }
             }
-
-            return $relation_id;
-
-            $data = [];
-
-            foreach ($explodedCodes as $code) {
-                if (!in_array($code, $results_arry['not_exist'])) {
-                    $data[$code] = [];
-                    foreach ($existing_code[$code] as $item) {
-                        $data[$code][$item->partnumber]['information'] = $this->info($item->id);
-                        $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
-                        $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($code);
-                    }
-                }
-            }
-
-            // return $data;
 
             return Inertia::render('Price/Partials/Load', [
                 'explodedCodes' => $explodedCodes,
@@ -115,11 +102,10 @@ class PriceController extends Controller
 
     public function isInRelation($id)
     {
-
         $relation_id = DB::table('similars')->select('pattern_id')->where('nisha_id', $id)
             ->first();
         if ($relation_id) {
-            return $relation_id->id;
+            return $relation_id->pattern_id;
         }
         return false;
     }

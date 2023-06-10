@@ -40,7 +40,6 @@ onMounted(() => {
         'ordered': true,
     }
     ordered_price.value = props.givenPrice.sort(function (a, b) { return new Date(b.created_at) - new Date(a.created_at) });
-    console.log(ordered_price.value);
 })
 
 </script>

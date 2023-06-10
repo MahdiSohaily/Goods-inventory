@@ -14,7 +14,20 @@ const seekExist = (e) => {
     const partNumber = element.getAttribute('data-key');
     const brand = element.getAttribute('data-brand');
 
-    
+    axios
+        .post("/goods/search", {
+            pattern,
+        })
+        .then(function (response) {
+            resultBox.setAttribute(
+                "data-length",
+                Math.ceil(response.data.count / 10)
+            );
+            resultBox.innerHTML = print(response.data.goods);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 
 
@@ -54,7 +67,7 @@ onMounted(() => {
                                         <th v-for="goodAmount, index in  props.relation.existing[key]" scope="col"
                                             :class="index == 'GEN' || index == 'MOB' ? index : 'brand-default'"
                                             class="text-white text-center py-2" :data-key="key" :data-brand="index"
-                                            @mouseover="seekExist">
+                                            @dblclick="seekExist">
                                             {{ index }}
                                         </th>
                                     </tr>

@@ -54,7 +54,8 @@ onMounted(() => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="element, key of props.relation.sorted">
+                    <tr class="relative" v-for="element, key of props.relation.sorted">
+                       
                         <td class="text-bold px-1 pt-2">
                             <p class="bold">
                                 {{ props.relation.goods[key].partnumber }}
@@ -147,3 +148,10 @@ onMounted(() => {
         </div>
     </div>
 </template>
+
+<style scoped>
+.custome-tooltip {
+    position: absolute;
+
+}
+</style>

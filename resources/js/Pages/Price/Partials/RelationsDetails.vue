@@ -42,7 +42,7 @@ onMounted(() => {
                             </p>
                         </td>
                         <td class="px-1 pt-2">
-                            <table class="min-w-full text-left text-sm font-light p-2 border-2 border-gray-400">
+                            <table class="min-w-full text-left text-sm font-light p-2">
                                 <thead class="font-medium">
                                     <tr>
                                         <th v-for="goodAmount, index in  props.relation.existing[key]" scope="col"
@@ -90,7 +90,7 @@ onMounted(() => {
                                             }}
                                         </td>
                                     </tr>
-                                    <tr class="bg-neutral-200"
+                                    <tr class="bg-neutral-400"
                                         v-if="props.relation.goods[key].mobis !== null && props.relation.goods[key].mobis !== '-'">
                                         <td class="text-bold whitespace-nowrap px-3 text-center py-2 "
                                             v-for="rate in rates">

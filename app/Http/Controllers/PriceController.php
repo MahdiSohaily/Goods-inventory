@@ -41,18 +41,26 @@ class PriceController extends Controller
                 }
             }
 
-            $relation_id = [];
+            $relation_id = [
+                'in_relationship' => [],
+                'no_relationship' => [],
+            ];
 
             foreach ($explodedCodes as $code) {
                 if (!in_array($code, $results_arry['not_exist'])) {
                     $data[$code] = [];
                     foreach ($existing_code[$code] as $item) {
-                        array_push($relation_id[$code],);
+                        $relation_exist = $this->isInRelation($item->id);
+                        if ($relation_exist) {
+                            array_push($relation_id['in_relationship'], $relation_exist);
+                        } else {
+                            array_push($relation_id['no_relationship'], $item);
+                        }
                     }
                 }
             }
 
-            return $existing_code;
+            return $relation_id;
 
             $data = [];
 
@@ -107,7 +115,13 @@ class PriceController extends Controller
 
     public function isInRelation($id)
     {
-        
+
+        $relation_id = DB::table('similars')->select('pattern_id')->where('nisha_id', $id)
+            ->first();
+        if ($relation_id) {
+            return $relation_id->id;
+        }
+        return false;
     }
 
     public function info($id)

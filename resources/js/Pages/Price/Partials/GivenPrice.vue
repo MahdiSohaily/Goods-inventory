@@ -65,6 +65,7 @@ const savePrice = (pattern) => {
 
                 </tbody>
             </table>
+            <br>
             <FormRelation @submitted="savePrice(item.result.pattern)">
                 <template #form>
                     <div class="pb-2">

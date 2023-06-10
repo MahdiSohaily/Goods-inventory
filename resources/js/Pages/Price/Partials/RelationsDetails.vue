@@ -64,7 +64,7 @@ onMounted(() => {
                             </table>
                         </td>
                         <td class="px-1 pt-2">
-                            <table class="min-w-full text-left text-sm font-light p-2 border-2 border-gray-400">
+                            <table class="min-w-full text-left text-sm font-light p-2">
                                 <thead class="font-medium">
                                     <tr>
                                         <th v-for="rate in rates" scope="col" class="text-gray-800 text-center py-2"
@@ -90,7 +90,7 @@ onMounted(() => {
                                             }}
                                         </td>
                                     </tr>
-                                    <tr class="bg-neutral-500"
+                                    <tr class="bg-neutral-200"
                                         v-if="props.relation.goods[key].mobis !== null && props.relation.goods[key].mobis !== '-'">
                                         <td class="text-bold whitespace-nowrap px-3 text-center py-2 "
                                             v-for="rate in rates">

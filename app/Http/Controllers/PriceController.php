@@ -41,6 +41,19 @@ class PriceController extends Controller
                 }
             }
 
+            $relation_id = [];
+
+            foreach ($explodedCodes as $code) {
+                if (!in_array($code, $results_arry['not_exist'])) {
+                    $data[$code] = [];
+                    foreach ($existing_code[$code] as $item) {
+                        array_push($relation_id[$code],);
+                    }
+                }
+            }
+
+            return $existing_code;
+
             $data = [];
 
             foreach ($explodedCodes as $code) {
@@ -90,6 +103,11 @@ class PriceController extends Controller
             ->where('selected', '1')
             ->get();
         return $rates;
+    }
+
+    public function isInRelation($id)
+    {
+        
     }
 
     public function info($id)

@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import axios from 'axios';
 
 const props = defineProps({
     rates: Array,
@@ -14,18 +13,27 @@ const seekExist = (e) => {
     const partNumber = element.getAttribute('data-key');
     const brand = element.getAttribute('data-brand');
 
-    console.log(stockRecords.value[partNumber][brand]);
+    const target = document.getElementById(partNumber + '-' + brand)
+    target.style.display = 'block';
+}
+
+const closeSeekExist = (e) => {
+    const element = e.target;
+    const partNumber = element.getAttribute('data-key');
+    const brand = element.getAttribute('data-brand');
+
+    const target = document.getElementById(partNumber + '-' + brand)
+    target.style.display = 'none';
 }
 
 
 onMounted(() => {
     stockRecords.value = props.relation.stockInfo;
-    console.log(stockRecords.value);
 })
 </script>
 
 <template>
-    <div class="bg-white rounded-lg col-span-5 overflow-auto">
+    <div class="bg-white rounded-lg col-span-5">
         <div id="search_result" class="p-3">
             <table class="min-w-full text-left text-sm font-light">
                 <thead class="font-medium bg-green-300">
@@ -55,9 +63,15 @@ onMounted(() => {
                                     <tr>
                                         <th v-for="goodAmount, index in  props.relation.existing[key]" scope="col"
                                             :class="index == 'GEN' || index == 'MOB' ? index : 'brand-default'"
-                                            class="text-white text-center py-2" :data-key="key" :data-brand="index"
-                                            @dblclick="seekExist">
+                                            class="text-white text-center py-2 relative hover:cursor-pointer"
+                                            :data-key="key" :data-brand="index" @mouseover="seekExist"
+                                            @mouseleave="closeSeekExist">
                                             {{ index }}
+                                            <div class="custome-tooltip" :id="key + '-' + index">
+                                                <div v-for="item, iterator in props.relation.stockInfo[key][index]">
+                                                    <p v-if="item > 0"> {{ iterator }} : {{ item }}</p>
+                                                </div>
+                                            </div>
                                         </th>
                                     </tr>
                                 </thead>
@@ -140,6 +154,12 @@ onMounted(() => {
 <style scoped>
 .custome-tooltip {
     position: absolute;
-
+    display: none;
+    bottom: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: seagreen;
+    width: 200px;
+    z-index: 100000;
 }
 </style>

@@ -86,7 +86,7 @@ onMounted(() => {
                         <template v-else>
                             <tr class="min-w-full mb-4 border-b-2 border-white">
                                 <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
-                                    موردی برای نمایش وجود ندارد
+                                    موردی برای نمایش وجود ندارد!!
                                 </td>
                             </tr>
                         </template>

@@ -64,11 +64,11 @@ onMounted(() => {
                             </table>
                         </td>
                         <td class="px-1 pt-2">
-                            <table class="min-w-full text-left text-sm font-light p-2">
+                            <table class="min-w-full text-left text-sm font-light p-4">
                                 <thead class="font-medium">
                                     <tr>
                                         <th v-for="rate in rates" scope="col" class="text-gray-800 text-center py-2"
-                                            :class="rate.status !== 'N' ? rate.status : 'bg-indigo-300'">
+                                            :class="rate.status !== 'N' ? rate.status : 'bg-green-700'">
                                             {{ rate.amount }}
                                         </th>
                                     </tr>
@@ -76,7 +76,7 @@ onMounted(() => {
                                 <tbody>
                                     <tr class="py-3">
                                         <td class="text-bold whitespace-nowrap px-3 py-2 text-center"
-                                            :class="rate.status !== 'N' ? rate.status : 'bg-indigo-100'"
+                                            :class="rate.status !== 'N' ? rate.status : 'bg-gray-100'"
                                             v-for="rate in rates">
 
                                             {{

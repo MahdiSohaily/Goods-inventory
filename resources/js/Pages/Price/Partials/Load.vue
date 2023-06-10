@@ -30,7 +30,8 @@ const props = defineProps({
             <RelationsDetails :rates="props.rates" :relation="existing[code][index]['relation']"
               :exist="existing[code][index]['exist']" />
 
-            <GivenPrice :givenPrice="existing[code][index]['givenPrice']" />
+            <GivenPrice :information="existing[code][index]['information']"
+              :givenPrice="existing[code][index]['givenPrice']" />
             <!--  <Estelam /> -->
           </div>
         </div>

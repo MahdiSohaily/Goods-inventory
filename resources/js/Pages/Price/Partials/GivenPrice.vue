@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted, ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import ActionMessage from "@/Components/ActionMessage.vue";
 import FormRelation from "@/Components/FormRelation.vue";
@@ -10,7 +11,10 @@ import arrangeTime from "../services/timeline.js";
 
 const props = defineProps({
     givenPrice: Array,
+    information: Array
 });
+
+const ordered_price = ref(null)
 
 const form = useForm({
     _method: "POST",
@@ -29,6 +33,16 @@ const savePrice = (pattern) => {
     });
 };
 
+onMounted(() => {
+    props.givenPrice[props.givenPrice.length] = {
+        'price': props.information.relationInfo.price,
+        'created_at': props.information.relationInfo.created_at,
+        'ordered': true,
+    }
+    ordered_price.value = props.givenPrice.sort(function (a, b) { return new Date(b.created_at) - new Date(a.created_at) });
+    console.log(ordered_price.value);
+})
+
 </script>
 
 <template>
@@ -44,9 +58,10 @@ const savePrice = (pattern) => {
                 </thead>
                 <tbody>
                     <template v-for="price in givenPrice">
-                        <tr class="min-w-full mb-1 bg-indigo-200">
+                        <tr class="min-w-full mb-1" :class="price.ordered ? 'bg-red-500' : 'bg-indigo-200'"
+                            :data-price='price.price'>
 
-                            <td scope="col" class="text-gray-800 pr-2 py-1">
+                            <td scope="col" class="text-gray-800 pr-2 py-1" :class="price.ordered && 'text-white'">
                                 {{ price.price }}
                             </td>
                             <td scope="col" class="text-gray-800 pr-2 py-1">
@@ -56,8 +71,9 @@ const savePrice = (pattern) => {
                                 {{ price.name }}
                             </td>
                         </tr>
-                        <tr class="min-w-full mb-4 bg-orange-100">
-                            <td colspan="3" scope="col" class="text-gray-800 pr-2 tiny-text">
+                        <tr class="min-w-full mb-4" :class="price.ordered ? 'bg-red-500' : 'bg-orange-200'">
+                            <td :class="price.ordered && 'text-white'" colspan="3" scope="col"
+                                class="text-gray-800 pr-2 tiny-text">
                                 {{ arrangeTime(price.created_at) }}
                             </td>
                         </tr>
@@ -66,7 +82,7 @@ const savePrice = (pattern) => {
                 </tbody>
             </table>
             <br>
-            <FormRelation @submitted="savePrice(item.result.pattern)">
+            <FormRelation class="rtl" @submitted="savePrice(item.result.pattern)">
                 <template #form>
                     <div class="pb-2">
                         <InputLabel for="price" value="قیمت" />

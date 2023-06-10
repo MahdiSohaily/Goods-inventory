@@ -104,7 +104,7 @@ onMounted(() => {
                                             }}
                                         </td>
                                     </tr>
-                                    <tr v-if="props.relation.goods[key].korea">
+                                    <tr class="bg-amber-600" v-if="props.relation.goods[key].korea">
                                         <td class="text-bold whitespace-nowrap px-3 text-center"
                                             v-for="rate in selected_rates">
                                             {{

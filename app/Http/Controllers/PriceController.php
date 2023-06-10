@@ -65,8 +65,6 @@ class PriceController extends Controller
                 'rates' => $this->getSelectedRates()
             ]);
         } else {
-            $this->validateRequest($request->all());
-
             return Inertia::render('Price/Show');
         }
     }

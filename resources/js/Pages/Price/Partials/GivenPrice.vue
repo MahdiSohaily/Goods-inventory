@@ -66,8 +66,9 @@ onUpdated(() => {
                 <tbody>
                     <template v-for="price in givenPrice">
                         <template v-if="price.price">
-                            <tr class="min-w-full mb-1" :class="price.ordered ? 'bg-red-400' : 'bg-indigo-200'"
-                                :data-price='price.price'>
+                            <tr class="min-w-full mb-1 hover:cursor-pointer"
+                                :class="price.ordered ? 'bg-red-400' : 'bg-indigo-200'" :data-price='price.price'
+                                @click="price.ordered && $emit('setPrice', price.price)">
 
                                 <td scope="col" class="text-gray-800 pr-2 py-1" :class="price.ordered && 'text-white'">
                                     {{ price.price }}

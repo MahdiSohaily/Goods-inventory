@@ -29,7 +29,7 @@ const updatePrice = (value) => {
     <RelationsDetails :rates="props.rates" :relation="existing[code][index]['relation']"
         :exist="existing[code][index]['exist']" @setPrice="(value) => updatePrice(value)" />
     <GivenPrice :information="existing[code][index]['information']" :givenPrice="existing[code][index]['givenPrice']"
-        :price="price" />
+        @setPrice="(value) => updatePrice(value)" :price="price" />
     <!--  <Estelam /> -->
 </template>
 <style></style>

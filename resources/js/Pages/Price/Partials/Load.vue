@@ -29,6 +29,7 @@ onUpdated(() => {
 <template>
   <AppLayout title="Rates">
     <div class="accordion mt-12">
+      {{ price }}
       <!--  Panel 1  -->
       <div v-for="code, index of explodedCodes">
         <input type="checkbox" checked="true" name="panel" :id="index" class="hidden">

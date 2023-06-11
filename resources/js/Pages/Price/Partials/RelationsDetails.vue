@@ -31,11 +31,22 @@ const closeSeekExist = (e) => {
 
 }
 
-const calculate = (price, rate) => {
+const calculateMobies = (price, rate) => {
     return Math.round(
         Math.round((price * 110) / 243.5) *
         rate *
         1.25 *
+        1.3
+    )
+}
+
+const calculateRegular = (price, rate) => {
+
+    Math.round(
+        Math.round((price * 110) / 243.5) *
+        rate *
+        1.2 *
+        1.2 *
         1.3
     )
 }
@@ -114,34 +125,28 @@ onMounted(() => {
                                     <tr class="py-3">
                                         <td class="text-bold whitespace-nowrap px-3 py-2 text-center"
                                             :class="rate.status !== 'N' ? rate.status : 'bg-gray-100'" v-for="rate in rates"
-                                            @click="$emit('setPrice', calculate(props.relation.goods[key].price, rate.amount))">
+                                            @click="$emit('setPrice', calculateRegular(props.relation.goods[key].price, rate.amount))">
 
                                             {{
-                                                Math.round(
-                                                    Math.round((props.relation.goods[key].price * 110) / 243.5) *
-                                                    rate.amount *
-                                                    1.2 *
-                                                    1.2 *
-                                                    1.3
-                                                )
+                                                calculateRegular(props.relation.goods[key].price, rate.amount)
                                             }}
                                         </td>
                                     </tr>
                                     <tr class="bg-neutral-400"
                                         v-if="props.relation.goods[key].mobis > 0 && props.relation.goods[key].mobis !== '-'">
                                         <td class="text-bold whitespace-nowrap px-3 text-center py-2 " v-for="rate in rates"
-                                            @click="$emit('setPrice', calculate(props.relation.goods[key].price, rate.amount))">
+                                            @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
                                             {{
-                                                calculate(props.relation.goods[key].price, rate.amount)
+                                                calculateMobies(props.relation.goods[key].price, rate.amount)
                                             }}
                                         </td>
                                     </tr>
 
                                     <tr class="bg-amber-600" v-if="props.relation.goods[key].korea > 0">
                                         <td class="text-bold whitespace-nowrap px-3 text-center py-2 " v-for="rate in rates"
-                                            @click="$emit('setPrice', calculate(props.relation.goods[key].price, rate.amount))">
+                                            @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
                                             {{
-                                                calculate(props.relation.goods[key].price, rate.amount)
+                                                calculateMobies(props.relation.goods[key].price, rate.amount)
 
                                             }}
                                         </td>

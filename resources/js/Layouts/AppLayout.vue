@@ -10,6 +10,7 @@ defineProps({
 });
 
 const notification = ref(null);
+const hasNotification = ref(false);
 
 const toggleNav = () => {
     const nav = document.getElementById("nav");
@@ -27,14 +28,16 @@ const logout = () => {
 onMounted(() => {
     notification.value = setInterval(() => {
         axios
-            .post("/notification")
+            .get("/notification")
             .then(function (response) {
-                console.log('success');
+                if (response.data > 0) {
+                    hasNotification.value = true;
+                }
             })
             .catch(function (error) {
                 console.log(error);
             });
-    }, 3000);
+    }, 1000);
 })
 
 onUnmounted(() => {
@@ -90,11 +93,36 @@ onUnmounted(() => {
             <main>
                 <div class="flex justify-between">
                     <i class="p-2 right-0 material-icons hover:cursor-pointer fixed" @click="toggleNav">menu</i>
-                    <i class="p-2 right-0 material-icons hover:cursor-pointer ">notifications</i>
-                    <i class="p-2 right-0 material-icons hover:cursor-pointer hidden ">notifications_active</i>
+                    <i v-if="hasNotification"
+                        class="p-2 material-icons hover:cursor-pointer notify ">notifications_active</i>
+                    <i v-else class="p-2 material-icons hover:cursor-pointer text-indigo-700">notifications</i>
                 </div>
                 <slot />
             </main>
         </div>
     </div>
 </template>
+<style scoped>
+.notify {
+    position: relative;
+    animation-name: wave;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    color: red;
+}
+
+@keyframes wave {
+    0% {
+        transform: rotate(-20deg);
+    }
+
+    50% {
+        transform: rotate(20deg);
+    }
+
+    100% {
+        transform: rotate(-20deg);
+    }
+
+}
+</style>

@@ -181,8 +181,8 @@ class PriceController extends Controller
         $givenPrices = DB::table('prices')
             ->join('customers', 'customers.id', '=', 'prices.customer_id')
             ->where('partnumber', 'like', "$code%")
-            ->orderBy('created_at')
-            ->limit(4)->get();
+            ->orderBy('created_at','desc')
+            ->limit(7)->get();
 
         return $givenPrices;
     }

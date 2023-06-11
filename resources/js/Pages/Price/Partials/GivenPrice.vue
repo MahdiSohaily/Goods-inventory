@@ -143,7 +143,7 @@ onUpdated(() => {
                     </a>
                     <PrimaryButton @click="$emit('setPrice', 'نداریم')" :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing">
-                        !!!نداریم
+                        نداریم !!!
                     </PrimaryButton>
                     <ActionMessage :on="form.recentlySuccessful" class="mr-3">
                         عملیات موفقانه صورت گرفت.

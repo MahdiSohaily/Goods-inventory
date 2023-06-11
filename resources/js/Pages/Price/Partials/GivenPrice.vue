@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, onUpdated, ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import ActionMessage from "@/Components/ActionMessage.vue";
 import FormRelation from "@/Components/FormRelation.vue";
@@ -46,11 +46,14 @@ onMounted(() => {
     form.price = props.price;
 })
 
+onUpdated(() => {
+    form.price = props.price;
+})
+
 </script>
 
 <template>
     <div class="bg-white rounded-lg shadow-md col-span-2 overflow-auto">
-        {{ props.price }}
         <div id="search_result" class="p-3">
             <table class="rtl min-w-full text-right text-sm font-light">
                 <thead>

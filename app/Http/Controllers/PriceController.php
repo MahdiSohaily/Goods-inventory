@@ -22,61 +22,66 @@ class PriceController extends Controller
             $customer = $request->input('customer');
             $completeCode = $request->input('code');
 
-            $explodedCodes = explode("\n", $request->input('code'));
+            return $this->setup_loading($customer, $completeCode);
+        } else {
+            return Inertia::render('Price/Show');
+        }
+    }
 
-            $results_arry = [
-                'not_exist' => [],
-                'existing' => [],
-            ];
+    public function setup_loading($customer, $completeCode)
+    {
+        $explodedCodes = explode("\n", $completeCode);
+
+        $results_arry = [
+            'not_exist' => [],
+            'existing' => [],
+        ];
 
 
-            $existing_code = [];
+        $existing_code = [];
 
-            foreach ($explodedCodes as $code) {
-                $good = DB::table('nisha')->select('id', 'partnumber')->where('partNumber', 'like', "$code%")->get();
-                if (count($good)) {
-                    $existing_code[$code] = $good;
-                } else {
-                    array_push($results_arry['not_exist'], $code);
-                }
+        foreach ($explodedCodes as $code) {
+            $good = DB::table('nisha')->select('id', 'partnumber')->where('partNumber', 'like', "$code%")->get();
+            if (count($good)) {
+                $existing_code[$code] = $good;
+            } else {
+                array_push($results_arry['not_exist'], $code);
             }
+        }
 
-            $data = [];
-            $relation_id = [];
-            foreach ($explodedCodes as $code) {
-                if (!in_array($code, $results_arry['not_exist'])) {
-                    $data[$code] = [];
-                    foreach ($existing_code[$code] as $item) {
-                        $relation_exist = $this->isInRelation($item->id);
-                        if ($relation_exist) {
-                            if (!in_array($relation_exist, $relation_id)) {
-                                array_push($relation_id, $relation_exist);
-                                $data[$code][$item->partnumber]['information'] = $this->info($item->id);
-                                $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
-                                $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($code);
-                            }
-                        } else {
+        $data = [];
+        $relation_id = [];
+        foreach ($explodedCodes as $code) {
+            if (!in_array($code, $results_arry['not_exist'])) {
+                $data[$code] = [];
+                foreach ($existing_code[$code] as $item) {
+                    $relation_exist = $this->isInRelation($item->id);
+                    if ($relation_exist) {
+                        if (!in_array($relation_exist, $relation_id)) {
+                            array_push($relation_id, $relation_exist);
                             $data[$code][$item->partnumber]['information'] = $this->info($item->id);
                             $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
                             $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($code);
                         }
+                    } else {
+                        $data[$code][$item->partnumber]['information'] = $this->info($item->id);
+                        $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
+                        $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($code);
                     }
                 }
             }
-
-            //  return $data;
-
-            return Inertia::render('Price/Partials/Load', [
-                'explodedCodes' => $explodedCodes,
-                'not_exist' => $results_arry['not_exist'],
-                'existing' => $data,
-                'customer' => $customer,
-                'completeCode' => $completeCode,
-                'rates' => $this->getSelectedRates()
-            ]);
-        } else {
-            return Inertia::render('Price/Show');
         }
+
+        //  return $data;
+
+        return Inertia::render('Price/Partials/Load', [
+            'explodedCodes' => $explodedCodes,
+            'not_exist' => $results_arry['not_exist'],
+            'existing' => $data,
+            'customer' => $customer,
+            'completeCode' => $completeCode,
+            'rates' => $this->getSelectedRates()
+        ]);
     }
 
     public function validateRequest($all_data)
@@ -288,7 +293,8 @@ class PriceController extends Controller
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        return 'Nice Job';
+
+        return $this->setup_loading($request->input('customer'), $request->input('completeCode'));
     }
 
     function getMax($array)

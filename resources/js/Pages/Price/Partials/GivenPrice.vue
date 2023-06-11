@@ -1,6 +1,8 @@
 <script setup>
 import { onMounted, onUpdated, ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
+import ActionMessage from "@/Components/ActionMessage.vue";
+import FormRelation from "@/Components/FormRelation.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -19,28 +21,23 @@ const props = defineProps({
 
 const ordered_price = ref(null);
 const customer_name = ref(null);
-const final_price = ref(null);
 
 const form = useForm({
     _method: "POST",
     customer: props.customer,
     partnumber: props.partNumber,
+    completeCode: props.completeCode,
     price: null,
 });
 
 const savePrice = () => {
-    axios
-        .post("/price", {
-            customer,
-            partnumber,
-            price
-        })
-        .then(function (response) {
-            console.log(response.data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    form.post(route("price.store"), {
+        errorBag: "savePrice",
+        preserveScroll: true,
+        onSuccess: () => {
+            console.log('Wll done');
+        },
+    });
 };
 
 const getCustomerName = (id) => {
@@ -49,7 +46,7 @@ const getCustomerName = (id) => {
             id,
         })
         .then(function (response) {
-            customer_name.value = response.data;
+            customer_name.value = (response.data);
         })
         .catch(function (error) {
             console.log(error);
@@ -63,12 +60,12 @@ onMounted(() => {
         'ordered': true,
     }
     ordered_price.value = props.givenPrice.sort(function (a, b) { return new Date(b.created_at) - new Date(a.created_at) });
-    final_price.value = props.price;
+    form.price = props.price;
     getCustomerName(props.customer);
 })
 
 onUpdated(() => {
-    final_price.value = props.price;
+    form.price = props.price;
 })
 
 </script>
@@ -125,24 +122,32 @@ onUpdated(() => {
                 </tbody>
             </table>
             <br>
-            <div class="rtl">
-                <h3 class="bg-orange-500 p-2 mt-5 mb-3 rounded-sm text-center text-white">ثبت قیمت برای کد مور نظر</h3>
-                <div class="pb-2">
-                    <InputLabel for="price" value="قیمت" />
-                    <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full" autocomplete="price" />
-                    <InputError :message="form.errors.price" class="mt-2" />
-                </div>
+            <FormRelation class="rtl" @submitted="savePrice()">
+                <template #form>
+                    <div class="pb-2">
+                        <InputLabel for="price" value="قیمت" />
+                        <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
+                            autocomplete="price" />
+                        <InputError :message="form.errors.price" class="mt-2" />
+                    </div>
+                </template>
 
-                <PrimaryButton @click="savePrice">
-                    ثبت
-                </PrimaryButton>
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    ارسال به نیایش
-                </PrimaryButton>
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    !!!نداریم
-                </PrimaryButton>
-            </div>
+                <template #actions>
+                    <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                        عملیات موفقانه صورت گرفت.
+                    </ActionMessage>
+
+                    <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        ثبت
+                    </PrimaryButton>
+                    <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        ارسال به نیایش
+                    </PrimaryButton>
+                    <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        !!!نداریم
+                    </PrimaryButton>
+                </template>
+            </FormRelation>
         </div>
     </div>
 </template>

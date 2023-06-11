@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\GoodController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RateController;
 use App\Http\Controllers\RelationController;
 use App\Http\Controllers\PriceController;
@@ -81,13 +82,14 @@ Route::middleware([
         Route::post('/price', 'store')->name('price.store'); // Route to create new good in the system
         Route::get('/test', 'test')->name('test_rates'); // Route to create new good in the system
 
-
-
-
-
         Route::post('/price/info', 'info')->name('price.info'); // Route to create new good in the system
         Route::post('/price/relations', 'relations')->name('price.relations'); // Route to create new good in the system
         Route::post('/price/customer/name', 'getCustomerName')->name('price.getCustomerName'); // Route to create new good in the system
         Route::post('/price/ask', 'askPrice')->name('price.askPrice'); // Route to create new good in the system
+    });
+   
+    // Notification related routs
+    Route::controller(NotificationController::class)->group(function () {
+        Route::get('/notification', 'index')->name('notification.give'); // notification route lead us to the notification page
     });
 });

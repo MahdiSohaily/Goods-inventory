@@ -367,6 +367,7 @@ class PriceController extends Controller
             'customer_id' => $customer,
             'user_id' => Auth::user()->id,
             'code' =>  $partNumber,
+            'status' =>  'pending',
             'created_at' => Carbon::now(),
         ]);
     }

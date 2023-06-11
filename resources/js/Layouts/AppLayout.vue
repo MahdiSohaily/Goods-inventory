@@ -1,8 +1,9 @@
 <script setup>
 import { Head, router } from "@inertiajs/vue3";
+import { onMounted, onUnmounted, ref } from "vue";
 import Banner from "@/Components/Banner.vue";
 import NavLink from "@/Components/NavLink.vue";
-import { onMounted, ref } from "vue";
+import axios from "axios";
 
 defineProps({
     title: String,
@@ -24,7 +25,24 @@ const logout = () => {
 };
 
 onMounted(() => {
-    notification.value = setInterval(() => { });
+    notification.value = setInterval(() => {
+        axios
+            .post("/price/ask", {
+                partNumber: props.partNumber,
+                customer: props.customer
+            })
+            .then(function (response) {
+                asked.value = true;
+                setTimeout(() => { asked.value = false; }, 500)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }, 3000);
+})
+
+onUnmounted(() => {
+    clearInterval(notification.value);
 })
 </script>
 

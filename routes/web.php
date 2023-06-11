@@ -80,13 +80,14 @@ Route::middleware([
         Route::get('/price/load', 'load')->name('price.load'); // Route to create new good in the system
         Route::post('/price', 'store')->name('price.store'); // Route to create new good in the system
         Route::get('/test', 'test')->name('test_rates'); // Route to create new good in the system
-        
-        
-        
-        
-        
+
+
+
+
+
         Route::post('/price/info', 'info')->name('price.info'); // Route to create new good in the system
         Route::post('/price/relations', 'relations')->name('price.relations'); // Route to create new good in the system
         Route::post('/price/customer/name', 'getCustomerName')->name('price.getCustomerName'); // Route to create new good in the system
+        Route::post('/price/ask', 'askPrice')->name('price.askPrice'); // Route to create new good in the system
     });
 });

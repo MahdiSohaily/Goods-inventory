@@ -181,7 +181,7 @@ class PriceController extends Controller
         $givenPrices = DB::table('prices')
             ->join('customers', 'customers.id', '=', 'prices.customer_id')
             ->where('partnumber', 'like', "$code%")
-            ->orderBy('created_at','desc')
+            ->orderBy('created_at', 'desc')
             ->limit(7)->get();
 
         return $givenPrices;
@@ -196,7 +196,6 @@ class PriceController extends Controller
             ->first();
         return $result;
     }
-
 
     public function stockInfo($id, $brand)
     {
@@ -356,5 +355,9 @@ class PriceController extends Controller
             ->where('id', $id)
             ->first();
         return $customer->name;
+    }
+
+    function askPrice(Request $request)
+    {
     }
 }

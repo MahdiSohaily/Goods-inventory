@@ -29,7 +29,7 @@ const props = defineProps({
             <Container :code="code" :index="index" :existing="existing"
               :information="existing[code][index]['information']" :partNumber="index" :rates="props.rates"
               :relation="existing[code][index]['relation']" :exist="existing[code][index]['exist']"
-              :givenPrice="existing[code][index]['givenPrice']" />
+              :givenPrice="existing[code][index]['givenPrice']" :customer="customer" :completeCode="completeCode" />
           </div>
         </div>
       </div>

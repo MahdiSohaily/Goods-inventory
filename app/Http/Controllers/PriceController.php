@@ -288,23 +288,7 @@ class PriceController extends Controller
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-
-        $customer = $request->input('customer');
-        $completeCode = $request->input('code');
-
-        $codes = explode("\n", $request->input('code'));
-        $allCodeData = [];
-
-        foreach ($codes as $key => $value) {
-            $good = DB::table('nisha')->where('partNumber', $value)->first();
-            if ($good) {
-                array_push($allCodeData, ['result' => $this->getCodeData($good->id, $customer, $value), 'search' => $value]);
-            } else {
-                array_push($allCodeData, ['result' => null, 'search' => $value]);
-            }
-        }
-
-        return Inertia::render('Price/Partials/Load', ['allCodeData' => $allCodeData, 'customer' => $customer, 'completeCode' => $completeCode]);
+        return true;
     }
 
     function getMax($array)

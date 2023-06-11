@@ -12,7 +12,10 @@ import arrangeTime from "../services/timeline.js";
 const props = defineProps({
     givenPrice: Array,
     information: Array,
-    price: String
+    price: String,
+    customer: String,
+    completeCode: String,
+    partNumber: String,
 });
 
 const ordered_price = ref(null)
@@ -25,8 +28,7 @@ const form = useForm({
     price: null,
 });
 
-const savePrice = (pattern) => {
-    form.partnumber = pattern;
+const savePrice = () => {
     form.post(route("price.store"), {
         errorBag: "savePrice",
         preserveScroll: true,
@@ -64,7 +66,7 @@ onUpdated(() => {
                     </tr>
                 </thead>
                 <tbody>
-                    <template v-for="price in givenPrice">
+                    <template v-if="givenPrice" v-for="price in givenPrice">
                         <template v-if="price.price">
                             <tr class="min-w-full mb-1 hover:cursor-pointer"
                                 :class="price.ordered ? 'bg-red-400' : 'bg-indigo-200'" :data-price='price.price'
@@ -92,19 +94,19 @@ onUpdated(() => {
                                 </td>
                             </tr>
                         </template>
-                        <template v-else>
-                            <tr class="min-w-full mb-4 border-b-2 border-white">
-                                <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
-                                    موردی برای نمایش وجود ندارد!!
-                                </td>
-                            </tr>
-                        </template>
+                    </template>
+                    <template v-else>
+                        <tr class="min-w-full mb-4 border-b-2 border-white">
+                            <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
+                                موردی برای نمایش وجود ندارد!!
+                            </td>
+                        </tr>
                     </template>
 
                 </tbody>
             </table>
             <br>
-            <FormRelation class="rtl" @submitted="savePrice(item.result.pattern)">
+            <FormRelation class="rtl" @submitted="savePrice()">
                 <template #form>
                     <div class="pb-2">
                         <InputLabel for="price" value="قیمت" />

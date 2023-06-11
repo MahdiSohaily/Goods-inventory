@@ -15,6 +15,8 @@ const props = defineProps({
     exist: String,
     givenPrice: String,
     rates: Array,
+    customer: String,
+    completeCode: String,
 });
 
 const price = ref(null);
@@ -28,8 +30,8 @@ const updatePrice = (value) => {
     <CodeInfo :information="existing[code][index]['information']" :partNumber="index" />
     <RelationsDetails :rates="props.rates" :relation="existing[code][index]['relation']"
         :exist="existing[code][index]['exist']" @setPrice="(value) => updatePrice(value)" />
-    <GivenPrice :information="existing[code][index]['information']" :givenPrice="existing[code][index]['givenPrice']"
-        @setPrice="(value) => updatePrice(value)" :price="price" />
+    <GivenPrice :customer="customer" :completeCode="completeCode" :information="existing[code][index]['information']"
+        :givenPrice="existing[code][index]['givenPrice']" @setPrice="(value) => updatePrice(value)" :price="price" :partNumber="index" />
     <!--  <Estelam /> -->
 </template>
 <style></style>

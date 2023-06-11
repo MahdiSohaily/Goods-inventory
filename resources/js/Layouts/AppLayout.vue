@@ -2,10 +2,13 @@
 import { Head, router } from "@inertiajs/vue3";
 import Banner from "@/Components/Banner.vue";
 import NavLink from "@/Components/NavLink.vue";
+import { onMounted, ref } from "vue";
 
 defineProps({
     title: String,
 });
+
+const notification = ref(null);
 
 const toggleNav = () => {
     const nav = document.getElementById("nav");
@@ -19,16 +22,20 @@ const toggleNav = () => {
 const logout = () => {
     router.post(route("logout"));
 };
+
+onMounted(() => {
+    notification.value = setInterval(() => { });
+})
 </script>
 
 <template>
     <div>
+
         <Head :title="title" />
         <Banner />
         <div class="min-h-screen bg-gray-100">
             <nav id="nav" ref="nav" class="main-nav bg-white shadow-lg flex flex-col justify-between">
-                <i id="close" @click="toggleNav()"
-                    class="material-icons absolute m-3 left-0 hover:cursor-pointer">close</i>
+                <i id="close" @click="toggleNav()" class="material-icons absolute m-3 left-0 hover:cursor-pointer">close</i>
                 <ul class="rtl flex flex-col pt-5">
                     <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                         <i class="px-2 material-icons hover:cursor-pointer">search</i>
@@ -46,9 +53,10 @@ const logout = () => {
                         <i class="px-2 material-icons hover:cursor-pointer">sync</i>
                         تعریف رابطه اجناس
                     </NavLink>
-                    <NavLink :href="route('price.give')" :active="route().current('price.give') || route().current('price.load')">
+                    <NavLink :href="route('price.give')"
+                        :active="route().current('price.give') || route().current('price.load')">
                         <i class="px-2 material-icons hover:cursor-pointer">receipt</i>
-                    قیمت دهی
+                        قیمت دهی
                     </NavLink>
                     <NavLink :href="route('profile.show')" :active="route().current('profile.show')">
                         <i class="px-2 material-icons hover:cursor-pointer">portrait</i>
@@ -68,6 +76,8 @@ const logout = () => {
             <main>
                 <div class="flex justify-between">
                     <i class="p-2 right-0 material-icons hover:cursor-pointer fixed" @click="toggleNav">menu</i>
+                    <i class="p-2 right-0 material-icons hover:cursor-pointer ">notifications</i>
+                    <i class="p-2 right-0 material-icons hover:cursor-pointer hidden ">notifications_active</i>
                 </div>
                 <slot />
             </main>

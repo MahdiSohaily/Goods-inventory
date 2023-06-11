@@ -58,7 +58,7 @@ onUpdated(() => {
             <table class="rtl min-w-full text-right text-sm font-light">
                 <thead>
                     <tr class="min-w-full bg-green-600">
-                        <td class="text-white bold py-2 pr-2">قیمت</td>
+                        <td class="text-white bold py-2 pr-2 w-28">قیمت</td>
                         <td class="text-white bold py-2 pr-2">شماره فنی</td>
                         <td class="text-white bold py-2 pr-2">مشتری</td>
                     </tr>

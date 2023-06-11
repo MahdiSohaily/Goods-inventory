@@ -18,12 +18,10 @@ const props = defineProps({
 });
 
 const price = ref(null);
-const updated = ref(null);
 const updatePrice = (value) => {
     price.value = value;
 }
 
-watch(price, (newValue) => updated.value = newValue);
 
 </script>
 <template>
@@ -31,7 +29,7 @@ watch(price, (newValue) => updated.value = newValue);
     <RelationsDetails :rates="props.rates" :relation="existing[code][index]['relation']"
         :exist="existing[code][index]['exist']" @setPrice="(value) => updatePrice(value)" />
     <GivenPrice :information="existing[code][index]['information']" :givenPrice="existing[code][index]['givenPrice']"
-        :price="updated" />
+        :price="price" />
     <!--  <Estelam /> -->
 </template>
 <style></style>

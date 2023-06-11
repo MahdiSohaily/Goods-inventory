@@ -8,6 +8,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import arrangeTime from "../services/timeline.js";
+import axios from "axios";
 
 const props = defineProps({
     givenPrice: Array,
@@ -18,7 +19,8 @@ const props = defineProps({
     partNumber: String,
 });
 
-const ordered_price = ref(null)
+const ordered_price = ref(null);
+const customer_name = ref(null);
 
 const form = useForm({
     _method: "POST",
@@ -38,6 +40,23 @@ const savePrice = () => {
     });
 };
 
+const getCustomerName = (id) => {
+    axios
+        .post("/price/customer/name", {
+            id,
+        })
+        .then(function (response) {
+            resultBox.setAttribute(
+                "data-length",
+                Math.ceil(response.data.count / 10)
+            );
+            resultBox.innerHTML = print(response.data.goods);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 onMounted(() => {
     props.givenPrice[props.givenPrice.length] = {
         'price': props.information.relationInfo.price,
@@ -55,6 +74,7 @@ onUpdated(() => {
 </script>
 
 <template>
+    {{ customer }}
     <div class="bg-white rounded-lg shadow-md col-span-2 overflow-auto">
         <div id="search_result" class="p-3">
             <table class="rtl min-w-full text-right text-sm font-light">
@@ -66,7 +86,7 @@ onUpdated(() => {
                     </tr>
                 </thead>
                 <tbody>
-                    <template v-if="givenPrice" v-for="price in givenPrice">
+                    <template v-if="givenPrice !== null" v-for="price in givenPrice">
                         <template v-if="price.price">
                             <tr class="min-w-full mb-1 hover:cursor-pointer"
                                 :class="price.ordered ? 'bg-red-400' : 'bg-indigo-200'" :data-price='price.price'

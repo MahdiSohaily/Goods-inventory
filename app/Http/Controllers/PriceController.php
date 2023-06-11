@@ -288,7 +288,6 @@ class PriceController extends Controller
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        return true;
     }
 
     function getMax($array)

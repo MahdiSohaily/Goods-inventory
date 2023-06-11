@@ -7,7 +7,6 @@ use App\Http\Controllers\GoodController;
 use App\Http\Controllers\RateController;
 use App\Http\Controllers\RelationController;
 use App\Http\Controllers\PriceController;
-use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 /*
 |--------------------------------------------------------------------------
@@ -88,5 +87,6 @@ Route::middleware([
         
         Route::post('/price/info', 'info')->name('price.info'); // Route to create new good in the system
         Route::post('/price/relations', 'relations')->name('price.relations'); // Route to create new good in the system
+        Route::post('/price/customer/name', 'getCustomerName')->name('price.getCustomerName'); // Route to create new good in the system
     });
 });

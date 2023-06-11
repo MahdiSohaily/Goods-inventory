@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted, onUpdated, ref } from 'vue';
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Container from './Container.vue';
 
@@ -27,7 +26,8 @@ const props = defineProps({
         </label>
         <div class="accordion__content overflow-hidden bg-grey-lighter">
           <div v-for="item, index of existing[code]" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
-            <Container :information="existing[code][index]['information']" :partNumber="index" :rates="props.rates"
+            <Container :code="code" :index="index" :existing="existing"
+              :information="existing[code][index]['information']" :partNumber="index" :rates="props.rates"
               :relation="existing[code][index]['relation']" :exist="existing[code][index]['exist']"
               :givenPrice="existing[code][index]['givenPrice']" />
           </div>

@@ -50,6 +50,7 @@ onMounted(() => {
 
 <template>
     <div class="bg-white rounded-lg shadow-md col-span-2 overflow-auto">
+        {{ props.price }}
         <div id="search_result" class="p-3">
             <table class="rtl min-w-full text-right text-sm font-light">
                 <thead>

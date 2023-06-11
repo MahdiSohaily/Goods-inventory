@@ -54,7 +54,17 @@ const getCustomerName = (id) => {
 }
 
 const askPrice = () => {
-    
+    axios
+        .post("/price/ask", {
+            partNumber: props.partNumber,
+            customer: props.customer
+        })
+        .then(function (response) {
+            alert('done');
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 
 onMounted(() => {

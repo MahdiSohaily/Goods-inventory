@@ -21,6 +21,7 @@ const props = defineProps({
 
 const ordered_price = ref(null);
 const customer_name = ref(null);
+const asked = ref(false);
 
 const form = useForm({
     _method: "POST",
@@ -60,7 +61,8 @@ const askPrice = () => {
             customer: props.customer
         })
         .then(function (response) {
-            alert('done');
+            asked.value = true;
+            setTimeout(() => { asked.value = false; }, 500)
         })
         .catch(function (error) {
             console.log(error);
@@ -160,6 +162,9 @@ onUpdated(() => {
                         ارسال به نیایش
                     </a>
                     <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                        عملیات موفقانه صورت گرفت.
+                    </ActionMessage>
+                    <ActionMessage :on="asked" class="mr-3">
                         عملیات موفقانه صورت گرفت.
                     </ActionMessage>
                 </template>

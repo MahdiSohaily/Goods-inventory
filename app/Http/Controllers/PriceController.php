@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PriceController extends Controller
 {
@@ -364,6 +365,7 @@ class PriceController extends Controller
 
         DB::table('ask_price')->insert([
             'customer_id' => $customer,
+            'user_id' => Auth::user()->id,
             'code' =>  $partNumber,
             'created_at' => Carbon::now(),
         ]);

@@ -359,5 +359,13 @@ class PriceController extends Controller
 
     function askPrice(Request $request)
     {
+        $customer = $request->input('customer');
+        $partNumber = $request->input('partNumber');
+
+        DB::table('ask_price')->insert([
+            'customer_id' => $customer,
+            'code' =>  $partNumber,
+            'created_at' => Carbon::now(),
+        ]);
     }
 }

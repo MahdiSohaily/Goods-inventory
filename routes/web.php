@@ -91,5 +91,6 @@ Route::middleware([
     // Notification related routs
     Route::controller(NotificationController::class)->group(function () {
         Route::get('/notification', 'index')->name('notification.give'); // notification route lead us to the notification page
+        Route::get('/notification/get', 'getNotification')->name('notification.get'); // notification route lead us to the notification page
     });
 });

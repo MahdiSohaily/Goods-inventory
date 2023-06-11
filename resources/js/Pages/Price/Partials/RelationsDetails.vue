@@ -42,7 +42,7 @@ const calculateMobies = (price, rate) => {
 
 const calculateRegular = (price, rate) => {
 
-    Math.round(
+    return Math.round(
         Math.round((price * 110) / 243.5) *
         rate *
         1.2 *

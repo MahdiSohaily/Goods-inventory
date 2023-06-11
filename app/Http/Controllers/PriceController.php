@@ -339,4 +339,15 @@ class PriceController extends Controller
 
         return $final_result;
     }
+
+    public function getCustomerName(Request $request)
+    {
+        $id = $request->input('id');
+
+        $customer = DB::table('customers')
+            ->select('name')
+            ->where('id', $id)
+            ->first();
+        return $customer->name;
+    }
 }

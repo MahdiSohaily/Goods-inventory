@@ -126,7 +126,7 @@ onUpdated(() => {
                 <template #form>
                     <div class="pb-2">
                         <InputLabel for="price" value="قیمت" />
-                        <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
+                        <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full ltr"
                             autocomplete="price" />
                         <InputError :message="form.errors.price" class="mt-2" />
                     </div>

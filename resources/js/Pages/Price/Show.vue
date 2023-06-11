@@ -44,9 +44,9 @@ const clearInput = () => { };
                     <div class="pb-2">
                         <InputLabel for="code" value="کدهای مدنظر" />
                         <textarea rows="7" id="code" v-model="form.code" type="text"
-                            class="mt-1 shadow-sm block w-full rounded-md border-gray-300"
-                            placeholder="لطف نموده کد های مختلف را با کلید Enter از هم جدا نمایید.">
-                            </textarea>
+                            class="ltr mt-1 shadow-sm block w-full rounded-md border-gray-300"
+                            placeholder="لطفا کد های مود نظر خود را در خط های مجزا قرار دهید">
+                                </textarea>
                         <InputError :message="form.errors.code" class="mt-2" />
                     </div>
                 </template>
@@ -67,5 +67,6 @@ const clearInput = () => { };
 <style scoped>
 ::placeholder {
     font-size: 13px;
+    text-align: right;
 }
 </style>

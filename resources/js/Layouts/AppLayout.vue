@@ -50,7 +50,7 @@ const logout = () => {
                         <i class="px-2 material-icons hover:cursor-pointer">receipt</i>
                     قیمت دهی
                     </NavLink>
-                    <NavLink :href="route('profile.show')" :active="route().current('profile')">
+                    <NavLink :href="route('profile.show')" :active="route().current('profile.show')">
                         <i class="px-2 material-icons hover:cursor-pointer">portrait</i>
                         حساب کاربری
                     </NavLink>

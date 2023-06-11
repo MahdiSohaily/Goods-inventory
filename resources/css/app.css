@@ -16,6 +16,10 @@
 .rtl {
     direction: rtl !important;
 }
+
+.ltr {
+    direction: ltr !important;
+}
 .tiny-text {
     font-size: 12px;
 }

@@ -37,7 +37,7 @@ onMounted(() => {
             .catch(function (error) {
                 console.log(error);
             });
-    }, 1000);
+    }, 10000);
 })
 
 onUnmounted(() => {

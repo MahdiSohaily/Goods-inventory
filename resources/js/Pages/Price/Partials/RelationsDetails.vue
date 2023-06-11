@@ -123,7 +123,7 @@ onMounted(() => {
                                 </thead>
                                 <tbody>
                                     <tr class="py-3">
-                                        <td class="text-bold whitespace-nowrap px-3 py-2 text-center"
+                                        <td class="text-bold whitespace-nowrap px-3 py-2 text-center hover:cursor-pointer"
                                             :class="rate.status !== 'N' ? rate.status : 'bg-gray-100'" v-for="rate in rates"
                                             @click="$emit('setPrice', calculateRegular(props.relation.goods[key].price, rate.amount))">
 
@@ -134,7 +134,7 @@ onMounted(() => {
                                     </tr>
                                     <tr class="bg-neutral-400"
                                         v-if="props.relation.goods[key].mobis > 0 && props.relation.goods[key].mobis !== '-'">
-                                        <td class="text-bold whitespace-nowrap px-3 text-center py-2 " v-for="rate in rates"
+                                        <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" v-for="rate in rates"
                                             @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
                                             {{
                                                 calculateMobies(props.relation.goods[key].price, rate.amount)
@@ -143,7 +143,7 @@ onMounted(() => {
                                     </tr>
 
                                     <tr class="bg-amber-600" v-if="props.relation.goods[key].korea > 0">
-                                        <td class="text-bold whitespace-nowrap px-3 text-center py-2 " v-for="rate in rates"
+                                        <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" v-for="rate in rates"
                                             @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
                                             {{
                                                 calculateMobies(props.relation.goods[key].price, rate.amount)

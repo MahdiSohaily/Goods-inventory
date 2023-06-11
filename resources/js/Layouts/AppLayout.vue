@@ -27,13 +27,9 @@ const logout = () => {
 onMounted(() => {
     notification.value = setInterval(() => {
         axios
-            .post("/price/ask", {
-                partNumber: props.partNumber,
-                customer: props.customer
-            })
+            .post("/notification")
             .then(function (response) {
-                asked.value = true;
-                setTimeout(() => { asked.value = false; }, 500)
+                console.log('success');
             })
             .catch(function (error) {
                 console.log(error);

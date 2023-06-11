@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted, onUpdated, ref } from 'vue';
 import AppLayout from "@/Layouts/AppLayout.vue";
 import CodeInfo from "./CodeInfo.vue";
 import RelationsDetails from "./RelationsDetails.vue";
@@ -13,6 +14,16 @@ const props = defineProps({
   completeCode: String,
   rates: Array,
 });
+
+const price = ref(0);
+
+const updatePrice = (value) => {
+  price.value = value;
+}
+
+onUpdated(() => {
+  console.log(price.value)
+})
 </script>
 
 <template>
@@ -28,10 +39,9 @@ const props = defineProps({
           <div v-for="item, index of existing[code]" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
             <CodeInfo :information="existing[code][index]['information']" :partNumber="index" />
             <RelationsDetails :rates="props.rates" :relation="existing[code][index]['relation']"
-              :exist="existing[code][index]['exist']" />
-
+              :exist="existing[code][index]['exist']" @setPrice="(value) => updatePrice(value)" />
             <GivenPrice :information="existing[code][index]['information']"
-              :givenPrice="existing[code][index]['givenPrice']" />
+              :givenPrice="existing[code][index]['givenPrice']" :price="price" />
             <!--  <Estelam /> -->
           </div>
         </div>

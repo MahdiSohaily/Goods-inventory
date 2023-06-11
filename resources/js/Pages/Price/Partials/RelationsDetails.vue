@@ -31,6 +31,15 @@ const closeSeekExist = (e) => {
 
 }
 
+const calculate = (price, rate) => {
+    return Math.round(
+        Math.round((price * 110) / 243.5) *
+        rate *
+        1.25 *
+        1.3
+    )
+}
+
 
 onMounted(() => {
     stockRecords.value = props.relation.stockInfo;
@@ -104,8 +113,8 @@ onMounted(() => {
                                 <tbody>
                                     <tr class="py-3">
                                         <td class="text-bold whitespace-nowrap px-3 py-2 text-center"
-                                            :class="rate.status !== 'N' ? rate.status : 'bg-gray-100'"
-                                            v-for="rate in rates">
+                                            :class="rate.status !== 'N' ? rate.status : 'bg-gray-100'" v-for="rate in rates"
+                                            @click="$emit('setPrice', calculate(props.relation.goods[key].price, rate.amount))">
 
                                             {{
                                                 Math.round(
@@ -120,29 +129,20 @@ onMounted(() => {
                                     </tr>
                                     <tr class="bg-neutral-400"
                                         v-if="props.relation.goods[key].mobis > 0 && props.relation.goods[key].mobis !== '-'">
-                                        <td class="text-bold whitespace-nowrap px-3 text-center py-2 "
-                                            v-for="rate in rates">
+                                        <td class="text-bold whitespace-nowrap px-3 text-center py-2 " v-for="rate in rates"
+                                            @click="$emit('setPrice', calculate(props.relation.goods[key].price, rate.amount))">
                                             {{
-                                                Math.round(
-                                                    Math.round((props.relation.goods[key].price * 110) / 243.5) *
-                                                    rate.amount *
-                                                    1.25 *
-                                                    1.3
-                                                )
+                                                calculate(props.relation.goods[key].price, rate.amount)
                                             }}
                                         </td>
                                     </tr>
 
                                     <tr class="bg-amber-600" v-if="props.relation.goods[key].korea > 0">
-                                        <td class="text-bold whitespace-nowrap px-3 text-center py-2 "
-                                            v-for="rate in rates">
+                                        <td class="text-bold whitespace-nowrap px-3 text-center py-2 " v-for="rate in rates"
+                                            @click="$emit('setPrice', calculate(props.relation.goods[key].price, rate.amount))">
                                             {{
-                                                Math.round(
-                                                    Math.round((props.relation.goods[key].price * 110) / 243.5) *
-                                                    rate.amount *
-                                                    1.25 *
-                                                    1.3
-                                                )
+                                                calculate(props.relation.goods[key].price, rate.amount)
+
                                             }}
                                         </td>
                                     </tr>

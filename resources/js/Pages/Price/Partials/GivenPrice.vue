@@ -11,7 +11,8 @@ import arrangeTime from "../services/timeline.js";
 
 const props = defineProps({
     givenPrice: Array,
-    information: Array
+    information: Array,
+    price: String
 });
 
 const ordered_price = ref(null)
@@ -29,7 +30,9 @@ const savePrice = (pattern) => {
     form.post(route("price.store"), {
         errorBag: "savePrice",
         preserveScroll: true,
-        onSuccess: () => { },
+        onSuccess: () => {
+            console.log('Wll done');
+        },
     });
 };
 
@@ -40,6 +43,7 @@ onMounted(() => {
         'ordered': true,
     }
     ordered_price.value = props.givenPrice.sort(function (a, b) { return new Date(b.created_at) - new Date(a.created_at) });
+    form.price = props.price;
 })
 
 </script>

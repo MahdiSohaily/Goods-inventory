@@ -32,7 +32,7 @@ const weDontHave = (id, code, customer) => {
             customer,
         })
         .then(function (response) {
-            alert('done');
+            location.reload();
         })
         .catch(function (error) {
             console.log(error);
@@ -80,7 +80,8 @@ const weDontHave = (id, code, customer) => {
                                 {{ item.user_name }}
                             </td>
                             <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                                در حال انتظار
+                                {{ item.status ==='pending' ? 'در حال انتظار' : 'بررسی شده' }}
+
                             </td>
 
                             <td class="whitespace-nowrap w-24">

@@ -29,7 +29,7 @@ class PriceController extends Controller
         }
     }
 
-    public function setup_loading($customer, $completeCode)
+    public function setup_loading($customer, $completeCode, $notification = null)
     {
         $explodedCodes = explode("\n", $completeCode);
 
@@ -81,6 +81,7 @@ class PriceController extends Controller
             'existing' => $data,
             'customer' => $customer,
             'completeCode' => $completeCode,
+            'notification' => $notification,
             'rates' => $this->getSelectedRates()
         ]);
     }

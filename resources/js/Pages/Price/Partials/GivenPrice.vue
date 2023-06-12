@@ -19,7 +19,6 @@ const props = defineProps({
     partNumber: String,
 });
 
-const ordered_price = ref(null);
 const customer_name = ref(null);
 const asked = ref(false);
 
@@ -70,12 +69,6 @@ const askPrice = () => {
 }
 
 onMounted(() => {
-    props.givenPrice[props.givenPrice.length] = {
-        'price': props.information.relationInfo.price,
-        'created_at': props.information.relationInfo.created_at,
-        'ordered': true,
-    }
-    ordered_price.value = props.givenPrice.sort(function (a, b) { return new Date(b.created_at) - new Date(a.created_at) });
     form.price = props.price;
     getCustomerName(props.customer);
 })

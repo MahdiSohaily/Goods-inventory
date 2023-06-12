@@ -17,6 +17,7 @@ const props = defineProps({
     customer: String,
     completeCode: String,
     partNumber: String,
+    notification: String
 });
 
 const customer_name = ref(null);
@@ -27,6 +28,7 @@ const form = useForm({
     customer: props.customer,
     partnumber: props.partNumber,
     completeCode: props.completeCode,
+    notification: props.notification,
     price: null,
 });
 

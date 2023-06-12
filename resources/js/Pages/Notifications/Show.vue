@@ -1,6 +1,7 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { useForm } from "@inertiajs/vue3";
+import axios from "axios";
 
 const props = defineProps({
     notifications: Array
@@ -22,6 +23,24 @@ const travelTO = (id, code, customer) => {
         preserveScroll: true,
     });
 };
+
+const weDontHave = (id, code, customer) => {
+    axios
+        .post("/goods/search", {
+            pattern,
+        })
+        .then(function (response) {
+            resultBox.setAttribute(
+                "data-length",
+                Math.ceil(response.data.count / 10)
+            );
+            resultBox.innerHTML = print(response.data.goods);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+};
+
 
 </script>
 
@@ -64,7 +83,7 @@ const travelTO = (id, code, customer) => {
                                 {{ item.user_name }}
                             </td>
                             <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                                {{ item.status }}
+                                در حال انتظار
                             </td>
 
                             <td class="whitespace-nowrap w-24">
@@ -72,6 +91,10 @@ const travelTO = (id, code, customer) => {
                                     <a>
                                         <i @click="travelTO(item.id, item.code, item.customer_id)"
                                             class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">archive</i>
+                                    </a>
+                                    <a>
+                                        <i @click="weDontHave(item.id, item.code, item.customer_id)"
+                                            class="bold material-icons text-red-500 hover:text-red-700 hover:cursor-pointer">close</i>
                                     </a>
                                 </div>
                             </td>

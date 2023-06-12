@@ -94,45 +94,33 @@ onUpdated(() => {
                 </thead>
                 <tbody>
                     <template v-if="givenPrice[0] !== null">
-                        <template v-if="givenPrice.length == 1 && givenPrice[0].price !== null">
-                            <template v-for="price in givenPrice">
-                                <template v-if="price.price">
-                                    <tr class="min-w-full mb-1 hover:cursor-pointer"
-                                        :class="price.ordered ? 'bg-red-400' : 'bg-indigo-200'" :data-price='price.price'
-                                        @click="price.ordered && $emit('setPrice', price.price)">
+                        <template v-for="price in givenPrice">
+                            <template v-if="price.price">
+                                <tr class="min-w-full mb-1 hover:cursor-pointer"
+                                    :class="price.ordered ? 'bg-red-400' : 'bg-indigo-200'" :data-price='price.price'
+                                    @click="price.ordered && $emit('setPrice', price.price)">
 
-                                        <td scope="col" class="text-gray-800 px-2 py-1"
-                                            :class="price.ordered && 'text-white'">
-                                            {{ price.price === null ? 'ندارد' : price.price }}
-                                        </td>
-                                        <td scope="col" class="text-gray-800 px-2 py-1"
-                                            :class="price.ordered && 'text-white'">
-                                            {{ price.ordered ? 'قیمت دستوری' : price.name }}
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr class="min-w-full mb-1 hover:cursor-pointer border-b-2"
-                                        :class="price.ordered ? 'bg-red-500' : 'bg-indigo-300'" :data-price='price.price'>
-                                        <td :class="price.ordered && 'text-white'" colspan="3" scope="col"
-                                            class="text-gray-800 px-2 tiny-text ">
-                                            <div class="rtl flex items-center w-full">
-                                                <i class="px-1 material-icons tiny-text "
-                                                    :class="price.ordered ? 'text-white' : 'text-gray-800'">access_time</i>
-                                                {{ arrangeTime(price.created_at) }}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </template>
-
+                                    <td scope="col" class="text-gray-800 px-2 py-1" :class="price.ordered && 'text-white'">
+                                        {{ price.price === null ? 'ندارد' : price.price }}
+                                    </td>
+                                    <td scope="col" class="text-gray-800 px-2 py-1" :class="price.ordered && 'text-white'">
+                                        {{ price.ordered ? 'قیمت دستوری' : price.name }}
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr class="min-w-full mb-1 hover:cursor-pointer border-b-2"
+                                    :class="price.ordered ? 'bg-red-500' : 'bg-indigo-300'" :data-price='price.price'>
+                                    <td :class="price.ordered && 'text-white'" colspan="3" scope="col"
+                                        class="text-gray-800 px-2 tiny-text ">
+                                        <div class="rtl flex items-center w-full">
+                                            <i class="px-1 material-icons tiny-text "
+                                                :class="price.ordered ? 'text-white' : 'text-gray-800'">access_time</i>
+                                            {{ arrangeTime(price.created_at) }}
+                                        </div>
+                                    </td>
+                                </tr>
                             </template>
 
-                        </template>
-                        <template v-else>
-                            <tr class="min-w-full mb-4 border-b-2 border-white">
-                                <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
-                                    موردی برای نمایش وجود ندارد!!
-                                </td>
-                            </tr>
                         </template>
                     </template>
                     <template v-else>

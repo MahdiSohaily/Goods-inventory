@@ -181,7 +181,9 @@ class PriceController extends Controller
     {
         $ordared_price = null;
         if ($relation_exist) {
-            $ordared_price = DB::table('patterns')->where('id', $relation_exist)->first();
+            $ordared_price = DB::table('patterns')
+                ->select('patterns.price', 'patterns.created_at')
+                ->where('id', $relation_exist)->first();
             $ordared_price->ordered = true;
         }
 

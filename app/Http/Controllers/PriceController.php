@@ -53,6 +53,8 @@ class PriceController extends Controller
 
         $data = [];
         $relation_id = [];
+
+
         foreach ($explodedCodes as $code) {
             if (!in_array($code, $results_arry['not_exist'])) {
                 $data[$code] = [];
@@ -63,18 +65,18 @@ class PriceController extends Controller
                             array_push($relation_id, $relation_exist);
                             $data[$code][$item->partnumber]['information'] = $this->info($item->id);
                             $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
-                            $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($code, $relation_exist);
+                            $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($item->partnumber, $relation_exist);
                         }
                     } else {
                         $data[$code][$item->partnumber]['information'] = $this->info($item->id);
                         $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
-                        $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($item->partnumber);
+                        $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($item->partnumber, $relation_exist);
                     }
                 }
             }
         }
 
-        //  return $data;
+        //return $data;
 
         return Inertia::render('Price/Partials/Load', [
             'explodedCodes' => $explodedCodes,

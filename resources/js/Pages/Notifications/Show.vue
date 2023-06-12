@@ -26,8 +26,10 @@ const travelTO = (id, code, customer) => {
 
 const weDontHave = (id, code, customer) => {
     axios
-        .post("/goods/search", {
-            pattern,
+        .post("/notification/clear", {
+            id,
+            code,
+            customer,
         })
         .then(function (response) {
             resultBox.setAttribute(

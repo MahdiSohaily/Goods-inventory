@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Carbon\Carbon;
 
 class NotificationController extends Controller
 {
@@ -25,5 +26,28 @@ class NotificationController extends Controller
             ->where('status', '=', 'pending')->get();
 
         return Inertia::render('Notifications/Show', ['notifications' => $notifications]);
+    }
+
+    function clearNotification(Request $request)
+    {
+        $code = $request->input('code');
+        $customer = $request->input('customer');
+        $id = $request->input('id');
+
+        if ($id) {
+            DB::table('ask_price')
+                ->where('id', $id)
+                ->update(['status' => 'done']);
+        }
+
+        if ($customer) {
+            DB::table('prices')->insert([
+                'partnumber' => $code,
+                'price' => 'نداریم',
+                'customer_id' => $customer,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
     }
 }

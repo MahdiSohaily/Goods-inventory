@@ -87,13 +87,14 @@ Route::middleware([
         Route::post('/price/customer/name', 'getCustomerName')->name('price.getCustomerName'); // Route to create new good in the system
         Route::post('/price/ask', 'askPrice')->name('price.askPrice'); // Route to create new good in the system
 
-        
+
         Route::post('/price/setup', 'pricesetup')->name('price.setup'); // Route to create new good in the system
     });
-   
+
     // Notification related routs
     Route::controller(NotificationController::class)->group(function () {
         Route::get('/notification', 'index')->name('notification.give'); // notification route lead us to the notification page
         Route::get('/notification/get', 'getNotification')->name('notification.get'); // notification route lead us to the notification page
+        Route::post('/notification/clear', 'clearNotification')->name('notification.clear'); // notification route lead us to the notification page
     });
 });

@@ -49,5 +49,7 @@ class NotificationController extends Controller
                 'updated_at' => Carbon::now(),
             ]);
         }
+
+        return  redirect()->route('notification.get');
     }
 }

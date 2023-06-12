@@ -40,13 +40,12 @@ const weDontHave = (id, code, customer) => {
 };
 
 
+
 </script>
 
 <template>
     <AppLayout title="notifications">
-        <InputError :message="form.errors.customer" class="mt-2" />
-        <InputError :message="form.errors.code" class="mt-2" />
-        <div class="bg-gray-100 bg-opacity-25">
+        <div class="bg-gray-100 bg-opacity-25 mt-20">
             <div class="max-w-7xl overflow-x-auto mx-auto">
                 <table class="rtl min-w-full text-left text-sm font-light">
                     <thead class="font-medium dark:border-neutral-500">

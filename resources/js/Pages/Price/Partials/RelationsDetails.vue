@@ -87,12 +87,9 @@ onMounted(() => {
                 </thead>
                 <tbody>
                     <tr class="relative" v-for="element, key of props.relation.sorted">
-
                         <td class=" px-1">
-                            <p class="text-center bold bg-gray-600 text-white px-2 py-3"
-                                :data-copy="props.relation.goods[key].partnumber">
+                            <p class="text-center bold bg-gray-600 text-white px-2 py-3">
                                 {{ props.relation.goods[key].partnumber }}
-
                             </p>
 
                         </td>

@@ -59,21 +59,21 @@ const updateGood = () => {
                         <!-- Weight -->
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="weight" value="وزن جنس" />
-                            <TextInput required id="weight" v-model="form.weight" type="text" class="mt-1 block w-full"
+                            <TextInput id="weight" v-model="form.weight" type="text" class="mt-1 block w-full"
                                 autocomplete="username" />
                             <InputError :message="form.errors.weight" class="mt-2" />
                         </div>
                         <!-- Mobis -->
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="mobis" value="موبیز" />
-                            <TextInput required id="mobis" v-model="form.mobis" type="text" class="mt-1 block w-full"
+                            <TextInput id="mobis" v-model="form.mobis" type="text" class="mt-1 block w-full"
                                 autocomplete="username" />
                             <InputError :message="form.errors.mobis" class="mt-2" />
                         </div>
                         <!-- korea -->
                         <div class="col-span-6 sm:col-span-4">
                             <InputLabel for="korea" value="کوریا" />
-                            <TextInput required id="korea" v-model="form.korea" type="text" class="mt-1 block w-full"
+                            <TextInput id="korea" v-model="form.korea" type="text" class="mt-1 block w-full"
                                 autocomplete="username" />
                             <InputError :message="form.errors.korea" class="mt-2" />
                         </div>

@@ -295,6 +295,9 @@ class PriceController extends Controller
             'required' => "The :attribute field can't be empty.",
         ])->validate();
 
+
+        $notification = $request->input('notification');
+
         DB::table('prices')->insert([
             'partnumber' => $request->input('partnumber'),
             'price' => $request->input('price'),
@@ -302,6 +305,12 @@ class PriceController extends Controller
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+
+        if ($notification) {
+            DB::table('asked_price')
+                ->where('id', $notification)
+                ->update(['status' => 'done']);
+        }
 
         return $this->setup_loading($request->input('customer'), $request->input('completeCode'));
     }

@@ -89,16 +89,15 @@ onUpdated(() => {
 <template>
     <div class="bg-white rounded-lg shadow-md col-span-2 overflow-auto">
         <div id="search_result" class="p-3">
-            <table class="rtl min-w-full text-right text-sm font-light">
+            <table class=" min-w-full text-right text-sm font-light">
                 <thead>
                     <tr class="min-w-full bg-green-600">
                         <td class="text-white bold py-2 pr-2 w-28">قیمت</td>
-                        <td class="text-white bold py-2 pr-2">شماره فنی</td>
                         <td class="text-white bold py-2 pr-2">مشتری</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <template v-if="givenPrice !== null" v-for="price in givenPrice">
+                    <template v-if="ordered_price !== null" v-for="price in ordered_price">
                         <template v-if="price.price">
                             <tr class="min-w-full mb-1 hover:cursor-pointer"
                                 :class="price.ordered ? 'bg-red-400' : 'bg-indigo-200'" :data-price='price.price'
@@ -108,9 +107,6 @@ onUpdated(() => {
                                     {{ price.price }}
                                 </td>
                                 <td scope="col" class="text-gray-800 pr-2 py-1">
-                                    {{ price.partnumber }}
-                                </td>
-                                <td scope="col" class="text-gray-800 pr-2 py-1">
                                     {{ price.name }}
                                 </td>
                             </tr>
@@ -118,7 +114,7 @@ onUpdated(() => {
                                 :class="price.ordered ? 'bg-red-500' : 'bg-indigo-300'">
                                 <td :class="price.ordered && 'text-white'" colspan="3" scope="col"
                                     class="text-gray-800 pr-2 tiny-text ">
-                                    <div class="flex items-center w-full">
+                                    <div class="rtl flex items-center w-full">
                                         <i class="px-1 material-icons tiny-text "
                                             :class="price.ordered ? 'text-white' : 'text-gray-800'">access_time</i>
                                         {{ arrangeTime(price.created_at) }}

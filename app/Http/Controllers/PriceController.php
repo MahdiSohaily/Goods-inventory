@@ -18,11 +18,11 @@ class PriceController extends Controller
 
     public function load(Request $request)
     {
+
         if ($request->input('customer')) {
             $this->validateRequest($request->all());
             $customer = $request->input('customer');
             $completeCode = $request->input('code');
-
             return $this->setup_loading($customer, $completeCode);
         } else {
             return Inertia::render('Price/Show');
@@ -67,7 +67,7 @@ class PriceController extends Controller
                     } else {
                         $data[$code][$item->partnumber]['information'] = $this->info($item->id);
                         $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
-                        $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($code);
+                        $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($item->partnumber);
                     }
                 }
             }
@@ -88,7 +88,7 @@ class PriceController extends Controller
     public function validateRequest($all_data)
     {
         Validator::make($all_data, [
-            'customer' => 'required|string|exists:customers,id',
+            'customer' => 'required|exists:customers,id',
             'code' => 'required|string',
 
         ], [
@@ -370,5 +370,14 @@ class PriceController extends Controller
             'status' =>  'pending',
             'created_at' => Carbon::now(),
         ]);
+    }
+
+    function pricesetup(Request $request)
+    {
+
+        $customer = $request->input('customer');
+        $completeCode = $request->input('code');
+
+        return $this->setup_loading($customer, $completeCode);
     }
 }

@@ -18,6 +18,12 @@ class NotificationController extends Controller
 
     public function getNotification()
     {
-        return Inertia::render('Price/Show');
+        $notifications = DB::table('ask_price')
+            ->join('users', 'users.id', '=', 'ask_price.user_id')
+            ->join('customers', 'customers.id', '=', 'ask_price.customer_id')
+            ->select('ask_price.*', 'users.id AS user_id', 'customers.id AS customer_id', 'customers.name AS customer_name', 'users.name AS user_name')
+            ->where('status', '=', 'pending')->get();
+
+        return Inertia::render('Notifications/Show', ['notifications' => $notifications]);
     }
 }

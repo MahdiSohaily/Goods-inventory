@@ -86,6 +86,9 @@ Route::middleware([
         Route::post('/price/relations', 'relations')->name('price.relations'); // Route to create new good in the system
         Route::post('/price/customer/name', 'getCustomerName')->name('price.getCustomerName'); // Route to create new good in the system
         Route::post('/price/ask', 'askPrice')->name('price.askPrice'); // Route to create new good in the system
+
+        
+        Route::post('/price/setup', 'pricesetup')->name('price.setup'); // Route to create new good in the system
     });
    
     // Notification related routs

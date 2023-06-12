@@ -202,7 +202,9 @@ class PriceController extends Controller
             ->orderBy('created_at', 'desc')
             ->limit(7)->get();
 
-        return [...$givenPrices, $ordared_price];
+        $final_data = $relation_exist ? [...$givenPrices, $ordared_price] : $givenPrices;
+
+        return  $final_data;
     }
 
     public function out($id)

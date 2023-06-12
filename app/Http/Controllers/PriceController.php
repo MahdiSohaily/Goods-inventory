@@ -128,12 +128,17 @@ class PriceController extends Controller
         $info = false;
         $cars = null;
         if ($isInRelation) {
-
             $info = DB::table('patterns')
-                ->join('status', 'status.id', '=', 'patterns.status_id')
-                ->select('patterns.*', 'status.name AS  status_name')
                 ->where('patterns.id', $isInRelation->pattern_id)
                 ->first();
+
+            if ($info->status_id) {
+                $info = DB::table('patterns')
+                    ->join('status', 'status.id', '=', 'patterns.status_id')
+                    ->select('patterns.*', 'status.name AS  status_name')
+                    ->where('patterns.id', $isInRelation->pattern_id)
+                    ->first();
+            }
 
             $cars = DB::table('patterncars')
                 ->join('cars', 'cars.id', '=', 'patterncars.car_id')

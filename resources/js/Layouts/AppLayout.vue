@@ -1,5 +1,5 @@
 <script setup>
-import { Head, router,Link } from "@inertiajs/vue3";
+import { Head, router, Link } from "@inertiajs/vue3";
 import { onMounted, onUnmounted, ref } from "vue";
 import Banner from "@/Components/Banner.vue";
 import NavLink from "@/Components/NavLink.vue";
@@ -37,7 +37,7 @@ onMounted(() => {
             .catch(function (error) {
                 console.log(error);
             });
-    }, 10000);
+    }, 30000);
 })
 
 onUnmounted(() => {
@@ -95,7 +95,7 @@ onUnmounted(() => {
                     <i class="p-2 right-0 material-icons hover:cursor-pointer fixed" @click="toggleNav">menu</i>
 
                     <Link v-if="hasNotification" :href="route('notification.get')">
-                        <i class="p-2 material-icons hover:cursor-pointer notify ">notifications_active</i>
+                    <i class="p-2 material-icons hover:cursor-pointer notify ">notifications_active</i>
                     </Link>
                     <i v-else class="p-2 material-icons hover:cursor-pointer text-indigo-700">notifications</i>
                 </div>

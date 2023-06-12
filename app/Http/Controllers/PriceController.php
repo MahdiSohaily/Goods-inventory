@@ -70,7 +70,7 @@ class PriceController extends Controller
                     } else {
                         $data[$code][$item->partnumber]['information'] = $this->info($item->id);
                         $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
-                        $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($item->partnumber, $relation_exist);
+                        $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($item->partnumber);
                     }
                 }
             }

@@ -62,7 +62,7 @@ class PriceController extends Controller
                             array_push($relation_id, $relation_exist);
                             $data[$code][$item->partnumber]['information'] = $this->info($item->id);
                             $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
-                            $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($code);
+                            $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($code, $relation_exist);
                         }
                     } else {
                         $data[$code][$item->partnumber]['information'] = $this->info($item->id);
@@ -177,15 +177,21 @@ class PriceController extends Controller
         return ['goods' => $sortedGoods, 'existing' => $existing, 'sorted' => $sorted, 'stockInfo' => $stockinfo];
     }
 
-    public function givenPrice($code)
+    public function givenPrice($code, $relation_exist = null)
     {
+        $ordared_price = null;
+        if ($relation_exist) {
+            $ordared_price = DB::table('patterns')->where('id', $relation_exist)->first();
+            $ordared_price->ordered = true;
+        }
+
         $givenPrices = DB::table('prices')
             ->join('customers', 'customers.id', '=', 'prices.customer_id')
             ->where('partnumber', 'like', "$code%")
             ->orderBy('created_at', 'desc')
             ->limit(7)->get();
 
-        return $givenPrices;
+        return [...$givenPrices, $ordared_price];
     }
 
     public function out($id)

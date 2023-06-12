@@ -36,11 +36,6 @@ const savePrice = () => {
         errorBag: "savePrice",
         preserveScroll: true,
         onSuccess: () => {
-            props.givenPrice[props.givenPrice.length] = {
-                'price': props.information.relationInfo.price,
-                'created_at': props.information.relationInfo.created_at,
-                'ordered': true,
-            };
             form.price = null;
         },
     });
@@ -92,6 +87,7 @@ onUpdated(() => {
 </script>
 
 <template>
+    {{ givenPrice }}
     <div class="bg-white rounded-lg shadow-md col-span-2 overflow-auto">
         <div id="search_result" class="p-3">
             <table class=" min-w-full text-sm font-light">

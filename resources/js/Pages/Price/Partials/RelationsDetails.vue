@@ -60,16 +60,16 @@ onMounted(() => {
 <template>
     <div class="bg-white rounded-lg col-span-5 overflow-auto">
         <div id="search_result" class="p-3">
-            <table class="min-w-full text-left text-sm font-light">
-                <thead class="font-medium bg-green-300">
+            <table class="min-w-full text-left text-sm font-light custom-table">
+                <thead class="font-medium bg-green-600">
                     <tr>
-                        <th scope="col" class="px-3 text-gray-800 py-3">
+                        <th scope="col" class="px-3 py-3 text-white text-center">
                             شماره فنی
                         </th>
-                        <th scope="col" class="px-3 text-gray-800 py-3">
+                        <th scope="col" class="px-3 py-3 text-white text-center">
                             مقدار موجودی
                         </th>
-                        <th scope="col" class="px-3 text-gray-800 py-3">
+                        <th scope="col" class="px-3 py-3 text-white text-center">
                             قیمت به اساس نرخ ارز
                         </th>
                     </tr>
@@ -77,8 +77,8 @@ onMounted(() => {
                 <tbody>
                     <tr class="relative" v-for="element, key of props.relation.sorted">
 
-                        <td class="text-bold px-1 pt-2">
-                            <p class="bold">
+                        <td class=" px-1">
+                            <p class="text-center bold bg-gray-600 text-white py-3 ">
                                 {{ props.relation.goods[key].partnumber }}
                             </p>
                         </td>
@@ -173,5 +173,9 @@ onMounted(() => {
     background-color: seagreen;
     width: 200px;
     z-index: 100000;
+}
+
+.custom-table td {
+    vertical-align: super;
 }
 </style>

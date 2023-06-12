@@ -23,7 +23,8 @@ class PriceController extends Controller
             $this->validateRequest($request->all());
             $customer = $request->input('customer');
             $completeCode = $request->input('code');
-            return $this->setup_loading($customer, $completeCode);
+            $notification_id = $request->input('id') ? $request->input('id') : null;
+            return $this->setup_loading($customer, $completeCode, $notification_id);
         } else {
             return Inertia::render('Price/Show');
         }
@@ -307,7 +308,7 @@ class PriceController extends Controller
         ]);
 
         if ($notification) {
-            DB::table('asked_price')
+            DB::table('ask_price')
                 ->where('id', $notification)
                 ->update(['status' => 'done']);
         }

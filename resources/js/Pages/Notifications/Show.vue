@@ -1,7 +1,6 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { useForm } from "@inertiajs/vue3";
-import axios from "axios";
 
 const props = defineProps({
     notifications: Array
@@ -9,11 +8,13 @@ const props = defineProps({
 
 const form = useForm({
     _method: "GET",
+    id: null,
     customer: null,
     code: null,
 });
 
-const travelTO = (code, customer) => {
+const travelTO = (id, code, customer) => {
+    form.id = id;
     form.code = code + "";
     form.customer = customer;
     form.post(route("price.load"), {
@@ -69,7 +70,7 @@ const travelTO = (code, customer) => {
                             <td class="whitespace-nowrap w-24">
                                 <div class="flex justify-center gap-1 items-center px-2">
                                     <a>
-                                        <i @click="travelTO(item.code, item.customer_id)"
+                                        <i @click="travelTO(item.id, item.code, item.customer_id)"
                                             class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">archive</i>
                                     </a>
                                 </div>

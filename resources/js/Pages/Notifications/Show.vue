@@ -32,11 +32,7 @@ const weDontHave = (id, code, customer) => {
             customer,
         })
         .then(function (response) {
-            resultBox.setAttribute(
-                "data-length",
-                Math.ceil(response.data.count / 10)
-            );
-            resultBox.innerHTML = print(response.data.goods);
+            alert('done');
         })
         .catch(function (error) {
             console.log(error);

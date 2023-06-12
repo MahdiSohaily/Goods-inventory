@@ -7,6 +7,8 @@ const props = defineProps({
 });
 
 const stockRecords = ref(null);
+const copied_icon = ref();
+const copied = ref(false);
 
 const seekExist = (e) => {
     const element = e.target;
@@ -51,6 +53,15 @@ const calculateRegular = (price, rate) => {
     )
 }
 
+function myFunction(e) {
+    const copyText = e.target;
+    navigator.clipboard.writeText(copyText.getAttribute('data-copy'));
+    copied.value = true;
+    setTimeout(() => {
+        copied.value = false;
+    }, 500)
+}
+
 
 onMounted(() => {
     stockRecords.value = props.relation.stockInfo;
@@ -78,9 +89,17 @@ onMounted(() => {
                     <tr class="relative" v-for="element, key of props.relation.sorted">
 
                         <td class=" px-1">
-                            <p class="text-center bold bg-gray-600 text-white py-3 ">
+                            <p @click="myFunction" class="custom-partNumber text-center bold bg-gray-600 text-white px-2 py-3
+                                                               hover:cursor-pointer 
+                                                               flex items-center justify-between"
+                                :data-copy="props.relation.goods[key].partnumber">
                                 {{ props.relation.goods[key].partnumber }}
+                                <i ref="copied_icon"
+                                    class="custom-partNumber-icon material-icons medium-text tooltip-message"
+                                    v-if="!copied">content_copy</i>
+                                <span class="text-white tiny-text tooltip-message" v-else>!کپی شد</span>
                             </p>
+
                         </td>
                         <td class="px-1 pt-2">
                             <table class="min-w-full text-sm font-light p-2">
@@ -177,5 +196,23 @@ onMounted(() => {
 
 .custom-table td {
     vertical-align: super;
+}
+
+.custom-partNumber {
+    position: relative;
+}
+
+.custom-partNumber-icon {
+    opacity: 0;
+    transition: all 50ms ease-in;
+}
+
+.custom-partNumber:hover .custom-partNumber-icon {
+    opacity: 1;
+}
+
+.tooltip-message {
+    position: absolute;
+    right: 5px;
 }
 </style>

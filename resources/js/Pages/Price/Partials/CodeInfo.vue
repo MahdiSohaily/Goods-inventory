@@ -23,7 +23,7 @@ onMounted(() => {
                 {{ props.partNumber }}
             </p>
             <div v-if="relationInfo">
-                <p class="my-2">{{ relationInfo.name }}</p>
+                <p class="my-2">قطعه: {{ relationInfo.name }}</p>
                 <p class="my-2">وضعیت: {{ relationInfo.status_name }}</p>
                 <ul>
                     <li class="" v-for="elem in relationCars">

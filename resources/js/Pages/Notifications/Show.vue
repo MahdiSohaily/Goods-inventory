@@ -41,6 +41,19 @@ const weDontHave = (id, code, customer) => {
         });
 };
 
+const markUsRead = (id) => {
+    axios
+        .post("/notification/read", {
+            id,
+        })
+        .then(function (response) {
+            location.reload();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+};
+
 
 
 </script>
@@ -152,13 +165,10 @@ const weDontHave = (id, code, customer) => {
                             <td class="whitespace-nowrap w-24">
                                 <div class="flex justify-center gap-1 items-center px-2">
                                     <a>
-                                        <i @click="travelTO(item.id, item.code, item.customer_id)"
-                                            class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">archive</i>
+                                        <i @click="markUsRead(item.id)"
+                                            class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">remove_red_eye</i>
                                     </a>
-                                    <a>
-                                        <i @click="weDontHave(item.id, item.code, item.customer_id)"
-                                            class="bold material-icons text-red-500 hover:text-red-700 hover:cursor-pointer">close</i>
-                                    </a>
+
                                 </div>
                             </td>
                         </tr>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use Carbon\Carbon;
 
 class RelationController extends Controller
 {
@@ -149,6 +150,7 @@ class RelationController extends Controller
             $pattern->price = $request->input('price');
             $pattern->serial = $request->input('serial');
             $pattern->status_id = $request->input('status_id');
+            $pattern->created_at = $request->input('status_id');
             $pattern->save();
             if (count($toAdd) > 0) {
                 foreach ($toAdd as $value) {

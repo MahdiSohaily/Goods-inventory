@@ -285,67 +285,69 @@ const createRelation = () => {
 
                 <SectionBorder />
 
-                <FormRelation @submitted="createRelation">
-                    <template #form>
-                        <!-- Name -->
-                        <div class="pb-2">
-                            <InputLabel for="name" value="اسم رابطه" />
-                            <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full"
-                                autocomplete="name" />
-                            <InputError :message="form.errors.name" class="mt-2" />
-                        </div>
-                        <div class="pb-2">
-                            <InputLabel for="price" value="قیمت" />
-                            <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
-                                autocomplete="price" />
-                            <InputError :message="form.errors.price" class="mt-2" />
-                        </div>
-                        <div class="pb-2">
-                            <InputLabel for="cars" value="خودرو های مرتبط" />
-                            <select type="cars" multiple
-                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                autocomplete="username" v-model="form.car_id" id="cars">
-                                <option v-for="item in cars" :value="item.id" class="text-sm">
-                                    {{ item.name }}
-                                </option>
-                            </select>
-                            <InputError :message="form.errors.car_id" class="mt-2" />
-                        </div>
-                        <div class="pb-2">
-                            <InputLabel for="status" value="وضعیت" />
-                            <select type="status"
-                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                autocomplete="username" v-model="form.status_id" id="status">
-                                <option v-for="item in status" :value="item.id" class="text-sm">
-                                    {{ item.name }}
-                                </option>
-                            </select>
-                            <InputError :message="form.errors.status_id" class="mt-2" />
-                        </div>
-                        <!-- <div class="container">
-                                <select multiple data-multi-select-plugin autocomplete="username" v-model="form.car_id"
-                                    id="cars">
-                                    <option v-for="item in cars" :value="item.id" class="text-sm"
-                                        :selected="form.car_id != null && form.car_id.includes(item.id)">
+                <div class="p-3">
+                    <FormRelation @submitted="createRelation">
+                        <template #form>
+                            <!-- Name -->
+                            <div class="pb-2">
+                                <InputLabel for="name" value="اسم رابطه" />
+                                <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full"
+                                    autocomplete="name" />
+                                <InputError :message="form.errors.name" class="mt-2" />
+                            </div>
+                            <div class="pb-2">
+                                <InputLabel for="price" value="قیمت" />
+                                <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
+                                    autocomplete="price" />
+                                <InputError :message="form.errors.price" class="mt-2" />
+                            </div>
+                            <div class="pb-2">
+                                <InputLabel for="cars" value="خودرو های مرتبط" />
+                                <select type="cars" multiple
+                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    autocomplete="username" v-model="form.car_id" id="cars">
+                                    <option v-for="item in cars" :value="item.id" class="text-sm">
                                         {{ item.name }}
                                     </option>
                                 </select>
+                                <InputError :message="form.errors.car_id" class="mt-2" />
                             </div>
-                             -->
-                        <InputError :message="form.errors.values" class="mt-2" />
-                    </template>
+                            <div class="pb-2">
+                                <InputLabel for="status" value="وضعیت" />
+                                <select type="status"
+                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    autocomplete="username" v-model="form.status_id" id="status">
+                                    <option v-for="item in status" :value="item.id" class="text-sm">
+                                        {{ item.name }}
+                                    </option>
+                                </select>
+                                <InputError :message="form.errors.status_id" class="mt-2" />
+                            </div>
+                            <!-- <div class="container">
+                                    <select multiple data-multi-select-plugin autocomplete="username" v-model="form.car_id"
+                                        id="cars">
+                                        <option v-for="item in cars" :value="item.id" class="text-sm"
+                                            :selected="form.car_id != null && form.car_id.includes(item.id)">
+                                            {{ item.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                                 -->
+                            <InputError :message="form.errors.values" class="mt-2" />
+                        </template>
 
-                    <template #actions>
-                        <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                            ذخیره سازی موفقانه صورت گرفت.
-                        </ActionMessage>
+                        <template #actions>
+                            <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                                ذخیره سازی موفقانه صورت گرفت.
+                            </ActionMessage>
 
-                        <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                            <i class="px-2 material-icons hover:cursor-pointer">save</i>
-                            ذخیره سازی
-                        </PrimaryButton>
-                    </template>
-                </FormRelation>
+                            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                <i class="px-2 material-icons hover:cursor-pointer">save</i>
+                                ذخیره سازی
+                            </PrimaryButton>
+                        </template>
+                    </FormRelation>
+                </div>
             </div>
         </div>
     </AppLayout>

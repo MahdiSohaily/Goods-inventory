@@ -76,7 +76,7 @@ class PriceController extends Controller
             }
         }
 
-        return $data;
+        // return $data;
 
         return Inertia::render('Price/Partials/Load', [
             'explodedCodes' => $explodedCodes,
@@ -203,10 +203,13 @@ class PriceController extends Controller
             ->limit(7)->get();
 
 
-        $unsortedData = collect([...$givenPrices, $ordared_price]);
-        $sortedData = $unsortedData->sortByDesc('created_at');
+        $unsortedData = [...$givenPrices, $ordared_price];
 
-        $final_data = $relation_exist ? $sortedData : $givenPrices;
+        usort($unsortedData, function ($a, $b) {
+            return $a->created_at < $b->created_at;
+        });
+        
+        $final_data = $relation_exist ? $unsortedData : $givenPrices;
 
         return  $final_data;
     }

@@ -39,15 +39,25 @@ class NotificationController extends Controller
                 ->where('status', '=', 'pending')->get();
         }
 
-        $notifications = DB::table('ask_price')
+        $answeredNotifications = DB::table('ask_price')
             ->join('users', 'users.id', '=', 'ask_price.user_id')
             ->join('customers', 'customers.id', '=', 'ask_price.customer_id')
             ->select('ask_price.*', 'users.id AS user_id', 'customers.id AS customer_id', 'customers.name AS customer_name', 'users.name AS user_name')
-            ->where('notify', '=', 'received')->get();
+            ->where('notify', '=', 'received')
+            ->where('user_id', '=', Auth::user()->id)
+            ->get();
+
+        $previousNotifications = DB::table('ask_price')
+            ->join('users', 'users.id', '=', 'ask_price.user_id')
+            ->join('customers', 'customers.id', '=', 'ask_price.customer_id')
+            ->select('ask_price.*', 'users.id AS user_id', 'customers.id AS customer_id', 'customers.name AS customer_name', 'users.name AS user_name')
+            ->where('user_id', '=', Auth::user()->id)
+            ->where('notify', '=', 'done')->get();
 
         return Inertia::render('Notifications/Show', [
-            'notifications' => $notifications,
+            'answeredNotifications' => $answeredNotifications,
             'adminNotification' => $adminNotification,
+            'previousNotifications' => $previousNotifications,
             'admin' => Auth::user()->name === 'نیایش' ? true : false,
         ]);
     }
@@ -90,6 +100,4 @@ class NotificationController extends Controller
 
         return  redirect()->route('notification.get');
     }
-
-    
 }

@@ -34,6 +34,9 @@ const props = defineProps({
               :completeCode="completeCode" />
           </div>
         </div>
+        <div class="accordion__content overflow-hidden bg-grey-lighter">
+          {{ not_exist.indexOf(code)? 'Foundes' : 'not found' }}
+        </div>
       </div>
     </div>
   </AppLayout>

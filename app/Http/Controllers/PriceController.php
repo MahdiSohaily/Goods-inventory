@@ -69,7 +69,6 @@ class PriceController extends Controller
         $data = [];
         $relation_id = [];
 
-
         foreach ($explodedCodes as $code) {
             if (!in_array($code, $results_arry['not_exist'])) {
                 $data[$code] = [];

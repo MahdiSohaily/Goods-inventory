@@ -201,8 +201,8 @@ class PriceController extends Controller
             ->where('partnumber', 'like', "$code%")
             ->orderBy('created_at', 'desc')
             ->limit(7)->get();
-
-        $final_data = $relation_exist ? [...$givenPrices, $ordared_price] : $givenPrices;
+            
+        $final_data = $relation_exist ? arsort([...$givenPrices, $ordared_price])  : $givenPrices;
 
         return  $final_data;
     }

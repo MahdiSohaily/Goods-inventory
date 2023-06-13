@@ -19,7 +19,7 @@ const props = defineProps({
     <div class="accordion mt-12">
       {{ price }}
       <!--  Panel 1  -->
-      <div v-for="code, index of explodedCodes">
+      <div v-if="existing[code] != null" v-for="code, index of explodedCodes">
         <input type="checkbox" checked="true" name="panel" :id="index" class="hidden">
         <label :for="index"
           class="relative flex items-center bg-gray-700 text-white p-4 shadow border-b border-grey hover:cursor-pointer">
@@ -34,8 +34,13 @@ const props = defineProps({
               :completeCode="completeCode" />
           </div>
         </div>
-        <div class="accordion__content overflow-hidden bg-grey-lighter">
-          {{ not_exist.indexOf(code)? 'Foundes' : 'not found' }}
+        <div v-if="not_exist.indexOf(code) > -1" class="accordion__content overflow-hidden bg-grey-lighter">
+
+          <div class="bg-white rounded-lg px-3 py-10">
+            <p class="text-center">
+              کد وارد شده در سیستم موجود نیست
+            </p>
+          </div>
         </div>
       </div>
     </div>

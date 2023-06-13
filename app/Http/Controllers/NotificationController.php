@@ -7,14 +7,25 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
     public function index()
     {
-        $hasNotification = DB::table('ask_price')->where('status', '=', 'pending')->get();
+        $adminNotification = [];
+        if (Auth::user()->name == 'admin') {
 
-        return count($hasNotification);
+            $adminNotification = DB::table('ask_price')
+                ->where('status', '=', 'pending')->get();
+        }
+
+        $hasNotification = DB::table('ask_price')
+            ->where('user_id', '=', Auth::user()->id)
+            ->where('notify', '=', 'received')
+            ->get();
+
+        return count([...$hasNotification, ...$adminNotification]);
     }
 
     public function getNotification()

@@ -291,20 +291,20 @@ const createRelation = () => {
                             <!-- Name -->
                             <div class="pb-2">
                                 <InputLabel for="name" value="اسم رابطه" />
-                                <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full"
+                                <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full ltr"
                                     autocomplete="name" />
                                 <InputError :message="form.errors.name" class="mt-2" />
                             </div>
                             <div class="pb-2">
                                 <InputLabel for="price" value="قیمت" />
-                                <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full"
+                                <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full ltr"
                                     autocomplete="price" />
                                 <InputError :message="form.errors.price" class="mt-2" />
                             </div>
                             <div class="pb-2">
                                 <InputLabel for="cars" value="خودرو های مرتبط" />
                                 <select type="cars" multiple
-                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    class="mt-1 block w-full border-gray-300 ltr focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                                     autocomplete="username" v-model="form.car_id" id="cars">
                                     <option v-for="item in cars" :value="item.id" class="text-sm">
                                         {{ item.name }}
@@ -315,7 +315,7 @@ const createRelation = () => {
                             <div class="pb-2">
                                 <InputLabel for="status" value="وضعیت" />
                                 <select type="status"
-                                    class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    class="mt-1 block w-full ltr border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                                     autocomplete="username" v-model="form.status_id" id="status">
                                     <option v-for="item in status" :value="item.id" class="text-sm">
                                         {{ item.name }}
@@ -324,15 +324,15 @@ const createRelation = () => {
                                 <InputError :message="form.errors.status_id" class="mt-2" />
                             </div>
                             <!-- <div class="container">
-                                    <select multiple data-multi-select-plugin autocomplete="username" v-model="form.car_id"
-                                        id="cars">
-                                        <option v-for="item in cars" :value="item.id" class="text-sm"
-                                            :selected="form.car_id != null && form.car_id.includes(item.id)">
-                                            {{ item.name }}
-                                        </option>
-                                    </select>
-                                </div>
-                                 -->
+                                        <select multiple data-multi-select-plugin autocomplete="username" v-model="form.car_id"
+                                            id="cars">
+                                            <option v-for="item in cars" :value="item.id" class="text-sm"
+                                                :selected="form.car_id != null && form.car_id.includes(item.id)">
+                                                {{ item.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                     -->
                             <InputError :message="form.errors.values" class="mt-2" />
                         </template>
 

@@ -217,11 +217,11 @@ class PriceController extends Controller
 
 
         $unsortedData = [...$givenPrices, $ordared_price];
-
-        usort($unsortedData, function ($a, $b) {
-            return $a->created_at < $b->created_at;
-        });
-
+        if ($relation_exist) {
+            usort($unsortedData, function ($a, $b) {
+                return $a->created_at < $b->created_at;
+            });
+        }
         $final_data = $relation_exist ? $unsortedData : $givenPrices;
 
         return  $final_data;

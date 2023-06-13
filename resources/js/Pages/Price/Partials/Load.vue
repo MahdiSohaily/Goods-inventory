@@ -19,7 +19,7 @@ const props = defineProps({
     <div class="accordion mt-12">
       {{ price }}
       <!--  Panel 1  -->
-      <div v-if="existing[code] != null" v-for="code, index of explodedCodes">
+      <div v-for="code, index of explodedCodes">
         <input type="checkbox" checked="true" name="panel" :id="index" class="hidden">
         <label :for="index"
           class="relative flex items-center bg-gray-700 text-white p-4 shadow border-b border-grey hover:cursor-pointer">

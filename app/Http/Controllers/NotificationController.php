@@ -76,4 +76,20 @@ class NotificationController extends Controller
 
         return  redirect()->route('notification.get');
     }
+
+
+    function readNotification(Request $request)
+    {
+        $id = $request->input('id');
+
+        if ($id) {
+            DB::table('ask_price')
+                ->where('id', $id)
+                ->update(['status' => 'done', 'notify' => 'done']);
+        }
+
+        return  redirect()->route('notification.get');
+    }
+
+    
 }

@@ -96,5 +96,6 @@ Route::middleware([
         Route::get('/notification', 'index')->name('notification.give'); // notification route lead us to the notification page
         Route::get('/notification/get', 'getNotification')->name('notification.get'); // notification route lead us to the notification page
         Route::post('/notification/clear', 'clearNotification')->name('notification.clear'); // notification route lead us to the notification page
+        Route::post('/notification/read', 'readNotification')->name('notification.read'); // notification route lead us to the notification page
     });
 });

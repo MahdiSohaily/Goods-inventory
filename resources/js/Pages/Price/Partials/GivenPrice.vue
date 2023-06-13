@@ -88,8 +88,7 @@ onUpdated(() => {
                 <thead>
                     <tr class="min-w-full bg-green-600">
                         <td class="text-white bold py-2 px-2 w-28">قیمت</td>
-                        <td class="text-white bold py-2 px-2 ">مشتری</td>
-                        <td class="text-white bold py-2 px-2 rtl">زمان</td>
+                        <td class="text-white bold py-2 px-2 rtl">مشتری</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,10 +102,9 @@ onUpdated(() => {
                                     <td scope="col" class="text-gray-800 px-2 py-1" :class="price.ordered && 'text-white'">
                                         {{ price.price === null ? 'ندارد' : price.price }}
                                     </td>
-                                    <td scope="col" class="text-gray-800 px-2 py-1" :class="price.ordered && 'text-white'">
+                                    <td scope="col" class="text-gray-800 px-2 py-1 rtl" :class="price.ordered && 'text-white'">
                                         {{ price.ordered ? 'قیمت دستوری' : price.name }}
                                     </td>
-                                    <td></td>
                                 </tr>
                                 <tr class="min-w-full mb-1 hover:cursor-pointer border-b-2"
                                     :class="price.ordered ? 'bg-red-500' : 'bg-indigo-300'" :data-price='price.price'>

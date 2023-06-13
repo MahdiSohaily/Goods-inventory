@@ -30,13 +30,26 @@ class NotificationController extends Controller
 
     public function getNotification()
     {
+        $adminNotification = [];
+        if (Auth::user()->name == 'admin') {
+            $notifications = DB::table('ask_price')
+                ->join('users', 'users.id', '=', 'ask_price.user_id')
+                ->join('customers', 'customers.id', '=', 'ask_price.customer_id')
+                ->select('ask_price.*', 'users.id AS user_id', 'customers.id AS customer_id', 'customers.name AS customer_name', 'users.name AS user_name')
+                ->where('status', '=', 'pending')->get();
+        }
+
         $notifications = DB::table('ask_price')
             ->join('users', 'users.id', '=', 'ask_price.user_id')
             ->join('customers', 'customers.id', '=', 'ask_price.customer_id')
             ->select('ask_price.*', 'users.id AS user_id', 'customers.id AS customer_id', 'customers.name AS customer_name', 'users.name AS user_name')
-            ->where('status', '=', 'pending')->get();
+            ->where('notify', '=', 'received')->get();
 
-        return Inertia::render('Notifications/Show', ['notifications' => $notifications]);
+        return Inertia::render('Notifications/Show', [
+            'notifications' => $notifications,
+            'adminNotification' => $adminNotification,
+            'admin' => Auth::user()->name === 'نیایش' ? true : false,
+        ]);
     }
 
     function clearNotification(Request $request)

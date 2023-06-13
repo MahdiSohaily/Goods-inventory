@@ -340,7 +340,7 @@ class PriceController extends Controller
         if ($notification) {
             DB::table('ask_price')
                 ->where('id', $notification)
-                ->update(['status' => 'done']);
+                ->update(['status' => 'done', 'notify' => 'received', 'price' => $request->input('price')]);
         }
 
         return $this->setup_loading($request->input('customer'), $request->input('completeCode'));

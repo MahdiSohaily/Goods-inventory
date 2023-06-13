@@ -37,7 +37,7 @@ class NotificationController extends Controller
         if ($id) {
             DB::table('ask_price')
                 ->where('id', $id)
-                ->update(['status' => 'done']);
+                ->update(['status' => 'done', 'notify' => 'received', 'price' => 'نداریم']);
         }
 
         if ($customer) {

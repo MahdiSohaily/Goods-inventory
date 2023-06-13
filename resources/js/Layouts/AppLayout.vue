@@ -97,6 +97,9 @@ onUnmounted(() => {
                     <Link v-if="hasNotification" :href="route('notification.get')">
                     <i class="p-2 material-icons hover:cursor-pointer notify ">notifications_active</i>
                     </Link>
+                    <Link v-else :href="route('notification.get')">
+                    <i class="p-2 material-icons hover:cursor-pointer text-indigo-500">notifications</i>
+                    </Link>
                 </div>
                 <slot />
             </main>

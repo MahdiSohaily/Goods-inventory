@@ -150,7 +150,7 @@ class RelationController extends Controller
             $pattern->price = $request->input('price');
             $pattern->serial = $request->input('serial');
             $pattern->status_id = $request->input('status_id');
-            $pattern->created_at = $request->input('status_id');
+            $pattern->created_at = Carbon::now();
             $pattern->save();
             if (count($toAdd) > 0) {
                 foreach ($toAdd as $value) {

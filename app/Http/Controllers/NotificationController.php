@@ -31,8 +31,8 @@ class NotificationController extends Controller
     public function getNotification()
     {
         $adminNotification = [];
-        if (Auth::user()->name == 'admin') {
-            $notifications = DB::table('ask_price')
+        if (Auth::user()->name === 'نیایش') {
+            $adminNotification = DB::table('ask_price')
                 ->join('users', 'users.id', '=', 'ask_price.user_id')
                 ->join('customers', 'customers.id', '=', 'ask_price.customer_id')
                 ->select('ask_price.*', 'users.id AS user_id', 'customers.id AS customer_id', 'customers.name AS customer_name', 'users.name AS user_name')

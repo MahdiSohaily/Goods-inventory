@@ -60,8 +60,8 @@ const markUsRead = (id) => {
 
 <template>
     <AppLayout title="notifications">
-        <div class="bg-gray-100 bg-opacity-25 mt-20">
-            <div v-if="admin" class="max-w-7xl overflow-x-auto mx-auto mb-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 bg-gray-100 bg-opacity-25 mt-20">
+            <div v-if="admin" class="max-w-7xl mb-5">
                 <h1 class="text-2xl py-3 rtl" v-if="adminNotification">قیمت های پرسیده شده</h1>
                 <table class="rtl min-w-full text-left text-sm font-light">
                     <thead class="font-medium dark:border-neutral-500">
@@ -96,7 +96,7 @@ const markUsRead = (id) => {
                                 {{ item.user_name }}
                             </td>
                             <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                                {{ item.price === 'pending' ? 'در حال انتظار' : 'بررسی شده' }}
+                                {{ item.status === 'pending' ? 'در حال انتظار' : 'بررسی شده' }}
 
                             </td>
 
@@ -124,7 +124,7 @@ const markUsRead = (id) => {
                     </tbody>
                 </table>
             </div>
-            <div class="max-w-7xl overflow-x-auto mx-auto">
+            <div class="max-w-7xl ">
                 <h1 class="text-2xl py-3 rtl">جواب های دریافتی</h1>
                 <table class="rtl min-w-full text-left text-sm font-light">
                     <thead class="font-medium dark:border-neutral-500">

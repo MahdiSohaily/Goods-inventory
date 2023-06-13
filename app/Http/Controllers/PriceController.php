@@ -40,9 +40,24 @@ class PriceController extends Controller
         ];
 
 
-        $existing_code = [];
+        $explodedCodes = array_map(function ($code) {
+            return preg_replace('/[^a-z0-9]/i', '', $code);;
+        }, $explodedCodes);
+
 
         foreach ($explodedCodes as $code) {
+
+            $good = DB::table('nisha')->select('id', 'partnumber')->where('partNumber', 'like', "$code%")->get();
+            if (count($good)) {
+                $existing_code[$code] = $good;
+            } else {
+                array_push($results_arry['not_exist'], $code);
+            }
+        }
+
+        $existing_code = [];
+        foreach ($explodedCodes as $code) {
+
             $good = DB::table('nisha')->select('id', 'partnumber')->where('partNumber', 'like', "$code%")->get();
             if (count($good)) {
                 $existing_code[$code] = $good;
@@ -208,7 +223,7 @@ class PriceController extends Controller
         usort($unsortedData, function ($a, $b) {
             return $a->created_at < $b->created_at;
         });
-        
+
         $final_data = $relation_exist ? $unsortedData : $givenPrices;
 
         return  $final_data;

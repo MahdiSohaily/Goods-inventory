@@ -46,7 +46,7 @@ const clearInput = () => { };
                         <textarea rows="7" id="code" v-model="form.code" type="text"
                             class="ltr mt-1 shadow-sm block w-full rounded-md border-gray-300"
                             placeholder="لطفا کد های مود نظر خود را در خط های مجزا قرار دهید">
-                                </textarea>
+                                    </textarea>
                         <InputError :message="form.errors.code" class="mt-2" />
                     </div>
                 </template>

@@ -17,11 +17,10 @@ const props = defineProps({
 <template>
   <AppLayout title="Rates">
     <div class="accordion mt-12">
-      {{ price }}
       <!--  Panel 1  -->
-      <div v-for="code, index of explodedCodes">
-        <input type="checkbox" checked="true" name="panel" :id="index" class="hidden">
-        <label :for="index"
+      <div v-for="code, code_index of explodedCodes">
+        <input type="checkbox" checked="true" name="panel" :id="code_index" class="hidden">
+        <label :for="code_index"
           class="relative flex items-center bg-gray-700 text-white p-4 shadow border-b border-grey hover:cursor-pointer">
           {{ code }}
         </label>

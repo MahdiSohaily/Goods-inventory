@@ -91,6 +91,8 @@ class PriceController extends Controller
             }
         }
 
+        //return $data;
+
         return Inertia::render('Price/Partials/Load', [
             'explodedCodes' => $explodedCodes,
             'not_exist' => $results_arry['not_exist'],

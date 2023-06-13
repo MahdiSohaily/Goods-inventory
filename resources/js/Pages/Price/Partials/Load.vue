@@ -23,6 +23,7 @@ const props = defineProps({
         <label :for="code_index"
           class="relative flex items-center bg-gray-700 text-white p-4 shadow border-b border-grey hover:cursor-pointer">
           {{ code }}
+          {{ existing[code] }}
         </label>
         <div class="accordion__content overflow-hidden bg-grey-lighter">
           <div v-for="item, index of existing[code]" class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
